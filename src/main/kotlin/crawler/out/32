@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Brave: эфемерные куки для правильной приватности / Комментарии / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" itemprop="image" content="/img/habr_ru.png" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="/img/habr_ru.png" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="/img/habr_ru.png" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="/img/habr_ru.png" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="/img/habr_ru.png?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" property="og:type" content="website" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:title" content="Хабр" data-vmid="og:title">
+  <meta data-vue-meta="ssr" property="og:url" content="https://habr.com/ru/company/brave/blog/651047/comments/" data-vmid="og:url"> 
+  <link data-vue-meta="ssr" image_src="image" href="/img/habr_ru.png" data-vmid="image:href">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/651047/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/company/brave/blog/651047/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" data-vmid="hreflang"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> 
+       <div class="tm-feature tm-header__feature tm-feature_variant-inline">
+        <!---->
+       </div> <!----> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div hl="ru" companyname="brave" data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <!----> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <article class="tm-article-comments__article-body">
+            <div class="tm-article-comments__article-snippet">
+             <div class="tm-article-snippet">
+              <div class="tm-article-snippet__meta-container">
+               <div class="tm-article-snippet__meta">
+                <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/BraveSoftware/" title="BraveSoftware" class="tm-user-info__userpic">
+                  <div class="tm-entity-image">
+                   <svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_green">
+                    <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                   </svg>
+                  </div></a> <span class="tm-user-info__user"><a href="/ru/users/BraveSoftware/" class="tm-user-info__username"> BraveSoftware </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T19:12:24.000Z" title="2022-03-11, 22:12">вчера в 22:12</time></span>
+               </div> <!---->
+              </div> 
+              <h1 class="tm-article-snippet__title tm-article-snippet__title_h1"><a href="/ru/company/brave/blog/651047/" data-article-link="" class="tm-article-snippet__title-link router-link-active"><span>Brave: эфемерные куки для правильной приватности</span></a></h1> 
+              <div class="tm-article-snippet__hubs">
+               <span class="tm-article-snippet__hubs-item"><a href="/ru/company/brave/blog/" class="tm-article-snippet__hubs-item-link router-link-active"><span>Блог компании Brave</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/browsers/" class="tm-article-snippet__hubs-item-link"><span>Браузеры</span> <!----></a></span>
+              </div> 
+              <div class="tm-article-snippet__labels">
+               <div class="tm-article-snippet__label tm-article-snippet__label_variant-translation">
+                <span> Перевод </span>
+               </div>
+              </div> <!----> <!---->
+             </div> 
+             <div class="tm-data-icons">
+              <!----> 
+              <div class="tm-votes-meter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                <title>Всего голосов 1: ↑1 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+               </svg> <span title="Всего голосов 1: ↑1 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+1</span>
+              </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+               </svg> <span class="tm-icon-counter__value">856</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                 <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 4 </span></button> 
+              <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+               <a href="/ru/company/brave/blog/651047/comments/" aria-current="page" class="tm-article-comments-counter-link__link">
+                <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                 <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                </svg> <span class="tm-article-comments-counter-link__value"> 1 </span></a> <!---->
+              </div> <!----> 
+              <div class="v-portal" style="display:none;"></div>
+             </div>
+            </div>
+           </article> <!----> 
+           <div data-async-called="true" class="tm-article-comments-offloaded">
+            <div class="tm-article-comments">
+             <div class="tm-comments-wrapper">
+              <div class="tm-comments-wrapper__wrapper">
+               <header class="tm-comments-wrapper__header">
+                <h2 class="tm-comments-wrapper__title"> Комментарии <span class="tm-comments-wrapper__comments-count"> 1 </span></h2> 
+                <div class="tm-comments-wrapper__header-aside">
+                 <!----> <button class="tm-rss-button tm-rss-button_comments-header"><span class="tm-svg-icon__wrapper tm-rss-button__icon">
+                   <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+                    <title>Скопировать ссылку на RSS</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#rss"></use>
+                   </svg></span></button> <!---->
+                </div>
+               </header> 
+               <div class="tm-comments-wrapper__inner"> 
+                <div class="tm-comments__tree">
+                 <section class="tm-comment-thread">
+                  <!----> 
+                  <article class="tm-comment-thread__comment">
+                   <a name="comment_24156907" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-0">
+                    <div class="tm-comment-thread__circle"></div></button> <!----> 
+                   <div data-comment-body="24156907" class="tm-comment-thread__indent_l-0">
+                    <div data-gallery-root="" class="tm-comment">
+                     <header data-comment-header tabindex="-1" class="tm-comment__header">
+                      <div class="tm-comment__header-inner">
+                       <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/JumpinCarrot/" title="JumpinCarrot" class="tm-user-info__userpic">
+                         <div class="tm-entity-image">
+                          <svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_lilac">
+                           <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                          </svg>
+                         </div></a> <span class="tm-user-info__user"><a href="/ru/users/JumpinCarrot/" class="tm-user-info__username"> JumpinCarrot </a> <a href="#comment_24156907" class="tm-comment-thread__comment-link"> 11.03.2022 в 22:40 <!----></a></span></span>
+                      </div> 
+                      <div class="tm-comment__buttons">
+                       <!----> <!---->
+                      </div>
+                     </header> 
+                     <div class="tm-comment__body-content tm-comment__body-content_v2">
+                      <div xmlns="http://www.w3.org/1999/xhtml">
+                       <p>Использую расширение Temporary Containers для Firefox. Оно задействует встроенный механизм изолированных контейнеров, создавая временные контейнеры для каждой открытой вкладки. Для сайтов на которых авторизуюсь ставлю постоянные контейнеры.</p>
+                      </div>
+                     </div> <!----> <!---->
+                    </div> 
+                    <div class="tm-comment-footer">
+                     <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                      <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                       <title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                      </svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span>
+                     </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                       <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                        <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                       </svg></span> <!----></button> <button data-comment-popup="24156907" class="tm-comment__button tm-comment__button_with-icon">
+                      <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                       <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                      </svg></button> <!---->
+                    </div>
+                   </div>
+                  </article> <!----> <!---->
+                 </section>
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div>
+              </div> 
+              <div class="tm-notice tm-comments__comment-notice tm-notice_positive">
+               <!----> 
+               <div class="tm-notice__inner">
+                <!----> 
+                <div class="tm-notice__content">
+                 <span>Только полноправные пользователи могут оставлять комментарии. <a rel="nofollow" href="/kek/v1/auth/habrahabr/?back=/ru/company/brave/blog/651047/comments/&amp;hl=ru">Войдите</a>, пожалуйста.</span>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div> <!----> <!---->
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div hl="ru" class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__placeholder_initial"></div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> <!----> <!---->
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/company/brave/blog/651047/comments/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/company/brave/blog/651047/comments/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"651047":{"id":"651047","timePublished":"2022-03-11T19:12:24+00:00","isCorporative":true,"lang":"ru","titleHtml":"Brave: эфемерные куки для правильной приватности","leadData":{"textHtml":"\u003Cp\u003EС самых первых релизов Brave блокировал все сторонние хранилища (куки, \u003Ca href=\"https:\u002F\u002Fdeveloper.mozilla.org\u002Fen-US\u002Fdocs\u002FWeb\u002FAPI\u002FWindow\u002FlocalStorage\"\u003E\u003Cu\u003ElocalStorage\u003C\u002Fu\u003E\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fdeveloper.mozilla.org\u002Fen-US\u002Fdocs\u002FWeb\u002FAPI\u002FIndexedDB_API\"\u003E\u003Cu\u003EindexedDB\u003C\u002Fu\u003E\u003C\u002Fa\u003E). Такая блокировка защищает наших пользователей от самых распространённых форм трекинга, но может ломать сайты. Сегодня мы поговорим об «эфемерных хранилищах», нашей стратегии работы со сторонними хранилищами в Brave, которая улучшает веб-совместимость, сохраняя при этом этот же уровень защиты конфиденциальности пользовательских данных.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8a6\u002Fcd3\u002F531\u002F8a6cd3531e07959a68125e42ace8b4c8.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8a6\u002Fcd3\u002F531\u002F8a6cd3531e07959a68125e42ace8b4c8.png","fit":"cover","positionY":0,"positionX":0}},"editorVersion":"2.0","postType":"article","postLabels":[{"type":"translation","data":{"originalAuthorName":"Brave Privacy Team","originalUrl":"https:\u002F\u002Fbrave.com\u002Fprivacy-updates\u002F7-ephemeral-storage\u002F"}}],"author":{"scoreStats":{"score":36,"votesCount":58},"rating":0.2,"relatedData":null,"contacts":[],"authorContacts":[],"paymentDetails":{"paymentYandexMoney":null,"paymentPayPalMe":null,"paymentWebmoney":null},"id":"2578349","alias":"BraveSoftware","fullname":null,"avatarUrl":null,"speciality":null},"statistics":{"commentsCount":1,"favoritesCount":4,"readingCount":856,"score":1,"votesCount":1},"hubs":[{"relatedData":null,"id":"22678","alias":"brave","type":"corporative","title":"Блог компании Brave","titleHtml":"Блог компании Brave","isProfiled":false},{"relatedData":null,"id":"19257","alias":"browsers","type":"collective","title":"Браузеры","titleHtml":"Браузеры","isProfiled":false}],"flows":[{"id":"1","alias":"develop","title":"Разработка"}],"relatedData":null,"textHtml":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Ch3\u003ETL;DR\u003C\u002Fh3\u003E\u003Cp\u003EС самых первых релизов Brave блокировал все сторонние хранилища (куки, \u003Ca href=\"https:\u002F\u002Fdeveloper.mozilla.org\u002Fen-US\u002Fdocs\u002FWeb\u002FAPI\u002FWindow\u002FlocalStorage\"\u003E\u003Cu\u003ElocalStorage\u003C\u002Fu\u003E\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fdeveloper.mozilla.org\u002Fen-US\u002Fdocs\u002FWeb\u002FAPI\u002FIndexedDB_API\"\u003E\u003Cu\u003EindexedDB\u003C\u002Fu\u003E\u003C\u002Fa\u003E). Такая блокировка защищает наших пользователей от самых распространённых форм трекинга, но может ломать сайты. Сегодня мы поговорим об «эфемерных хранилищах», нашей стратегии работы со сторонними хранилищами в Brave, которая улучшает веб-совместимость, сохраняя при этом этот же уровень защиты конфиденциальности пользовательских данных.\u003C\u002Fp\u003E\u003Ch3\u003EЧто было раньше?\u003C\u002Fh3\u003E\u003Cp\u003EВ основном трекинг в сети основывается на использовании сторонних (3rd-party) кук и других данных, то есть на сохранении и передаче уникальных идентификаторов на сайты, которые вы не собирались посещать. Такой трекинг и ваша идентификация, как правило, происходят без вашего ведома и согласия, и конфиденциальные браузеры постоянно борются с таким трекингом. \u003C\u002Fp\u003E\u003Cp\u003EРанее Brave агрессивно блокировал все сторонние хранилища по умолчанию (в частности, не сохранял 3rd-party куки). Это даёт серьёзную защиту, но может сломать сайты, которые рассчитывают на доступность внешних хранилищ. И, к сожалению, большинство сайтов созданы под Chrome и рассчитывают на практически ни в чём не ограниченные внешние хранилища. При этом Chrome является самым популярным, и самым небезопасным с этой точки зрения браузером.\u003C\u002Fp\u003E\u003Cp\u003EИз-за этого раньше в Brave сайты часто ломались, а пользователям приходилось выбирать между функционирующим браузером и нетронутыми личными данными. Мы боролись с этим по-разному, и скриптами, и \u003Ca href=\"https:\u002F\u002Fgithub.com\u002Fbrave\u002Fbrave-browser\u002Fwiki\u002FWeb-Compatibility-Exceptions-in-Brave\"\u003E\u003Cu\u003Eточечными исключениями\u003C\u002Fu\u003E\u003C\u002Fa\u003E. В основном, конечно, работало, но решение не было идеальным. В результате мы разработали принципиально новую систему «эфемерных» хранилищ, которая защищает от трекинга, но при этом практически не влияет на функционирование сайтов. \u003C\u002Fp\u003E\u003Ch3\u003EКак работают «эфемерные хранилища»? \u003C\u002Fh3\u003E\u003Cp\u003EЭфемерные хранилища по сути представляют собой объединение нескольких решений. \u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EВо-первых, мы никогда не отправляем куки на запросы подресурсов от третьей стороны. \u003C\u002Fstrong\u003EМы \u003Cem\u003Eбудем \u003C\u002Fem\u003Eотправлять куки для запросов подресурсов с основного документа, или в других локальных (с того же сайта) вложенных документах, но мы \u003Cem\u003Eне будем \u003C\u002Fem\u003Eотправлять куки на запросы подресурсов из различных источников, даже если они вызываются с основного сайта. \u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EВо-вторых, сторонние фреймы получат секционированное хранилище для некоторых API хранилищ DOM. \u003C\u002Fstrong\u003EJavaScript, выполняющийся в стороннем фрейме, может использовать document.cookie, localStorage и sessionStorage API, но значения, которые он увидит, секционированы в рамках основного документа. Это означает, что код, исполняющийся в social.org &lt;iframe\u003E на example.org, будет видеть хранилище, отличающееся от того, что social.org &lt;iframe\u003E увидит на other.org.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EВ-третьих, хранилища доступны для всех для оригинальных страниц одного и того же сайта. \u003C\u002Fstrong\u003EЕсли пользователь открыл два таба одного и того же сайта (одинаковый eTLD+1), третьи стороны на этих сайтах будут видеть одно и то же хранилище, и смогут использовать его, чтобы общаться между собой. К примеру, вы открыли два таба одного сайта, first.example.org и second.example.org, и оба включают в себя iframe ютуба. В этом случае оба фрейма ютуба будут видеть одно и то же хранилище. Однако же, фрейм ютуба на different.org увидит другое хранилище, а таб, загружающий youtube.com напрямую, увидит вообще третье. \u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EВ-четвёртых, внешние хранилища очищаются, когда закрывается последний оригинальный документ. \u003C\u002Fstrong\u003EВнешние документы получают различные хранилища для каждого сайта верхнего уровня. Если хотя бы один документ верхнего уровня сайта открыт, хранилище будет существовать, а сторонние фреймы будут видеть одно и то же хранилище для любых новых документов верхнего уровня для этого же сайта верхнего уровня. Но когда больше не будет существовать ни одного документа верхнего уровня для сайта, все внешние хранилища для этого сайта будут очищены. Если вы вновь посетите этот сайт позднее, все включённые внешние фреймы на этом сайте будут видеть новые пустые хранилища.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EНаконец, хранилища очищаются при перезапуске браузера.\u003C\u002Fstrong\u003E Когда вы выходите из Brave, все хранилища очищаются вне зависимости от того, перезапускаете ли вы браузер полностью или вы включили опцию запуска браузера с «ранее открытыми вкладками». Логика здесь схожа с той, по которой \u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fcompany\u002Fbrave\u002Fblog\u002F587968\u002F\"\u003E\u003Cu\u003Eмы меняем затравку для рандомизации цифрового отпечатка вашего браузера\u003C\u002Fu\u003E\u003C\u002Fa\u003E. Это делается для предотвращения появления \u003Ca href=\"https:\u002F\u002Ftextslashplain.com\u002F2019\u002F06\u002F24\u002Fsurprise-undead-session-cookies\u002F\"\u003E\u003Cu\u003Eнеожиданно долгоживущих сессионных значений\u003C\u002Fu\u003E\u003C\u002Fa\u003E, о которых говорил \u003Ca href=\"https:\u002F\u002Ftwitter.com\u002Fericlaw\"\u003E\u003Cu\u003EЭрик Лоуренс\u003C\u002Fu\u003E\u003C\u002Fa\u003E из команды Edge. \u003C\u002Fp\u003E\u003Ch3\u003EА что с другими браузерами?\u003C\u002Fh3\u003E\u003Cp\u003EВо многом наши эфемерные хранилища схожи с тем, как Safari работает с внешними хранилищами. Мы хотели бы отметить роль Safari в популяризации идеи секционирования внешних хранилищ для защиты от трекинга. Safari, как и Tor Browser Bundle, который давно уже секционирует сторонние хранилища в рамках системы First-Party Isolation, предоставляют разделённые хранилища для внешних данных в зависимости от того, на каком сайте они находятся.\u003C\u002Fp\u003E\u003Cp\u003EТем не менее, наш подход достаточно сильно отличается от Safari. Safari очищает внешние хранилища при закрытии браузера, мы же очищаем эти хранилища при закрытии сайта. У каждого подхода свои плюсы и минусы, но наш подход защищает от некоторых случаев провязывания аккаунтов пользователя третьими сторонами. Тем не менее, снимаем шляпу перед Safari и TBB за то, что они во многом выступили пионерами подхода секционирования. Firefox тоже работает с секционированием схожим образом, но его секционирование сохраняется навсегда (в Brave — пока вы взаимодействуете с сайтом, в Safari — до закрытия браузера). Несмотря на то, что наш подход во многом агрессивнее других браузеров, мы хотели бы подчеркнуть их, \u003Ca href=\"https:\u002F\u002Fblog.mozilla.org\u002Fsecurity\u002F2021\u002F01\u002F26\u002Fsupercookie-protections\u002F\"\u003E\u003Cu\u003Eи в особенности Firefox\u003C\u002Fu\u003E\u003C\u002Fa\u003E, работу над секционированием других элементов сайтов (кэш HTTP и т.д.). Команда Chromium также работает в этом направлении, и, хотя эта работа и не всегда видна глазу конечных пользователей, она критически важна для безопасности браузеров, основанных на Chromium, таких как Chrome, Brave, и Edge.\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","tags":[{"titleHtml":"Brave"},{"titleHtml":"Ephemeral storage"},{"titleHtml":"Брейв"},{"titleHtml":"эфемерные хранилища"}],"metadata":{"stylesUrls":[],"scriptUrls":[],"shareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8a6\u002Fcd3\u002F531\u002F8a6cd3531e07959a68125e42ace8b4c8.png","shareImageWidth":1200,"shareImageHeight":630,"vkShareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8a6\u002Fcd3\u002F531\u002F8a6cd3531e07959a68125e42ace8b4c8.png","schemaJsonLd":"{\"@context\":\"http:\\\u002F\\\u002Fschema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Fbrave\\\u002Fblog\\\u002F651047\\\u002F\"},\"headline\":\"Brave: эфемерные куки для правильной приватности\",\"datePublished\":\"2022-03-11T22:12:24+03:00\",\"dateModified\":\"2022-03-11T22:12:24+03:00\",\"author\":{\"@type\":\"Person\",\"name\":\"BraveSoftware\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Habr\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fwebt\\\u002Fa_\\\u002Flk\\\u002F9m\\\u002Fa_lk9mjkccjox-zccjrpfolmkmq.png\"}},\"description\":\"TL;DRС самых первых релизов Brave блокировал все сторонние хранилища (куки, localStorage, indexedDB). Такая блокировка защищает наших пользователей от самых расп...\",\"url\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Fbrave\\\u002Fblog\\\u002F651047\\\u002F#post-content-body\",\"about\":[\"c_brave\",\"h_browsers\",\"f_develop\"],\"image\":[\"https:\\\u002F\\\u002Fhabr.com\\\u002Fshare\\\u002Fpublication\\\u002F651047\\\u002F86266c6790e80ce85f8338f01c26e3e0\\\u002F\"]}","metaDescription":"TL;DRС самых первых релизов Brave блокировал все сторонние хранилища (куки, localStorage, indexedDB). Такая блокировка защищает наших пользователей от самых распространённых форм трекинга, но может...","mainImageUrl":null,"amp":true,"customTrackerLinks":[]},"polls":[],"commentsEnabled":true,"rulesRemindEnabled":false,"votesEnabled":true,"status":"published","plannedPublishTime":null,"checked":null,"isEditorial":false}},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[],"hubs":""},"comments":{"articleComments":{"651047":{"refs":{"24156907":{"id":"24156907","parentId":null,"level":0,"timePublished":"2022-03-11T19:40:41+00:00","timeChanged":null,"isSuspended":false,"score":0,"votesCount":0,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EИспользую расширение Temporary Containers для Firefox. Оно задействует встроенный механизм изолированных контейнеров, создавая временные контейнеры для каждой открытой вкладки. Для сайтов на которых авторизуюсь ставлю постоянные контейнеры.\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","editorVersion":2,"author":{"id":"71992","alias":"JumpinCarrot","fullname":null,"avatarUrl":null,"speciality":null},"isAuthor":false,"isPostAuthor":false,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":[],"vote":{"value":null,"isCanVote":false}}},"root":["24156907"]}},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{"isCanComment":false,"cantCommentReasonKey":"AUTH_REQUIRED","cantCommentReason":"Authorization required","data":null},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":1647027641,"moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":false,"featurer":null,"megaposts":null,"promoLinks":null,"promoPosts":null},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

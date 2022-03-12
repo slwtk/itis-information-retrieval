@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Дофаминовое сопровождение / Комментарии / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" itemprop="image" content="/img/habr_ru.png" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="/img/habr_ru.png" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="/img/habr_ru.png" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="/img/habr_ru.png" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="/img/habr_ru.png?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" property="og:type" content="website" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:title" content="Хабр" data-vmid="og:title">
+  <meta data-vue-meta="ssr" property="og:url" content="https://habr.com/ru/post/655245/comments/" data-vmid="og:url"> 
+  <link data-vue-meta="ssr" image_src="image" href="/img/habr_ru.png" data-vmid="image:href">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/655245/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/post/655245/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" data-vmid="hreflang"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> <!----> <a href="https://effect.habr.com/a/LZMaSpGV5qvkXHv3XsrwFAv4PP9mYpd7F55V_nO6721uzC0rP6ZuyEvcQVKeXhevmVbSO9M6ofIvgBT_DhPNlf9ni9mSgey7FiDY2CoIsOOPQ6Lusul6WvGFMiI33BUv4CFaMA" target="_blank" class="tm-top-link" style="color:#99ddff;"> Сработают ли в IT принципы космической подготовки </a> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div hl="ru" data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <!----> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <article class="tm-article-comments__article-body">
+            <div class="tm-article-comments__article-snippet">
+             <div class="tm-article-snippet">
+              <div class="tm-article-snippet__meta-container">
+               <div class="tm-article-snippet__meta">
+                <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/nmivan/" title="nmivan" class="tm-user-info__userpic">
+                  <div class="tm-entity-image">
+                   <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/a80/f53/fda/a80f53fda4f6c39955207b0505cc8f53.jpg" width="24" class="tm-entity-image__pic">
+                  </div></a> <span class="tm-user-info__user"><a href="/ru/users/nmivan/" class="tm-user-info__username"> nmivan </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T15:45:58.000Z" title="2022-03-11, 18:45">вчера в 18:45</time></span>
+               </div> <!---->
+              </div> 
+              <h1 class="tm-article-snippet__title tm-article-snippet__title_h1"><a href="/ru/post/655245/" data-article-link="" class="tm-article-snippet__title-link router-link-active"><span>Дофаминовое сопровождение</span></a></h1> 
+              <div class="tm-article-snippet__hubs">
+               <span class="tm-article-snippet__hubs-item"><a href="/ru/hub/erp/" class="tm-article-snippet__hubs-item-link"><span>ERP-системы</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/dev_management/" class="tm-article-snippet__hubs-item-link"><span>Управление разработкой</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/sales/" class="tm-article-snippet__hubs-item-link"><span>Управление продажами</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/hr_management/" class="tm-article-snippet__hubs-item-link"><span>Управление персоналом</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/1C/" class="tm-article-snippet__hubs-item-link"><span>1С</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span>
+              </div> <!----> <!----> <!---->
+             </div> 
+             <div class="tm-data-icons">
+              <!----> 
+              <div class="tm-votes-meter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                <title>Всего голосов 15: ↑13 и ↓2</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+               </svg> <span title="Всего голосов 15: ↑13 и ↓2" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+11</span>
+              </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+               </svg> <span class="tm-icon-counter__value">2.1K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                 <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 11 </span></button> 
+              <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+               <a href="/ru/post/655245/comments/" aria-current="page" class="tm-article-comments-counter-link__link">
+                <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                 <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                </svg> <span class="tm-article-comments-counter-link__value"> 6 </span></a> <!---->
+              </div> <!----> 
+              <div class="v-portal" style="display:none;"></div>
+             </div>
+            </div>
+           </article> 
+           <div class="tm-ad-banner__container tm-article-comments__top-banner">
+            <!----> 
+            <div id="commentsBanner19095" class="tm-ad-banner tm-ad-banner_variant-leaderboard"></div>
+           </div> 
+           <div data-async-called="true" class="tm-article-comments-offloaded">
+            <div class="tm-article-comments">
+             <div class="tm-comments-wrapper">
+              <div class="tm-comments-wrapper__wrapper">
+               <header class="tm-comments-wrapper__header">
+                <h2 class="tm-comments-wrapper__title"> Комментарии <span class="tm-comments-wrapper__comments-count"> 6 </span></h2> 
+                <div class="tm-comments-wrapper__header-aside">
+                 <!----> <button class="tm-rss-button tm-rss-button_comments-header"><span class="tm-svg-icon__wrapper tm-rss-button__icon">
+                   <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+                    <title>Скопировать ссылку на RSS</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#rss"></use>
+                   </svg></span></button> <!---->
+                </div>
+               </header> 
+               <div class="tm-comments-wrapper__inner"> 
+                <div class="tm-comments__tree">
+                 <section class="tm-comment-thread">
+                  <!----> 
+                  <article class="tm-comment-thread__comment">
+                   <a name="comment_24156289" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-0">
+                    <div class="tm-comment-thread__circle"></div></button> <!----> 
+                   <div data-comment-body="24156289" class="tm-comment-thread__indent_l-0">
+                    <div data-gallery-root="" class="tm-comment">
+                     <header data-comment-header tabindex="-1" class="tm-comment__header">
+                      <div class="tm-comment__header-inner">
+                       <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/panvartan/" title="panvartan" class="tm-user-info__userpic">
+                         <div class="tm-entity-image">
+                          <svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_green">
+                           <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                          </svg>
+                         </div></a> <span class="tm-user-info__user"><a href="/ru/users/panvartan/" class="tm-user-info__username"> panvartan </a> <a href="#comment_24156289" class="tm-comment-thread__comment-link"> 11.03.2022 в 19:00 <!----></a></span></span>
+                      </div> 
+                      <div class="tm-comment__buttons">
+                       <!----> <!---->
+                      </div>
+                     </header> 
+                     <div class="tm-comment__body-content tm-comment__body-content_v2">
+                      <div xmlns="http://www.w3.org/1999/xhtml">
+                       <p>Сейчас более актуальна глюкоза внутривенно. </p>
+                      </div>
+                     </div> <!----> <!---->
+                    </div> 
+                    <div class="tm-comment-footer">
+                     <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                      <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                       <title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                      </svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span>
+                     </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                       <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                        <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                       </svg></span> <!----></button> <button data-comment-popup="24156289" class="tm-comment__button tm-comment__button_with-icon">
+                      <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                       <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                      </svg></button> <!---->
+                    </div>
+                   </div>
+                  </article> <!----> <!---->
+                 </section>
+                 <section class="tm-comment-thread">
+                  <!----> 
+                  <article class="tm-comment-thread__comment">
+                   <a name="comment_24156341" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-0">
+                    <div class="tm-comment-thread__circle"></div></button> <!----> 
+                   <div data-comment-body="24156341" class="tm-comment-thread__indent_l-0">
+                    <div data-gallery-root="" class="tm-comment">
+                     <header data-comment-header tabindex="-1" class="tm-comment__header">
+                      <div class="tm-comment__header-inner">
+                       <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/GaDzik/" title="GaDzik" class="tm-user-info__userpic">
+                         <div class="tm-entity-image">
+                          <svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_lilac">
+                           <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                          </svg>
+                         </div></a> <span class="tm-user-info__user"><a href="/ru/users/GaDzik/" class="tm-user-info__username"> GaDzik </a> <a href="#comment_24156341" class="tm-comment-thread__comment-link"> 11.03.2022 в 19:30 <!----></a></span></span>
+                      </div> 
+                      <div class="tm-comment__buttons">
+                       <!----> <!---->
+                      </div>
+                     </header> 
+                     <div class="tm-comment__body-content tm-comment__body-content_v2">
+                      <div xmlns="http://www.w3.org/1999/xhtml">
+                       <p>Это даже круче чем казино похоже))</p>
+                      </div>
+                     </div> <!----> <!---->
+                    </div> 
+                    <div class="tm-comment-footer">
+                     <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                      <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                       <title>Всего голосов 2: ↑2 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                      </svg> <span title="Всего голосов 2: ↑2 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">+2</span>
+                     </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                       <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                        <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                       </svg></span> <!----></button> <button data-comment-popup="24156341" class="tm-comment__button tm-comment__button_with-icon">
+                      <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                       <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                      </svg></button> <!---->
+                    </div>
+                   </div>
+                  </article> <!----> <!---->
+                 </section>
+                 <section class="tm-comment-thread">
+                  <!----> 
+                  <article class="tm-comment-thread__comment">
+                   <a name="comment_24156607" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-0">
+                    <div class="tm-comment-thread__circle"></div></button> <!----> 
+                   <div data-comment-body="24156607" class="tm-comment-thread__indent_l-0">
+                    <div data-gallery-root="" class="tm-comment">
+                     <header data-comment-header tabindex="-1" class="tm-comment__header">
+                      <div class="tm-comment__header-inner">
+                       <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/aakhamef/" title="aakhamef" class="tm-user-info__userpic">
+                         <div class="tm-entity-image">
+                          <svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_lilac">
+                           <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                          </svg>
+                         </div></a> <span class="tm-user-info__user"><a href="/ru/users/aakhamef/" class="tm-user-info__username"> aakhamef </a> <a href="#comment_24156607" class="tm-comment-thread__comment-link"> 11.03.2022 в 21:11 <!----></a></span></span>
+                      </div> 
+                      <div class="tm-comment__buttons">
+                       <!----> <!---->
+                      </div>
+                     </header> 
+                     <div class="tm-comment__body-content">
+                      <div xmlns="http://www.w3.org/1999/xhtml">
+                       <blockquote>
+                        Не знаю, как у вас, а в 1С всегда не хватало хороших программистов. Вот таких, которые могут полностью самостоятельно решить задачу одновременно в техническом, методическом, организационном, архитектурном и прочих планах.
+                       </blockquote>
+                       <br> Причины на поверхности
+                       <br> 1. Маленькие зарплаты (1С за рубежом не нужна, значит нет конкуренции работодатенлей)
+                       <br> 2. Отсутствие нормальных бесплатных источников для самообучения. Книги дорогие, платные видеоуроки. Даже форумы платные.
+                      </div>
+                     </div> <!----> <!---->
+                    </div> 
+                    <div class="tm-comment-footer">
+                     <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                      <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                       <title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                      </svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span>
+                     </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                       <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                        <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                       </svg></span> <!----></button> <button data-comment-popup="24156607" class="tm-comment__button tm-comment__button_with-icon">
+                      <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                       <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                      </svg></button> <!---->
+                    </div>
+                   </div>
+                  </article> 
+                  <div class="tm-comment-thread__children" style="display:;">
+                   <section class="tm-comment-thread">
+                    <!----> 
+                    <article class="tm-comment-thread__comment">
+                     <a name="comment_24156761" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-1">
+                      <div class="tm-comment-thread__circle"></div></button> <!----> 
+                     <div data-comment-body="24156761" class="tm-comment-thread__indent_l-1">
+                      <div data-gallery-root="" class="tm-comment">
+                       <header data-comment-header tabindex="-1" class="tm-comment__header">
+                        <div class="tm-comment__header-inner">
+                         <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/WicRus/" title="WicRus" class="tm-user-info__userpic">
+                           <div class="tm-entity-image">
+                            <svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_pink">
+                             <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                            </svg>
+                           </div></a> <span class="tm-user-info__user"><a href="/ru/users/WicRus/" class="tm-user-info__username"> WicRus </a> <a href="#comment_24156761" class="tm-comment-thread__comment-link"> 11.03.2022 в 21:54 <!----></a></span></span>
+                        </div> 
+                        <div class="tm-comment__buttons">
+                         <button type="button" class="tm-comment__button tm-comment__button_with-icon">
+                          <svg height="16" width="16" class="tm-svg-img tm-comment__icon">
+                           <title>Показать предыдущий комментарий</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#small-arrow"></use>
+                          </svg></button> <!---->
+                        </div>
+                       </header> 
+                       <div class="tm-comment__body-content">
+                        <div xmlns="http://www.w3.org/1999/xhtml">
+                         А вы знаете модель распространения 1с? Модель лицензирования? Мне как начинают рассказывать, как там всё устроено, я сразу перестаю удивляться, что квалифицированные кадры от туда регулярно бегут в другие области. На поверхности наоборот — визуально всё гладко. Но к примеру, необходимость получения всяких «сертификатов» цепляет глаз опытного наблюдателя, только мало кто захочет узнать, насколько глубока кроличья нора.
+                        </div>
+                       </div> <!----> <!---->
+                      </div> 
+                      <div class="tm-comment-footer">
+                       <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                        <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                         <title>Всего голосов 2: ↑2 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                        </svg> <span title="Всего голосов 2: ↑2 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">+2</span>
+                       </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                         <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                          <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                         </svg></span> <!----></button> <button data-comment-popup="24156761" class="tm-comment__button tm-comment__button_with-icon">
+                        <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                         <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                        </svg></button> <!---->
+                      </div>
+                     </div>
+                    </article> 
+                    <div class="tm-comment-thread__children" style="display:;">
+                     <section class="tm-comment-thread">
+                      <!----> 
+                      <article class="tm-comment-thread__comment">
+                       <a name="comment_24156975" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-2">
+                        <div class="tm-comment-thread__circle"></div></button> <!----> 
+                       <div data-comment-body="24156975" class="tm-comment-thread__indent_l-2">
+                        <div data-gallery-root="" class="tm-comment">
+                         <header data-comment-header tabindex="-1" class="tm-comment__header">
+                          <div class="tm-comment__header-inner">
+                           <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/nmivan/" title="nmivan" class="tm-user-info__userpic">
+                             <div class="tm-entity-image">
+                              <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/a80/f53/fda/a80f53fda4f6c39955207b0505cc8f53.jpg" width="24" class="tm-entity-image__pic">
+                             </div></a> <span class="tm-user-info__user"><a href="/ru/users/nmivan/" class="tm-user-info__username"> nmivan </a> <a href="#comment_24156975" class="tm-comment-thread__comment-link"> 11.03.2022 в 23:03 <!----></a></span></span>
+                          </div> 
+                          <div class="tm-comment__buttons">
+                           <button type="button" class="tm-comment__button tm-comment__button_with-icon">
+                            <svg height="16" width="16" class="tm-svg-img tm-comment__icon">
+                             <title>Показать предыдущий комментарий</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#small-arrow"></use>
+                            </svg></button> <!---->
+                          </div>
+                         </header> 
+                         <div class="tm-comment__body-content tm-comment__body-content_v2">
+                          <div xmlns="http://www.w3.org/1999/xhtml">
+                           <p>Сертификаты - как раз то, что "на поверхности". Внутри они никому не нужны.</p>
+                          </div>
+                         </div> <!----> <!---->
+                        </div> 
+                        <div class="tm-comment-footer">
+                         <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                          <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                           <title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                          </svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span>
+                         </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                           <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                            <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                           </svg></span> <!----></button> <button data-comment-popup="24156975" class="tm-comment__button tm-comment__button_with-icon">
+                          <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                           <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                          </svg></button> <!---->
+                        </div>
+                       </div>
+                      </article> <!----> <!---->
+                     </section>
+                    </div> <!---->
+                   </section>
+                   <section class="tm-comment-thread">
+                    <!----> 
+                    <article class="tm-comment-thread__comment">
+                     <a name="comment_24156969" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-1">
+                      <div class="tm-comment-thread__circle"></div></button> <!----> 
+                     <div data-comment-body="24156969" class="tm-comment-thread__indent_l-1">
+                      <div data-gallery-root="" class="tm-comment">
+                       <header data-comment-header tabindex="-1" class="tm-comment__header">
+                        <div class="tm-comment__header-inner">
+                         <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/nmivan/" title="nmivan" class="tm-user-info__userpic">
+                           <div class="tm-entity-image">
+                            <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/a80/f53/fda/a80f53fda4f6c39955207b0505cc8f53.jpg" width="24" class="tm-entity-image__pic">
+                           </div></a> <span class="tm-user-info__user"><a href="/ru/users/nmivan/" class="tm-user-info__username"> nmivan </a> <a href="#comment_24156969" class="tm-comment-thread__comment-link"> 11.03.2022 в 23:02 <!----></a></span></span>
+                        </div> 
+                        <div class="tm-comment__buttons">
+                         <button type="button" class="tm-comment__button tm-comment__button_with-icon">
+                          <svg height="16" width="16" class="tm-svg-img tm-comment__icon">
+                           <title>Показать предыдущий комментарий</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#small-arrow"></use>
+                          </svg></button> <!---->
+                        </div>
+                       </header> 
+                       <div class="tm-comment__body-content tm-comment__body-content_v2">
+                        <div xmlns="http://www.w3.org/1999/xhtml">
+                         <ol>
+                          <li><p>Да, до 300;</p></li>
+                          <li><p>Их тысячи. Форумы не платные, а закрытые. Зато с разработчиками. </p></li>
+                         </ol>
+                        </div>
+                       </div> <!----> <!---->
+                      </div> 
+                      <div class="tm-comment-footer">
+                       <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                        <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                         <title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                        </svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span>
+                       </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                         <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                          <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                         </svg></span> <!----></button> <button data-comment-popup="24156969" class="tm-comment__button tm-comment__button_with-icon">
+                        <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                         <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                        </svg></button> <!---->
+                      </div>
+                     </div>
+                    </article> <!----> <!---->
+                   </section>
+                  </div> <!---->
+                 </section>
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div>
+              </div> 
+              <div class="tm-notice tm-comments__comment-notice tm-notice_positive">
+               <!----> 
+               <div class="tm-notice__inner">
+                <!----> 
+                <div class="tm-notice__content">
+                 <span>Только полноправные пользователи могут оставлять комментарии. <a rel="nofollow" href="/kek/v1/auth/habrahabr/?back=/ru/post/655245/comments/&amp;hl=ru">Войдите</a>, пожалуйста.</span>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div> <!----> 
+           <section class="tm-block tm-block_spacing-around">
+            <header class="tm-block__header">
+             <h2 class="tm-block__title">Минуточку внимания</h2> 
+             <div class="tm-block__header-aside">
+              <a href="https://tmtm.ru/megapost/" target="_blank" class="tm-block-extralink"> Разместить </a>
+             </div>
+            </header> 
+            <div class="tm-block__body">
+             <div pagination="" slides-per-view="1" class="tm-promo-block__content-wrapper">
+              <div class="tm-promo-block__item-wrapper">
+               <a href="https://effect.habr.com/a/hBsM7zKESOQO7RPvtz3zGT8BAlW5zUxHAxPO0OeikM7-saGJIs6zLegBeNibFxZjWKgYqSD9fSwCZrUga63cHVA3-SwAiZhtVr3dD1HAIBSCtg" rel="nofollow " class="tm-promo-block__item tm-article-title__link">
+                <header class="tm-promo-block__head">
+                 <div class="tm-promo-block__image-wrapper">
+                  <img alt="" src="https://effect.habr.com/a/Yi4LtaQiKJMAqLzWCizqXA1cxf3czAEcjSMy0qnhd-fqbgtKh2F0eFbppMZMq316BXdSjJI7k1riyVFoIyKgeW_SwA7-hfqZS0mhuQSosCxDs1Yuec0TvZgI1a_tHLtCC5TiMHWN61Xspc8qcb-EbZYfq7RfNJGN5MwGifcbv9ZiYQGX0bdQmHt5LhawI4ZSnHN7AcZUWpvjVvOUskyPi-6Jz-ff" class="tm-promo-block__image">
+                 </div> 
+                 <div class="tm-promo-block__label">
+                   Событие <!---->
+                 </div>
+                </header> 
+                <div class="tm-promo-block__info">
+                 <h3 class="tm-promo-block__title">Конкурс технических статей Технотекст 2021</h3>
+                </div></a>
+              </div>
+              <div class="tm-promo-block__item-wrapper">
+               <a href="https://effect.habr.com/a/lzKqx6rzh-7A7c-MOxH3fdPXihtlxDkzkDXX0WdTmjRPmiYwnHv-cvDzwLn6_Q8eVQoetadSUG8vR-xGhYsvICCDGqLLTOhOpKMWJWa5mOMXpIohYfvk5rORC5paW-RKYCJWJEk" rel="nofollow " class="tm-promo-block__item tm-article-title__link">
+                <header class="tm-promo-block__head">
+                 <div class="tm-promo-block__image-wrapper">
+                  <img alt="" src="https://effect.habr.com/a/YyUTaQtgvxQdb0CjzXrOlR6lXpiKDCySLLqD-UEvz3DVr5mUVXCMUHRmzo61Alkv5MTWmQIdOT8fcumMjH8KHFXegemBcRaTVAuM811tBU7HsQ5gVqWH9vQHXYXdlIDpvXgWZfIJeZ6XfUXe_AIGeN_4aSHl5-UcQ_6xL3Pdvo-J2fzJWqTKNT8kfCVgXNvM-NMCuMGs9ygRDA" class="tm-promo-block__image">
+                 </div> 
+                 <div class="tm-promo-block__label">
+                   Мегапост <!---->
+                 </div>
+                </header> 
+                <div class="tm-promo-block__info">
+                 <h3 class="tm-promo-block__title">Хьюстон, на воркшопе этого не было: IT-обучение и космос</h3>
+                </div></a>
+              </div>
+              <div class="tm-promo-block__item-wrapper">
+               <a href="https://effect.habr.com/a/WPnyg0FkwSOi60-2wOCtjR6dYgvzxzrNLJ162oBlQSstMZgoH8SJHOqKiDCXyQ3b0OVLwK_vTspsju1JSJmO-icGoo5r5ZYZfQUGnogwPmuYVqjhY8NJgWBm5th1ON5VNFjXP3YKMQ" rel="nofollow " class="tm-promo-block__item tm-article-title__link">
+                <header class="tm-promo-block__head">
+                 <div class="tm-promo-block__image-wrapper">
+                  <img alt="" src="https://effect.habr.com/a/jc-BB74uCToCPM9ImCxDcFcKJEPZ_Fys2euuAycMw9YMtNIng7u6ea9GLovtG97rs_dzqbiccOzzfQydMgzj4vc88BRnUJAAIQUqvudTAeWkyuHEzGSRDkrNKZLCIygRAr_SaKUHzyX8f_lyAF-9CHGehegpkggtWHKibvkUvxAX8hyROpGZDRBUPdWKz2qye_U69Bxhz7cK" class="tm-promo-block__image">
+                 </div> 
+                 <div class="tm-promo-block__label">
+                   Интересно <!---->
+                 </div>
+                </header> 
+                <div class="tm-promo-block__info">
+                 <h3 class="tm-promo-block__title">Истощающая тревога: что такое стресс и как с ним бороться</h3>
+                </div></a>
+              </div>
+             </div>
+            </div> <!---->
+           </section>
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div hl="ru" id="655245" class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__ads tm-layout-sidebar__ads_initial">
+            <div class="tm-ad-banner__container tm-layout-sidebar__banner tm-layout-sidebar__banner_top">
+             <!----> 
+             <div id="sidebarBanner19096" class="tm-ad-banner tm-ad-banner_variant-half-page"></div>
+            </div>
+           </div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> 
+            <div class="tm-ad-banner__container tm-layout-sidebar__banner tm-layout-sidebar__banner_bottom">
+             <!----> 
+             <div id="sidebarBannerBottom19097" class="tm-ad-banner tm-ad-banner_variant-medium-rectangle"></div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/post/655245/comments/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/post/655245/comments/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"655245":{"id":"655245","timePublished":"2022-03-11T15:45:58+00:00","isCorporative":false,"lang":"ru","titleHtml":"Дофаминовое сопровождение","leadData":{"textHtml":"\u003Cp\u003EНедавно проводил конференцию по обмену опытом среди программистов 1С. В числе прочих, там делился своим опытом весьма примечательный человек по имени Захар. Примечателен он тем, что создал и развивает стабильную систему обслуживания клиентов.\u003C\u002Fp\u003E\u003Cp\u003EНачал он с показателей – деньги, удержание клиентов, оценки качества – цифры действительно интересные, необычные для рынка сопровождения 1С. На всякий случай поясню: сопровождение 1С – это периодическое выполнение задач по программированию разной степени сложности, ну и банальная тех.поддержка.\u003C\u002Fp\u003E\u003Cp\u003EКазалось, после цифр он перейдёт к организации процесса, и там будут стандартные клише вроде «мы работаем качественно», «не пишем go-no-code» и «искренне хотим помочь клиенту». Ан нет. Оказалось, дело в дофамине.\u003C\u002Fp\u003E","imageUrl":null,"buttonTextHtml":"Читать далее","image":null},"editorVersion":"2.0","postType":"article","postLabels":[],"author":{"scoreStats":{"score":523,"votesCount":1399},"rating":15.4,"relatedData":null,"contacts":[],"authorContacts":[],"paymentDetails":{"paymentYandexMoney":"410013378285689","paymentPayPalMe":null,"paymentWebmoney":"207313360238"},"id":"1524977","alias":"nmivan","fullname":"Иван Белокаменцев","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002Fa80\u002Ff53\u002Ffda\u002Fa80f53fda4f6c39955207b0505cc8f53.jpg","speciality":"Биоробот"},"statistics":{"commentsCount":6,"favoritesCount":11,"readingCount":2114,"score":11,"votesCount":15},"hubs":[{"relatedData":null,"id":"17699","alias":"erp","type":"collective","title":"ERP-системы","titleHtml":"ERP-системы","isProfiled":true},{"relatedData":null,"id":"19583","alias":"dev_management","type":"collective","title":"Управление разработкой","titleHtml":"Управление разработкой","isProfiled":true},{"relatedData":null,"id":"20728","alias":"sales","type":"collective","title":"Управление продажами","titleHtml":"Управление продажами","isProfiled":true},{"relatedData":null,"id":"20736","alias":"hr_management","type":"collective","title":"Управление персоналом","titleHtml":"Управление персоналом","isProfiled":true},{"relatedData":null,"id":"22624","alias":"1C","type":"collective","title":"1С","titleHtml":"1С","isProfiled":true}],"flows":[{"id":"1","alias":"develop","title":"Разработка"},{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"textHtml":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EНедавно проводил конференцию по обмену опытом среди программистов 1С. В числе прочих, там делился своим опытом весьма примечательный человек по имени Захар. Примечателен он тем, что создал и развивает стабильную систему обслуживания клиентов.\u003C\u002Fp\u003E\u003Cp\u003EНачал он с показателей – деньги, удержание клиентов, оценки качества – цифры действительно интересные, необычные для рынка сопровождения 1С. На всякий случай поясню: сопровождение 1С – это периодическое выполнение задач по программированию разной степени сложности, ну и банальная тех.поддержка.\u003C\u002Fp\u003E\u003Cp\u003EКазалось, после цифр он перейдёт к организации процесса, и там будут стандартные клише вроде «мы работаем качественно», «не пишем go-no-code» и «искренне хотим помочь клиенту». Ан нет. Оказалось, дело в дофамине.\u003C\u002Fp\u003E\u003Cp\u003EЗахар, как человек любознательный, в своё время прочитал книгу Нира Эяля «На крючке» - там рассказано, как создавать продукты, которые сами приучают пользователей к себе. Изложена некая «модель крючка», состоящая из четырёх этапов – всё пересказывать не буду, чтобы не лишать вас удовольствия от прочтения книги (сам купил, дочитываю).\u003C\u002Fp\u003E\u003Cp\u003EОдна из частей модели крючка – переменное вознаграждение. Основано на эксперименте. То ли крысам, то ли голубям выдали педальку. Жмёшь – получаешь дофамин. Зверьки, разумеется, очень увлеклись педалькой. Но потом, в рамках эксперимента, сделали выдачу дофамина случайной, не на каждое нажатие педали. Результат был удивительным – то ли крысы, то ли голуби начали «педалировать» намного чаще и увлечённее.\u003C\u002Fp\u003E\u003Cp\u003EПотом всё это назвали «переменное вознаграждение» и вовсю стали использовать в разработке ПО – пользователей к нему притягивает не предсказуемое, а именно случайное удовольствие. В том числе, случайным может быть и отсутствие вознаграждения (нет писем, нет сообщений, нет нового в ленте и т.д.).\u003C\u002Fp\u003E\u003Cp\u003EТак вот, Захар подумал – а чем сопровождение клиентов по 1С хуже? Вообще, он не какой-нибудь сумасшедший экспериментатор. На подобные изыски его заставила пойти извечная проблема – дефицит кадров. Точнее, дефицит квалифицированных кадров.\u003C\u002Fp\u003E\u003Cp\u003EНе знаю, как у вас, а в 1С всегда не хватало хороших программистов. Вот таких, которые могут полностью самостоятельно решить задачу одновременно в техническом, методическом, организационном, архитектурном и прочих планах. А тех, кого вы зовёте джунами и мидлами, обычно хватает. Но они могут справиться далеко не со всеми задачами.\u003C\u002Fp\u003E\u003Cp\u003EКакое-то время бытовала теория, что проблему дефицита можно решить грамотной координацией – просто распределять задачи согласно квалификации. Увы, в сопровождении не помогло – джуны всегда недогружены, мидлы туда-сюда, а к экспертам очередь на несколько месяцев. Потому что в сопровождении нельзя не взять, не выполнить задачу, отказаться или посоветовать найти фрилансера.\u003C\u002Fp\u003E\u003Cp\u003EПоначалу Захар понаблюдал, и пришёл к интересному выводу: равномерное качество обслуживания не вызывает никакой реакции.\u003C\u002Fp\u003E\u003Cp\u003EЕсли толпа джунов сопровождает клиента, задачи решает плохо и долго, много ошибается, несколько раз переделывает – клиент привыкает и не испытывает никаких эмоций. Ни плохих, ни хороших. Соответственно, дофамина нет.\u003C\u002Fp\u003E\u003Cp\u003EАналогичная ситуация – если клиента сопровождают мидлы. Задачи решаются быстрее и качественнее, но клиент этого не замечает! Не в том смысле, что лайк не ставит и с 23 февраля не поздравляет. Он не испытывает никаких эмоций. Ну как мы с вами не радуемся работающему отоплению и холодной воде из-под крана.\u003C\u002Fp\u003E\u003Cp\u003EКак ни парадоксально, если клиента сопровождают только эксперты, он тоже бревно бревном! Не испытывает ни радости, ни горячего желания выдать новую задачу. Не на крючке он, и педальку жмёт только при необходимости.\u003C\u002Fp\u003E\u003Cp\u003EТут Захар и подумал: перемешаю-ка я всех спецов, и сделаю качество работы переменным. Ну и перемешал. Встал на позицию учёного за пределами клетки, и стал зорко наблюдать за настроением клиента.\u003C\u002Fp\u003E\u003Cp\u003EИтак, экспертов он вообще отвёл в сторонку – занял проектной разработкой, а не сопровождением. Мидлов и джунов распределил по клиентам. Велел ставить себя в копию всех писем, особенно – конфликтных (где клиент начинает возмущаться). Ну и велел работать силами джунов и мидлов.\u003C\u002Fp\u003E\u003Cp\u003EДальше понятно. Клиент ставит задачи, их решают джуны и мидлы, распределение идёт в зависимости от квалификации. Захар наблюдает за поступающими задачами, и как только попадётся «подходящая» - резко перекидывает её эксперту.\u003C\u002Fp\u003E\u003Cp\u003EЭксперт подключается и делает то, что Захар назвал «дофаминовый штурм» - решает задачу настолько быстро и качественно, что клиент столбенеет. По сути, просто на разнице между привычным ритмом работы джунов с мидлами и экспертов.\u003C\u002Fp\u003E\u003Cp\u003EВ такие моменты клиентов резко пробивает на эмоции. Пишут и звонят, чтобы выразить благодарность. Естественно, просят, чтобы с ними отныне работал только эксперт. Захар придумал отговорку – час работы эксперта в разы дороже, только по предоплате не меньше определённой суммы, и очередь на пару месяцев. Но: вы – наш любимый клиент, и я (Захар) имею возможность иногда подключать эксперта к решению ваших задач, или анализу, проектированию, проверке качества кода джунов и т.д. Только момент подключения эксперта нельзя спрогнозировать – он случайный. Догадываетесь, наверное, почему и зачем.\u003C\u002Fp\u003E\u003Cp\u003EВсе до единого клиенты реагируют одинаково: грустно вздыхают, улыбаются, благодарят и просят «по блату» подключать им эксперта почаще. В ответ готовы терпеть джунов с мидлами, давать больше задач, вносить абонентскую предоплату и вообще. Хотя Захар ничего взамен не просил.\u003C\u002Fp\u003E\u003Cp\u003EДальше понятно. По умолчанию, с задачами клиента работают джуны и мидлы. Эксперты – как в китайском ресторане с крутящимся столом, где в качестве блюд – клиенты. Захар, правда, продолжает следить за потоком задач и выбирать «подходящие» для экспертов. Как я понял, «подходящие» - те, на которых дофаминовый выброс будет наиболее ощутим для клиента.\u003C\u002Fp\u003E\u003Cp\u003EЗахар примерно вычислил частоту, с которой каждому клиенту надо давать дофамин. Понял, что при смене ЛПР клиента надо давать усиленную дозу. Научил джунов и мидлов «снимать настроение» клиента и вовремя сигнализировать, где и кому нужен укольчик.\u003C\u002Fp\u003E\u003Cp\u003EНу и, в конце своего рассказа, Захар ещё раз показал цифры. На этот раз я, и остальные слушатели, разглядывали их куда более внимательно. Главное, что отмечу – стабильность и рост, никаких синусоид и кассовых разрывов.\u003C\u002Fp\u003E\u003Cp\u003EИ, главное, клиенты не уходят. Кто занимается сопровождением – знает, какой удар по эффективности наносит замена клиента, с учётом конфетно-букетной стадии, взаимной притирки и, в терминах Захара, длительного дофаминового штурма для завоевания уважения клиента.\u003C\u002Fp\u003E\u003Cp\u003EЧто думаете? Я, наверное, тоже такой метод попробую.\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","tags":[{"titleHtml":"черт знает что"}],"metadata":{"stylesUrls":[],"scriptUrls":[],"shareImageUrl":"https:\u002F\u002Fhabr.com\u002Fshare\u002Fpublication\u002F655245\u002Fe55b9c4c8e6d87d23c683e59d8e5cca1\u002F","shareImageWidth":1200,"shareImageHeight":630,"vkShareImageUrl":"https:\u002F\u002Fhabr.com\u002Fshare\u002Fpublication\u002F655245\u002Fe55b9c4c8e6d87d23c683e59d8e5cca1\u002F?format=vk","schemaJsonLd":"{\"@context\":\"http:\\\u002F\\\u002Fschema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fpost\\\u002F655245\\\u002F\"},\"headline\":\"Дофаминовое сопровождение\",\"datePublished\":\"2022-03-11T18:45:58+03:00\",\"dateModified\":\"2022-03-11T19:11:45+03:00\",\"author\":{\"@type\":\"Person\",\"name\":\"Иван Белокаменцев\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Habr\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fwebt\\\u002Fa_\\\u002Flk\\\u002F9m\\\u002Fa_lk9mjkccjox-zccjrpfolmkmq.png\"}},\"description\":\"Недавно проводил конференцию по обмену опытом среди программистов 1С. В числе прочих, там делился своим опытом весьма примечательный человек по имени Захар. Прим...\",\"url\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fpost\\\u002F655245\\\u002F#post-content-body\",\"about\":[\"h_erp\",\"h_dev_management\",\"h_sales\",\"h_hr_management\",\"h_1C\",\"f_develop\",\"f_management\"],\"image\":[\"https:\\\u002F\\\u002Fhabr.com\\\u002Fshare\\\u002Fpublication\\\u002F655245\\\u002Fe55b9c4c8e6d87d23c683e59d8e5cca1\\\u002F\"]}","metaDescription":"Недавно проводил конференцию по обмену опытом среди программистов 1С. В числе прочих, там делился своим опытом весьма примечательный человек по имени Захар. Примечателен он тем, что создал и развивает...","mainImageUrl":null,"amp":true,"customTrackerLinks":[]},"polls":[],"commentsEnabled":true,"rulesRemindEnabled":false,"votesEnabled":true,"status":"published","plannedPublishTime":null,"checked":null,"isEditorial":false}},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[],"hubs":""},"comments":{"articleComments":{"655245":{"refs":{"24156289":{"id":"24156289","parentId":null,"level":0,"timePublished":"2022-03-11T16:00:51+00:00","timeChanged":null,"isSuspended":false,"score":0,"votesCount":0,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EСейчас более актуальна глюкоза внутривенно. \u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","editorVersion":2,"author":{"id":"859916","alias":"panvartan","fullname":null,"avatarUrl":null,"speciality":null},"isAuthor":false,"isPostAuthor":false,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":[],"vote":{"value":null,"isCanVote":false}},"24156341":{"id":"24156341","parentId":null,"level":0,"timePublished":"2022-03-11T16:30:10+00:00","timeChanged":null,"isSuspended":false,"score":2,"votesCount":2,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EЭто даже круче чем казино похоже))\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","editorVersion":2,"author":{"id":"1696501","alias":"GaDzik","fullname":null,"avatarUrl":null,"speciality":null},"isAuthor":false,"isPostAuthor":false,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":[],"vote":{"value":null,"isCanVote":false}},"24156607":{"id":"24156607","parentId":null,"level":0,"timePublished":"2022-03-11T18:11:39+00:00","timeChanged":null,"isSuspended":false,"score":0,"votesCount":0,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cblockquote\u003EНе знаю, как у вас, а в 1С всегда не хватало хороших программистов. Вот таких, которые могут полностью самостоятельно решить задачу одновременно в техническом, методическом, организационном, архитектурном и прочих планах.\u003C\u002Fblockquote\u003E\u003Cbr\u002F\u003E\r\nПричины на поверхности\u003Cbr\u002F\u003E\r\n1. Маленькие зарплаты (1С за рубежом не нужна, значит нет конкуренции работодатенлей)\u003Cbr\u002F\u003E\r\n2. Отсутствие нормальных бесплатных источников для самообучения. Книги дорогие, платные видеоуроки. Даже форумы платные.\u003C\u002Fdiv\u003E","editorVersion":1,"author":{"id":"1702465","alias":"aakhamef","fullname":null,"avatarUrl":null,"speciality":"Погромист"},"isAuthor":false,"isPostAuthor":false,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":["24156761","24156969"],"vote":{"value":null,"isCanVote":false}},"24156761":{"id":"24156761","parentId":"24156607","level":1,"timePublished":"2022-03-11T18:54:27+00:00","timeChanged":null,"isSuspended":false,"score":2,"votesCount":2,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003EА вы знаете модель распространения 1с? Модель лицензирования? Мне как начинают рассказывать, как там всё устроено, я сразу перестаю удивляться, что квалифицированные кадры от туда регулярно бегут в другие области. На поверхности наоборот — визуально всё гладко. Но к примеру, необходимость получения всяких «сертификатов» цепляет глаз опытного наблюдателя, только мало кто захочет узнать, насколько глубока кроличья нора.\u003C\u002Fdiv\u003E","editorVersion":1,"author":{"id":"68410","alias":"WicRus","fullname":"Виктор","avatarUrl":null,"speciality":"hwdev"},"isAuthor":false,"isPostAuthor":false,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":["24156975"],"vote":{"value":null,"isCanVote":false}},"24156969":{"id":"24156969","parentId":"24156607","level":1,"timePublished":"2022-03-11T20:02:56+00:00","timeChanged":null,"isSuspended":false,"score":0,"votesCount":0,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Col\u003E\u003Cli\u003E\u003Cp\u003EДа, до 300;\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EИх тысячи. Форумы не платные, а закрытые. Зато с разработчиками. \u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Fol\u003E\u003C\u002Fdiv\u003E","editorVersion":2,"author":{"id":"1524977","alias":"nmivan","fullname":"Иван Белокаменцев","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002Fa80\u002Ff53\u002Ffda\u002Fa80f53fda4f6c39955207b0505cc8f53.jpg","speciality":"Биоробот"},"isAuthor":false,"isPostAuthor":true,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":[],"vote":{"value":null,"isCanVote":false}},"24156975":{"id":"24156975","parentId":"24156761","level":2,"timePublished":"2022-03-11T20:03:56+00:00","timeChanged":null,"isSuspended":false,"score":0,"votesCount":0,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EСертификаты - как раз то, что \"на поверхности\". Внутри они никому не нужны.\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","editorVersion":2,"author":{"id":"1524977","alias":"nmivan","fullname":"Иван Белокаменцев","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002Fa80\u002Ff53\u002Ffda\u002Fa80f53fda4f6c39955207b0505cc8f53.jpg","speciality":"Биоробот"},"isAuthor":false,"isPostAuthor":true,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":[],"vote":{"value":null,"isCanVote":false}}},"root":["24156289","24156341","24156607"]}},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{"isCanComment":false,"cantCommentReasonKey":"AUTH_REQUIRED","cantCommentReason":"Authorization required","data":null},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":1647029036,"moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":true,"featurer":[],"megaposts":[{"title":"Сработают ли в IT принципы космической подготовки","color":"#99ddff","link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FLZMaSpGV5qvkXHv3XsrwFAv4PP9mYpd7F55V_nO6721uzC0rP6ZuyEvcQVKeXhevmVbSO9M6ofIvgBT_DhPNlf9ni9mSgey7FiDY2CoIsOOPQ6Lusul6WvGFMiI33BUv4CFaMA"},"events":{"view":"d99T7YA4_fkB22EJNu9eQWbcOAIo1IIv8uEhvkJaKtMjp5ZHqo7b14sZHxLNSR09YDfy_PtkjjoSJg"}}],"promoLinks":[{"title":"Как работа вызывает стресс и как это отследить","label":"Интересно","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FmY9t4KLbuHbm4ZqYTP317GA_Q3WTvRi5ism9WVl-wS8NllHnFr_RDkn3IjH06y8mptv0GnSl4q1rq6yU2bxVOB0dri1aLZSOubL4Wm4qwhxT7tJmGBy_cSXV4HDlMMwrG24Ddb4CtA"},"events":{"view":"vnVHs5_VzNYFijDXZohEQGinkf7dPT2XkWEF6kXKmzApHAb58Z1lsEcyBOtHxMisStqO1p2Glvj_WA"}},{"title":"А как прошел ваш 2021? Исследуем рынок труда в IT, строим тренды и ищем аномалии","label":"Промо","external":true,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FwjTC3gWZt0u0oib58dsjDBUTxCWsmlCR4yJ5-qczvFastP2XXEBPygAM0_DJF87TfsDKBYiUI5qFPM4KI0vP8O5J0nuP75OWoa57zEImDxv9WnNgyMtktNACfAa0GB5de2Q9oGTaKd53Vh-rqrs9LU4aPrU9yDI"},"events":{"view":"4DJp86WFHergIrmQYSXQeTmvQSMMHLiOs1We_aPPE4QAzv6QmOd9faasbD5t_WH1q8U-NJXGVOiF7g"}}],"promoPosts":[{"title":"Конкурс технических статей Технотекст 2021","label":"Событие","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FYi4LtaQiKJMAqLzWCizqXA1cxf3czAEcjSMy0qnhd-fqbgtKh2F0eFbppMZMq316BXdSjJI7k1riyVFoIyKgeW_SwA7-hfqZS0mhuQSosCxDs1Yuec0TvZgI1a_tHLtCC5TiMHWN61Xspc8qcb-EbZYfq7RfNJGN5MwGifcbv9ZiYQGX0bdQmHt5LhawI4ZSnHN7AcZUWpvjVvOUskyPi-6Jz-ff"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FhBsM7zKESOQO7RPvtz3zGT8BAlW5zUxHAxPO0OeikM7-saGJIs6zLegBeNibFxZjWKgYqSD9fSwCZrUga63cHVA3-SwAiZhtVr3dD1HAIBSCtg"}},{"title":"Хьюстон, на воркшопе этого не было: IT-обучение и космос","label":"Мегапост","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FYyUTaQtgvxQdb0CjzXrOlR6lXpiKDCySLLqD-UEvz3DVr5mUVXCMUHRmzo61Alkv5MTWmQIdOT8fcumMjH8KHFXegemBcRaTVAuM811tBU7HsQ5gVqWH9vQHXYXdlIDpvXgWZfIJeZ6XfUXe_AIGeN_4aSHl5-UcQ_6xL3Pdvo-J2fzJWqTKNT8kfCVgXNvM-NMCuMGs9ygRDA"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FlzKqx6rzh-7A7c-MOxH3fdPXihtlxDkzkDXX0WdTmjRPmiYwnHv-cvDzwLn6_Q8eVQoetadSUG8vR-xGhYsvICCDGqLLTOhOpKMWJWa5mOMXpIohYfvk5rORC5paW-RKYCJWJEk"}},{"title":"Истощающая тревога: что такое стресс и как с ним бороться","label":"Интересно","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002Fjc-BB74uCToCPM9ImCxDcFcKJEPZ_Fys2euuAycMw9YMtNIng7u6ea9GLovtG97rs_dzqbiccOzzfQydMgzj4vc88BRnUJAAIQUqvudTAeWkyuHEzGSRDkrNKZLCIygRAr_SaKUHzyX8f_lyAF-9CHGehegpkggtWHKibvkUvxAX8hyROpGZDRBUPdWKz2qye_U69Bxhz7cK"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FWPnyg0FkwSOi60-2wOCtjR6dYgvzxzrNLJ162oBlQSstMZgoH8SJHOqKiDCXyQ3b0OVLwK_vTspsju1JSJmO-icGoo5r5ZYZfQUGnogwPmuYVqjhY8NJgWBm5th1ON5VNFjXP3YKMQ"}}]},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

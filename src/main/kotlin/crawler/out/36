@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title> ValterGames
+     - Gamedeveloper / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/page-user.4a447f8d.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/page-user.71d0782a.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/page-user.4a447f8d.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" itemprop="image" content="/img/habr_ru.png" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="/img/habr_ru.png" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="/img/habr_ru.png" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="/img/habr_ru.png" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="/img/habr_ru.png?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" property="og:type" content="website" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:url" content="https://habr.com/ru/users/ValterGames/" data-vmid="og:url">
+  <meta data-vue-meta="ssr" property="og:title" content=" ValterGames
+     - Gamedeveloper" data-vmid="og:title">
+  <meta data-vue-meta="ssr" name="description" content=" ValterGames. Опубликовал 3 статьи на Хабр и оставил 11 комментариев." data-vmid="description">
+  <meta data-vue-meta="ssr" property="og:description" content=" ValterGames. Опубликовал 3 статьи на Хабр и оставил 11 комментариев." data-vmid="og:description">
+  <meta data-vue-meta="ssr" name="keywords" content="ValterGames, "> 
+  <link data-vue-meta="ssr" image_src="image" href="/img/habr_ru.png" data-vmid="image:href">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/users/ValterGames/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/users/ValterGames/" hreflang="ru" rel="alternate" data-vmid="hreflang">
+  <link data-vue-meta="ssr" href="https://habr.com/en/users/ValterGames/" hreflang="en" rel="alternate" data-vmid="hreflang"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> <!----> <a href="https://effect.habr.com/a/E73j5Fr4O-142fgehWBkgSYhmn5ZRacku7beakZ3hv54EdbWEfLT97djoyD-hj0yCVxRKwwSSsU098-iNgpc2lmoKiwVB6N_1YR9jWcHYGiGmPxdqrNlkZhBzbo_vy_QYhmIy0w7PQ" target="_blank" class="tm-top-link" style="color:#99ddff;"> Как COVID отрывается на IT: тренды и новое исследование </a> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div data-async-called="true" class="tm-page tm-user">
+       <div class="tm-page-width">
+        <!----> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <section class="tm-block tm-block_spacing-bottom">
+            <!----> 
+            <div class="tm-user-card tm-user__user-card">
+             <div class="tm-user-card__info-container">
+              <div class="tm-user-card__header">
+               <div class="tm-user-card__header-data">
+                <a href="/ru/users/ValterGames/" aria-current="page" class="tm-user-card__userpic router-link-exact-active router-link-active tm-user-card__userpic_size-48">
+                 <div class="tm-entity-image">
+                  <img alt="" src="//habrastorage.org/getpro/habr/avatars/7a4/158/c4e/7a4158c4e0d1840bda3c7f4289f15f63.png" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-user-card__meta">
+                 <div title=" 56 голосов " class="tm-karma tm-user-card__karma">
+                  <div class="tm-karma__votes tm-karma__votes_positive">
+                    52 
+                  </div> 
+                  <div class="tm-karma__text">
+                    Карма 
+                  </div>
+                 </div> 
+                 <div title="Рейтинг пользователя" class="tm-rating tm-user-card__rating">
+                  <div class="tm-rating__header"> 
+                   <div class="tm-rating__counter">
+                    10
+                   </div>
+                  </div> 
+                  <div class="tm-rating__text">
+                    Рейтинг 
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div> 
+              <div class="tm-user-card__info">
+               <div class="tm-user-card__title">
+                <!----> <a href="/ru/users/ValterGames/" aria-current="page" class="tm-user-card__nickname router-link-exact-active router-link-active"> @ValterGames </a> <!---->
+               </div> 
+               <p class="tm-user-card__short-info">Gamedeveloper</p>
+              </div>
+             </div> 
+             <div class="tm-user-card__buttons">
+              <!----> <!----> <!----> <!----> <!---->
+             </div>
+            </div> 
+            <div class="tm-tabs tm-user__tabs">
+             <div class="tm-tabs__padding-area">
+              <span class="tm-tabs__tab-item"><a href="/ru/users/ValterGames/" aria-current="page" data-test-id="tab-link-active" class="tm-tabs__tab-link router-link-exact-active  tm-tabs__tab-link_active"> Профиль <!----></a></span><span class="tm-tabs__tab-item"><a href="/ru/users/ValterGames/posts/" class="tm-tabs__tab-link"> Публикации <span class="tm-tabs__tab-counter"> 3 </span></a></span><span class="tm-tabs__tab-item"><a href="/ru/users/ValterGames/comments/" class="tm-tabs__tab-link"> Комментарии <span class="tm-tabs__tab-counter"> 11 </span></a></span><span class="tm-tabs__tab-item"><a href="/ru/users/ValterGames/favorites/" class="tm-tabs__tab-link"> Закладки <!----></a></span>
+             </div> 
+             <div class="tm-tabs__dropdown">
+              <div class="tm-navigation-dropdown tm-navigation-dropdown_variant-tabs">
+               <div class="tm-navigation-dropdown__wrapper">
+                <button class="tm-navigation-dropdown__button tm-navigation-dropdown__button_variant-tabs">
+                 <div class="tm-navigation-dropdown__button-text">
+                   Ещё 
+                 </div> 
+                 <svg height="16" width="16" class="tm-svg-img icon_dropdown-arrow">
+                  <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+                 </svg></button> 
+               </div> 
+               <ul class="tm-navigation-dropdown__options tm-navigation-dropdown__options_absolute">
+                <li class="tm-navigation-dropdown__option"><button class="tm-navigation-dropdown__option-button"> Подписчики <span class="tm-navigation-dropdown__option-count"> 22 </span></button></li>
+                <li class="tm-navigation-dropdown__option"><button class="tm-navigation-dropdown__option-button"> Подписки <span class="tm-navigation-dropdown__option-count"> 5 </span></button></li>
+               </ul>
+              </div>
+             </div>
+            </div> <!----> <!---->
+           </section> <!----> 
+           <div data-async-called="true" class="tm-profile__body">
+            <!----> 
+            <dl class="tm-description-list tm-description-list_variant-base">
+             <dt class="tm-description-list__title tm-description-list__title_variant-base">
+              Значки
+             </dt> 
+             <dd class="tm-description-list__body tm-description-list__body_variant-base">
+              <div class="tm-badges">
+               <ul class="tm-badges__list">
+                <li class="tm-badges__item">
+                 <div title="Пользователь с кармой >0" class="tm-badges__badge">
+                   Захабренный 
+                 </div></li>
+               </ul>
+              </div>
+             </dd>
+            </dl> 
+            <dl class="tm-description-list tm-description-list_variant-base">
+             <dt class="tm-description-list__title tm-description-list__title_variant-base">
+               Приглашен 
+             </dt> 
+             <dd class="tm-description-list__body tm-description-list__body_variant-base">
+              <time datetime="2021-12-04T19:08:51.000Z" title="2021-12-04, 22:08">4 декабря 2021</time> по приглашению от НЛО 
+             </dd>
+            </dl> 
+            <dl class="tm-description-list tm-description-list_variant-base">
+             <dt class="tm-description-list__title tm-description-list__title_variant-base">
+              О себе
+             </dt> 
+             <dd class="tm-description-list__body tm-description-list__body_variant-base">
+              <div class="tm-user-profile__content">
+               <span>🎮 Unity Game Developer<br> 🌈 Google Play: <a href="https://play.google.com/store/apps/dev?id=6376110392077490413" rel="nofollow noopener noreferrer">play.google.com/store/apps/dev?id=6376110392077490413</a> <br> 🌍 Discord Server: <a href="https://discord.gg/NHTMq69GWd" rel="nofollow noopener noreferrer">discord.gg/NHTMq69GWd</a><br> 💬 ВК группа: <a href="https://vk.com/valtergamesclub" rel="nofollow noopener noreferrer">vk.com/valtergamesclub</a><br> 📷 Instagram: <a href="https://www.instagram.com/_valtergames_" rel="nofollow noopener noreferrer">www.instagram.com/_valtergames_</a></span>
+              </div>
+             </dd>
+            </dl> <!----> <!----> 
+            <dl class="tm-description-list tm-description-list_variant-base">
+             <dt class="tm-description-list__title tm-description-list__title_variant-base">
+              Состоит в хабах
+             </dt> 
+             <dd class="tm-description-list__body tm-description-list__body_variant-base">
+              <div class="tm-show-more-handler">
+               <div class="tm-show-more-handler__content">
+                <div class="tm-user-hubs">
+                 <div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/net/" class="tm-user-hubs__hub"><span>.NET</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/csharp/" class="tm-user-hubs__hub"><span>C#</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/git/" class="tm-user-hubs__hub"><span>Git</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/github/" class="tm-user-hubs__hub"><span>GitHub</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/python/" class="tm-user-hubs__hub"><span>Python</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/sql/" class="tm-user-hubs__hub"><span>SQL</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/unity/" class="tm-user-hubs__hub"><span>Unity3D</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/Xamarin/" class="tm-user-hubs__hub"><span>Xamarin</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/mobileanalytics/" class="tm-user-hubs__hub"><span>Mobile App Analytics</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/hi/" class="tm-user-hubs__hub"><span>High performance</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/graph_design/" class="tm-user-hubs__hub"><span>Graphic design</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/design/" class="tm-user-hubs__hub"><span>Design</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/apps_design/" class="tm-user-hubs__hub"><span>Mobile applications design</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/game_monetization/" class="tm-user-hubs__hub"><span>Games monetization</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/mobile_monetization/" class="tm-user-hubs__hub"><span>Mobile applications monetization</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/linux/" class="tm-user-hubs__hub"><span>Configuring Linux</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/debug/" class="tm-user-hubs__hub"><span>Debugging</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/programming/" class="tm-user-hubs__hub"><span>Programming</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/game_promotion/" class="tm-user-hubs__hub"><span>Games promotion</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                  <div class="tm-user-hubs__item">
+                   <div class="tm-hub-link-popup">
+                    <div class="tm-hub-link-popup__link">
+                     <a href="/ru/hub/prototyping/" class="tm-user-hubs__hub"><span>Prototyping</span></a>
+                    </div> <!---->
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div> <button type="button" class="tm-show-more-handler__action"> Показать еще </button>
+              </div>
+             </dd>
+            </dl> <!----> 
+            <dl class="tm-description-list tm-description-list_variant-base">
+             <dt class="tm-description-list__title tm-description-list__title_variant-base">
+               Подписан на компании 
+             </dt> 
+             <dd class="tm-description-list__body tm-description-list__body_variant-base">
+              <div class="tm-user-profile__section tm-user-profile__section_folllowed-companies">
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/alconost/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/2b4/2d1/a9d/2b42d1a9d6fd61e4ff1b0ebf9ec3f0cc.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/alconost/profile/" class="tm-company-snippet__title">Alconost</a> 
+                 <div class="tm-company-snippet__description">
+                  Localization in 70+ languages &amp; video production
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/avito/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/565/f01/fdc/565f01fdc410465d057ad2b0b27c8db9.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/avito/profile/" class="tm-company-snippet__title">Авито</a> 
+                 <div class="tm-company-snippet__description">
+                  У нас живут ваши объявления
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/badoo/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/69e/0a4/840/69e0a4840cbfdc565559f6af093b5835.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/badoo/profile/" class="tm-company-snippet__title">Badoo</a> 
+                 <div class="tm-company-snippet__description">
+                  Big Dating
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/bitrix/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/f86/e5b/908/f86e5b908b36c321d5ab60173473f00c.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/bitrix/profile/" class="tm-company-snippet__title">Битрикс24</a> 
+                 <div class="tm-company-snippet__description">
+                  Компания
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/citymobil/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/cd3/99d/b96/cd399db968a2981be5357e8cc3488bf2.jpg" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/citymobil/profile/" class="tm-company-snippet__title">Ситимобил</a> 
+                 <div class="tm-company-snippet__description">
+                  Творим городскую мобильность
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/dododev/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/7ee/724/8ca/7ee7248ca5cef85feaf889deea8803b7.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/dododev/profile/" class="tm-company-snippet__title">Dodo Engineering</a> 
+                 <div class="tm-company-snippet__description">
+                  О том, как разработчики строят IT в Dodo
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/ds/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/companies/6fb/c41/2a3/6fbc412a3357f50389c9a9e2677549b4.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/ds/profile/" class="tm-company-snippet__title">DassaultSystèmes</a> 
+                 <div class="tm-company-snippet__description">
+                  Компания
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/habr/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/075/e25/e71/075e25e71073e14733fe91726932789a.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/habr/profile/" class="tm-company-snippet__title">Habr</a> 
+                 <div class="tm-company-snippet__description">
+                  Create services for geeks
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/haulmont/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/1ca/718/577/1ca7185776f10094a58597ac99a568b0.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/haulmont/profile/" class="tm-company-snippet__title">Haulmont</a> 
+                 <div class="tm-company-snippet__description">
+                  Создаем современные корпоративные системы
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/hsespb/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/a37/7dd/b5c/a377ddb5cb5a09cc5221653c23ef3264.jpg" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/hsespb/profile/" class="tm-company-snippet__title">Питерская Вышка</a> 
+                 <div class="tm-company-snippet__description">
+                  Не для школы, а для жизни
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/htmlacademy/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/406/525/342/40652534232a3ce9dc978d2e0c9b33e4.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/htmlacademy/profile/" class="tm-company-snippet__title">HTML Academy</a> 
+                 <div class="tm-company-snippet__description">
+                  Обучаем веб-разработке и меняем жизни
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/huawei/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/e8a/76f/4c1/e8a76f4c1185ffc1859d558c31374c6a.jpg" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/huawei/profile/" class="tm-company-snippet__title">Huawei</a> 
+                 <div class="tm-company-snippet__description">
+                  Huawei – мировой лидер в области ИКТ
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/intersystems/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/146/798/2ee/1467982ee5de6ad5fac7134814cacfcf.jpg" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/intersystems/profile/" class="tm-company-snippet__title">InterSystems</a> 
+                 <div class="tm-company-snippet__description">
+                  InterSystems IRIS: СУБД, ESB, BI, Healthcare
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/ivi/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/47a/cf3/171/47acf31717fba8e1697e298bb79a6167.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/ivi/profile/" class="tm-company-snippet__title">Онлайн-кинотеатр IVI</a> 
+                 <div class="tm-company-snippet__description">
+                  Мы открываем для людей многообразие мира кино
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/jugru/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/0a7/ce6/a86/0a7ce6a86556ff20579e90e6b732e663.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/jugru/profile/" class="tm-company-snippet__title">JUG Ru Group</a> 
+                 <div class="tm-company-snippet__description">
+                  Онлайн-конференции для Senior-разработчиков
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/lamoda/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/cdd/710/61a/cdd71061ae61f0c4f273ddcaaec533c7.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/lamoda/profile/" class="tm-company-snippet__title">Lamoda</a> 
+                 <div class="tm-company-snippet__description">
+                  Code the lifestyle
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/lightmap/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/b48/f8d/0e1/b48f8d0e11c97dd1e1b3c097307e2011.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/lightmap/profile/" class="tm-company-snippet__title">Lightmap</a> 
+                 <div class="tm-company-snippet__description">
+                  Разработчик мобильных игр
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/microsoft/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/e98/5cf/6a0/e985cf6a01b15006350561f26c70a41f.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/microsoft/profile/" class="tm-company-snippet__title">Microsoft</a> 
+                 <div class="tm-company-snippet__description">
+                  Microsoft — мировой лидер в области ПО и ИТ-услуг
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/miro/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <svg height="40" width="40" class="tm-svg-img tm-image-placeholder tm-image-placeholder_green">
+                   <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-company"></use>
+                  </svg>
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/miro/profile/" class="tm-company-snippet__title">Miro</a> 
+                 <div class="tm-company-snippet__description">
+                  Online collaborative whiteboard platform
+                 </div>
+                </div>
+               </div>
+               <div class="tm-company-snippet tm-user-profile__followed-company">
+                <a href="/ru/company/nanosoft/profile/" class="tm-company-snippet__logo-link">
+                 <div class="tm-entity-image">
+                  <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/572/1e7/df1/5721e7df17b47f391ffbafaee345da67.png" width="40" class="tm-entity-image__pic">
+                 </div></a> 
+                <div class="tm-company-snippet__info">
+                 <a href="/ru/company/nanosoft/profile/" class="tm-company-snippet__title">Нанософт разработка</a> 
+                 <div class="tm-company-snippet__description">
+                  Инженерная экосистема
+                 </div>
+                </div>
+               </div>
+              </div>
+             </dd>
+            </dl>
+           </div>
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__placeholder_initial"></div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <section class="tm-block tm-block_spacing-bottom">
+             <header class="tm-block__header">
+              <h2 class="tm-block__title">Информация</h2> <!---->
+             </header> 
+             <div class="tm-block__body">
+              <div class="tm-user-basic-info">
+               <dl class="tm-description-list tm-description-list_variant-columns">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns">
+                 В рейтинге
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns">
+                  361-й 
+                </dd>
+               </dl> <!----> <!----> <!----> 
+               <dl class="tm-description-list tm-description-list_variant-columns">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns">
+                  Зарегистрирован 
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns">
+                 <time datetime="2021-11-30T07:53:23.000Z" title="2021-11-30, 10:53">30 ноября 2021</time>
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns">
+                 Активность
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns">
+                 <time datetime="2022-03-11T20:05:35.000Z" title="2022-03-11, 23:05">вчера в 23:05</time>
+                </dd>
+               </dl>
+              </div>
+             </div> <!---->
+            </section> 
+            <div data-async-called="true" class="tm-user-specialization">
+             <section class="tm-block tm-block_spacing-bottom">
+              <header class="tm-block__header">
+               <h2 class="tm-block__title">Специализация</h2> <!---->
+              </header> 
+              <div class="tm-block__body tm-block__body_variant-stucked">
+               <div class="tm-user-specialization__title">
+                <strong>Game Developer, Application Developer</strong>
+               </div> <!----> <!----> 
+               <div class="tm-user-specialization__skills">
+                <div class="tm-user-specialization__skill">
+                 C#
+                </div>
+                <div class="tm-user-specialization__skill">
+                 Unity3d
+                </div>
+                <div class="tm-user-specialization__skill">
+                 Game Development
+                </div>
+                <div class="tm-user-specialization__skill">
+                 Software development
+                </div>
+                <div class="tm-user-specialization__skill">
+                 Git
+                </div>
+                <div class="tm-user-specialization__skill">
+                 Linux
+                </div>
+               </div>
+              </div> <!---->
+             </section>
+            </div> <!----> <!----> <!---->
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/users/ValterGames/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/users/ValterGames/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link router-link-active"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[],"hubs":""},"comments":{"articleComments":{},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":"","moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":true,"featurer":[],"megaposts":[{"title":"Как COVID отрывается на IT: тренды и новое исследование","color":"#99ddff","link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FE73j5Fr4O-142fgehWBkgSYhmn5ZRacku7beakZ3hv54EdbWEfLT97djoyD-hj0yCVxRKwwSSsU098-iNgpc2lmoKiwVB6N_1YR9jWcHYGiGmPxdqrNlkZhBzbo_vy_QYhmIy0w7PQ"},"events":{"view":"QrG_lfQ68WtqnOHcf_wt3gCP1GIez2AHM0mCfbiAW-Ks0W3KILyQNS11eXUhbtaZ_6X9peJnQEMjRw"}}],"promoLinks":[{"title":"Делаем торт вместе: собираем темы, которых вам не хватает на Хабре","label":"Опрос","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F8uQOcFg1H6vC7OhVnI4cyQI3JjTMCKjgTJD3ZNRWTcdHG8F-MUuyv5DnDzHFyv9w6r898-CE2YeHsSxaxcSz3MLW1AKcmHs7dHox1C5BYgPSC7VhtZszPeCxcFIa"},"events":{"view":"Ei3A0Mjf3r00oFclPSYMBo0VatIuH1mhoZsj95zPM2kw-jpSmoBrgFkYtsLkn1eayZwfJ3EFGkh7QA"}},{"title":"Собрали со всего Хабра самую полезную инфу о платёжных технологиях","label":"Коллекция","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002Fz4lV7x_IPS-e7VnRBLqicxp_NyOSNB_OKz5nyDszNPxsaxOixgOf6bJCqufD872F1l4aptckpkfEtxa42SOPmWQ9EvqrKc_NFiX4pI8DDLKIpZ9i"},"events":{"view":"Su-GQY--kuw5LK5kSwOMFq_cjERHyr29jhLBfqsuStGPNFvzOAmDzoMddnq5GRHDoN77Vcr9FaB5qg"}}],"promoPosts":[{"title":"Промокод — твой билет в общество потребления","label":"Промо","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FSGIaQRQOWptbZ5_hyJDj6taPT9Bkg5hCXWC2VKIPVGUEcE7pfhTtZtaiAQAHWNS_d-T1-3-YpjonDuz-s8GLvRRUIyD87nY3z64h-1FSmy3T8FZNh4L72_z5Uj4lqjBDp2F0_pmB-fkVeM711MMWaXwkygAY8mNSiAzaoqaWiA7WSISknT1mi0rVQJ9HwCnoqudGAPXM8RAmAKnxO2aUFwCSXaOD"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F57COVRpDpKOwOwVTsteqpPaBddGj3iUi8CDeBXfw0alhcQuw_LO0OBnNXjqI5D_AYR90Fd5RFNp8M28ok-yRQrR3bR38Zq_xZdj7EnWi2XL_irzFrBAS"}},{"title":"Конкурс технических статей Технотекст 2021","label":"Событие","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FDkohD6z5W6mBEVzeLhh8lzw8ch_NLe-N6bud8HZjVxZlX8JyYyAy_qGTegF8Cotma3STDlCu_zaHXhIiiCSF5ZieapkArbczTWut5qPW3bE5rnjcHtoVTwYS2Jd4_bIE1VcJ83xjdsZnWDRkLHNoDP06-X_c7uI3tYLU4NRrEzjc0XvcqO--QZTxn03JEMcOunVd9-3x2x5IGd3G2WUmcGMuOIIH"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FkUAbJdAboUZLMOlIMwh5Op3wocXPsOqWhowY9EbzqUvJm8BwpgiwUjVT3OnqeeMvcZ64G-TM16lXGw0azXgGk5vM0efLoh9hJlejYJpCtyRHTw"}},{"title":"Хьюстон, на воркшопе этого не было: IT-обучение и космос","label":"Мегапост","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FWExsUH0l4Ku-7yEQlToPTbY5pKNVxpUteUEkv6yUKn_pvEKb4XOwmxPu9oXW3IkJ4ySis0A79KJY2m8m2z-C3z4JZI7TGiCGe-Ku-7uuNGYaXKY48KUFoXpkfAtC5pcGVIo6eDRJlHc0lWEiGx47j8dXqzXqTh_btuM90cOZGvIKFG-qGPKP6ef9cKLvueuhRd_9g8ZmlVyB1A"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FhiB81gZUx4pbzXTsqm9P7ezLR43BQIrnprTr4PKz3-T2IXAO23FhHJ7IM79Vw5pjYt9kNt5yzn-GPqoWU_8n3v2SnJzJrR04plIsNE2qQDnqXRhgtk6ux1KD26uxqqshMVn66VI"}}]},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{"valtergames":{"alias":"ValterGames","fullname":"","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F7a4\u002F158\u002Fc4e\u002F7a4158c4e0d1840bda3c7f4289f15f63.png","speciality":"Gamedeveloper","gender":"1","rating":10,"ratingPos":361,"scoreStats":{"score":52,"votesCount":56},"relatedData":null,"followStats":{"followCount":5,"followersCount":22},"lastActivityDateTime":"2022-03-11T20:05:35+00:00","registerDateTime":"2021-11-30T07:53:23+00:00","birthday":null,"location":null,"workplace":[],"counterStats":{"postCount":3,"commentCount":11,"favoriteCount":0},"isReadonly":false,"canBeInvited":false}},"authorIds":{},"pagesCount":{},"authorProfiles":{"valtergames":{"alias":"ValterGames","badgets":[{"id":"1","title":"Захабренный","description":"Пользователь с кармой \u003E0","url":null,"isRemovable":false}],"aboutHtml":"🎮 Unity Game Developer\u003Cbr\u003E 🌈 Google Play: \u003Ca href=\"https:\u002F\u002Fplay.google.com\u002Fstore\u002Fapps\u002Fdev?id=6376110392077490413\" rel=\"nofollow noopener noreferrer\"\u003Eplay.google.com\u002Fstore\u002Fapps\u002Fdev?id=6376110392077490413\u003C\u002Fa\u003E \u003Cbr\u003E 🌍 Discord Server: \u003Ca href=\"https:\u002F\u002Fdiscord.gg\u002FNHTMq69GWd\" rel=\"nofollow noopener noreferrer\"\u003Ediscord.gg\u002FNHTMq69GWd\u003C\u002Fa\u003E\u003Cbr\u003E 💬 ВК группа: \u003Ca href=\"https:\u002F\u002Fvk.com\u002Fvaltergamesclub\" rel=\"nofollow noopener noreferrer\"\u003Evk.com\u002Fvaltergamesclub\u003C\u002Fa\u003E\u003Cbr\u003E 📷 Instagram: \u003Ca href=\"https:\u002F\u002Fwww.instagram.com\u002F_valtergames_\" rel=\"nofollow noopener noreferrer\"\u003Ewww.instagram.com\u002F_valtergames_\u003C\u002Fa\u003E","contacts":[],"invitedBy":{"issuerLogin":null,"timeCreated":"2021-12-04T19:08:51+00:00"},"companies":{"pagesCount":3,"companyIds":["alconost","avito","badoo","bitrix","citymobil","dododev","ds","habr","haulmont","hsespb","htmlacademy","huawei","intersystems","ivi","jugru","lamoda","lightmap","microsoft","miro","nanosoft"],"companyRefs":{"alconost":{"id":"1216","alias":"alconost","titleHtml":"Alconost","descriptionHtml":"Localization in 70+ languages & video production","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F2b4\u002F2d1\u002Fa9d\u002F2b42d1a9d6fd61e4ff1b0ebf9ec3f0cc.png","relatedData":null,"statistics":{"subscribersCount":6524,"rating":56.25,"invest":null},"commonHubs":[{"id":"19341","alias":"localization","type":"collective","title":"Language localisation","titleHtml":"Language localisation","isProfiled":true},{"id":"20742","alias":"read","type":"collective","title":"Reading room","titleHtml":"Reading room","isProfiled":false},{"id":"7773","alias":"gamedev","type":"collective","title":"Game development","titleHtml":"Game development","isProfiled":true},{"id":"20726","alias":"productpm","type":"collective","title":"Product Management","titleHtml":"Product Management","isProfiled":true},{"id":"6345","alias":"mobile_dev","type":"collective","title":"Development of mobile applications","titleHtml":"Development of mobile applications","isProfiled":true}]},"avito":{"id":"4486","alias":"avito","titleHtml":"Авито","descriptionHtml":"У нас живут ваши объявления","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F565\u002Ff01\u002Ffdc\u002F565f01fdc410465d057ad2b0b27c8db9.png","relatedData":null,"statistics":{"subscribersCount":84671,"rating":143.89,"invest":null},"commonHubs":[{"id":"20726","alias":"productpm","type":"collective","title":"Product Management","titleHtml":"Product Management","isProfiled":true},{"id":"359","alias":"programming","type":"collective","title":"Programming","titleHtml":"Programming","isProfiled":true},{"id":"14332","alias":"oleg-bunin","type":"corporative","title":"Конференции Олега Бунина (Онтико) corporate blog","titleHtml":"Конференции Олега Бунина (Онтико) corporate blog","isProfiled":false},{"id":"20740","alias":"career","type":"collective","title":"IT career","titleHtml":"IT career","isProfiled":false},{"id":"19279","alias":"web_testing","type":"collective","title":"Web services testing","titleHtml":"Web services testing","isProfiled":true}]},"badoo":{"id":"934","alias":"badoo","titleHtml":"Badoo","descriptionHtml":"Big Dating","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F69e\u002F0a4\u002F840\u002F69e0a4840cbfdc565559f6af093b5835.png","relatedData":null,"statistics":{"subscribersCount":83503,"rating":96.51,"invest":null},"commonHubs":[{"id":"359","alias":"programming","type":"collective","title":"Programming","titleHtml":"Programming","isProfiled":true},{"id":"17107","alias":"android_dev","type":"collective","title":"Development for Android","titleHtml":"Development for Android","isProfiled":true},{"id":"19441","alias":"kotlin","type":"collective","title":"Kotlin","titleHtml":"Kotlin","isProfiled":true},{"id":"19281","alias":"mobile_testing","type":"collective","title":"Mobile applications testing","titleHtml":"Mobile applications testing","isProfiled":true},{"id":"19583","alias":"dev_management","type":"collective","title":"Development Management","titleHtml":"Development Management","isProfiled":true}]},"bitrix":{"id":"85","alias":"bitrix","titleHtml":"Битрикс24","descriptionHtml":null,"imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002Ff86\u002Fe5b\u002F908\u002Ff86e5b908b36c321d5ab60173473f00c.png","relatedData":null,"statistics":{"subscribersCount":12351,"rating":68.93,"invest":null},"commonHubs":[{"id":"210","alias":"it_testing","type":"collective","title":"IT systems testing","titleHtml":"IT systems testing","isProfiled":true},{"id":"4","alias":"hi","type":"collective","title":"High performance","titleHtml":"High performance","isProfiled":true},{"id":"17739","alias":"crm","type":"collective","title":"CRM systems","titleHtml":"CRM systems","isProfiled":true},{"id":"21470","alias":"cloud_services","type":"collective","title":"Cloud services","titleHtml":"Cloud services","isProfiled":false}]},"citymobil":{"id":"5858","alias":"citymobil","titleHtml":"Ситимобил","descriptionHtml":"Творим городскую мобильность","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002Fcd3\u002F99d\u002Fb96\u002Fcd399db968a2981be5357e8cc3488bf2.jpg","relatedData":null,"statistics":{"subscribersCount":7708,"rating":187.05,"invest":null},"commonHubs":[{"id":"17795","alias":"bigdata","type":"collective","title":"Big Data","titleHtml":"Big Data","isProfiled":true},{"id":"6345","alias":"mobile_dev","type":"collective","title":"Development of mobile applications","titleHtml":"Development of mobile applications","isProfiled":true},{"id":"22374","alias":"data_engineering","type":"collective","title":"Data Engineering","titleHtml":"Data Engineering","isProfiled":true},{"id":"19439","alias":"machine_learning","type":"collective","title":"Machine learning","titleHtml":"Machine learning","isProfiled":true},{"id":"17107","alias":"android_dev","type":"collective","title":"Development for Android","titleHtml":"Development for Android","isProfiled":true}]},"dododev":{"id":"5678","alias":"dododev","titleHtml":"Dodo Engineering","descriptionHtml":"О том, как разработчики строят IT в Dodo","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F7ee\u002F724\u002F8ca\u002F7ee7248ca5cef85feaf889deea8803b7.png","relatedData":null,"statistics":{"subscribersCount":13869,"rating":132.54,"invest":null},"commonHubs":[{"id":"19583","alias":"dev_management","type":"collective","title":"Development Management","titleHtml":"Development Management","isProfiled":true},{"id":"20740","alias":"career","type":"collective","title":"IT career","titleHtml":"IT career","isProfiled":false},{"id":"546","alias":"net","type":"collective","title":".NET","titleHtml":".NET","isProfiled":true},{"id":"548","alias":"ios_dev","type":"collective","title":"Development for iOS","titleHtml":"Development for iOS","isProfiled":true},{"id":"6345","alias":"mobile_dev","type":"collective","title":"Development of mobile applications","titleHtml":"Development of mobile applications","isProfiled":true}]},"ds":{"id":"1269","alias":"ds","titleHtml":"DassaultSystèmes","descriptionHtml":null,"imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompanies\u002F6fb\u002Fc41\u002F2a3\u002F6fbc412a3357f50389c9a9e2677549b4.png","relatedData":null,"statistics":{"subscribersCount":6605,"rating":55.71,"invest":null},"commonHubs":[{"id":"17698","alias":"cad_cam","type":"collective","title":"CAD\u002FCAM","titleHtml":"CAD\u002FCAM","isProfiled":true},{"id":"397","alias":"analysis_design","type":"collective","title":"System Analysis and Design","titleHtml":"System Analysis and Design","isProfiled":true},{"id":"643","alias":"3d_graphics","type":"collective","title":"Working with 3D-graphics","titleHtml":"Working with 3D-graphics","isProfiled":true},{"id":"20682","alias":"pm","type":"collective","title":"Project management","titleHtml":"Project management","isProfiled":true},{"id":"19583","alias":"dev_management","type":"collective","title":"Development Management","titleHtml":"Development Management","isProfiled":true}]},"habr":{"id":"412","alias":"habr","titleHtml":"Habr","descriptionHtml":"Create services for geeks","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F075\u002Fe25\u002Fe71\u002F075e25e71073e14733fe91726932789a.png","relatedData":null,"statistics":{"subscribersCount":44625,"rating":635.5,"invest":null},"commonHubs":[{"id":"161","alias":"habr","type":"collective","title":"Habr","titleHtml":"Habr","isProfiled":false},{"id":"20720","alias":"contentmarketing","type":"collective","title":"Content-marketing","titleHtml":"Content-marketing","isProfiled":false},{"id":"20736","alias":"hr_management","type":"collective","title":"Personnel Management","titleHtml":"Personnel Management","isProfiled":true},{"id":"20742","alias":"read","type":"collective","title":"Reading room","titleHtml":"Reading room","isProfiled":false},{"id":"20740","alias":"career","type":"collective","title":"IT career","titleHtml":"IT career","isProfiled":false}]},"haulmont":{"id":"2644","alias":"haulmont","titleHtml":"Haulmont","descriptionHtml":"Создаем современные корпоративные системы","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F1ca\u002F718\u002F577\u002F1ca7185776f10094a58597ac99a568b0.png","relatedData":null,"statistics":{"subscribersCount":8321,"rating":104.84,"invest":null},"commonHubs":[{"id":"359","alias":"programming","type":"collective","title":"Programming","titleHtml":"Programming","isProfiled":true},{"id":"375","alias":"java","type":"collective","title":"Java","titleHtml":"Java","isProfiled":true},{"id":"20754","alias":"tech_events","type":"collective","title":"Conferences","titleHtml":"Conferences","isProfiled":false},{"id":"21904","alias":"office","type":"collective","title":"Offices of IT companies","titleHtml":"Offices of IT companies","isProfiled":false},{"id":"19441","alias":"kotlin","type":"collective","title":"Kotlin","titleHtml":"Kotlin","isProfiled":true}]},"hsespb":{"id":"5650","alias":"hsespb","titleHtml":"Питерская Вышка","descriptionHtml":"Не для школы, а для жизни","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002Fa37\u002F7dd\u002Fb5c\u002Fa377ddb5cb5a09cc5221653c23ef3264.jpg","relatedData":null,"statistics":{"subscribersCount":8131,"rating":59.32,"invest":null},"commonHubs":[{"id":"20696","alias":"study","type":"collective","title":"Studying in IT","titleHtml":"Studying in IT","isProfiled":false},{"id":"19439","alias":"machine_learning","type":"collective","title":"Machine learning","titleHtml":"Machine learning","isProfiled":true},{"id":"359","alias":"programming","type":"collective","title":"Programming","titleHtml":"Programming","isProfiled":true},{"id":"559","alias":"cpp","type":"collective","title":"C++","titleHtml":"C++","isProfiled":true},{"id":"8000","alias":"algorithms","type":"collective","title":"Algorithms","titleHtml":"Algorithms","isProfiled":true}]},"htmlacademy":{"id":"2292","alias":"htmlacademy","titleHtml":"HTML Academy","descriptionHtml":"Обучаем веб-разработке и меняем жизни","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F406\u002F525\u002F342\u002F40652534232a3ce9dc978d2e0c9b33e4.png","relatedData":null,"statistics":{"subscribersCount":10571,"rating":124.42,"invest":null},"commonHubs":[{"id":"91","alias":"webdev","type":"collective","title":"Website development","titleHtml":"Website development","isProfiled":true},{"id":"17103","alias":"html5","type":"collective","title":"HTML","titleHtml":"HTML","isProfiled":true},{"id":"20740","alias":"career","type":"collective","title":"IT career","titleHtml":"IT career","isProfiled":false},{"id":"20696","alias":"study","type":"collective","title":"Studying in IT","titleHtml":"Studying in IT","isProfiled":false},{"id":"307","alias":"css","type":"collective","title":"CSS","titleHtml":"CSS","isProfiled":true}]},"huawei":{"id":"3515","alias":"huawei","titleHtml":"Huawei","descriptionHtml":"Huawei – мировой лидер в области ИКТ","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002Fe8a\u002F76f\u002F4c1\u002Fe8a76f4c1185ffc1859d558c31374c6a.jpg","relatedData":null,"statistics":{"subscribersCount":10911,"rating":113.28,"invest":null},"commonHubs":[{"id":"17123","alias":"network_technologies","type":"collective","title":"Network technologies","titleHtml":"Network technologies","isProfiled":true},{"id":"21958","alias":"network_hardware","type":"collective","title":"Network hardware","titleHtml":"Network hardware","isProfiled":false},{"id":"6398","alias":"it-infrastructure","type":"collective","title":"IT Infrastructure","titleHtml":"IT Infrastructure","isProfiled":true},{"id":"17201","alias":"wireless","type":"collective","title":"Wireless technologies","titleHtml":"Wireless technologies","isProfiled":true},{"id":"21470","alias":"cloud_services","type":"collective","title":"Cloud services","titleHtml":"Cloud services","isProfiled":false}]},"intersystems":{"id":"1582","alias":"intersystems","titleHtml":"InterSystems","descriptionHtml":"InterSystems IRIS: СУБД, ESB, BI, Healthcare","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F146\u002F798\u002F2ee\u002F1467982ee5de6ad5fac7134814cacfcf.jpg","relatedData":null,"statistics":{"subscribersCount":8314,"rating":80.1,"invest":null},"commonHubs":[{"id":"19439","alias":"machine_learning","type":"collective","title":"Machine learning","titleHtml":"Machine learning","isProfiled":true},{"id":"21922","alias":"artificial_intelligence","type":"collective","title":"Artificial Intelligence","titleHtml":"Artificial Intelligence","isProfiled":false},{"id":"21482","alias":"distributed_systems","type":"collective","title":"Distributed systems","titleHtml":"Distributed systems","isProfiled":true},{"id":"17681","alias":"db_admins","type":"collective","title":"Database Administration","titleHtml":"Database Administration","isProfiled":true},{"id":"18202","alias":"data_visualization","type":"collective","title":"Data visualization","titleHtml":"Data visualization","isProfiled":false}]},"ivi":{"id":"3007","alias":"ivi","titleHtml":"Онлайн-кинотеатр IVI","descriptionHtml":"Мы открываем для людей многообразие мира кино","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F47a\u002Fcf3\u002F171\u002F47acf31717fba8e1697e298bb79a6167.png","relatedData":null,"statistics":{"subscribersCount":10327,"rating":66.56,"invest":null},"commonHubs":[{"id":"19279","alias":"web_testing","type":"collective","title":"Web services testing","titleHtml":"Web services testing","isProfiled":true},{"id":"6398","alias":"it-infrastructure","type":"collective","title":"IT Infrastructure","titleHtml":"IT Infrastructure","isProfiled":true},{"id":"19465","alias":"apps_design","type":"collective","title":"Mobile applications design","titleHtml":"Mobile applications design","isProfiled":true},{"id":"21892","alias":"design","type":"collective","title":"Design","titleHtml":"Design","isProfiled":false},{"id":"50","alias":"infosecurity","type":"collective","title":"Information Security","titleHtml":"Information Security","isProfiled":true}]},"jugru":{"id":"2192","alias":"jugru","titleHtml":"JUG Ru Group","descriptionHtml":"Онлайн-конференции для Senior-разработчиков","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F0a7\u002Fce6\u002Fa86\u002F0a7ce6a86556ff20579e90e6b732e663.png","relatedData":null,"statistics":{"subscribersCount":14842,"rating":241.48,"invest":null},"commonHubs":[{"id":"20754","alias":"tech_events","type":"collective","title":"Conferences","titleHtml":"Conferences","isProfiled":false},{"id":"546","alias":"net","type":"collective","title":".NET","titleHtml":".NET","isProfiled":true},{"id":"359","alias":"programming","type":"collective","title":"Programming","titleHtml":"Programming","isProfiled":true},{"id":"375","alias":"java","type":"collective","title":"Java","titleHtml":"Java","isProfiled":true},{"id":"357","alias":"javascript","type":"collective","title":"JavaScript","titleHtml":"JavaScript","isProfiled":true}]},"lamoda":{"id":"5609","alias":"lamoda","titleHtml":"Lamoda","descriptionHtml":"Code the lifestyle","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002Fcdd\u002F710\u002F61a\u002Fcdd71061ae61f0c4f273ddcaaec533c7.png","relatedData":null,"statistics":{"subscribersCount":11147,"rating":90.41,"invest":null},"commonHubs":[{"id":"19583","alias":"dev_management","type":"collective","title":"Development Management","titleHtml":"Development Management","isProfiled":true},{"id":"375","alias":"java","type":"collective","title":"Java","titleHtml":"Java","isProfiled":true},{"id":"20682","alias":"pm","type":"collective","title":"Project management","titleHtml":"Project management","isProfiled":true},{"id":"17795","alias":"bigdata","type":"collective","title":"Big Data","titleHtml":"Big Data","isProfiled":true},{"id":"20740","alias":"career","type":"collective","title":"IT career","titleHtml":"IT career","isProfiled":false}]},"lightmap":{"id":"7774","alias":"lightmap","titleHtml":"Lightmap","descriptionHtml":"Разработчик мобильных игр","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002Fb48\u002Ff8d\u002F0e1\u002Fb48f8d0e11c97dd1e1b3c097307e2011.png","relatedData":null,"statistics":{"subscribersCount":6731,"rating":63.91,"invest":null},"commonHubs":[{"id":"7773","alias":"gamedev","type":"collective","title":"Game development","titleHtml":"Game development","isProfiled":true},{"id":"20800","alias":"game_design","type":"collective","title":"Game design","titleHtml":"Game design","isProfiled":true},{"id":"17831","alias":"unity","type":"collective","title":"Unity3D","titleHtml":"Unity3D","isProfiled":true},{"id":"21980","alias":"games","type":"collective","title":"Games and game consoles","titleHtml":"Games and game consoles","isProfiled":false},{"id":"6345","alias":"mobile_dev","type":"collective","title":"Development of mobile applications","titleHtml":"Development of mobile applications","isProfiled":true}]},"microsoft":{"id":"68","alias":"microsoft","titleHtml":"Microsoft","descriptionHtml":"Microsoft — мировой лидер в области ПО и ИТ-услуг","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002Fe98\u002F5cf\u002F6a0\u002Fe985cf6a01b15006350561f26c70a41f.png","relatedData":null,"statistics":{"subscribersCount":90635,"rating":164.01,"invest":null},"commonHubs":[{"id":"359","alias":"programming","type":"collective","title":"Programming","titleHtml":"Programming","isProfiled":true},{"id":"17851","alias":"azure","type":"collective","title":"Microsoft Azure","titleHtml":"Microsoft Azure","isProfiled":false},{"id":"546","alias":"net","type":"collective","title":".NET","titleHtml":".NET","isProfiled":true},{"id":"22026","alias":"itcompanies","type":"collective","title":"IT-companies","titleHtml":"IT-companies","isProfiled":false},{"id":"11606","alias":"vs","type":"collective","title":"Visual Studio","titleHtml":"Visual Studio","isProfiled":true}]},"miro":{"id":"4316","alias":"miro","titleHtml":"Miro","descriptionHtml":"Online collaborative whiteboard platform","imageUrl":null,"relatedData":null,"statistics":{"subscribersCount":12169,"rating":67.42,"invest":null},"commonHubs":[{"id":"20736","alias":"hr_management","type":"collective","title":"Personnel Management","titleHtml":"Personnel Management","isProfiled":true},{"id":"22026","alias":"itcompanies","type":"collective","title":"IT-companies","titleHtml":"IT-companies","isProfiled":false},{"id":"19279","alias":"web_testing","type":"collective","title":"Web services testing","titleHtml":"Web services testing","isProfiled":true},{"id":"19583","alias":"dev_management","type":"collective","title":"Development Management","titleHtml":"Development Management","isProfiled":true},{"id":"357","alias":"javascript","type":"collective","title":"JavaScript","titleHtml":"JavaScript","isProfiled":true}]},"nanosoft":{"id":"923","alias":"nanosoft","titleHtml":"Нанософт разработка","descriptionHtml":"Инженерная экосистема","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F572\u002F1e7\u002Fdf1\u002F5721e7df17b47f391ffbafaee345da67.png","relatedData":null,"statistics":{"subscribersCount":6923,"rating":75.8,"invest":null},"commonHubs":[{"id":"17698","alias":"cad_cam","type":"collective","title":"CAD\u002FCAM","titleHtml":"CAD\u002FCAM","isProfiled":true},{"id":"397","alias":"analysis_design","type":"collective","title":"System Analysis and Design","titleHtml":"System Analysis and Design","isProfiled":true},{"id":"21918","alias":"soft","type":"collective","title":"Software","titleHtml":"Software","isProfiled":false},{"id":"643","alias":"3d_graphics","type":"collective","title":"Working with 3D-graphics","titleHtml":"Working with 3D-graphics","isProfiled":true},{"id":"22113","alias":"engineering_systems","type":"collective","title":"Systems engineering","titleHtml":"Systems engineering","isProfiled":false}]}}}}},"userHubs":{"valtergames":{"hubRefs":{"net":{"id":"546","alias":"net","titleHtml":".NET","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002Fa5a\u002F5ae\u002Fa29\u002Fa5a5aea294f48a0d81c4b1968432e5e1.png","descriptionHtml":"A hub about .NET Framework","relatedData":null,"statistics":{"subscribersCount":121454,"rating":198.96,"authorsCount":1620,"postsCount":4070},"commonTags":[".net","c#","microsoft","pvs-studio",".net core","open source","static code analysis","static analysis","dotnetbook","clrbook"],"isProfiled":true,"isOfftop":false},"csharp":{"id":"17718","alias":"csharp","titleHtml":"C#","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002Fbc7\u002Ff1e\u002F783\u002Fbc7f1e78397bca57cf5adcd5bf1725be.png","descriptionHtml":"Multi-paradigm programming language encompassing strong typing, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines","relatedData":null,"statistics":{"subscribersCount":155597,"rating":147.06,"authorsCount":1167,"postsCount":2513},"commonTags":["c#",".net","pvs-studio","microsoft","open source","static code analysis",".net core","static analysis","clrbook","dotnetbook"],"isProfiled":true,"isOfftop":false},"git":{"id":"7151","alias":"git","titleHtml":"Git","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002Fc4b\u002F10b\u002F703\u002Fc4b10b70333b4c79a9658ff587522d4d.jpg","descriptionHtml":"File version control system","relatedData":null,"statistics":{"subscribersCount":110879,"rating":9.09,"authorsCount":416,"postsCount":649},"commonTags":["git","github","microsoft"],"isProfiled":true,"isOfftop":false},"github":{"id":"18790","alias":"github","titleHtml":"GitHub","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F757\u002F036\u002F572\u002F7570365720336f67615cded621df8bd5.png","descriptionHtml":"Web-service for hosting and development of IT projects","relatedData":null,"statistics":{"subscribersCount":48934,"rating":48.82,"authorsCount":356,"postsCount":683},"commonTags":["github","microsoft","pvs-studio","php","python","devops","git","visual studio","java"],"isProfiled":false,"isOfftop":false},"python":{"id":"340","alias":"python","titleHtml":"Python","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F1c6\u002F724\u002F437\u002F1c6724437b83f3d71abd08e5c2877a7a.png","descriptionHtml":"Interpreted high-level programming language for general-purpose programming","relatedData":null,"statistics":{"subscribersCount":187866,"rating":139.91,"authorsCount":2326,"postsCount":5077},"commonTags":["python","machine learning","data science","artificial intelligence","deep learning","computer vision","digest","open source","data science digest","natural language processing"],"isProfiled":true,"isOfftop":false},"sql":{"id":"594","alias":"sql","titleHtml":"SQL","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F64b\u002F22b\u002F8b6\u002F64b22b8b6c4677778423e971d52eb05d.png","descriptionHtml":"Domain-specific languageused in programming and designed for managing data held in a relational database management system, or for stream processing in a relational data stream management system","relatedData":null,"statistics":{"subscribersCount":159059,"rating":37.92,"authorsCount":630,"postsCount":1281},"commonTags":["postgresql","sql","postgres","index","indexing","tuples","wal","write-ahead log","locks","vacuum"],"isProfiled":true,"isOfftop":false},"unity":{"id":"17831","alias":"unity","titleHtml":"Unity3D","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F211\u002F26b\u002F3fa\u002F21126b3fa26389b05c39149dcdffd86c.png","descriptionHtml":"2D\u002F3D games development tool","relatedData":null,"statistics":{"subscribersCount":91471,"rating":80.69,"authorsCount":515,"postsCount":1072},"commonTags":["unity","gamedev","unity3d","indiedev","gamedesign","game development"],"isProfiled":true,"isOfftop":false},"Xamarin":{"id":"21374","alias":"Xamarin","titleHtml":"Xamarin","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F169\u002F334\u002Ff50\u002F169334f506dc179631ec91889a47da71.png","descriptionHtml":"Tools for cross-platform development","relatedData":null,"statistics":{"subscribersCount":40753,"rating":0,"authorsCount":72,"postsCount":133},"commonTags":["xamarin","microsoft","xaml"],"isProfiled":true,"isOfftop":false},"mobileanalytics":{"id":"20724","alias":"mobileanalytics","titleHtml":"Mobile App Analytics","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002Fcd5\u002F334\u002F8ce\u002Fcd53348ce9a13411cbeb0cc6c3b07d85.png","descriptionHtml":"Analysis of user behavior","relatedData":null,"statistics":{"subscribersCount":70599,"rating":9.17,"authorsCount":234,"postsCount":529},"commonTags":["mobile apps","alconost","mobile games","mobile games marketing","localization"],"isProfiled":true,"isOfftop":false},"hi":{"id":"4","alias":"hi","titleHtml":"High performance","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002Fd4c\u002F97c\u002Fde3\u002Fd4c97cde31f59169b6159e7fc7020503.png","descriptionHtml":"Methods for obtaining systems high performance ","relatedData":null,"statistics":{"subscribersCount":184499,"rating":40.26,"authorsCount":1139,"postsCount":2587},"commonTags":["tarantool","taxi","citymobil","tarantool cartridge","php","c#","performance","swift","ios","ansible"],"isProfiled":true,"isOfftop":false},"graph_design":{"id":"19802","alias":"graph_design","titleHtml":"Graphic design","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F2a0\u002Fae7\u002Fb1b\u002F2a0ae7b1b9bf7280a5a9ff7aab1da42f.png","descriptionHtml":"The process of visual communication and problem-solving through the use of typography, photography and illustration","relatedData":null,"statistics":{"subscribersCount":38534,"rating":32.3,"authorsCount":258,"postsCount":512},"commonTags":["дизайн","pvs-studio"],"isProfiled":true,"isOfftop":false},"design":{"id":"21892","alias":"design","titleHtml":"Design","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fgeektimes\u002Fhub\u002F579\u002Fffa\u002Febd\u002F579ffaebd7870d2c87f88ae2d35694e3.png","descriptionHtml":"Design will save the world","relatedData":null,"statistics":{"subscribersCount":187409,"rating":41.08,"authorsCount":865,"postsCount":1905},"commonTags":["дизайн","программирование"],"isProfiled":false,"isOfftop":false},"apps_design":{"id":"19465","alias":"apps_design","titleHtml":"Mobile applications design","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002Fc04\u002F4de\u002Fa64\u002Fc044dea649d5fac76a46799cc12766b7.png","descriptionHtml":"Applications for iOS, Android, Windows Phone","relatedData":null,"statistics":{"subscribersCount":67655,"rating":6.06,"authorsCount":335,"postsCount":639},"commonTags":["mobile app development","app development","mobile development","mobile application development","web-разработка","app developer","react native","ios","flutter","ios development"],"isProfiled":true,"isOfftop":false},"game_monetization":{"id":"20708","alias":"game_monetization","titleHtml":"Games monetization","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F6c1\u002F010\u002Fb5f\u002F6c1010b5f21e20c68bb48604f8039d2f.png","descriptionHtml":"Learn how to monetize games","relatedData":null,"statistics":{"subscribersCount":42916,"rating":3.94,"authorsCount":110,"postsCount":262},"commonTags":["alconost","localization","gamedev","game development","localize","indiedev","translation","monetization","english","game localization"],"isProfiled":true,"isOfftop":false},"mobile_monetization":{"id":"20706","alias":"mobile_monetization","titleHtml":"Mobile applications monetization","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002Fc63\u002F254\u002F642\u002Fc6325464298725f9c24ac53529e31e85.png","descriptionHtml":"Learn how to monetize mobile applications","relatedData":null,"statistics":{"subscribersCount":58466,"rating":0,"authorsCount":110,"postsCount":300},"commonTags":["alconost","localization","alconost translations","localize","english","app market","app promotion","translation","translations","app promo"],"isProfiled":true,"isOfftop":false},"linux":{"id":"36","alias":"linux","titleHtml":"Configuring Linux","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002Fd65\u002F2d0\u002F42e\u002Fd652d042e03426c4e8c7d15e2254cb4b.png","descriptionHtml":"Eternal euphoria","relatedData":null,"statistics":{"subscribersCount":529191,"rating":66.21,"authorsCount":1791,"postsCount":3567},"commonTags":["linux","development","devops","ansible","embedded linux","bash","kernel","ubuntu","linux bash scripts","buildroot"],"isProfiled":true,"isOfftop":false},"debug":{"id":"17716","alias":"debug","titleHtml":"Debugging","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F0a4\u002F1da\u002Fa7f\u002F0a41daa7ff93df591be64cd36dfe13c4.png","descriptionHtml":"Debugging is the process of finding and resolving defects or problems within a computer program","relatedData":null,"statistics":{"subscribersCount":172627,"rating":82,"authorsCount":296,"postsCount":481},"commonTags":["debug","devops"],"isProfiled":true,"isOfftop":false},"programming":{"id":"359","alias":"programming","titleHtml":"Programming","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002Fdb2\u002Fc8f\u002F4a1\u002Fdb2c8f4a1974bf334d01595732f339c1.png","descriptionHtml":"The art of creating computer programs","relatedData":null,"statistics":{"subscribersCount":314606,"rating":435.07,"authorsCount":5570,"postsCount":14934},"commonTags":[".net","c#","pvs-studio","wcs","webrtc","программирование","static code analysis","javascript","c++","security"],"isProfiled":true,"isOfftop":false},"game_promotion":{"id":"20844","alias":"game_promotion","titleHtml":"Games promotion","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F3c4\u002Fe01\u002F3b8\u002F3c4e013b8bcb3592209ed57f1d4b69fd.png","descriptionHtml":"Tips for beginners and experienced gamedevs","relatedData":null,"statistics":{"subscribersCount":41413,"rating":5.47,"authorsCount":106,"postsCount":257},"commonTags":["alconost","localization","game development","gamedev","localize","translation","localisation","alconost translations","game localization","product development"],"isProfiled":true,"isOfftop":false},"prototyping":{"id":"19796","alias":"prototyping","titleHtml":"Prototyping","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fhub\u002F6fa\u002F6da\u002F62d\u002F6fa6da62d615ba8e7d9f0186eacfabbf.png","descriptionHtml":"Important stage in product development","relatedData":null,"statistics":{"subscribersCount":37608,"rating":4.15,"authorsCount":179,"postsCount":272},"commonTags":[],"isProfiled":true,"isOfftop":false}},"pagesCount":2,"currentPage":1}},"userInvitations":{"valtergames":{"invitationsRefs":{},"pagesCount":0,"currentPage":1}},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{"valtergames":{"salary":null,"currency":null,"qualification":null,"specializations":[{"id":"6","title":"Game Developer","textFieldData":null},{"id":"72","title":"Application Developer","textFieldData":null}],"skills":[{"alias":"706","name":"C#"},{"alias":"904","name":"Unity3d"},{"alias":"60","name":"Game Development"},{"alias":"81","name":"Software development"},{"alias":"947","name":"Git"},{"alias":"821","name":"Linux"}]}},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/page-user.71d0782a.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

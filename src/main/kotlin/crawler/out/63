@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Почувствуй себя государством, или для чего нужна наука / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script data-vue-meta="ssr" type="application/ld+json" data-vmid="ldjson-schema">{"@context":"http:\/\/schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/habr.com\/ru\/company\/unidata\/blog\/655243\/"},"headline":"Почувствуй себя государством, или для чего нужна наука","datePublished":"2022-03-11T18:40:27+03:00","dateModified":"2022-03-11T21:44:16+03:00","author":{"@type":"Person","name":"Unidata"},"publisher":{"@type":"Organization","name":"Habr","logo":{"@type":"ImageObject","url":"https:\/\/habrastorage.org\/webt\/a_\/lk\/9m\/a_lk9mjkccjox-zccjrpfolmkmq.png"}},"description":"Так нужна ли наука в коммерческих компаниях?ВступлениеНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почем...","url":"https:\/\/habr.com\/ru\/company\/unidata\/blog\/655243\/#post-content-body","about":["c_unidata","h_career","h_itcompanies","f_management"],"image":["https:\/\/habr.com\/share\/publication\/655243\/990861833bca2f30a0a25a7b3f782e6f\/","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/8d0\/64c\/ddb\/8d064cddb9a4a8ba2361a5f8f549265e.jpg","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/9ae\/a01\/2b8\/9aea012b8123a97145bad26accb74633.jpg","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/a81\/6db\/3d6\/a816db3d631e6e1f812a40b7454be2cc.jpg","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/732\/e31\/af1\/732e31af1c3d79c488ce4fe4c22b9a47.jpg","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/faf\/87e\/7ae\/faf87e7ae4b0952d3e8c8ef948cd3423.jpg"]}</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:title" content="Почувствуй себя государством, или для чего нужна наука" data-vmid="og:title">
+  <meta data-vue-meta="ssr" name="twitter:title" content="Почувствуй себя государством, или для чего нужна наука" data-vmid="twitter:title">
+  <meta data-vue-meta="ssr" name="aiturec:title" content="Почувствуй себя государством, или для чего нужна наука" data-vmid="aiturec:title">
+  <meta data-vue-meta="ssr" name="description" content="Так нужна ли наука в коммерческих компаниях?ВступлениеНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели..." data-vmid="description">
+  <meta data-vue-meta="ssr" itemprop="description" content="Так нужна ли наука в коммерческих компаниях?ВступлениеНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели..." data-vmid="description:itemprop">
+  <meta data-vue-meta="ssr" property="og:description" content="Так нужна ли наука в коммерческих компаниях?ВступлениеНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели..." data-vmid="og:description">
+  <meta data-vue-meta="ssr" name="twitter:description" content="Так нужна ли наука в коммерческих компаниях?ВступлениеНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели..." data-vmid="twitter:description">
+  <meta data-vue-meta="ssr" property="aiturec:description" content="Так нужна ли наука в коммерческих компаниях?ВступлениеНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели..." data-vmid="aiturec:description">
+  <meta data-vue-meta="ssr" itemprop="image" content="https://habrastorage.org/getpro/habr/upload_files/8d0/64c/ddb/8d064cddb9a4a8ba2361a5f8f549265e.jpg" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="https://habrastorage.org/getpro/habr/upload_files/8d0/64c/ddb/8d064cddb9a4a8ba2361a5f8f549265e.jpg" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="https://habrastorage.org/getpro/habr/upload_files/8d0/64c/ddb/8d064cddb9a4a8ba2361a5f8f549265e.jpg" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="https://habrastorage.org/getpro/habr/upload_files/8d0/64c/ddb/8d064cddb9a4a8ba2361a5f8f549265e.jpg" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="https://habrastorage.org/getpro/habr/upload_files/8d0/64c/ddb/8d064cddb9a4a8ba2361a5f8f549265e.jpg?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="aiturec:item_id" content="655243" data-vmid="aiturec:item_id">
+  <meta data-vue-meta="ssr" property="aiturec:datetime" content="2022-03-11T15:40:27.000Z" data-vmid="aiturec:datetime">
+  <meta data-vue-meta="ssr" content="https://habr.com/ru/company/unidata/blog/655243/" property="og:url" data-vmid="og:url">
+  <meta data-vue-meta="ssr" property="og:type" content="article" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" name="keywords" content="Юнидата, Карьера, Наука, наука и технологии, Управление данными, Лаборатория, лаборатория данных"> 
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/655243/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/company/unidata/blog/655243/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" data-vmid="hreflang">
+  <link data-vue-meta="ssr" image_src="image" href="https://habrastorage.org/getpro/habr/upload_files/8d0/64c/ddb/8d064cddb9a4a8ba2361a5f8f549265e.jpg" data-vmid="image:href">
+  <link data-vue-meta="ssr" rel="amphtml" href="https://habr.com/ru/amp/post/655243/"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> <!----> <a href="https://effect.habr.com/a/LZMaSpGV5qvkXHv3XsrwFAv4PP9mYpd7F55V_nO6721uzC0rP6ZuyEvcQVKeXhevmVbSO9M6ofIvgBT_DhPNlf9ni9mSgey7FiDY2CoIsOOPQ6Lusul6WvGFMiI33BUv4CFaMA" target="_blank" class="tm-top-link" style="color:#99ddff;"> Сработают ли в IT принципы космической подготовки </a> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div hl="ru" companyname="unidata" data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <div class="tm-page__header">
+         <!---->
+        </div> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <div class="tm-article-presenter">
+            <div class="tm-company-profile-card tm-company-article__profile-card">
+             <div class="tm-company-card tm-company-profile-card__info">
+              <div class="tm-company-card__header">
+               <a href="/ru/company/unidata/profile/" class="tm-company-card__avatar">
+                <div class="tm-entity-image">
+                 <img alt="" height="48" src="//habrastorage.org/getpro/habr/company/67a/e9f/02e/67ae9f02ec0bbd1ab33d901ccf0d374a.jpg" width="48" class="tm-entity-image__pic">
+                </div></a> <!----> 
+               <div class="tm-rating tm-company-card__rating">
+                <div class="tm-rating__header"> 
+                 <div class="tm-rating__counter">
+                  15.37
+                 </div>
+                </div> 
+                <div class="tm-rating__text">
+                  Рейтинг 
+                </div>
+               </div> <!---->
+              </div> 
+              <div class="tm-company-card__info">
+               <a href="/ru/company/unidata/profile/" class="tm-company-card__name"> Юнидата </a> 
+               <div class="tm-company-card__description">
+                Разработчик ПО в области управления данными
+               </div>
+              </div>
+             </div> <!---->
+            </div> 
+            <div class="tm-article-presenter__body">
+             <div class="tm-misprint-area">
+              <div class="tm-misprint-area__wrapper">
+               <article class="tm-article-presenter__content tm-article-presenter__content_narrow">
+                <div class="tm-article-presenter__header"> 
+                 <div class="tm-article-snippet tm-article-presenter__snippet">
+                  <div class="tm-article-snippet__meta-container">
+                   <div class="tm-article-snippet__meta">
+                    <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                      <div class="tm-entity-image">
+                       <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                      </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T15:40:27.000Z" title="2022-03-11, 18:40">вчера в 18:40</time></span>
+                   </div> <!---->
+                  </div> 
+                  <h1 lang="ru" class="tm-article-snippet__title tm-article-snippet__title_h1"><span>Почувствуй себя государством, или для чего нужна наука</span></h1> 
+                  <div class="tm-article-snippet__hubs">
+                   <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" class="tm-article-snippet__hubs-item-link router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/career/" class="tm-article-snippet__hubs-item-link"><span>Карьера в IT-индустрии</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/itcompanies/" class="tm-article-snippet__hubs-item-link"><span>IT-компании</span> <!----></a></span>
+                  </div> <!----> <!----> <!---->
+                 </div>
+                </div> <!----> 
+                <div data-gallery-root="" lang="ru" class="tm-article-body">
+                 <div></div> 
+                 <div id="post-content-body">
+                  <div>
+                   <div class="article-formatted-body article-formatted-body_version-2">
+                    <div xmlns="http://www.w3.org/1999/xhtml">
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w780q1/getpro/habr/upload_files/8d0/64c/ddb/8d064cddb9a4a8ba2361a5f8f549265e.jpg" alt="Так нужна ли наука в коммерческих компаниях?" title="Так нужна ли наука в коммерческих компаниях?" width="1694" height="1133" data-src="https://habrastorage.org/getpro/habr/upload_files/8d0/64c/ddb/8d064cddb9a4a8ba2361a5f8f549265e.jpg" data-blurred="true">
+                      <figcaption>
+                       Так нужна ли наука в коммерческих компаниях?
+                      </figcaption>
+                     </figure>
+                     <h3>Вступление</h3>
+                     <p>Наша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели изначально работали в научной сфере. Разработки, лежащие в основе запатентованных технологий работы с данными и ставшие основой для нашего флагманского продукта – следствие их высоких теоретических знаний и исследовательских талантов.&nbsp;&nbsp;На пути реализации своих целей в бизнесе, они всегда старались сохранить связь с академической средой. Издавали и издают поныне научные статьи и книги, участвовали в разработке научных программ и сотрудничали со своими родными ВУЗами и кафедрами.</p>
+                     <p>Постепенно к этой деятельности все больше привлекалась ГК, это была либо практическая деятельность – дипломные работы и практики студентов, либо осознанная благотворительность – ведение спецкурса для студентов нескольких кафедр СПбГУ на базе ГК и с активной «прокачкой» слушателей по методологии и практике проектной деятельности и программирования.</p>
+                     <p>&nbsp;</p>
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w780q1/getpro/habr/upload_files/9ae/a01/2b8/9aea012b8123a97145bad26accb74633.jpg" width="1536" height="1173" data-src="https://habrastorage.org/getpro/habr/upload_files/9ae/a01/2b8/9aea012b8123a97145bad26accb74633.jpg" data-blurred="true">
+                      <figcaption></figcaption>
+                     </figure>
+                     <h3>Лаборатория</h3>
+                     <p>Наступил момент, когда было решено поднять ставки. Теперь у нас должно было появиться подразделение научной деятельности, сотрудничающее с R&amp;D, но не настолько смыкающееся с производственной практикой и прикладными задачами. Так, например, работа с данными — это область, где наиболее полно можно применить машинное обучение. Или другой пример, когда разработчики корпят над базой платформы — это сложная, трудоемкая, но техническая работа и знание о ней можно взять из книг или из голов опытных архитекторов. А теперь надо делать на ней хайтек, а данных нет, нужна исследовательская группа, лаборатория – которая будет искать необходимую информацию и сопоставлять ее с имеющейся (открытые источники, статьи) – адаптировать и актуализировать полученные модели.</p>
+                     <h3>Первоначальные ожидания</h3>
+                     <p>Чистая теоретическая наука в интересующей нас области управлениями данных, расширение нашей экспертизы на тот уровень стратегии, где успех обеспечивает новейшая теоретическая модель и глубочайшее предвиденье трендов технологий. Это то, чего мы хотели.</p>
+                     <p>Руководителем <a href="https://unidata-labs.com">Лаборатории</a> стал научный работник, преподаватель и исследователь Георгий Чернышев, человек со значительным опытом международного сотрудничества в исследовательских проектах, опытный лид исследовательских команд.&nbsp;&nbsp;Для того чтобы работники лаборатории – студенты из научного коллектива Георгия, лучше понимали бизнес-среду, для которой они делают исследования – им обеспечили погружение в реальную практическую деятельность. Частичное, но позволяющее понять специфику прикладной работы с технологиями.</p>
+                     <p>Мы ожидали, что это задаст им контекст и понимание среды. При этом, план научной работы Лаборатории был независим от проектной деятельности ГК. Особенным фокусом развития было машинное обучение – место, где сходятся вместе наука и актуальные производственные потребности.</p>
+                     <p>&nbsp;</p>
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w780q1/getpro/habr/upload_files/a81/6db/3d6/a816db3d631e6e1f812a40b7454be2cc.jpg" width="1170" height="720" data-src="https://habrastorage.org/getpro/habr/upload_files/a81/6db/3d6/a816db3d631e6e1f812a40b7454be2cc.jpg" data-blurred="true">
+                      <figcaption></figcaption>
+                     </figure>
+                     <h3>Реальность</h3>
+                     <p>Поначалу ситуация развивалась в рамках наших ожиданий, теоретики и практики из проектных команд притирались друг к другу со скрипом, но большим взаимным любопытством. Даже возник эффект увлечения практиков наукой, целый ряд наших сотрудников захотели стать причастными к работе Лаборатории, например: писать теоретически статьи или поступить в магистратуру или аспирантуру.</p>
+                     <p>Как только эта волна спала, перед нами явилась новая неожиданная тенденция. Сотрудники Лаборатории стали проявлять больший, чем ожидалось, интерес к практической деятельности. А те, кто уже учился в магистратуре, стали заявлять о невозможности (и нежелании) сочетать науку и реальную работу.</p>
+                     <h3>Анализ ситуации</h3>
+                     <p>Разбор ситуации показал нам абсолютно четкий кризис роли современной теоретической науки в любой высокотехнологической (и следовательно, хорошо финансируемой) отрасли. Речь идет не только о финансировании или статусе учёного в обществе. Речь идет о понимании простого вопроса «Зачем это все?».</p>
+                     <p>Зачем заниматься интересными и сложными теоретическими разработками, чья связь с практической деятельностью сомнительна. Ведь есть интересные задачи и практические сложные разработки, решение которых очень востребовано на практике и (приятный бонус) отлично оплачивается. В конце этого абзаца намеренно нет знака вопроса, так как для тех, кого мы опросили – вопроса в этом тезисе нет. Все и так ясно.</p>
+                     <p>Для них, в этой постановке вопроса нет привкуса того отступничества, который возникал у ученых в 90-ые - «вот брошу институт и пойду в бизнес, да, это деградация, но за хорошие деньги». Здесь речь идет о смене одной интеллектуальной деятельности на интеллектуальною деятельность сопоставимой сложности хотя и иной направленности (и на гораздо более приятных условиях).</p>
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w780q1/getpro/habr/upload_files/732/e31/af1/732e31af1c3d79c488ce4fe4c22b9a47.jpg" width="3960" height="2640" data-src="https://habrastorage.org/getpro/habr/upload_files/732/e31/af1/732e31af1c3d79c488ce4fe4c22b9a47.jpg" data-blurred="true">
+                      <figcaption></figcaption>
+                     </figure>
+                     <h3>А как у них?</h3>
+                     <h4>Люди:</h4>
+                     <p>Западные IT-шники в основной массе не хотят заниматься наукой. Причем не только по экономическим причинам, которые, кстати говоря, не так ярко выражены, как у нас – в их IT аспирантуре платят хорошо.</p>
+                     <p>Самые важные причины почему не хотят – это сложность обеспечения профессионального роста, нельзя преуспеть в академии просто работая, просто занимаясь написанием кода или какой-либо работой. Надо уметь говорить с людьми, выстраивать контакты. Кроме того, она требует бОльшей отдачи, например практически все дедлайны по статьям ставят на воскресенье, а значит, что иногда надо работать и на выходных. Именно из-за этого местные в IT-аспирантуры не идут, или идут только в топовые места или на хайповые специальности типа машинного обучения.</p>
+                     <p>Довольно известен пример <a href="http://matt-welsh.blogspot.com/2010/11/why-im-leaving-harvard.html">Мэтта Вэлша</a>. Он бросил теньюр (гарантия обеспеченной жизни) в Гарварде и ушел в&nbsp;Google, потому что там больше возможностей для развития и внедрения сделанного, есть доступ к актуальным задачам.</p>
+                     <h4>Университеты:</h4>
+                     <p>Западная университетская наука, также, как и наша, страдает от недостатка задач и датасетов. То есть того, что может дать индустрия. Хотя ситуация, конечно, получше, есть большие программы по кооперации, компании массово приходят в университеты, приносят задачи и даже приводят специалистов – индустриальных ученых. И, конечно, дают деньги. Однако, всё очень сильно зависит от университета, от его географического местоположения – есть университеты, где работы (контрактов) полно и потому есть жизнь, а есть университеты, где ничего этого нет. На государственном уровне это пытаются выровнять, например некоторые компании имеют специальные стажировки для студентов именно этого университета.</p>
+                     <h4>Компании:&nbsp;</h4>
+                     <p>Компании на самом деле тоже страдают. Прежде всего, от дороговизны исследований в целом, зрелые IT-ученые стоят значительно дороже программистов. Поэтому делается ставка на аспирантов или молодых исследователей, что, в свою очередь, сказывается на качестве. Кадровая проблема, на самом деле острейшая, компании не имеют возможности вырастить: нет денег просто взять и дать человеку поучиться хотя бы три месяца в спокойной обстановке, не грузя его задачами.</p>
+                     <p>Другая проблема — это пресс текущих задач, который выливается в предпочтение конкретных прикладных исследований. Надо сделать X и только X – причем ты должен доказать, что X достижим, получится и будет полезен вот прямо сейчас, в продукте Y. Без этого проект не стартанут, денег не дадут. И это приводит к унылым проектам, которые-то не всегда и исследованиями назвать можно.</p>
+                     <p>Кроме этого, ориентированность на текущие задачи приводит к сжатым срокам, что выливается в неожиданные проблема типа отсутствия (или нарушения) методологии. Например, не собрали достаточно большой датасет или собрали неправильно, получили плохие (или слишком хорошие и не подтвердившиеся на реальном проекте) результаты.</p>
+                     <p>Стоит отметить, что количество компаний, где есть полноценный отдел, занимающийся фундаментальной IT-наукой, невелико. Компания должна быть очень большой (от тысячи человек), чтобы позволить себе такую лабу. Но и тут есть проблемы – эти отделы обычно отрезаны от производственных подразделений, актуальных задач и ресурсов. По итогу оказывается, что, если и сделали что-то очень хорошее, сделать внедрение – нереально. Либо его будут делать уже другие люди, без тебя.&nbsp;</p>
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w780q1/getpro/habr/upload_files/faf/87e/7ae/faf87e7ae4b0952d3e8c8ef948cd3423.jpg" width="885" height="641" data-src="https://habrastorage.org/getpro/habr/upload_files/faf/87e/7ae/faf87e7ae4b0952d3e8c8ef948cd3423.jpg" data-blurred="true">
+                      <figcaption></figcaption>
+                     </figure>
+                     <p>Легко осуждать родное государство за его «реформы» науки и то, к чему они привели. Но проблемы эти идут не только от злонамеренности или некомпетентности чиновников, а больше от общего кризиса нахождения места и роли академической науки в жизни человечества.</p>
+                     <p>Бизнесу, как и государству – вольно или невольно понятен прикладной характер наук и девиз «сделали – получили». И любая исследовательская деятельность будет приводится ими к факторам измеримости успеха – индекс цитируемости для чиновника, сумма выручки от внедрения технологии и продукта для бизнесмена. Но сколько стоит теория относительности?</p>
+                     <p>То, что теоретическая физика, некогда бывшая заумной и бесполезной алхимией, потом внезапно привела к атомной бомбе и реакторам, общеизвестно. Но кто готов содержать десятки лет ученых, лаборатории, исследования – не направленные на получение быстрой практической выгоды?</p>
+                     <p>В нашей ситуации, как в капле воды отразился кризис более крупного масштаба. Академическая наука становится уделом людей, скорее с монашеским отношением к действительности и служением чистому знанию (взять, хотя бы Григория Перельмана). Десятки лет дрессировки научного сообщества работой по грантам, ситуации с научными стартапами на западе и востребованностью научной мысли в биотехе, IT, оборонной отрасли – все это привело нас к разделению ученого мира на деятельных практиков, готовых к капитализации своих знаний и на людей, не вписывающихся в эту систему.</p>
+                     <p>Погрузив, изначально чистых академических теоретиков в среду капитализации, мы сами создали переток кадров из одной области в другую. Но, наступило ли время пессимизма?&nbsp;&nbsp;</p>
+                     <h3>Перспективы</h3>
+                     <p>Всё это время, c 1991 года, научная степень (фактически, маркер очень узкой специализации) не давала никаких преимуществ, как по деньгам, так и по перспективам. Сейчас же всё меняется, массово появились индустриальные лаборатории, и мы ожидаем что будет как на Западе – где без научной степени тебя не возьмут в серьезные исследования. А там -- интересная работа и оплата как у программиста, плюс возможность делать что-то новое.</p>
+                     <p>Вторым важнейшим моментом стало осознание того, что невозможно создавать по-настоящему новые продукты, пользуясь лишь старым накопленным багажом.</p>
+                     <p>Третий момент. Просто программиста найти и выучить можно, хотя и трудозатратно по нынешним временам. Найти и подготовить профессионального исследователя – трудозатратно втройне.</p>
+                     <p>Но иных путей развития просто нет, и мы, как и вся отрасль – будем находить и пробовать новые подходы по неизбежному союзу науки и технологического успеха. Вот почему мы создали свою собственную <a href="https://unidata-labs.com">Лабораторию</a>!</p>
+                     <p>&nbsp;</p>
+                    </div>
+                   </div>
+                  </div> 
+                  <div class="v-portal" style="display:none;"></div>
+                 </div> <!----> <!---->
+                </div> 
+                <div class="tm-article-presenter__meta">
+                 <div class="tm-separated-list tm-article-presenter__meta-list">
+                  <span class="tm-separated-list__title">Теги:</span> 
+                  <ul class="tm-separated-list__list">
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%AE%D0%BD%D0%B8%D0%B4%D0%B0%D1%82%D0%B0%5D" class="tm-tags-list__link">Юнидата</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%9A%D0%B0%D1%80%D1%8C%D0%B5%D1%80%D0%B0%5D" class="tm-tags-list__link">Карьера</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%9D%D0%B0%D1%83%D0%BA%D0%B0%5D" class="tm-tags-list__link">Наука</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%BD%D0%B0%D1%83%D0%BA%D0%B0%20%D0%B8%20%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%5D" class="tm-tags-list__link">наука и технологии</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8%5D" class="tm-tags-list__link">Управление данными</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%9B%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B8%D1%8F%5D" class="tm-tags-list__link">Лаборатория</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%5D" class="tm-tags-list__link">лаборатория данных</a></li>
+                  </ul>
+                 </div> 
+                 <div class="tm-separated-list tm-article-presenter__meta-list">
+                  <span class="tm-separated-list__title">Хабы:</span> 
+                  <ul class="tm-separated-list__list">
+                   <li class="tm-separated-list__item"><a href="/ru/company/unidata/blog/" class="tm-hubs-list__link router-link-active"> Блог компании Юнидата </a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/hub/career/" class="tm-hubs-list__link"> Карьера в IT-индустрии </a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/hub/itcompanies/" class="tm-hubs-list__link"> IT-компании </a></li>
+                  </ul>
+                 </div>
+                </div>
+               </article>
+              </div> <!---->
+             </div> 
+             <div class="tm-article-sticky-panel">
+              <div class="tm-data-icons tm-article-sticky-panel__icons">
+               <div class="tm-article-rating tm-data-icons__item">
+                <div class="tm-votes-meter tm-article-rating__votes-switcher">
+                 <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                  <title>Всего голосов 1: ↑0 и ↓1</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                 </svg> <span title="Всего голосов 1: ↑0 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_negative tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">-1</span>
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> <!----> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                 <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                </svg> <span class="tm-icon-counter__value">735</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                 <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                  <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                 </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 4 </span></button> <!----> 
+               <div title="Поделиться" class="tm-sharing tm-data-icons__item">
+                <button type="button" class="tm-sharing__button">
+                 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="tm-sharing__icon">
+                  <path fill="currentColor" d="M13.8 13.8V18l7.2-6.6L13.8 5v3.9C5 8.9 3 18.6 3 18.6c2.5-4.4 6-4.8 10.8-4.8z"></path>
+                 </svg></button> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> 
+               <div class="v-portal" style="display:none;"></div>
+              </div> 
+             </div>
+            </div> 
+            <div class="v-portal" style="display:none;"></div> 
+            <div class="tm-article-presenter__footer">
+             <div class="tm-article-blocks">
+              <!----> 
+              <section class="tm-block tm-block_spacing-bottom">
+               <!----> 
+               <div class="tm-block__body tm-block__body_variant-balanced">
+                <div class="tm-article-author">
+                 <div class="tm-article-author__company">
+                  <div class="tm-article-author__company-card">
+                   <div class="tm-company-snippet">
+                    <a href="/ru/company/unidata/profile/" class="tm-company-snippet__logo-link">
+                     <div class="tm-entity-image">
+                      <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/67a/e9f/02e/67ae9f02ec0bbd1ab33d901ccf0d374a.jpg" width="40" class="tm-entity-image__pic">
+                     </div></a> 
+                    <div class="tm-company-snippet__info">
+                     <a href="/ru/company/unidata/profile/" class="tm-company-snippet__title">Юнидата</a> 
+                     <div class="tm-company-snippet__description">
+                      Разработчик ПО в области управления данными
+                     </div>
+                    </div>
+                   </div> 
+                   <div class="tm-article-author__buttons">
+                    <!----> <!---->
+                   </div>
+                  </div> 
+                  <div class="tm-article-author__company-contacts">
+                   <a href="https://unidata-platform.ru" rel="noopener" target="_blank" class="tm-article-author__contact"> Сайт </a>
+                  </div> 
+                  <div class="tm-article-author__separator"></div>
+                 </div> 
+                 <div class="tm-user-card tm-article-author__user-card tm-user-card_variant-article">
+                  <div class="tm-user-card__info-container">
+                   <div class="tm-user-card__header">
+                    <div class="tm-user-card__header-data">
+                     <a href="/ru/users/Unidata/" class="tm-user-card__userpic tm-user-card__userpic_size-40">
+                      <div class="tm-entity-image">
+                       <img alt="" src="//habrastorage.org/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" class="tm-entity-image__pic">
+                      </div></a> 
+                     <div class="tm-user-card__meta">
+                      <div title=" 44 голоса " class="tm-karma tm-user-card__karma">
+                       <div class="tm-karma__votes tm-karma__votes_positive">
+                         24 
+                       </div> 
+                       <div class="tm-karma__text">
+                         Карма 
+                       </div>
+                      </div> 
+                      <div title="Рейтинг пользователя" class="tm-rating tm-user-card__rating">
+                       <div class="tm-rating__header"> 
+                        <div class="tm-rating__counter">
+                         -0.5
+                        </div>
+                       </div> 
+                       <div class="tm-rating__text">
+                         Рейтинг 
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div> 
+                   <div class="tm-user-card__info tm-user-card__info_variant-article">
+                    <div class="tm-user-card__title tm-user-card__title_variant-article">
+                     <!----> <a href="/ru/users/Unidata/" class="tm-user-card__nickname tm-user-card__nickname_variant-article"> @Unidata </a> <!---->
+                    </div> 
+                    <p class="tm-user-card__short-info tm-user-card__short-info_variant-article">Пользователь</p>
+                   </div>
+                  </div> 
+                  <div class="tm-user-card__buttons tm-user-card__buttons_variant-article">
+                   <!----> <!----> <!----> <!----> <!---->
+                  </div>
+                 </div> <!---->
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> <!---->
+              </section> 
+              <div class="tm-article-blocks__comments">
+               <div class="tm-article-page-comments">
+                <div class="tm-article-comments-counter-link tm-article-comments-counter-button">
+                 <a href="/ru/company/unidata/blog/655243/comments/" class="tm-article-comments-counter-link__link tm-article-comments-counter-link__link_button-style">
+                  <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon tm-article-comments-counter-link__icon_contrasted">
+                   <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                  </svg> <span class="tm-article-comments-counter-link__value tm-article-comments-counter-link__value_contrasted"> Комментарии 1 </span></a> <!---->
+                </div>
+               </div>
+              </div> <!----> <!----> <!----> 
+             </div>
+            </div>
+           </div>
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__placeholder_initial"></div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> 
+            <section class="tm-block tm-block_spacing-bottom">
+             <header class="tm-block__header">
+              <h2 class="tm-block__title">Информация</h2> <!---->
+             </header> 
+             <div class="tm-block__body">
+              <div class="tm-company-basic-info">
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Дата основания
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                 <time datetime="2015-07-27T21:00:00.000Z" title="2015-07-28, 00:00">28 июля 2015</time>
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Местоположение
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                  Россия 
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Сайт
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                 <a href="https://unidata-platform.ru" target="_blank" class="tm-company-basic-info__link"> unidata-platform.ru </a>
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Численность
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                  101–200 человек 
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Дата регистрации
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                 <time datetime="2021-02-20T08:02:19.000Z" title="2021-02-20, 11:02">20 февраля 2021</time>
+                </dd>
+               </dl> <!---->
+              </div>
+             </div> <!---->
+            </section> 
+            <div class="tm-company-widgets"></div> <!----> <!---->
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/company/unidata/blog/655243/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/company/unidata/blog/655243/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"655243":{"id":"655243","timePublished":"2022-03-11T15:40:27+00:00","isCorporative":true,"lang":"ru","titleHtml":"Почувствуй себя государством, или для чего нужна наука","leadData":{"textHtml":"\u003Cp\u003E\u003Cstrong\u003EВступление\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Cp\u003EНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели изначально работали в научной сфере. Разработки, лежащие в основе запатентованных технологий работы с данными и ставшие основой для нашего флагманского продукта – следствие их высоких теоретических знаний и исследовательских талантов.&nbsp;&nbsp;На пути реализации своих целей в бизнесе, они всегда старались сохранить связь с академической средой. Издавали и издают поныне научные статьи и книги, участвовали в разработке научных программ и сотрудничали со своими родными ВУЗами и кафедрами.\u003C\u002Fp\u003E\u003Cp\u003EПостепенно к этой деятельности все больше привлекалась ГК, это была либо практическая деятельность – дипломные работы и практики студентов, либо осознанная благотворительность – ведение спецкурса для студентов нескольких кафедр СПбГУ на базе ГК и с активной «прокачкой» слушателей по методологии и практике проектной деятельности и программирования.\u003C\u002Fp\u003E\u003Cp\u003E&nbsp;\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8d0\u002F64c\u002Fddb\u002F8d064cddb9a4a8ba2361a5f8f549265e.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8d0\u002F64c\u002Fddb\u002F8d064cddb9a4a8ba2361a5f8f549265e.jpg","fit":"cover","positionY":0,"positionX":0}},"editorVersion":"2.0","postType":"article","postLabels":[],"author":{"scoreStats":{"score":24,"votesCount":44},"rating":-0.5,"relatedData":null,"contacts":[],"authorContacts":[],"paymentDetails":{"paymentYandexMoney":null,"paymentPayPalMe":null,"paymentWebmoney":null},"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":1,"favoritesCount":4,"readingCount":735,"score":-1,"votesCount":1},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"20740","alias":"career","type":"collective","title":"Карьера в IT-индустрии","titleHtml":"Карьера в IT-индустрии","isProfiled":false},{"relatedData":null,"id":"22026","alias":"itcompanies","type":"collective","title":"IT-компании","titleHtml":"IT-компании","isProfiled":false}],"flows":[{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"textHtml":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw780q1\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8d0\u002F64c\u002Fddb\u002F8d064cddb9a4a8ba2361a5f8f549265e.jpg\" alt=\"Так нужна ли наука в коммерческих компаниях?\" title=\"Так нужна ли наука в коммерческих компаниях?\" width=\"1694\" height=\"1133\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8d0\u002F64c\u002Fddb\u002F8d064cddb9a4a8ba2361a5f8f549265e.jpg\" data-blurred=\"true\"\u002F\u003E\u003Cfigcaption\u003EТак нужна ли наука в коммерческих компаниях?\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch3\u003EВступление\u003C\u002Fh3\u003E\u003Cp\u003EНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели изначально работали в научной сфере. Разработки, лежащие в основе запатентованных технологий работы с данными и ставшие основой для нашего флагманского продукта – следствие их высоких теоретических знаний и исследовательских талантов.  На пути реализации своих целей в бизнесе, они всегда старались сохранить связь с академической средой. Издавали и издают поныне научные статьи и книги, участвовали в разработке научных программ и сотрудничали со своими родными ВУЗами и кафедрами.\u003C\u002Fp\u003E\u003Cp\u003EПостепенно к этой деятельности все больше привлекалась ГК, это была либо практическая деятельность – дипломные работы и практики студентов, либо осознанная благотворительность – ведение спецкурса для студентов нескольких кафедр СПбГУ на базе ГК и с активной «прокачкой» слушателей по методологии и практике проектной деятельности и программирования.\u003C\u002Fp\u003E\u003Cp\u003E \u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw780q1\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F9ae\u002Fa01\u002F2b8\u002F9aea012b8123a97145bad26accb74633.jpg\" width=\"1536\" height=\"1173\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F9ae\u002Fa01\u002F2b8\u002F9aea012b8123a97145bad26accb74633.jpg\" data-blurred=\"true\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch3\u003EЛаборатория\u003C\u002Fh3\u003E\u003Cp\u003EНаступил момент, когда было решено поднять ставки. Теперь у нас должно было появиться подразделение научной деятельности, сотрудничающее с R&amp;D, но не настолько смыкающееся с производственной практикой и прикладными задачами. Так, например, работа с данными — это область, где наиболее полно можно применить машинное обучение. Или другой пример, когда разработчики корпят над базой платформы — это сложная, трудоемкая, но техническая работа и знание о ней можно взять из книг или из голов опытных архитекторов. А теперь надо делать на ней хайтек, а данных нет, нужна исследовательская группа, лаборатория – которая будет искать необходимую информацию и сопоставлять ее с имеющейся (открытые источники, статьи) – адаптировать и актуализировать полученные модели.\u003C\u002Fp\u003E\u003Ch3\u003EПервоначальные ожидания\u003C\u002Fh3\u003E\u003Cp\u003EЧистая теоретическая наука в интересующей нас области управлениями данных, расширение нашей экспертизы на тот уровень стратегии, где успех обеспечивает новейшая теоретическая модель и глубочайшее предвиденье трендов технологий. Это то, чего мы хотели.\u003C\u002Fp\u003E\u003Cp\u003EРуководителем \u003Ca href=\"https:\u002F\u002Funidata-labs.com\"\u003EЛаборатории\u003C\u002Fa\u003E стал научный работник, преподаватель и исследователь Георгий Чернышев, человек со значительным опытом международного сотрудничества в исследовательских проектах, опытный лид исследовательских команд.  Для того чтобы работники лаборатории – студенты из научного коллектива Георгия, лучше понимали бизнес-среду, для которой они делают исследования – им обеспечили погружение в реальную практическую деятельность. Частичное, но позволяющее понять специфику прикладной работы с технологиями.\u003C\u002Fp\u003E\u003Cp\u003EМы ожидали, что это задаст им контекст и понимание среды. При этом, план научной работы Лаборатории был независим от проектной деятельности ГК. Особенным фокусом развития было машинное обучение – место, где сходятся вместе наука и актуальные производственные потребности.\u003C\u002Fp\u003E\u003Cp\u003E \u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw780q1\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa81\u002F6db\u002F3d6\u002Fa816db3d631e6e1f812a40b7454be2cc.jpg\" width=\"1170\" height=\"720\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa81\u002F6db\u002F3d6\u002Fa816db3d631e6e1f812a40b7454be2cc.jpg\" data-blurred=\"true\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch3\u003EРеальность\u003C\u002Fh3\u003E\u003Cp\u003EПоначалу ситуация развивалась в рамках наших ожиданий, теоретики и практики из проектных команд притирались друг к другу со скрипом, но большим взаимным любопытством. Даже возник эффект увлечения практиков наукой, целый ряд наших сотрудников захотели стать причастными к работе Лаборатории, например: писать теоретически статьи или поступить в магистратуру или аспирантуру.\u003C\u002Fp\u003E\u003Cp\u003EКак только эта волна спала, перед нами явилась новая неожиданная тенденция. Сотрудники Лаборатории стали проявлять больший, чем ожидалось, интерес к практической деятельности. А те, кто уже учился в магистратуре, стали заявлять о невозможности (и нежелании) сочетать науку и реальную работу.\u003C\u002Fp\u003E\u003Ch3\u003EАнализ ситуации\u003C\u002Fh3\u003E\u003Cp\u003EРазбор ситуации показал нам абсолютно четкий кризис роли современной теоретической науки в любой высокотехнологической (и следовательно, хорошо финансируемой) отрасли. Речь идет не только о финансировании или статусе учёного в обществе. Речь идет о понимании простого вопроса «Зачем это все?».\u003C\u002Fp\u003E\u003Cp\u003EЗачем заниматься интересными и сложными теоретическими разработками, чья связь с практической деятельностью сомнительна. Ведь есть интересные задачи и практические сложные разработки, решение которых очень востребовано на практике и (приятный бонус) отлично оплачивается. В конце этого абзаца намеренно нет знака вопроса, так как для тех, кого мы опросили – вопроса в этом тезисе нет. Все и так ясно.\u003C\u002Fp\u003E\u003Cp\u003EДля них, в этой постановке вопроса нет привкуса того отступничества, который возникал у ученых в 90-ые - «вот брошу институт и пойду в бизнес, да, это деградация, но за хорошие деньги». Здесь речь идет о смене одной интеллектуальной деятельности на интеллектуальною деятельность сопоставимой сложности хотя и иной направленности (и на гораздо более приятных условиях).\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw780q1\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F732\u002Fe31\u002Faf1\u002F732e31af1c3d79c488ce4fe4c22b9a47.jpg\" width=\"3960\" height=\"2640\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F732\u002Fe31\u002Faf1\u002F732e31af1c3d79c488ce4fe4c22b9a47.jpg\" data-blurred=\"true\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch3\u003EА как у них?\u003C\u002Fh3\u003E\u003Ch4\u003EЛюди:\u003C\u002Fh4\u003E\u003Cp\u003EЗападные IT-шники в основной массе не хотят заниматься наукой. Причем не только по экономическим причинам, которые, кстати говоря, не так ярко выражены, как у нас – в их IT аспирантуре платят хорошо.\u003C\u002Fp\u003E\u003Cp\u003EСамые важные причины почему не хотят – это сложность обеспечения профессионального роста, нельзя преуспеть в академии просто работая, просто занимаясь написанием кода или какой-либо работой. Надо уметь говорить с людьми, выстраивать контакты. Кроме того, она требует бОльшей отдачи, например практически все дедлайны по статьям ставят на воскресенье, а значит, что иногда надо работать и на выходных. Именно из-за этого местные в IT-аспирантуры не идут, или идут только в топовые места или на хайповые специальности типа машинного обучения.\u003C\u002Fp\u003E\u003Cp\u003EДовольно известен пример \u003Ca href=\"http:\u002F\u002Fmatt-welsh.blogspot.com\u002F2010\u002F11\u002Fwhy-im-leaving-harvard.html\"\u003EМэтта Вэлша\u003C\u002Fa\u003E. Он бросил теньюр (гарантия обеспеченной жизни) в Гарварде и ушел в Google, потому что там больше возможностей для развития и внедрения сделанного, есть доступ к актуальным задачам.\u003C\u002Fp\u003E\u003Ch4\u003EУниверситеты:\u003C\u002Fh4\u003E\u003Cp\u003EЗападная университетская наука, также, как и наша, страдает от недостатка задач и датасетов. То есть того, что может дать индустрия. Хотя ситуация, конечно, получше, есть большие программы по кооперации, компании массово приходят в университеты, приносят задачи и даже приводят специалистов – индустриальных ученых. И, конечно, дают деньги. Однако, всё очень сильно зависит от университета, от его географического местоположения – есть университеты, где работы (контрактов) полно и потому есть жизнь, а есть университеты, где ничего этого нет. На государственном уровне это пытаются выровнять, например некоторые компании имеют специальные стажировки для студентов именно этого университета.\u003C\u002Fp\u003E\u003Ch4\u003EКомпании: \u003C\u002Fh4\u003E\u003Cp\u003EКомпании на самом деле тоже страдают. Прежде всего, от дороговизны исследований в целом, зрелые IT-ученые стоят значительно дороже программистов. Поэтому делается ставка на аспирантов или молодых исследователей, что, в свою очередь, сказывается на качестве. Кадровая проблема, на самом деле острейшая, компании не имеют возможности вырастить: нет денег просто взять и дать человеку поучиться хотя бы три месяца в спокойной обстановке, не грузя его задачами.\u003C\u002Fp\u003E\u003Cp\u003EДругая проблема — это пресс текущих задач, который выливается в предпочтение конкретных прикладных исследований. Надо сделать X и только X – причем ты должен доказать, что X достижим, получится и будет полезен вот прямо сейчас, в продукте Y. Без этого проект не стартанут, денег не дадут. И это приводит к унылым проектам, которые-то не всегда и исследованиями назвать можно.\u003C\u002Fp\u003E\u003Cp\u003EКроме этого, ориентированность на текущие задачи приводит к сжатым срокам, что выливается в неожиданные проблема типа отсутствия (или нарушения) методологии. Например, не собрали достаточно большой датасет или собрали неправильно, получили плохие (или слишком хорошие и не подтвердившиеся на реальном проекте) результаты.\u003C\u002Fp\u003E\u003Cp\u003EСтоит отметить, что количество компаний, где есть полноценный отдел, занимающийся фундаментальной IT-наукой, невелико. Компания должна быть очень большой (от тысячи человек), чтобы позволить себе такую лабу. Но и тут есть проблемы – эти отделы обычно отрезаны от производственных подразделений, актуальных задач и ресурсов. По итогу оказывается, что, если и сделали что-то очень хорошее, сделать внедрение – нереально. Либо его будут делать уже другие люди, без тебя. \u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw780q1\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Ffaf\u002F87e\u002F7ae\u002Ffaf87e7ae4b0952d3e8c8ef948cd3423.jpg\" width=\"885\" height=\"641\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Ffaf\u002F87e\u002F7ae\u002Ffaf87e7ae4b0952d3e8c8ef948cd3423.jpg\" data-blurred=\"true\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EЛегко осуждать родное государство за его «реформы» науки и то, к чему они привели. Но проблемы эти идут не только от злонамеренности или некомпетентности чиновников, а больше от общего кризиса нахождения места и роли академической науки в жизни человечества.\u003C\u002Fp\u003E\u003Cp\u003EБизнесу, как и государству – вольно или невольно понятен прикладной характер наук и девиз «сделали – получили». И любая исследовательская деятельность будет приводится ими к факторам измеримости успеха – индекс цитируемости для чиновника, сумма выручки от внедрения технологии и продукта для бизнесмена. Но сколько стоит теория относительности?\u003C\u002Fp\u003E\u003Cp\u003EТо, что теоретическая физика, некогда бывшая заумной и бесполезной алхимией, потом внезапно привела к атомной бомбе и реакторам, общеизвестно. Но кто готов содержать десятки лет ученых, лаборатории, исследования – не направленные на получение быстрой практической выгоды?\u003C\u002Fp\u003E\u003Cp\u003EВ нашей ситуации, как в капле воды отразился кризис более крупного масштаба. Академическая наука становится уделом людей, скорее с монашеским отношением к действительности и служением чистому знанию (взять, хотя бы Григория Перельмана). Десятки лет дрессировки научного сообщества работой по грантам, ситуации с научными стартапами на западе и востребованностью научной мысли в биотехе, IT, оборонной отрасли – все это привело нас к разделению ученого мира на деятельных практиков, готовых к капитализации своих знаний и на людей, не вписывающихся в эту систему.\u003C\u002Fp\u003E\u003Cp\u003EПогрузив, изначально чистых академических теоретиков в среду капитализации, мы сами создали переток кадров из одной области в другую. Но, наступило ли время пессимизма?  \u003C\u002Fp\u003E\u003Ch3\u003EПерспективы\u003C\u002Fh3\u003E\u003Cp\u003EВсё это время, c 1991 года, научная степень (фактически, маркер очень узкой специализации) не давала никаких преимуществ, как по деньгам, так и по перспективам. Сейчас же всё меняется, массово появились индустриальные лаборатории, и мы ожидаем что будет как на Западе – где без научной степени тебя не возьмут в серьезные исследования. А там -- интересная работа и оплата как у программиста, плюс возможность делать что-то новое.\u003C\u002Fp\u003E\u003Cp\u003EВторым важнейшим моментом стало осознание того, что невозможно создавать по-настоящему новые продукты, пользуясь лишь старым накопленным багажом.\u003C\u002Fp\u003E\u003Cp\u003EТретий момент. Просто программиста найти и выучить можно, хотя и трудозатратно по нынешним временам. Найти и подготовить профессионального исследователя – трудозатратно втройне.\u003C\u002Fp\u003E\u003Cp\u003EНо иных путей развития просто нет, и мы, как и вся отрасль – будем находить и пробовать новые подходы по неизбежному союзу науки и технологического успеха. Вот почему мы создали свою собственную \u003Ca href=\"https:\u002F\u002Funidata-labs.com\"\u003EЛабораторию\u003C\u002Fa\u003E!\u003C\u002Fp\u003E\u003Cp\u003E \u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","tags":[{"titleHtml":"Юнидата"},{"titleHtml":"Карьера"},{"titleHtml":"Наука"},{"titleHtml":"наука и технологии"},{"titleHtml":"Управление данными"},{"titleHtml":"Лаборатория"},{"titleHtml":"лаборатория данных"}],"metadata":{"stylesUrls":[],"scriptUrls":[],"shareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8d0\u002F64c\u002Fddb\u002F8d064cddb9a4a8ba2361a5f8f549265e.jpg","shareImageWidth":1200,"shareImageHeight":630,"vkShareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8d0\u002F64c\u002Fddb\u002F8d064cddb9a4a8ba2361a5f8f549265e.jpg","schemaJsonLd":"{\"@context\":\"http:\\\u002F\\\u002Fschema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Funidata\\\u002Fblog\\\u002F655243\\\u002F\"},\"headline\":\"Почувствуй себя государством, или для чего нужна наука\",\"datePublished\":\"2022-03-11T18:40:27+03:00\",\"dateModified\":\"2022-03-11T21:44:16+03:00\",\"author\":{\"@type\":\"Person\",\"name\":\"Unidata\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Habr\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fwebt\\\u002Fa_\\\u002Flk\\\u002F9m\\\u002Fa_lk9mjkccjox-zccjrpfolmkmq.png\"}},\"description\":\"Так нужна ли наука в коммерческих компаниях?ВступлениеНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почем...\",\"url\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Funidata\\\u002Fblog\\\u002F655243\\\u002F#post-content-body\",\"about\":[\"c_unidata\",\"h_career\",\"h_itcompanies\",\"f_management\"],\"image\":[\"https:\\\u002F\\\u002Fhabr.com\\\u002Fshare\\\u002Fpublication\\\u002F655243\\\u002F990861833bca2f30a0a25a7b3f782e6f\\\u002F\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F8d0\\\u002F64c\\\u002Fddb\\\u002F8d064cddb9a4a8ba2361a5f8f549265e.jpg\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F9ae\\\u002Fa01\\\u002F2b8\\\u002F9aea012b8123a97145bad26accb74633.jpg\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fa81\\\u002F6db\\\u002F3d6\\\u002Fa816db3d631e6e1f812a40b7454be2cc.jpg\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F732\\\u002Fe31\\\u002Faf1\\\u002F732e31af1c3d79c488ce4fe4c22b9a47.jpg\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Ffaf\\\u002F87e\\\u002F7ae\\\u002Ffaf87e7ae4b0952d3e8c8ef948cd3423.jpg\"]}","metaDescription":"Так нужна ли наука в коммерческих компаниях?ВступлениеНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели...","mainImageUrl":null,"amp":true,"customTrackerLinks":[]},"polls":[],"commentsEnabled":true,"rulesRemindEnabled":false,"votesEnabled":true,"status":"published","plannedPublishTime":null,"checked":null,"isEditorial":false}},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[""],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[],"hubs":""},"comments":{"articleComments":{},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":"","moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{"unidata":{"alias":"unidata","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F67a\u002Fe9f\u002F02e\u002F67ae9f02ec0bbd1ab33d901ccf0d374a.jpg","titleHtml":"Юнидата","descriptionHtml":"Разработчик ПО в области управления данными","relatedData":null,"statistics":{"postsCount":15,"newsCount":0,"vacanciesCount":0,"employeesCount":2,"careerRating":null,"subscribersCount":41,"rating":15.37,"invest":null},"foundationDate":{"year":"2015","month":"07","day":"28"},"location":{"city":{"id":"447733","title":"Санкт-Петербург"},"region":{"id":"1948","title":"Санкт-Петербург и область"},"country":{"id":"168","title":"Россия"}},"siteUrl":"https:\u002F\u002Funidata-platform.ru","staffNumber":"101–200 человек","registrationDate":"2021-02-20T08:02:19+00:00","representativeUser":null,"contacts":[{"title":"Сайт","url":"https:\u002F\u002Funidata-platform.ru"}],"settings":{"analyticsSettings":[],"branding":null,"status":"active","isStartup":false},"metadata":{"titleHtml":"Юнидата, Санкт-Петербург - Разработчик ПО в области управления данными с 28 июля 2015 г.","title":"Юнидата, Санкт-Петербург - Разработчик ПО в области управления данными с 28 июля 2015 г.","keywords":["IT-компании","Карьера в IT-индустрии","Анализ и проектирование систем","Софт","Информационная безопасность","mdm","управление данными","юнидата","hr","mdm-система","java","unidata"],"descriptionHtml":"15 статей от авторов компании Юнидата","description":"15 статей от авторов компании Юнидата"},"aDeskSettings":null,"careerAlias":null}},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":true,"featurer":[],"megaposts":[{"title":"Сработают ли в IT принципы космической подготовки","color":"#99ddff","link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FLZMaSpGV5qvkXHv3XsrwFAv4PP9mYpd7F55V_nO6721uzC0rP6ZuyEvcQVKeXhevmVbSO9M6ofIvgBT_DhPNlf9ni9mSgey7FiDY2CoIsOOPQ6Lusul6WvGFMiI33BUv4CFaMA"},"events":{"view":"d99T7YA4_fkB22EJNu9eQWbcOAIo1IIv8uEhvkJaKtMjp5ZHqo7b14sZHxLNSR09YDfy_PtkjjoSJg"}}],"promoLinks":[{"title":"Как работа вызывает стресс и как это отследить","label":"Интересно","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FmY9t4KLbuHbm4ZqYTP317GA_Q3WTvRi5ism9WVl-wS8NllHnFr_RDkn3IjH06y8mptv0GnSl4q1rq6yU2bxVOB0dri1aLZSOubL4Wm4qwhxT7tJmGBy_cSXV4HDlMMwrG24Ddb4CtA"},"events":{"view":"vnVHs5_VzNYFijDXZohEQGinkf7dPT2XkWEF6kXKmzApHAb58Z1lsEcyBOtHxMisStqO1p2Glvj_WA"}},{"title":"А как прошел ваш 2021? Исследуем рынок труда в IT, строим тренды и ищем аномалии","label":"Промо","external":true,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FwjTC3gWZt0u0oib58dsjDBUTxCWsmlCR4yJ5-qczvFastP2XXEBPygAM0_DJF87TfsDKBYiUI5qFPM4KI0vP8O5J0nuP75OWoa57zEImDxv9WnNgyMtktNACfAa0GB5de2Q9oGTaKd53Vh-rqrs9LU4aPrU9yDI"},"events":{"view":"4DJp86WFHergIrmQYSXQeTmvQSMMHLiOs1We_aPPE4QAzv6QmOd9faasbD5t_WH1q8U-NJXGVOiF7g"}}],"promoPosts":[{"title":"Конкурс технических статей Технотекст 2021","label":"Событие","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FYi4LtaQiKJMAqLzWCizqXA1cxf3czAEcjSMy0qnhd-fqbgtKh2F0eFbppMZMq316BXdSjJI7k1riyVFoIyKgeW_SwA7-hfqZS0mhuQSosCxDs1Yuec0TvZgI1a_tHLtCC5TiMHWN61Xspc8qcb-EbZYfq7RfNJGN5MwGifcbv9ZiYQGX0bdQmHt5LhawI4ZSnHN7AcZUWpvjVvOUskyPi-6Jz-ff"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FhBsM7zKESOQO7RPvtz3zGT8BAlW5zUxHAxPO0OeikM7-saGJIs6zLegBeNibFxZjWKgYqSD9fSwCZrUga63cHVA3-SwAiZhtVr3dD1HAIBSCtg"}},{"title":"Хьюстон, на воркшопе этого не было: IT-обучение и космос","label":"Мегапост","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FYyUTaQtgvxQdb0CjzXrOlR6lXpiKDCySLLqD-UEvz3DVr5mUVXCMUHRmzo61Alkv5MTWmQIdOT8fcumMjH8KHFXegemBcRaTVAuM811tBU7HsQ5gVqWH9vQHXYXdlIDpvXgWZfIJeZ6XfUXe_AIGeN_4aSHl5-UcQ_6xL3Pdvo-J2fzJWqTKNT8kfCVgXNvM-NMCuMGs9ygRDA"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FlzKqx6rzh-7A7c-MOxH3fdPXihtlxDkzkDXX0WdTmjRPmiYwnHv-cvDzwLn6_Q8eVQoetadSUG8vR-xGhYsvICCDGqLLTOhOpKMWJWa5mOMXpIohYfvk5rORC5paW-RKYCJWJEk"}},{"title":"Истощающая тревога: что такое стресс и как с ним бороться","label":"Интересно","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002Fjc-BB74uCToCPM9ImCxDcFcKJEPZ_Fys2euuAycMw9YMtNIng7u6ea9GLovtG97rs_dzqbiccOzzfQydMgzj4vc88BRnUJAAIQUqvudTAeWkyuHEzGSRDkrNKZLCIygRAr_SaKUHzyX8f_lyAF-9CHGehegpkggtWHKibvkUvxAX8hyROpGZDRBUPdWKz2qye_U69Bxhz7cK"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FWPnyg0FkwSOi60-2wOCtjR6dYgvzxzrNLJ162oBlQSstMZgoH8SJHOqKiDCXyQ3b0OVLwK_vTspsju1JSJmO-icGoo5r5ZYZfQUGnogwPmuYVqjhY8NJgWBm5th1ON5VNFjXP3YKMQ"}}]},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

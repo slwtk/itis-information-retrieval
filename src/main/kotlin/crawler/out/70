@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Аннотации в Java и их обработка / Комментарии / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" itemprop="image" content="/img/habr_ru.png" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="/img/habr_ru.png" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="/img/habr_ru.png" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="/img/habr_ru.png" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="/img/habr_ru.png?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" property="og:type" content="website" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:title" content="Хабр" data-vmid="og:title">
+  <meta data-vue-meta="ssr" property="og:url" content="https://habr.com/ru/company/otus/blog/655239/comments/" data-vmid="og:url"> 
+  <link data-vue-meta="ssr" image_src="image" href="/img/habr_ru.png" data-vmid="image:href">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/655239/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/company/otus/blog/655239/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" data-vmid="hreflang"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> 
+       <div class="tm-feature tm-header__feature tm-feature_variant-inline">
+        <!---->
+       </div> <!----> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div hl="ru" companyname="otus" data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <!----> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <article class="tm-article-comments__article-body">
+            <div class="tm-article-comments__article-snippet">
+             <div class="tm-article-snippet">
+              <div class="tm-article-snippet__meta-container">
+               <div class="tm-article-snippet__meta">
+                <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/kmoseenk/" title="kmoseenk" class="tm-user-info__userpic">
+                  <div class="tm-entity-image">
+                   <svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_pink">
+                    <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                   </svg>
+                  </div></a> <span class="tm-user-info__user"><a href="/ru/users/kmoseenk/" class="tm-user-info__username"> kmoseenk </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T15:32:02.000Z" title="2022-03-11, 18:32">вчера в 18:32</time></span>
+               </div> <!---->
+              </div> 
+              <h1 class="tm-article-snippet__title tm-article-snippet__title_h1"><a href="/ru/company/otus/blog/655239/" data-article-link="" class="tm-article-snippet__title-link router-link-active"><span>Аннотации в Java и их обработка</span></a></h1> 
+              <div class="tm-article-snippet__hubs">
+               <span class="tm-article-snippet__hubs-item"><a href="/ru/company/otus/blog/" class="tm-article-snippet__hubs-item-link router-link-active"><span>Блог компании OTUS</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/java/" class="tm-article-snippet__hubs-item-link"><span>Java</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span>
+              </div> 
+              <div class="tm-article-snippet__labels">
+               <div class="tm-article-snippet__label tm-article-snippet__label_variant-translation">
+                <span> Перевод </span>
+               </div>
+              </div> <!----> <!---->
+             </div> 
+             <div class="tm-data-icons">
+              <!----> 
+              <div class="tm-votes-meter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                <title>Всего голосов 2: ↑1 и ↓1</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+               </svg> <span title="Всего голосов 2: ↑1 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">0</span>
+              </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+               </svg> <span class="tm-icon-counter__value">983</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                 <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 10 </span></button> 
+              <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+               <a href="/ru/company/otus/blog/655239/comments/" aria-current="page" class="tm-article-comments-counter-link__link">
+                <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                 <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                </svg> <span class="tm-article-comments-counter-link__value"> 0 </span></a> <!---->
+              </div> <!----> 
+              <div class="v-portal" style="display:none;"></div>
+             </div>
+            </div>
+           </article> <!----> 
+           <div data-async-called="true" class="tm-article-comments-offloaded">
+            <div class="tm-article-comments">
+             <div class="tm-comments-wrapper">
+              <div class="tm-comments-wrapper__wrapper">
+               <header class="tm-comments-wrapper__header">
+                <h2 class="tm-comments-wrapper__title"> Комментарии <!----></h2> 
+                <div class="tm-comments-wrapper__header-aside">
+                 <!----> <button class="tm-rss-button tm-rss-button_comments-header"><span class="tm-svg-icon__wrapper tm-rss-button__icon">
+                   <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+                    <title>Скопировать ссылку на RSS</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#rss"></use>
+                   </svg></span></button> <!---->
+                </div>
+               </header> 
+               <div class="tm-comments-wrapper__inner"> 
+                <div class="tm-comments__empty">
+                 <span>Здесь пока нет ни одного комментария, вы&nbsp;можете&nbsp;стать&nbsp;первым!</span>
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div>
+              </div> 
+              <div class="tm-notice tm-comments__comment-notice tm-notice_positive">
+               <!----> 
+               <div class="tm-notice__inner">
+                <!----> 
+                <div class="tm-notice__content">
+                 <span>Только полноправные пользователи могут оставлять комментарии. <a rel="nofollow" href="/kek/v1/auth/habrahabr/?back=/ru/company/otus/blog/655239/comments/&amp;hl=ru">Войдите</a>, пожалуйста.</span>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div> <!----> <!---->
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div hl="ru" class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__placeholder_initial"></div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> <!----> <!---->
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/company/otus/blog/655239/comments/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/company/otus/blog/655239/comments/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"655239":{"id":"655239","timePublished":"2022-03-11T15:32:02+00:00","isCorporative":true,"lang":"ru","titleHtml":"Аннотации в Java и их обработка","leadData":{"textHtml":"\u003Cp\u003EАннотация — это специальная конструкция языка, связанная с классом, методом или переменной, предоставляющая программе дополнительную информацию, на основе которой программа может предпринять дальнейшие действия или реализовать дополнительную функциональность, такую как генерация кода, проверка ошибок и т. д.\u003C\u002Fp\u003E\u003Cp\u003EВ этой статье мы обсудим назначение стандартных аннотаций, а также рассмотрим на практическом примере создание и обработку своих аннотаций.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc1d\u002F8d6\u002Fd1e\u002Fc1d8d6d1e880ba73218b3240c9e37232.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc1d\u002F8d6\u002Fd1e\u002Fc1d8d6d1e880ba73218b3240c9e37232.png","fit":"cover","positionY":0,"positionX":0}},"editorVersion":"2.0","postType":"article","postLabels":[{"type":"translation","data":{"originalAuthorName":"Arshad Syed","originalUrl":"https:\u002F\u002Freflectoring.io\u002Fjava-annotation-processing\u002F"}}],"author":{"scoreStats":{"score":20,"votesCount":116},"rating":41.6,"relatedData":null,"contacts":[],"authorContacts":[],"paymentDetails":{"paymentYandexMoney":null,"paymentPayPalMe":null,"paymentWebmoney":null},"id":"2723985","alias":"kmoseenk","fullname":"KatMot","avatarUrl":null,"speciality":"Контент-менеджер"},"statistics":{"commentsCount":0,"favoritesCount":10,"readingCount":983,"score":0,"votesCount":2},"hubs":[{"relatedData":null,"id":"21052","alias":"otus","type":"corporative","title":"Блог компании OTUS","titleHtml":"Блог компании OTUS","isProfiled":false},{"relatedData":null,"id":"375","alias":"java","type":"collective","title":"Java","titleHtml":"Java","isProfiled":true}],"flows":[{"id":"1","alias":"develop","title":"Разработка"}],"relatedData":null,"textHtml":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc1d\u002F8d6\u002Fd1e\u002Fc1d8d6d1e880ba73218b3240c9e37232.png\" width=\"780\" height=\"439\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc1d\u002F8d6\u002Fd1e\u002Fc1d8d6d1e880ba73218b3240c9e37232.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EАннотация — это специальная конструкция языка, связанная с классом, методом или переменной, предоставляющая программе дополнительную информацию, на основе которой программа может предпринять дальнейшие действия или реализовать дополнительную функциональность, такую как генерация кода, проверка ошибок и т. д.\u003C\u002Fp\u003E\u003Cp\u003EПомимо использования стандартных аннотаций из пакета java.lang, о которых мы поговорим далее, можно также создавать свои аннотации и обрабатывать их.\u003C\u002Fp\u003E\u003Cp\u003EВ этой статье мы обсудим назначение стандартных аннотаций, а также рассмотрим на практическом примере создание и обработку своих аннотаций.\u003C\u002Fp\u003E\u003Cp\u003EКод примеров вы можете найти на \u003Ca href=\"https:\u002F\u002Fgithub.com\u002Fthombergs\u002Fcode-examples\u002Ftree\u002Fmaster\u002Fcore-java\u002Fannotation-processing\u002Fintroduction-to-annotations\"\u003E\u003Cu\u003EGitHub\u003C\u002Fu\u003E\u003C\u002Fa\u003E.\u003C\u002Fp\u003E\u003Ch3\u003EОсновы аннотаций\u003C\u002Fh3\u003E\u003Cp\u003EАннотации начинаются с символа \u003Ccode\u003E@\u003C\u002Fcode\u003E. Например, в пакете \u003Ccode\u003Ejava.lang\u003C\u002Fcode\u003E определены аннотации \u003Ccode\u003E@Override\u003C\u002Fcode\u003E и \u003Ccode\u003E@SuppressWarnings\u003C\u002Fcode\u003E.\u003C\u002Fp\u003E\u003Cp\u003EСама по себе аннотация не выполняет никаких действий. Она просто предоставляет информацию, которую можно использовать во время компиляции или в рантайме.\u003C\u002Fp\u003E\u003Cp\u003EВ качестве примера рассмотрим аннотацию \u003Ccode\u003E@Override\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class ParentClass {\n  public String getName() {...}\n}\n\npublic class ChildClass extends ParentClass {\n  @Override\n  public String getname() {...}\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EАннотация \u003Ccode\u003E@Override\u003C\u002Fcode\u003E используется для обозначения переопределенного метода из базового класса. Приведенная выше программа при компиляции выдаст ошибку, потому что метод \u003Ccode\u003Egetname()\u003C\u002Fcode\u003E в классе \u003Ccode\u003EChildClass\u003C\u002Fcode\u003E аннотирован \u003Ccode\u003E@Override\u003C\u002Fcode\u003E, но в родительском классе \u003Ccode\u003EParentClass\u003C\u002Fcode\u003E метода \u003Ccode\u003Egetname()\u003C\u002Fcode\u003E нет.\u003C\u002Fp\u003E\u003Cp\u003EИспользуя аннотацию \u003Ccode\u003E@Override\u003C\u002Fcode\u003E в \u003Ccode\u003EChildClass\u003C\u002Fcode\u003E, компилятор проверяет, что имя переопределенного метода в дочернем классе совпадает с именем метода в родительском классе.\u003C\u002Fp\u003E\u003Ch3\u003EСтандартные аннотации\u003C\u002Fh3\u003E\u003Cp\u003EРассмотрим некоторые из распространенных стандартных аннотаций из пакета \u003Ccode\u003Ejava.lang\u003C\u002Fcode\u003E. Чтобы увидеть их влияние на поведение компилятора, запускайте примеры из командной строки, поскольку большинство IDE могут подавлять предупреждения.\u003C\u002Fp\u003E\u003Ch4\u003E@SuppressWarnings\u003C\u002Fh4\u003E\u003Cp\u003EАннотация \u003Ccode\u003E@SuppressWarnings\u003C\u002Fcode\u003E используется для подавления предупреждений компилятора. Например, \u003Ccode\u003E@SuppressWarnings\u003C\u002Fcode\u003E(\"unchecked\") отключает  предупреждения, связанные с \"сырыми\" типами (Raw Types). \u003C\u002Fp\u003E\u003Cp\u003EДавайте рассмотрим пример использования \u003Ccode\u003E@SuppressWarnings\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class SuppressWarningsDemo {\n\n  public static void main(String[] args) {\n    SuppressWarningsDemo swDemo = new SuppressWarningsDemo();\n    swDemo.testSuppressWarning();\n  }\n\n  public void testSuppressWarning() {\n    Map testMap = new HashMap();\n    testMap.put(1, \"Item_1\");\n    testMap.put(2, \"Item_2\");\n    testMap.put(3, \"Item_3\");\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЕсли мы запустим компиляцию из командной строки с параметром \u003Ccode\u003E-Xlint:unchecked\u003C\u002Fcode\u003E, то получим следующее сообщение:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Ejavac -Xlint:unchecked .\u002Fcom\u002Freflectoring\u002FSuppressWarningsDemo.java\nWarning:\nunchecked call to put(K,V) as a member of the raw type Map\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЭто пример легаси кода (до Java 5) — в коллекции мы можем случайно сохранить объекты разных типов. Для проверки подобных ошибок на этапе компиляции, были придуманы обобщенные типы (generics, дженерики). Чтобы этот код компилировался без предупреждений измените строку:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003EMap testMap = new HashMap();\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003Eна\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003EMap&lt;Integer, String\u003E testMap = new HashMap&lt;\u003E();\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЕсли подобного легаси кода много, то вы вряд ли захотите вносить изменения, поскольку это влечет за собой много регрессионного тестирования. В этом случае к классу можно добавить аннотацию \u003Ccode\u003E@SuppressWarning\u003C\u002Fcode\u003E, чтобы логи не загромождались избыточными предупреждениями.\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@SuppressWarnings({\"rawtypes\", \"unchecked\"})\npublic class SuppressWarningsDemo {\n  ...\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EТеперь при компиляции предупреждений не будет.\u003C\u002Fp\u003E\u003Ch4\u003E@Deprecated\u003C\u002Fh4\u003E\u003Cp\u003EАннотация \u003Ccode\u003E@Deprecated\u003C\u002Fcode\u003E используется для пометки устаревших методов или типов.\u003C\u002Fp\u003E\u003Cp\u003EIDE автоматически обрабатывают эту аннотацию и обычно отображают устаревший метод зачеркнутым шрифтом, сообщая разработчику, что больше не следует его использовать.\u003C\u002Fp\u003E\u003Cp\u003EВ примере ниже метод \u003Ccode\u003EtestLegacyFunction()\u003C\u002Fcode\u003E помечен как устаревший:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class DeprecatedDemo {\n\n  @Deprecated(since = \"4.5\", forRemoval = true)\n  public void testLegacyFunction() {\n\n    System.out.println(\"This is a legacy function\");\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EВ атрибуте \u003Ccode\u003Esince\u003C\u002Fcode\u003E этой аннотации содержится версия, с которой элемент объявлен устаревшим, а \u003Ccode\u003EforRemoval\u003C\u002Fcode\u003E указывает, будет ли элемент удален в следующей версии.\u003C\u002Fp\u003E\u003Cp\u003EТеперь вызов устаревшего метода, вызовет предупреждение во время компиляции, указывая, что лучше этот метод не использовать:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E.\u002Fcom\u002Freflectoring\u002FDeprecatedDemoTest.java:8: warning: [removal] testLegacyFunction() in DeprecatedDemo has been deprecated and marked for removal\n    demo.testLegacyFunction();\n      ^           \n1 warning\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Ch4\u003E@Override\u003C\u002Fh4\u003E\u003Cp\u003EМы уже упоминали выше аннотацию \u003Ccode\u003E@Override\u003C\u002Fcode\u003E. Она используется для проверки переопределенных методов во время компиляции на такие ошибки, как опечатки в регистре символов:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class Employee {\n  public void getEmployeeStatus(){\n    System.out.println(\"This is the Base Employee class\");\n  }\n}\n\npublic class Manager extends Employee {\n  public void getemployeeStatus(){\n    System.out.println(\"This is the Manager class\");\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЗдесь мы хотели переопределить метод \u003Ccode\u003EgetEmployeeStatus()\u003C\u002Fcode\u003E, но неправильно написали имя метода. Это может привести к серьезным ошибкам. Приведенная выше программа скомпилируется и запуститься без проблем, не обнаружив эту ошибку при компиляции.\u003C\u002Fp\u003E\u003Cp\u003EЕсли добавить аннотацию \u003Ccode\u003E@Override\u003C\u002Fcode\u003E к методу \u003Ccode\u003EgetemployeeStatus()\u003C\u002Fcode\u003E, то при компиляции получим следующую ошибку:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E.\u002Fcom\u002Freflectoring\u002FManager.java:5: error: method does not override or implement a method from a supertype\n  @Override\n  ^\n1 error\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Ch4\u003E@FunctionalInterface\u003C\u002Fh4\u003E\u003Cp\u003EАннотация \u003Ccode\u003E@FunctionalInterface\u003C\u002Fcode\u003E используется для указания того, что в интерфейсе не может быть более одного абстрактного метода. Если абстрактных методов будет больше одного, то компилятор выдаст ошибку. Функциональные интерфейсы появились в Java 8 для реализации лямбда-выражений и гарантии того, что в них не более одного абстрактного метода.\u003C\u002Fp\u003E\u003Cp\u003EНо и без аннотации \u003Ccode\u003E@FunctionalInterface\u003C\u002Fcode\u003E компилятор выдаст ошибку, если вы включите в интерфейс больше одного абстрактного метода. Так зачем же нужна необязательная аннотация \u003Ccode\u003E@FunctionalInterface\u003C\u002Fcode\u003E?\u003C\u002Fp\u003E\u003Cp\u003EДавайте рассмотрим следующий пример:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@FunctionalInterface\ninterface Print {\n  void printString(String testString);\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЕсли в интерфейс Print мы добавим еще один метод \u003Ccode\u003EprintString2()\u003C\u002Fcode\u003E, то компилятор или IDE выдаст ошибку.\u003C\u002Fp\u003E\u003Cp\u003EА что, если интерфейс Print находится в отдельном модуле и без аннотации \u003Ccode\u003E@FunctionalInterface\u003C\u002Fcode\u003E? Разработчики этого модуля могут легко добавить в интерфейс еще один метод и сломать ваш код. Добавив аннотацию \u003Ccode\u003E@FunctionalInterface\u003C\u002Fcode\u003E, мы сразу получим предупреждение в IDE:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003EMultiple non-overriding abstract methods found in interface com.reflectoring.Print\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПоэтому рекомендуется всегда использовать аннотацию \u003Ccode\u003E@FunctionalInterface\u003C\u002Fcode\u003E, если интерфейс должен использоваться в качестве лямбды.\u003C\u002Fp\u003E\u003Ch4\u003E@SafeVarargs\u003C\u002Fh4\u003E\u003Cp\u003EФункциональность varargs позволяет создавать методы с переменным количеством аргументов. До Java 5 единственной возможностью создания методов с необязательными параметрами было создание нескольких методов, каждый из которых с разным количеством параметров. Varargs позволяет создать один метод с переменным количеством параметров с помощью следующего синтаксиса:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E\u002F\u002F можно написать так:\nvoid printStrings(String... stringList)\n\n\u002F\u002F вместо этого мы делаем:\nvoid printStrings(String string1, String string2)\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EОднако при использовании в аргументах метода обобщенных типов выдаются предупреждения. Аннотация \u003Ccode\u003E@SafeVarargs\u003C\u002Fcode\u003E позволяет подавить их:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epackage com.reflectoring;\n\nimport java.util.Arrays;\nimport java.util.List;\n\npublic class SafeVarargsTest {\n\n   private void printString(String test1, String test2) {\n    System.out.println(test1);\n    System.out.println(test2);\n  }\n\n  private void printStringVarargs(String... tests) {\n    for (String test : tests) {\n      System.out.println(test);\n    }\n  }\n\n  private void printStringSafeVarargs(List&lt;String\u003E... testStringLists) {\n    for (List&lt;String\u003E testStringList : testStringLists) {\n      for (String testString : testStringList) {\n        System.out.println(testString);\n      }\n    }\n  }\n\n  public static void main(String[] args) {\n    SafeVarargsTest test = new SafeVarargsTest();\n\n    test.printString(\"String1\", \"String2\");\n    test.printString(\"*******\");\n\n    test.printStringVarargs(\"String1\", \"String2\");\n    test.printString(\"*******\");\n\n    List&lt;String\u003E testStringList1 = Arrays.asList(\"One\", \"Two\");\n    List&lt;String\u003E testStringList2 = Arrays.asList(\"Three\", \"Four\");\n\n    test.printStringSafeVarargs(testStringList1, testStringList2);\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EМетоды \u003Ccode\u003EprintString()\u003C\u002Fcode\u003E и \u003Ccode\u003EprintStringVarargs()\u003C\u002Fcode\u003E приводят к одинаковому результату. Но при компиляции для метода \u003Ccode\u003EprintStringSafeVarargs()\u003C\u002Fcode\u003E выдается предупреждение, поскольку в нем используются обобщенные типы:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Ejavac -Xlint:unchecked .\u002Fcom\u002Freflectoring\u002FSafeVarargsTest.java\n\n.\u002Fcom\u002Freflectoring\u002FSafeVarargsTest.java:28: warning: [unchecked] Possible heap pollution from parameterized vararg type List&lt;String\u003E\n  private void printStringSafeVarargs(List&lt;String\u003E... testStringLists) {\n                            ^\n.\u002Fcom\u002Freflectoring\u002FSafeVarargsTest.java:52: warning: [unchecked] unchecked generic array creation for varargs parameter of type List&lt;String\u003E[]\n    test.printStringSafeVarargs(testStringList1, testStringList2);\n                   ^\n2 warnings\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EДобавив аннотацию \u003Ccode\u003E@SafeVarargs\u003C\u002Fcode\u003E, мы можем избавиться от этого предупреждения:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@SafeVarargs\nprivate void printStringSafeVarargs(List&lt;String\u003E... testStringLists) {\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Ch3\u003EПользовательские аннотации\u003C\u002Fh3\u003E\u003Cp\u003EМы можем создавать свои аннотации, например, для реализации следующей функциональности:\u003C\u002Fp\u003E\u003Col\u003E\u003Cli\u003E\u003Cp\u003EУменьшение дублирования кода.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EАвтоматизация генерации бойлерплейт кода.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EОтлов ошибок во время компиляции, например, потенциальные Null Pointer Exception.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EНастройка поведения в рантайме на основе наличия аннотации.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Fol\u003E\u003Cp\u003EДля примера рассмотрим аннотацию \u003Ccode\u003E@Company\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Company{  \n  name=\"ABC\"\n  city=\"XYZ\"\n}\npublic class CustomAnnotatedEmployee { \n  ... \n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПри создании экземпляров класса \u003Ccode\u003ECustomAnnotatedEmployee\u003C\u002Fcode\u003E все экземпляры будут содержать одно и то же название компании (name) и города (city) — больше не нужно добавлять эту информацию в конструктор.\u003C\u002Fp\u003E\u003Cp\u003EСоздать пользовательскую аннотацию можно с помощью ключевого слова \u003Ccode\u003E@interface\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic @interface Company{\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЧтобы указать информацию об области действия аннотации и о типах элементов, к которым она может быть применена, используются мета-аннотации.\u003C\u002Fp\u003E\u003Cp\u003EНапример, чтобы указать, что аннотация применяется только к классам, используется аннотация \u003Ccode\u003E@Target(ElementType.TYPE)\u003C\u002Fcode\u003E. А мета-аннотация \u003Ccode\u003E@Retention(RetentionPolicy.RUNTIME)\u003C\u002Fcode\u003E указывает, что аннотация должна быть доступна в рантайме.\u003C\u002Fp\u003E\u003Cp\u003EС мета-аннотациями наша аннотация \u003Ccode\u003E@Company\u003C\u002Fcode\u003E выглядит следующим образом:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface Company{\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EДалее добавим атрибуты в нашу аннотацию: имя (\u003Ccode\u003Ename\u003C\u002Fcode\u003E) и город (\u003Ccode\u003Ecity\u003C\u002Fcode\u003E). Добавляем их, как показано ниже:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface Company{\n\tString name() default \"ABC\";\n\tString city() default \"XYZ\";\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EСоздадим класс \u003Ccode\u003ECustomAnnotatedEmployee\u003C\u002Fcode\u003E и применим к нему аннотацию \u003Ccode\u003E@Company\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Company\npublic class CustomAnnotatedEmployee {\n\n  private int id;\n  private String name;\n\n  public CustomAnnotatedEmployee(int id, String name) {\n    this.id = id;\n    this.name = name;\n  }\n\n  public void getEmployeeDetails(){\n    System.out.println(\"Employee Id: \" + id);\n    System.out.println(\"Employee Name: \" + name);\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПрочитать аннотацию \u003Ccode\u003E@Company\u003C\u002Fcode\u003E в рантайме можно следующим образом:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Eimport java.lang.annotation.Annotation;\n\npublic class TestCustomAnnotatedEmployee {\n\n  public static void main(String[] args) {\n\n    CustomAnnotatedEmployee employee = new CustomAnnotatedEmployee(1, \"John Doe\");\n    employee.getEmployeeDetails();\n\n    Annotation companyAnnotation = employee\n            .getClass()\n            .getAnnotation(Company.class);\n    Company company = (Company)companyAnnotation;\n\n    System.out.println(\"Company Name: \" + company.name());\n    System.out.println(\"Company City: \" + company.city());\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EРезультат будет следующий:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode\u003EEmployee Id: 1\nEmployee Name: John Doe\nCompany Name: ABC\nCompany City: XYZ\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EАнализируя аннотацию в рантайме, мы можем получить доступ к некоторой общей информации обо всех сотрудниках и избежать дублирования кода.\u003C\u002Fp\u003E\u003Ch3\u003EМета-аннотации\u003C\u002Fh3\u003E\u003Cp\u003EМета-аннотации — это аннотации, применяемые к другим аннотациям для предоставления информации об аннотации компилятору или среде выполнения.\u003C\u002Fp\u003E\u003Cp\u003EМета-аннотации могут ответить на следующие вопросы об аннотации:\u003C\u002Fp\u003E\u003Col\u003E\u003Cli\u003E\u003Cp\u003EМожет ли аннотация наследоваться дочерними классами?\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EДолжна ли аннотация отображаться в документации?\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EМожно ли применить аннотацию несколько раз к одному и тому же элементу?\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EК какому типу элементов можно применить аннотацию: к классу, методу, полю и т.д.?\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EОбрабатывается ли аннотация во время компиляции или в рантайме?\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Fol\u003E\u003Ch4\u003E@Inherited\u003C\u002Fh4\u003E\u003Cp\u003EПо умолчанию аннотация не наследуется от родительского класса к дочернему. Мета-аннотация \u003Ccode\u003E@Inherited\u003C\u002Fcode\u003E позволяет ей наследоваться:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Inherited\n@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface Company{\n  String name() default \"ABC\";\n  String city() default \"XYZ\";\n}\n\n@Company\npublic class CustomAnnotatedEmployee {\n\n  private int id;\n  private String name;\n\n  public CustomAnnotatedEmployee(int id, String name) {\n    this.id = id;\n    this.name = name;\n  }\n\n  public void getEmployeeDetails(){\n    System.out.println(\"Employee Id: \" + id);\n    System.out.println(\"Employee Name: \" + name);\n  }\n}\n\npublic class CustomAnnotatedManager extends CustomAnnotatedEmployee{\n  public CustomAnnotatedManager(int id, String name) {\n    super(id, name);\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПоскольку \u003Ccode\u003ECustomAnnotatedEmployee\u003C\u002Fcode\u003E аннотирован \u003Ccode\u003E@Company\u003C\u002Fcode\u003E, а \u003Ccode\u003ECustomAnnotatedManager\u003C\u002Fcode\u003E наследуется от него, то нет необходимости ставить аннотацию на класс \u003Ccode\u003ECustomAnnotatedManager\u003C\u002Fcode\u003E.\u003C\u002Fp\u003E\u003Cp\u003EДавайте проверим это.\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class TestCustomAnnotatedManager {\n\n  public static void main(String[] args) {\n    CustomAnnotatedManager manager = new CustomAnnotatedManager(1, \"John Doe\");\n    manager.getEmployeeDetails();\n\n    Annotation companyAnnotation = manager\n            .getClass()\n            .getAnnotation(Company.class);\n    Company company = (Company)companyAnnotation;\n\n    System.out.println(\"Company Name: \" + company.name());\n    System.out.println(\"Company City: \" + company.city());\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EАннотация \u003Ccode\u003E@Company\u003C\u002Fcode\u003E доступна, хотя мы не указывали ее явно для класса \u003Ccode\u003EManager\u003C\u002Fcode\u003E.\u003C\u002Fp\u003E\u003Ch4\u003E@Documented\u003C\u002Fh4\u003E\u003Cp\u003E@Documented указывает, что аннотация должна присутствовать в JavaDoc.\u003C\u002Fp\u003E\u003Cp\u003EПо умолчанию информация об аннотациях не отображается в JavaDoc-документации, но если использовать @Documented, она появится:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Inherited\n@Documented\n@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface Company{\n  String name() default \"ABC\";\n  String city() default \"XYZ\";\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Ch4\u003E@Repeatable\u003C\u002Fh4\u003E\u003Cp\u003E\u003Ccode\u003E@Repeatable\u003C\u002Fcode\u003E позволяет использовать аннотацию несколько раз на одном методе, классе или поле. Для использования \u003Ccode\u003E@Repeatable\u003C\u002Fcode\u003E — аннотации необходимо создать аннотацию-контейнер, которая хранит значение в виде массива исходных аннотаций:}\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Target(ElementType.TYPE)\n@Repeatable(RepeatableCompanies.class)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface RepeatableCompany {\n  String name() default \"Name_1\";\n  String city() default \"City_1\";\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface RepeatableCompanies {\n  RepeatableCompany[] value() default{};\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EИспользовать аннотацию можно следующим образом:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@RepeatableCompany\n@RepeatableCompany(name =  \"Name_2\", city = \"City_2\")\npublic class RepeatedAnnotatedEmployee {\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПротестируем:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class TestRepeatedAnnotation {\n\n  public static void main(String[] args) {\n\n    RepeatableCompany[] repeatableCompanies = RepeatedAnnotatedEmployee.class\n            .getAnnotationsByType(RepeatableCompany.class);\n    for (RepeatableCompany repeatableCompany : repeatableCompanies) {\n      System.out.println(\"Name: \" + repeatableCompany.name());\n      System.out.println(\"City: \" + repeatableCompany.city());\n    }\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПолучим следующий результат, отображающий значение нескольких аннотаций \u003Ccode\u003E@RepeatableCompany\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode\u003EName: Name_1\nCity: City_1\nName: Name_2\nCity: City_2\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Ch4\u003E@Target\u003C\u002Fh4\u003E\u003Cp\u003E\u003Ccode\u003E@Target\u003C\u002Fcode\u003E определяет типы элементов, к которым может применяться аннотация. Например, в приведенном выше примере аннотация \u003Ccode\u003E@Company\u003C\u002Fcode\u003E была определена как TYPE, и поэтому может быть применена только к классам.\u003C\u002Fp\u003E\u003Cp\u003EДавайте попробуем применить аннотацию \u003Ccode\u003E@Company\u003C\u002Fcode\u003E к методу:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Company\npublic class Employee {\n\n  @Company\n  public void getEmployeeStatus(){\n    System.out.println(\"This is the Base Employee class\");\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EВ этом случае мы получим ошибку компилятора: \u003Ccode\u003E@Company\u003C\u002Fcode\u003E \u003Ccode\u003Enot applicable to method\u003C\u002Fcode\u003E.\u003C\u002Fp\u003E\u003Cp\u003EСуществуют следующие типы целей, названия которых говорят сами за себя:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003EElementType.ANNOTATION_TYPE\u003C\u002Fcode\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003EElementType.CONSTRUCTOR\u003C\u002Fcode\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003EElementType.FIELD\u003C\u002Fcode\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003EElementType.LOCAL_VARIABLE\u003C\u002Fcode\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003EElementType.METHOD\u003C\u002Fcode\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003EElementType.PACKAGE\u003C\u002Fcode\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003EElementType.PARAMETER\u003C\u002Fcode\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003EElementType.TYPE\u003C\u002Fcode\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Ch4\u003E@Retention\u003C\u002Fh4\u003E\u003Cp\u003E\u003Ccode\u003E@Retention\u003C\u002Fcode\u003E указывает, когда аннотация будет доступна:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003ESOURCE\u003C\u002Fcode\u003E — аннотация доступна в исходном коде и удаляется после компиляции.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003ECLASS\u003C\u002Fcode\u003E — аннотация сохраняется в class-файле во время компиляции, но недоступна при выполнении программы.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ccode\u003ERUNTIME\u003C\u002Fcode\u003E — аннотация доступна в рантайме.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003EЕсли аннотация нужна только для проверки ошибок во время компиляции, как это делает \u003Ccode\u003E@Override\u003C\u002Fcode\u003E, мы используем SOURCE. Если аннотация нужна для обеспечения функциональности в рантайме, например, \u003Ccode\u003E@Test\u003C\u002Fcode\u003E в JUnit, то используем RUNTIME. Давайте поэкспериментируем с разными значениями \u003Ccode\u003ERetentionPolicy\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.CLASS)\npublic @interface ClassRetention {\n}\n\n@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.SOURCE)\npublic @interface SourceRetention {\n}\n\n@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface RuntimeRetention {\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EСоздадим класс, который использует все три аннотации:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@SourceRetention\n@RuntimeRetention\n@ClassRetention\npublic class EmployeeRetentionAnnotation {\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EДля проверки доступности аннотаций запустите следующий код:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class RetentionTest {\n\n  public static void main(String[] args) {\n\n    SourceRetention[] sourceRetention = new EmployeeRetentionAnnotation()\n            .getClass()\n            .getAnnotationsByType(SourceRetention.class);\n    System.out.println(\"Source Retentions at runtime: \" + sourceRetention.length);\n\n    RuntimeRetention[] runtimeRetention = new EmployeeRetentionAnnotation()\n            .getClass()\n            .getAnnotationsByType(RuntimeRetention.class);\n    System.out.println(\"Runtime Retentions at runtime: \" + runtimeRetention.length);\n\n    ClassRetention[] classRetention = new EmployeeRetentionAnnotation()\n            .getClass()\n            .getAnnotationsByType(ClassRetention.class);\n    System.out.println(\"Class Retentions at runtime: \" + classRetention.length);\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EРезультат будет следующим:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003ESource Retentions at runtime: 0\nRuntime Retentions at runtime: 1\nClass Retentions at runtime: 0\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EИтак, мы убедились, что в рантайме доступна только RUNTIME-аннотация.\u003C\u002Fp\u003E\u003Ch3\u003EКлассификация аннотаций\u003C\u002Fh3\u003E\u003Cp\u003EАннотации можно классифицировать по количеству передаваемых в них параметров: без параметров, с одним параметром и с несколькими параметрами.\u003C\u002Fp\u003E\u003Ch4\u003EМаркерные аннотации\u003C\u002Fh4\u003E\u003Cp\u003EМаркерные аннотации не содержат никаких членов или данных. Для определения наличия аннотации можно использовать метод \u003Ccode\u003EisAnnotationPresent()\u003C\u002Fcode\u003E.\u003C\u002Fp\u003E\u003Cp\u003EНапример, если бы у нашей компании было несколько клиентов с разными способами передачи данных, мы могли бы аннотировать класс аннотацией, указывающей способ передачи данных:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface CSV {\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EКласс \u003Ccode\u003EClient\u003C\u002Fcode\u003E может использовать аннотацию следующим образом:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@CSV\npublic class XYZClient {\n    ...\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EОбработать аннотацию можно следующим образом:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class TestMarkerAnnotation {\n\n  public static void main(String[] args) {\n\n  XYZClient client = new XYZClient();\n  Class clientClass = client.getClass();\n\n    if (clientClass.isAnnotationPresent(CSV.class)){\n        System.out.println(\"Write client data to CSV.\");\n    } else {\n        System.out.println(\"Write client data to Excel file.\");\n    }\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EНа основании присутствия аннотации \u003Ccode\u003E@CSV\u003C\u002Fcode\u003E, мы можем решить, куда записать информацию — в CSV или в файл Excel. Приведенная выше программа выдаст следующий результат:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode\u003EWrite client data to CSV.\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Ch4\u003EАннотации с одним значением\u003C\u002Fh4\u003E\u003Cp\u003EАннотации с одним значением содержат только один атрибут, который принято называть value.\u003C\u002Fp\u003E\u003Cp\u003EДавайте создадим аннотацию \u003Ccode\u003ESingleValueAnnotationCompany\u003C\u002Fcode\u003E с одним атрибутом \u003Ccode\u003Evalue\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface SingleValueAnnotationCompany {\n  String value() default \"ABC\";\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EСоздайте класс, использующий аннотацию:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@SingleValueAnnotationCompany(\"XYZ\")\npublic class SingleValueAnnotatedEmployee {\n\n  private int id;\n  private String name;\n\n  public SingleValueAnnotatedEmployee(int id, String name) {\n    this.id = id;\n    this.name = name;\n  }\n\n  public void getEmployeeDetails(){\n    System.out.println(\"Employee Id: \" + id);\n    System.out.println(\"Employee Name: \" + name);\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЗапустите следующий пример:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class TestSingleValueAnnotatedEmployee {\n\n  public static void main(String[] args) {\n    SingleValueAnnotatedEmployee employee = new SingleValueAnnotatedEmployee(1, \"John Doe\");\n    employee.getEmployeeDetails();\n\n    Annotation companyAnnotation = employee\n            .getClass()\n            .getAnnotation(SingleValueAnnotationCompany.class);\n    SingleValueAnnotationCompany company = (SingleValueAnnotationCompany)companyAnnotation;\n\n    System.out.println(\"Company Name: \" + company.value());\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПереданное значение \"XYZ\" переопределяет значение атрибута аннотации по умолчанию. Результат выглядит следующим образом:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode\u003EEmployee Id: 1\nEmployee Name: John Doe\nCompany Name: XYZ\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Ch4\u003EПолные аннотации\u003C\u002Fh4\u003E\u003Cp\u003EОни состоят из нескольких пар \"имя-значение\". Например, \u003Ccode\u003ECompany(name = \"ABC\", city = \"XYZ\")\u003C\u002Fcode\u003E. Рассмотрим наш исходный пример Company:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Target(ElementType.TYPE)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface Company{\n  String name() default \"ABC\";\n  String city() default \"XYZ\";\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EДавайте создадим класс \u003Ccode\u003EMultiValueAnnotatedEmployee\u003C\u002Fcode\u003E со значением параметров, как показано ниже. Значения по умолчанию будут перезаписаны.\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Company(name = \"AAA\", city = \"ZZZ\")\npublic class MultiValueAnnotatedEmployee {\n  \n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЗапустите следующий пример:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class TestMultiValueAnnotatedEmployee {\n\n  public static void main(String[] args) {\n\n    MultiValueAnnotatedEmployee employee = new MultiValueAnnotatedEmployee();\n\n    Annotation companyAnnotation = employee.getClass().getAnnotation(Company.class);\n    Company company = (Company)companyAnnotation;\n\n    System.out.println(\"Company Name: \" + company.name());\n    System.out.println(\"Company City: \" + company.city());\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EРезультат:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode\u003ECompany Name: AAA\nCompany City: ZZZ\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Ch3\u003EПрактический пример\u003C\u002Fh3\u003E\u003Cp\u003EВ качестве практического примера обработки аннотаций напишем простой аналог аннотации \u003Ccode\u003E@Test\u003C\u002Fcode\u003E из JUnit. Пометив методы аннотацией \u003Ccode\u003E@Test\u003C\u002Fcode\u003E, мы сможем определить в рантайме, какие методы тестового класса нужно запускать как тесты.\u003C\u002Fp\u003E\u003Cp\u003EСначала создадим маркерную аннотацию для методов-тестов:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003E@Retention(RetentionPolicy.RUNTIME)\n@Target(ElementType.METHOD) \npublic @interface Test {\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EДалее создадим класс \u003Ccode\u003EAnnotatedMethods\u003C\u002Fcode\u003E, в котором применим аннотацию \u003Ccode\u003E@Test\u003C\u002Fcode\u003E к методу \u003Ccode\u003Etest1()\u003C\u002Fcode\u003E. Это позволит выполнить метод в рантайме. У метода \u003Ccode\u003Etest2()\u003C\u002Fcode\u003E аннотации нет и он не должен выполняться.\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Epublic class AnnotatedMethods {\n\n  @Test\n  public void test1() {\n    System.out.println(\"This is the first test\");\n  }\n\n  public void test2() {\n    System.out.println(\"This is the second test\");\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EТеперь напишем код для запуска тестов из класса \u003Ccode\u003EAnnotatedMethods\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"java\"\u003Eimport java.lang.annotation.Annotation;\nimport java.lang.reflect.Method;\n\npublic class TestAnnotatedMethods {\n\n  public static void main(String[] args) throws Exception {\n\n    Class&lt;AnnotatedMethods\u003E annotatedMethodsClass = AnnotatedMethods.class;\n\n    for (Method method : annotatedMethodsClass.getDeclaredMethods()) {\n\n      Annotation annotation = method.getAnnotation(Test.class);\n      Test test = (Test) annotation;\n\n      \u002F\u002F If the annotation is not null\n      if (test != null) {\n\n        try {\n          method.invoke(annotatedMethodsClass\n                  .getDeclaredConstructor()\n                  .newInstance());\n        } catch (Throwable ex) {\n          System.out.println(ex.getCause());\n        }\n\n      }\n    }\n  }\n}\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЧерез метод \u003Ccode\u003EgetDeclaredMethods()\u003C\u002Fcode\u003E мы получаем методы класса \u003Ccode\u003EAnnotatedMethods\u003C\u002Fcode\u003E. Затем перебираем методы и проверяем, аннотирован ли метод аннотацией \u003Ccode\u003E@Test\u003C\u002Fcode\u003E. Наконец, выполняем вызов методов, которые были аннотированы с помощью \u003Ccode\u003E@Test\u003C\u002Fcode\u003E.\u003C\u002Fp\u003E\u003Cp\u003EВ результате метод \u003Ccode\u003Etest1()\u003C\u002Fcode\u003E выполнится, поскольку он аннотирован \u003Ccode\u003E@Test\u003C\u002Fcode\u003E, а \u003Ccode\u003Etest2()\u003C\u002Fcode\u003E нет, так как он без аннотации \u003Ccode\u003E@Test\u003C\u002Fcode\u003E.\u003C\u002Fp\u003E\u003Cp\u003EРезультат:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode\u003EThis is the first test\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Ch3\u003EЗаключение\u003C\u002Fh3\u003E\u003Cp\u003EМы сделали обзор основных стандартных аннотаций и рассмотрели, как создавать и обрабатывать свои аннотации.\u003C\u002Fp\u003E\u003Cp\u003EВозможностей по использованию аннотаций гораздо больше, чем мы рассмотрели. Например, можно автоматически генерировать код для паттерна Builder. Шаблон проектирования Builder (строитель) используется как альтернатива конструкторам, когда в конструкторы передается много параметров или есть необходимость в нескольких конструкторах с необязательными параметрами. При большом количестве таких классов  возможность генерации кода обработчиком аннотаций сэкономит много времени и поможет избежать дублирования кода.\u003C\u002Fp\u003E\u003Cp\u003EПримеры кода вы можете найти на \u003Ca href=\"https:\u002F\u002Fgithub.com\u002Fthombergs\u002Fcode-examples\u002Ftree\u002Fmaster\u002Fcore-java\u002Fannotation-processing\u002Fintroduction-to-annotations\"\u003E\u003Cu\u003EGitHub\u003C\u002Fu\u003E\u003C\u002Fa\u003E.\u003C\u002Fp\u003E\u003Chr\u002F\u003E\u003Cp\u003EВсех желающих приглашаем на Demo-занятие «Объектно-ориентированное и функциональное программирование». На вебинаре поговорим о стилях программирования и необходимости каждого из них. Разберём основные принципы объектно-ориентированного стиля (Инкапсуляция, Наследование, Полиморфизм), а также возможности функционального стиля, которые предоставляет язык Java. Регистрация для всех желающих по \u003Ca href=\"https:\u002F\u002Fotus.pw\u002F4LCJ\u002F\"\u003E\u003Cstrong\u003Eссылке.\u003C\u002Fstrong\u003E\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","tags":[{"titleHtml":"java"},{"titleHtml":"Аннотации в Java"},{"titleHtml":"ООП"},{"titleHtml":"функциональное программирование"}],"metadata":{"stylesUrls":[],"scriptUrls":[],"shareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc1d\u002F8d6\u002Fd1e\u002Fc1d8d6d1e880ba73218b3240c9e37232.png","shareImageWidth":1200,"shareImageHeight":630,"vkShareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc1d\u002F8d6\u002Fd1e\u002Fc1d8d6d1e880ba73218b3240c9e37232.png","schemaJsonLd":"{\"@context\":\"http:\\\u002F\\\u002Fschema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Fotus\\\u002Fblog\\\u002F655239\\\u002F\"},\"headline\":\"Аннотации в Java и их обработка\",\"datePublished\":\"2022-03-11T18:32:02+03:00\",\"dateModified\":\"2022-03-11T20:50:26+03:00\",\"author\":{\"@type\":\"Person\",\"name\":\"KatMot\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Habr\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fwebt\\\u002Fa_\\\u002Flk\\\u002F9m\\\u002Fa_lk9mjkccjox-zccjrpfolmkmq.png\"}},\"description\":\"Аннотация &mdash; это специальная конструкция языка, связанная с классом, методом или переменной, предоставляющая программе дополнительную информацию, на основе которо...\",\"url\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Fotus\\\u002Fblog\\\u002F655239\\\u002F#post-content-body\",\"about\":[\"c_otus\",\"h_java\",\"f_develop\"],\"image\":[\"https:\\\u002F\\\u002Fhabr.com\\\u002Fshare\\\u002Fpublication\\\u002F655239\\\u002F60e67bf1a4a533a4e34559a70d841fb4\\\u002F\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fc1d\\\u002F8d6\\\u002Fd1e\\\u002Fc1d8d6d1e880ba73218b3240c9e37232.png\"]}","metaDescription":"Аннотация — это специальная конструкция языка, связанная с классом, методом или переменной, предоставляющая программе дополнительную информацию, на основе которой программа может предпринять...","mainImageUrl":null,"amp":true,"customTrackerLinks":[]},"polls":[],"commentsEnabled":true,"rulesRemindEnabled":false,"votesEnabled":true,"status":"published","plannedPublishTime":null,"checked":null,"isEditorial":false}},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[],"hubs":""},"comments":{"articleComments":{"655239":{"refs":{},"root":[]}},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{"isCanComment":false,"cantCommentReasonKey":"AUTH_REQUIRED","cantCommentReason":"Authorization required","data":null},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":"","moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":false,"featurer":null,"megaposts":null,"promoLinks":null,"promoPosts":null},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

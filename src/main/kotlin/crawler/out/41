@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Разработка игры на Unity с нуля до релиза. Часть 2 / Комментарии / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" itemprop="image" content="/img/habr_ru.png" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="/img/habr_ru.png" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="/img/habr_ru.png" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="/img/habr_ru.png" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="/img/habr_ru.png?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" property="og:type" content="website" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:title" content="Хабр" data-vmid="og:title">
+  <meta data-vue-meta="ssr" property="og:url" content="https://habr.com/ru/post/655261/comments/" data-vmid="og:url"> 
+  <link data-vue-meta="ssr" image_src="image" href="/img/habr_ru.png" data-vmid="image:href">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/655261/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/post/655261/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" data-vmid="hreflang"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> <!----> <a href="https://effect.habr.com/a/1RZvxMiMrAoqyWyIvV6xtgBSdtkQVE1-VPLH0TjBQK9SUpI43eWCa9FU8SXZ71hRMELv4VHD041bQU3J4V5vCdtfG03cJTqC1BR7RWLPfpuovR0S" target="_blank" class="tm-top-link" style="color:#99ddff;"> Основы основ финтеха </a> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div hl="ru" data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <!----> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <article class="tm-article-comments__article-body">
+            <div class="tm-article-comments__article-snippet">
+             <div class="tm-article-snippet">
+              <div class="tm-article-snippet__meta-container">
+               <div class="tm-article-snippet__meta">
+                <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/ValterGames/" title="ValterGames" class="tm-user-info__userpic">
+                  <div class="tm-entity-image">
+                   <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/7a4/158/c4e/7a4158c4e0d1840bda3c7f4289f15f63.png" width="24" class="tm-entity-image__pic">
+                  </div></a> <span class="tm-user-info__user"><a href="/ru/users/ValterGames/" class="tm-user-info__username"> ValterGames </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T17:37:44.000Z" title="2022-03-11, 20:37">вчера в 20:37</time></span>
+               </div> <!---->
+              </div> 
+              <h1 class="tm-article-snippet__title tm-article-snippet__title_h1"><a href="/ru/post/655261/" data-article-link="" class="tm-article-snippet__title-link router-link-active"><span>Разработка игры на Unity с нуля до релиза. Часть 2</span></a></h1> 
+              <div class="tm-article-snippet__hubs">
+               <span class="tm-article-snippet__hubs-item"><a href="/ru/hub/gamedev/" class="tm-article-snippet__hubs-item-link"><span>Разработка игр</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/unity/" class="tm-article-snippet__hubs-item-link"><span>Unity</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span>
+              </div> 
+              <div class="tm-article-snippet__labels">
+               <div class="tm-article-snippet__label tm-article-snippet__label_variant-tutorial">
+                <span> Tutorial </span>
+               </div>
+              </div> <!----> <!---->
+             </div> 
+             <div class="tm-data-icons">
+              <!----> 
+              <div class="tm-votes-meter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                <title>Всего голосов 2: ↑2 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+               </svg> <span title="Всего голосов 2: ↑2 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+2</span>
+              </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+               </svg> <span class="tm-icon-counter__value">633</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                 <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 9 </span></button> 
+              <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+               <a href="/ru/post/655261/comments/" aria-current="page" class="tm-article-comments-counter-link__link">
+                <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                 <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                </svg> <span class="tm-article-comments-counter-link__value"> 0 </span></a> <!---->
+              </div> <!----> 
+              <div class="v-portal" style="display:none;"></div>
+             </div>
+            </div>
+           </article> 
+           <div class="tm-ad-banner__container tm-article-comments__top-banner">
+            <!----> 
+            <div id="commentsBanner25302" class="tm-ad-banner tm-ad-banner_variant-leaderboard"></div>
+           </div> 
+           <div data-async-called="true" class="tm-article-comments-offloaded">
+            <div class="tm-article-comments">
+             <div class="tm-comments-wrapper">
+              <div class="tm-comments-wrapper__wrapper">
+               <header class="tm-comments-wrapper__header">
+                <h2 class="tm-comments-wrapper__title"> Комментарии <!----></h2> 
+                <div class="tm-comments-wrapper__header-aside">
+                 <!----> <button class="tm-rss-button tm-rss-button_comments-header"><span class="tm-svg-icon__wrapper tm-rss-button__icon">
+                   <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+                    <title>Скопировать ссылку на RSS</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#rss"></use>
+                   </svg></span></button> <!---->
+                </div>
+               </header> 
+               <div class="tm-comments-wrapper__inner"> 
+                <div class="tm-comments__empty">
+                 <span>Здесь пока нет ни одного комментария, вы&nbsp;можете&nbsp;стать&nbsp;первым!</span>
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div>
+              </div> 
+              <div class="tm-notice tm-comments__comment-notice tm-notice_positive">
+               <!----> 
+               <div class="tm-notice__inner">
+                <!----> 
+                <div class="tm-notice__content">
+                 <span>Только полноправные пользователи могут оставлять комментарии. <a rel="nofollow" href="/kek/v1/auth/habrahabr/?back=/ru/post/655261/comments/&amp;hl=ru">Войдите</a>, пожалуйста.</span>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div> <!----> 
+           <section class="tm-block tm-block_spacing-around">
+            <header class="tm-block__header">
+             <h2 class="tm-block__title">Минуточку внимания</h2> 
+             <div class="tm-block__header-aside">
+              <a href="https://tmtm.ru/megapost/" target="_blank" class="tm-block-extralink"> Разместить </a>
+             </div>
+            </header> 
+            <div class="tm-block__body">
+             <div pagination="" slides-per-view="1" class="tm-promo-block__content-wrapper">
+              <div class="tm-promo-block__item-wrapper">
+               <a href="https://effect.habr.com/a/6GZ9RZ3OGMYXtb0khbQ2rlGXzM049Wt2lfGboGbUXBxaFubLEzd4NFuRLqP2HIafyq_tu6A5nf5TjLn3U9giFntPgptLpIBLOf4GhI_OMnv50j4n02e6lXVsM80CxaQrwF-R7HZp7IUNoSoyJ_aZ3BU1d4wgySE" rel="nofollow sponsored" class="tm-promo-block__item tm-article-title__link">
+                <header class="tm-promo-block__head">
+                 <div class="tm-promo-block__image-wrapper">
+                  <img alt="" src="https://effect.habr.com/a/4Q2xxp5OPxB6TrOZXqCEPge44dgExVyMQc1YuL7-ZdBlsCMfPsjHnhVoXkLq4xeE30PKIPAveEQHXwKAhCHnHm_Wq0_XEquq-ZjnUCMI6D6bP07BWdWEfjtrmc-8Ryj41mZFjLvrBsSRdPfVIVCbl_c-9tkGDfvehBmSnU13n4dGc40TOYn91H29UcNNeNLFfLcDQ5B07LwG5LIN" class="tm-promo-block__image">
+                 </div> 
+                 <div class="tm-promo-block__label">
+                   Промо 
+                  <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 11 11" class="tm-block-promo__external">
+                   <path fill="currentColor" d="M7.5 0a.5.5 0 000 1h1.793L5.146 5.146a.5.5 0 10.708.708L10 1.707V3.5a.5.5 0 001 0v-3a.5.5 0 00-.5-.5h-3zm-7 1a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h9a.5.5 0 00.5-.5V6a.5.5 0 00-1 0v4H1V2h4a.5.5 0 000-1H.5z"></path>
+                  </svg>
+                 </div>
+                </header> 
+                <div class="tm-promo-block__info">
+                 <h3 class="tm-promo-block__title">Красивое: смотрим тренды рынка труда в IT вместе с вами</h3>
+                </div></a>
+              </div>
+              <div class="tm-promo-block__item-wrapper">
+               <a href="https://effect.habr.com/a/6XGzQ8llPccJFaQhs5bxMRxHcjEsfo0DUKgNwFXpRrfJtR5s8KiQyLDAjNezkx9wZlvz1nD23ELf8M-1JQK8-4HgJPKSe3Xe2fzW3RnC2635m_Kuc0tB9zi8o-0QM9S3urTLUKa63SUFp8UJ4awS" rel="nofollow sponsored" class="tm-promo-block__item tm-article-title__link">
+                <header class="tm-promo-block__head">
+                 <div class="tm-promo-block__image-wrapper">
+                  <img alt="" src="https://effect.habr.com/a/MVlg0bU1hxlkFuOarCIrFETW7AG5hHkRQN-jvBUI2QkHNU2elEzwnZ0iAYXG2M0f2S6zf9Fq52ukGzklz2A3d95_hqczq-9ywji6pVjR9U5ZwYQau3rbGVEfziEgA1wCF6uO-67k6iOx_9wUQfPz9Hl02MhO9wb0w-RguM5HybQGIJmS9i6-KAXj6ZK-LYEjtWsuEg" class="tm-promo-block__image">
+                 </div> 
+                 <div class="tm-promo-block__label">
+                   Опрос 
+                  <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 11 11" class="tm-block-promo__external">
+                   <path fill="currentColor" d="M7.5 0a.5.5 0 000 1h1.793L5.146 5.146a.5.5 0 10.708.708L10 1.707V3.5a.5.5 0 001 0v-3a.5.5 0 00-.5-.5h-3zm-7 1a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h9a.5.5 0 00.5-.5V6a.5.5 0 00-1 0v4H1V2h4a.5.5 0 000-1H.5z"></path>
+                  </svg>
+                 </div>
+                </header> 
+                <div class="tm-promo-block__info">
+                 <h3 class="tm-promo-block__title">Хотите рассказать о себе в наших социальных сетях?</h3>
+                </div></a>
+              </div>
+              <div class="tm-promo-block__item-wrapper">
+               <a href="https://effect.habr.com/a/1K8z78opzGnGHHTZ7OjrP0UfLJ2LVQGMteyd-cx-ZH4gpEauL_PqnB--6gPnU58tEwuN00cuKnMgL6Z-JbW5kVFFxDigIvFw2WNOgQNnzFqbLBspUocbrUkIlHcOp3ZnOxyfN_D3i96SeYwJQU7fPg" rel="nofollow " class="tm-promo-block__item tm-article-title__link">
+                <header class="tm-promo-block__head">
+                 <div class="tm-promo-block__image-wrapper">
+                  <img alt="" src="https://effect.habr.com/a/-G7AcwcJYMOE5O5kn7a8DilAcRQvCOfR24uXhmTjmmWyDh8mn5OfEWbotlSf-imgXJcDjieZesK52OWpimpu3zxkVYFBnt-j0H3so34vpr8pCQKPAt-bLfABe9z1oOYNlNPlkSZ3H5rvzES1Vl_phuKqqJW4JlhdEEvvmzbYSP9_IXZ7RszsCSQpkXS2Slsy4or6gBIe9qTVrIMoTt3N" class="tm-promo-block__image">
+                 </div> 
+                 <div class="tm-promo-block__label">
+                   Событие <!---->
+                 </div>
+                </header> 
+                <div class="tm-promo-block__info">
+                 <h3 class="tm-promo-block__title">Неделе фронтендеров на Хабр Карьере </h3>
+                </div></a>
+              </div>
+             </div>
+            </div> <!---->
+           </section>
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div hl="ru" id="655261" class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__ads tm-layout-sidebar__ads_initial">
+            <div class="tm-ad-banner__container tm-layout-sidebar__banner tm-layout-sidebar__banner_top">
+             <!----> 
+             <div id="sidebarBanner25303" class="tm-ad-banner tm-ad-banner_variant-half-page"></div>
+            </div>
+           </div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> 
+            <div class="tm-ad-banner__container tm-layout-sidebar__banner tm-layout-sidebar__banner_bottom">
+             <!----> 
+             <div id="sidebarBannerBottom25304" class="tm-ad-banner tm-ad-banner_variant-medium-rectangle"></div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/post/655261/comments/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/post/655261/comments/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"655261":{"id":"655261","timePublished":"2022-03-11T17:37:44+00:00","isCorporative":false,"lang":"ru","titleHtml":"Разработка игры на Unity с нуля до релиза. Часть 2","leadData":{"textHtml":"\u003Cp\u003EПриветствую Хабр! 👋\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003E«Разработка игры с нуля до релиза»\u003C\u002Fstrong\u003E - это серии статьей, где я покажу, как создать свою игру с самого нуля до публикации в Google Play и Itch.io на ОС GNU\\Linux. Часть 2\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Faa7\u002F840\u002F20f\u002Faa784020f2fd3afa2fc045cb7458f6c0.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Faa7\u002F840\u002F20f\u002Faa784020f2fd3afa2fc045cb7458f6c0.png","fit":"cover","positionY":0,"positionX":0}},"editorVersion":"2.0","postType":"article","postLabels":[{"type":"tutorial","data":null}],"author":{"scoreStats":{"score":52,"votesCount":56},"rating":10,"relatedData":null,"contacts":[],"authorContacts":[],"paymentDetails":{"paymentYandexMoney":null,"paymentPayPalMe":null,"paymentWebmoney":null},"id":"2840263","alias":"ValterGames","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F7a4\u002F158\u002Fc4e\u002F7a4158c4e0d1840bda3c7f4289f15f63.png","speciality":"Gamedeveloper"},"statistics":{"commentsCount":0,"favoritesCount":9,"readingCount":633,"score":2,"votesCount":2},"hubs":[{"relatedData":null,"id":"7773","alias":"gamedev","type":"collective","title":"Разработка игр","titleHtml":"Разработка игр","isProfiled":true},{"relatedData":null,"id":"17831","alias":"unity","type":"collective","title":"Unity","titleHtml":"Unity","isProfiled":true}],"flows":[{"id":"1","alias":"develop","title":"Разработка"}],"relatedData":null,"textHtml":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Ch2\u003EЧасть 2. Работа с Unity\u003C\u002Fh2\u003E\u003Cp\u003EПриветствую Хабр! 👋\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003E«Разработка игры с нуля до релиза»\u003C\u002Fstrong\u003E - это серии статьей, где я покажу, как создать свою игру с самого нуля до публикации в Google Play и Itch.io на ОС GNU\\Linux. \u003C\u002Fp\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fpost\u002F654525\u002F\" rel=\"noopener noreferrer nofollow\"\u003EВ прошлой части\u003C\u002Fa\u003E я показал, как установить Unity, Rider и GitHub Desktop и как настроить их. В этой же статье мы полностью уделим внимание Unity. Я расскажу где что находится и покажу как настроить Build под Android для дальнейшей публикации.\u003C\u002Fp\u003E\u003Ch3\u003E2.1 Создание проекта\u003C\u002Fh3\u003E\u003Cp\u003EПерейдём во вкладку Projects   \u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc25\u002F125\u002Fd56\u002Fc25125d56962a8bdd12e1bf0a2f4e413.png\" width=\"977\" height=\"628\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc25\u002F125\u002Fd56\u002Fc25125d56962a8bdd12e1bf0a2f4e413.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EНажимаем New и выбираем тип, имя, местоположение проекта\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Ff06\u002Fc71\u002Fde2\u002Ff06c71de20c0b135a6ea520095b06bea.png\" width=\"979\" height=\"632\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Ff06\u002Fc71\u002Fde2\u002Ff06c71de20c0b135a6ea520095b06bea.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F9b2\u002Fd80\u002F991\u002F9b2d8099137b90107994b4753937b864.png\" width=\"1032\" height=\"661\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F9b2\u002Fd80\u002F991\u002F9b2d8099137b90107994b4753937b864.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EПосле создания проекта, вы будете наблюдать следующую картину:\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F7ff\u002F2d4\u002F2ea\u002F7ff2d42ea164f712d9737297c22e7a90.png\" width=\"2489\" height=\"1412\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F7ff\u002F2d4\u002F2ea\u002F7ff2d42ea164f712d9737297c22e7a90.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EПредлагаюсь пройтись по основным окнам:\u003C\u002Fp\u003E\u003Ch4\u003EScene\u003C\u002Fh4\u003E\u003Cp\u003EЗдесь проводится основная работа над проектом. В этом коне вы добавляете все модели или спрайты, камеры, свет и другие игровые элементы, составляющие вашу игру.\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fe87\u002F9c5\u002F2f8\u002Fe879c52f8ff5bf80325596cafb4af84c.png\" width=\"1500\" height=\"753\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fe87\u002F9c5\u002F2f8\u002Fe879c52f8ff5bf80325596cafb4af84c.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch4\u003EGame\u003C\u002Fh4\u003E\u003Cp\u003EВ окне Game вы можете просмотреть результат своей работы.\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fdf1\u002F7bb\u002Fb38\u002Fdf17bbb38c0c7da6606bdaafd6b0b836.png\" width=\"1588\" height=\"754\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fdf1\u002F7bb\u002Fb38\u002Fdf17bbb38c0c7da6606bdaafd6b0b836.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch4\u003EProject\u003C\u002Fh4\u003E\u003Cp\u003EОкно проекта\u003Cem\u003E \u003C\u002Fem\u003Eсодержит все ассеты, используемые вашей игрой. Для удобство организовывайте ваши ассеты по папкам.\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F2d0\u002Fc13\u002Fcdb\u002F2d0c13cdb0c04a1497d1aa345adf1078.png\" alt=\"\" title=\"\" width=\"1914\" height=\"571\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F2d0\u002Fc13\u002Fcdb\u002F2d0c13cdb0c04a1497d1aa345adf1078.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch3\u003EInspector\u003C\u002Fh3\u003E\u003Cp\u003EВ окне инспектора добавляются и настраиваются любые свойства игрового объекта.\u003C\u002Fp\u003E\u003Cfigure class=\"\"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fcc1\u002Fc2c\u002F303\u002Fcc1c2c303a2a61188c6229e6ed2ca65c.png\" width=\"399\" height=\"721\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fcc1\u002Fc2c\u002F303\u002Fcc1c2c303a2a61188c6229e6ed2ca65c.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch4\u003EConsole\u003C\u002Fh4\u003E\u003Cp\u003EЭто окно используется для отладки проекта или вывода системных сообщений (ошибки, предупреждение и т.д.)\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fd22\u002F591\u002F638\u002Fd2259163876a085e7823f93dac471b7b.png\" width=\"1984\" height=\"569\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fd22\u002F591\u002F638\u002Fd2259163876a085e7823f93dac471b7b.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch4\u003EВерхняя панель задач\u003C\u002Fh4\u003E\u003Cp\u003EНа этой панели есть все функции для манипуляций в окне Scene.\u003C\u002Fp\u003E\u003Col\u003E\u003Cli\u003E\u003Cp\u003EQ → Перемещение в сцене  \t\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EW → Перемещение объекта\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EE → Поворот\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003ER → Размер\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003ET → 2D изменение\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EY → Трансформация\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Fol\u003E\u003Cfigure class=\"\"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F0e1\u002F74e\u002Fe11\u002F0e174ee11819377e88cac9bf820c8622.png\" width=\"423\" height=\"42\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F0e1\u002F74e\u002Fe11\u002F0e174ee11819377e88cac9bf820c8622.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EЭто самое основное, но и не всё. Подробно о других окнах Unity вы сможете узнать в интернете по ходу изучения движка. А сейчас я покажу как настроить Build игры под Android на примере игры которую я сделал за пару часов.\u003C\u002Fp\u003E\u003Ch3\u003E2.2 Настройка Player Settings\u003C\u002Fh3\u003E\u003Cp\u003EЧтобы настроить сборку проекта, надо перейти в File → Build Settings → Player Settings. Мы увидим такое окно. Начнём его настраивать:\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F47d\u002Fb21\u002F884\u002F47db218844449feded9fb53308fab62b.png\" width=\"839\" height=\"1065\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F47d\u002Fb21\u002F884\u002F47db218844449feded9fb53308fab62b.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Col\u003E\u003Cli\u003E\u003Cp\u003E Название компании\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E Название проекта\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E Версия проекта\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F45e\u002F558\u002F3a6\u002F45e5583a6657c4a0df0ee966ce12d5fe.png\" alt=\"\" title=\"\" width=\"840\" height=\"1054\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F45e\u002F558\u002F3a6\u002F45e5583a6657c4a0df0ee966ce12d5fe.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003C\u002Fli\u003E\u003C\u002Fol\u003E\u003Ch4\u003EResolution и Presentation\u003C\u002Fh4\u003E\u003Cp\u003E\u003Cu\u003EFullscreen Mode\u003C\u002Fu\u003E — как будет открываться твой проект — в полноэкранном или в окошке.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EDefault Orientation\u003C\u002Fu\u003E — Какой ориентации будет ваша игра, выбирайте по тому, как вы задумывали (вертикальная, горизонтальная или авто-поворот).\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F345\u002Fefa\u002F652\u002F345efa65242a09c8d2d402d855dfde52.png\" width=\"588\" height=\"371\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F345\u002Fefa\u002F652\u002F345efa65242a09c8d2d402d855dfde52.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch4\u003ESplash Image\u003C\u002Fh4\u003E\u003Cp\u003EНачальная заставка будет всегда появляться при запуске игры. Вы можете её изменить, добавить свои картинки, изменить цвет и т.д. Если вы хотите убрать её, придётся заплатить 💵\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fd49\u002Fa80\u002F4e2\u002Fd49a804e28cfeca0badbdf12503fb50b.png\" width=\"577\" height=\"743\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fd49\u002Fa80\u002F4e2\u002Fd49a804e28cfeca0badbdf12503fb50b.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch4\u003EOther settings\u003C\u002Fh4\u003E\u003Cp\u003E\u003Cu\u003EPackage Name\u003C\u002Fu\u003E — имя продукта.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EVersion и Bundle Version Code\u003C\u002Fu\u003E — версия ваши игры. Bundle Version Code нужен для публикации в Google Play, и он может быть только целочисленным.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EAPI Level\u003C\u002Fu\u003E — нужно для выбора Android версии, под которые будет работать ваша игра. Используют в основном для оптимизации.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EScripting Backend\u003C\u002Fu\u003E — Mono\u002FIL2CPP. На данный момент используют IL2CPP, ведь он быстрее и легче, да и Google Play также не пропускает игру без этого сценария.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EApi Compatibility Level\u003C\u002Fu\u003E — версия .NET компилятора. Лучше брать самую высокую, по очевидным причинам.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003ETarget Architectures\u003C\u002Fu\u003E — различные версии ядeр. ARMv7 уже устарел, но иногда от его отсутствия ломается сборка игры, поэтому советуются выбирать ARMv7 и ARMv64, а две остальные только если хотите делать игры на Chrome OS.\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F4b8\u002Fb1f\u002Fdc9\u002F4b8b1fdc9e80661412e19bf00c5e6b2c.png\" width=\"577\" height=\"535\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F4b8\u002Fb1f\u002Fdc9\u002F4b8b1fdc9e80661412e19bf00c5e6b2c.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Ch4\u003EPublishing Settings\u003C\u002Fh4\u003E\u003Cp\u003EТакже для того, чтобы выложить игру, надо создать java-ключ 🔑. Для этого надо создать его в разделе Keystore Manager.\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F0cd\u002F2c7\u002F75d\u002F0cd2c775dc63ff33e32a1ffdae81d2ca.png\" width=\"575\" height=\"551\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F0cd\u002F2c7\u002F75d\u002F0cd2c775dc63ff33e32a1ffdae81d2ca.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EЗаполните поля Password, Alias и Validity.\u003C\u002Fp\u003E\u003Cfigure class=\"\"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F091\u002F039\u002F9cf\u002F0910399cf5d844bb5afe6a9f52943aaf.png\" width=\"500\" height=\"501\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F091\u002F039\u002F9cf\u002F0910399cf5d844bb5afe6a9f52943aaf.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EТеперь перед каждой сборкой под публикацию в магазин, надо будет вводить пароль от ключа.\u003C\u002Fp\u003E\u003Cp\u003EМожно билдить. Если вам надо только протестировать игру, вы можете использовать Development Build, или Unity Remote. Готово ✅\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F161\u002Fb09\u002Fc77\u002F161b09c7721a07f61e0701ef3a404991.png\" width=\"629\" height=\"636\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F161\u002Fb09\u002Fc77\u002F161b09c7721a07f61e0701ef3a404991.png\"\u002F\u003E\u003Cfigcaption\u003E\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EСтатья получилась короткая, но здесь я показал только самое основное, что сам использую ежедневно в разработке игр. В следующей части я покажу как работать с GitHub Desktop. Если хотите дополнить меня, то пишите в комментарии. Спасибо за прочтение статьи!  \u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003E🔗 \u003C\u002Fstrong\u003E\u003Ca href=\"https:\u002F\u002Flinktr.ee\u002FValterGames\" rel=\"noopener noreferrer nofollow\"\u003E\u003Cstrong\u003EСсылки на мои соцсети\u003C\u002Fstrong\u003E\u003C\u002Fa\u003E\u003Cstrong\u003E 🔗\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","tags":[{"titleHtml":"gamedev"},{"titleHtml":"unity3d"},{"titleHtml":"tutorial"},{"titleHtml":"разработка игр"}],"metadata":{"stylesUrls":[],"scriptUrls":[],"shareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Faa7\u002F840\u002F20f\u002Faa784020f2fd3afa2fc045cb7458f6c0.png","shareImageWidth":1200,"shareImageHeight":630,"vkShareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Faa7\u002F840\u002F20f\u002Faa784020f2fd3afa2fc045cb7458f6c0.png","schemaJsonLd":"{\"@context\":\"http:\\\u002F\\\u002Fschema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fpost\\\u002F655261\\\u002F\"},\"headline\":\"Разработка игры на Unity с нуля до релиза. Часть 2\",\"datePublished\":\"2022-03-11T20:37:44+03:00\",\"dateModified\":\"2022-03-11T21:37:37+03:00\",\"author\":{\"@type\":\"Person\",\"name\":\"ValterGames\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Habr\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fwebt\\\u002Fa_\\\u002Flk\\\u002F9m\\\u002Fa_lk9mjkccjox-zccjrpfolmkmq.png\"}},\"description\":\"Часть 2. Работа с UnityПриветствую Хабр! 👋&laquo;Разработка игры с нуля до релиза&raquo; - это серии статьей, где я покажу, как создать свою игру с самого нуля до публикации...\",\"url\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fpost\\\u002F655261\\\u002F#post-content-body\",\"about\":[\"h_gamedev\",\"h_unity\",\"f_develop\"],\"image\":[\"https:\\\u002F\\\u002Fhabr.com\\\u002Fshare\\\u002Fpublication\\\u002F655261\\\u002F8565a83bfb107a110d72d26ec51ac7a6\\\u002F\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fc25\\\u002F125\\\u002Fd56\\\u002Fc25125d56962a8bdd12e1bf0a2f4e413.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Ff06\\\u002Fc71\\\u002Fde2\\\u002Ff06c71de20c0b135a6ea520095b06bea.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F9b2\\\u002Fd80\\\u002F991\\\u002F9b2d8099137b90107994b4753937b864.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F7ff\\\u002F2d4\\\u002F2ea\\\u002F7ff2d42ea164f712d9737297c22e7a90.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fe87\\\u002F9c5\\\u002F2f8\\\u002Fe879c52f8ff5bf80325596cafb4af84c.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fdf1\\\u002F7bb\\\u002Fb38\\\u002Fdf17bbb38c0c7da6606bdaafd6b0b836.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F2d0\\\u002Fc13\\\u002Fcdb\\\u002F2d0c13cdb0c04a1497d1aa345adf1078.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fcc1\\\u002Fc2c\\\u002F303\\\u002Fcc1c2c303a2a61188c6229e6ed2ca65c.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fd22\\\u002F591\\\u002F638\\\u002Fd2259163876a085e7823f93dac471b7b.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F0e1\\\u002F74e\\\u002Fe11\\\u002F0e174ee11819377e88cac9bf820c8622.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F47d\\\u002Fb21\\\u002F884\\\u002F47db218844449feded9fb53308fab62b.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F45e\\\u002F558\\\u002F3a6\\\u002F45e5583a6657c4a0df0ee966ce12d5fe.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F345\\\u002Fefa\\\u002F652\\\u002F345efa65242a09c8d2d402d855dfde52.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fd49\\\u002Fa80\\\u002F4e2\\\u002Fd49a804e28cfeca0badbdf12503fb50b.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F4b8\\\u002Fb1f\\\u002Fdc9\\\u002F4b8b1fdc9e80661412e19bf00c5e6b2c.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F0cd\\\u002F2c7\\\u002F75d\\\u002F0cd2c775dc63ff33e32a1ffdae81d2ca.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F091\\\u002F039\\\u002F9cf\\\u002F0910399cf5d844bb5afe6a9f52943aaf.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F161\\\u002Fb09\\\u002Fc77\\\u002F161b09c7721a07f61e0701ef3a404991.png\"]}","metaDescription":"Часть 2. Работа с UnityПриветствую Хабр! 👋«Разработка игры с нуля до релиза» - это серии статьей, где я покажу, как создать свою игру с самого нуля до публикации в Google Play и Itch.io на ОС...","mainImageUrl":null,"amp":true,"customTrackerLinks":[]},"polls":[],"commentsEnabled":true,"rulesRemindEnabled":false,"votesEnabled":true,"status":"published","plannedPublishTime":null,"checked":null,"isEditorial":false}},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[],"hubs":""},"comments":{"articleComments":{"655261":{"refs":{},"root":[]}},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{"isCanComment":false,"cantCommentReasonKey":"AUTH_REQUIRED","cantCommentReason":"Authorization required","data":null},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":"","moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":true,"featurer":[],"megaposts":[{"title":"Основы основ финтеха","color":"#99ddff","link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F1RZvxMiMrAoqyWyIvV6xtgBSdtkQVE1-VPLH0TjBQK9SUpI43eWCa9FU8SXZ71hRMELv4VHD041bQU3J4V5vCdtfG03cJTqC1BR7RWLPfpuovR0S"},"events":{"view":"mx5wP6gdRafZN4s5sjKYg8PSFzRrvmx493AergP9lfoVhDy0Md4mOp2Edd9qj0_lmaIgo-pMr8-Jew"}}],"promoLinks":[{"title":"Как работа вызывает стресс и как это отследить","label":"Интересно","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F2wg8kV0Q4OaBCGFQfKJdlJklqnxGIhxos1cBTj4ASMe1uwF_ssNRmbNNmCVlJdvYNDYoX7iZ5M7qrfz0RW5gqeiw8wxM5vnev2LOC8YyS1EYUyG7u6LLwfExH6rONJ4sH6oLBHk-MQ"},"events":{"view":"fstrjRuHO1u9Si7OsBVEzljNqXyyjMoKQgcbWupjx6_kpc9lvgrRaN9ac4DyTlDrEtglHAAsY0Xeiw"}},{"title":"Делаем торт вместе: собираем темы, которых вам не хватает на Хабре","label":"Опрос","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FhCT6-4pF8HTaFB4oC-wbTOdzMlQVqkwOQniXCXXuHcwsUn7HUa1daRRnfJeuHolbalKUA-IGyvlgvVO5RNn0haa2ydKk26WPMTFdi9A3rFXWWxSCS5qkSI4w4X1X"},"events":{"view":"eM5T9xKv4u5FRt9XPMED7uXtqp_jTJ0YD8XM8ZhjtUNORqCGAJjrX0Lt2e4ymR1syxxkA03hEOHFfA"}}],"promoPosts":[{"title":"Красивое: смотрим тренды рынка труда в IT вместе с вами","label":"Промо","external":true,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F4Q2xxp5OPxB6TrOZXqCEPge44dgExVyMQc1YuL7-ZdBlsCMfPsjHnhVoXkLq4xeE30PKIPAveEQHXwKAhCHnHm_Wq0_XEquq-ZjnUCMI6D6bP07BWdWEfjtrmc-8Ryj41mZFjLvrBsSRdPfVIVCbl_c-9tkGDfvehBmSnU13n4dGc40TOYn91H29UcNNeNLFfLcDQ5B07LwG5LIN"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F6GZ9RZ3OGMYXtb0khbQ2rlGXzM049Wt2lfGboGbUXBxaFubLEzd4NFuRLqP2HIafyq_tu6A5nf5TjLn3U9giFntPgptLpIBLOf4GhI_OMnv50j4n02e6lXVsM80CxaQrwF-R7HZp7IUNoSoyJ_aZ3BU1d4wgySE"}},{"title":"Хотите рассказать о себе в наших социальных сетях?","label":"Опрос","external":true,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FMVlg0bU1hxlkFuOarCIrFETW7AG5hHkRQN-jvBUI2QkHNU2elEzwnZ0iAYXG2M0f2S6zf9Fq52ukGzklz2A3d95_hqczq-9ywji6pVjR9U5ZwYQau3rbGVEfziEgA1wCF6uO-67k6iOx_9wUQfPz9Hl02MhO9wb0w-RguM5HybQGIJmS9i6-KAXj6ZK-LYEjtWsuEg"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F6XGzQ8llPccJFaQhs5bxMRxHcjEsfo0DUKgNwFXpRrfJtR5s8KiQyLDAjNezkx9wZlvz1nD23ELf8M-1JQK8-4HgJPKSe3Xe2fzW3RnC2635m_Kuc0tB9zi8o-0QM9S3urTLUKa63SUFp8UJ4awS"}},{"title":"Неделе фронтендеров на Хабр Карьере ","label":"Событие","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F-G7AcwcJYMOE5O5kn7a8DilAcRQvCOfR24uXhmTjmmWyDh8mn5OfEWbotlSf-imgXJcDjieZesK52OWpimpu3zxkVYFBnt-j0H3so34vpr8pCQKPAt-bLfABe9z1oOYNlNPlkSZ3H5rvzES1Vl_phuKqqJW4JlhdEEvvmzbYSP9_IXZ7RszsCSQpkXS2Slsy4or6gBIe9qTVrIMoTt3N"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F1K8z78opzGnGHHTZ7OjrP0UfLJ2LVQGMteyd-cx-ZH4gpEauL_PqnB--6gPnU58tEwuN00cuKnMgL6Z-JbW5kVFFxDigIvFw2WNOgQNnzFqbLBspUocbrUkIlHcOp3ZnOxyfN_D3i96SeYwJQU7fPg"}}]},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

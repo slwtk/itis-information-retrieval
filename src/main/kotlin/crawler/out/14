@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Коснутся ли санкции IP адресов российских операторов связи? / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script data-vue-meta="ssr" type="application/ld+json" data-vmid="ldjson-schema">{"@context":"http:\/\/schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/habr.com\/ru\/post\/655285\/"},"headline":"Коснутся ли санкции IP адресов российских операторов связи?","datePublished":"2022-03-12T02:43:29+03:00","dateModified":"2022-03-12T02:43:29+03:00","author":{"@type":"Person","name":"Agnese Ilizarova"},"publisher":{"@type":"Organization","name":"Habr","logo":{"@type":"ImageObject","url":"https:\/\/habrastorage.org\/webt\/a_\/lk\/9m\/a_lk9mjkccjox-zccjrpfolmkmq.png"}},"description":"По прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от...","url":"https:\/\/habr.com\/ru\/post\/655285\/#post-content-body","about":["h_it-infrastructure","f_admin"],"image":["https:\/\/habr.com\/share\/publication\/655285\/9bab76619b8cb41b306c2aeed4b11d8d\/"]}</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:title" content="Коснутся ли санкции IP адресов российских операторов связи?" data-vmid="og:title">
+  <meta data-vue-meta="ssr" name="twitter:title" content="Коснутся ли санкции IP адресов российских операторов связи?" data-vmid="twitter:title">
+  <meta data-vue-meta="ssr" name="aiturec:title" content="Коснутся ли санкции IP адресов российских операторов связи?" data-vmid="aiturec:title">
+  <meta data-vue-meta="ssr" name="description" content="По прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от времени озвучиваются призывы &amp;quot;отключить..." data-vmid="description">
+  <meta data-vue-meta="ssr" itemprop="description" content="По прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от времени озвучиваются призывы &amp;quot;отключить..." data-vmid="description:itemprop">
+  <meta data-vue-meta="ssr" property="og:description" content="По прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от времени озвучиваются призывы &amp;quot;отключить..." data-vmid="og:description">
+  <meta data-vue-meta="ssr" name="twitter:description" content="По прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от времени озвучиваются призывы &amp;quot;отключить..." data-vmid="twitter:description">
+  <meta data-vue-meta="ssr" property="aiturec:description" content="По прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от времени озвучиваются призывы &amp;quot;отключить..." data-vmid="aiturec:description">
+  <meta data-vue-meta="ssr" itemprop="image" content="https://habrastorage.org/getpro/habr/upload_files/7f5/e4c/352/7f5e4c352693b77bfa81e8e807fda656.jpg" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="https://habrastorage.org/getpro/habr/upload_files/7f5/e4c/352/7f5e4c352693b77bfa81e8e807fda656.jpg" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="https://habrastorage.org/getpro/habr/upload_files/7f5/e4c/352/7f5e4c352693b77bfa81e8e807fda656.jpg" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="https://habrastorage.org/getpro/habr/upload_files/7f5/e4c/352/7f5e4c352693b77bfa81e8e807fda656.jpg" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="https://habrastorage.org/getpro/habr/upload_files/7f5/e4c/352/7f5e4c352693b77bfa81e8e807fda656.jpg?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="aiturec:item_id" content="655285" data-vmid="aiturec:item_id">
+  <meta data-vue-meta="ssr" property="aiturec:datetime" content="2022-03-11T23:43:29.000Z" data-vmid="aiturec:datetime">
+  <meta data-vue-meta="ssr" content="https://habr.com/ru/post/655285/" property="og:url" data-vmid="og:url">
+  <meta data-vue-meta="ssr" property="og:type" content="article" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" name="keywords" content="ipv4, ip-адреса, санкции, lir, россия, ripe ncc"> 
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/655285/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/post/655285/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" data-vmid="hreflang">
+  <link data-vue-meta="ssr" image_src="image" href="https://habrastorage.org/getpro/habr/upload_files/7f5/e4c/352/7f5e4c352693b77bfa81e8e807fda656.jpg" data-vmid="image:href">
+  <link data-vue-meta="ssr" rel="amphtml" href="https://habr.com/ru/amp/post/655285/"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> <!----> <a href="https://effect.habr.com/a/xIxVcWmofSW_FWBFgh5rWSVjDkpDrb72Ieef7CDli2VpaYsmUCAz5EtXUvm9mxsIwrFvwZk20p-lt6tM5DyV_IsopeT4Nzh5c5GW6KtJkL_6kab0LGLUMsMcXomKKLiPuNlwd2jUHQ" target="_blank" class="tm-top-link" style="color:#99ddff;"> Как COVID отрывается на IT: тренды и новое исследование </a> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div hl="ru" data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <!----> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <div class="tm-article-presenter"> 
+            <div class="tm-article-presenter__body">
+             <div class="tm-misprint-area">
+              <div class="tm-misprint-area__wrapper">
+               <article class="tm-article-presenter__content tm-article-presenter__content_narrow">
+                <div class="tm-article-presenter__header"> 
+                 <div class="tm-article-snippet tm-article-presenter__snippet">
+                  <div class="tm-article-snippet__meta-container">
+                   <div class="tm-article-snippet__meta">
+                    <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/oxucu/" title="oxucu" class="tm-user-info__userpic">
+                      <div class="tm-entity-image">
+                       <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/e5f/8be/8f6/e5f8be8f6da5be85064f5654f8ccb817.jpg" width="24" class="tm-entity-image__pic">
+                      </div></a> <span class="tm-user-info__user"><a href="/ru/users/oxucu/" class="tm-user-info__username"> oxucu </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T23:43:29.000Z" title="2022-03-12, 02:43">сегодня в 02:43</time></span>
+                   </div> <!---->
+                  </div> 
+                  <h1 lang="ru" class="tm-article-snippet__title tm-article-snippet__title_h1"><span>Коснутся ли санкции IP адресов российских операторов связи?</span></h1> 
+                  <div class="tm-article-snippet__hubs">
+                   <span class="tm-article-snippet__hubs-item"><a href="/ru/hub/it-infrastructure/" class="tm-article-snippet__hubs-item-link"><span>IT-инфраструктура</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span>
+                  </div> <!----> <!----> <!---->
+                 </div>
+                </div> <!----> 
+                <div data-gallery-root="" lang="ru" class="tm-article-body">
+                 <div></div> 
+                 <div id="post-content-body">
+                  <div>
+                   <div class="article-formatted-body article-formatted-body_version-2">
+                    <div xmlns="http://www.w3.org/1999/xhtml">
+                     <p>По прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от времени озвучиваются призывы "отключить Россию от Интернета", подразумевая под этим, в частности, дерегистрацию IP адресов, выделенных российским провайдерам связи. Как на это реагирует RIPE NCC и следует ли ожидать реальных ограничений в сфере распределения IP ресурсов в России? <br><br>28 февраля RIPE NCC выступило с заявлением о том, что занимает нейтральную позицию в отношении международных конфликтов, войн и внутриполитических споров. Такое положение обосновано задачей региональных интернет-регистраторов обеспечивать средства коммуникации и оказывать критически важные услуги в географически и политически разнообразных регионах.<br> <br>2 марта Правительство Украины выступило с просьбой, среди прочего, дерегистрировать все IPv4 и IPv6 адреса, выделенные российским LIR-ам. На этот запрос RIPE NCC ответил отказом, снова подчеркнув важность своей аполитичности в сохранения глобального и открытого Интернета, доступного для населения всех стран мира. <br><br>Одновременно RIPE NCC подчеркнуло, что окажет содействие украинским операторам связи, выполняющим свою работу в сложных условиях военных действий. К примеру, было обещано не отзывать IP адреса у украинских LIR-ов по причине неуплаты членских взносов или несоблюдения административных требований. <br><br>Означает ли это, что со стороны RIPE NCC не следует ожидать никаких ограничений в отношении российских LIR-ов? <br><br>Надо отметить, что RIPE NCC не первый год последовательно придерживаться либертарианских взглядов на права свободного доступа к сетевой инфраструктуре, и старается уклониться от попыток политиков ограничить сетевые свободы. В частности, обсуждение с властями Нидерландов применения санкций к членам RIPE NCC длилось как минимум в течение 2020-го и 2021-го годов.<br><br>И все же, являясь организацией, зарегистрированной в Нидерландах, RIPE NCC просто-напросто обязано соблюдать законодательство ЕС, в том числе принятые ЕС санкции. <br>В прошлом году RIPE NCC начало ежеквартально публиковать специальный отчет по своим членам, находящимся под санкциями. На данный момент таких держателей IP ресурсов два - одна организация из Ирана и одна из Сирии. Следует отметить, что данные по ним анонимизированы. <br><br>Что означает применение санкций со стороны RIPE NCC к его члену - держателю ресурсов? Предоставленные такому члену IP ресурсы (адреса IPv4 и IPv6, AS) замораживаются в базе данных RIPE (RIPE Database). Подсанкционные организации/лица не могут изменить свою регистрационную информацию. Также им не могут быть предоставлены дополнительные IP ресурсы, а уже выделенные запрещено передавать (продавать). При этом, дерегистрация таких ресурсов не проводится, и договор (Standard Service Agreement) с подсанкционной организацией/лицом не расторгается. Однако включенная в санкционные списки организация / лицо не могут стать новым членом RIPE NCC и не могут являться представителями члена.<br><br>Еще раз подчеркнем, эти ограничения относятся к конкретным организациям или лицам, включенным в санкционные списки ЕС, если IP ресурсы зарегистрированы на имя их лично или представляемых ими организаций. Эти правила не распространяются на всех операторов связи из стран, в той или иной мере подверженных санкциям. Операторы связи в той или иной форме существуют, пользуются IP ресурсами и продают их как в Иране, так в Венесуэле и в других подсанкционных странах. С другой стороны, надо иметь ввиду, что ситуация с Украиной до сих пор находится в развитии, и западные страны могут принять новые неожиданные решения, санкционные списки могут пополняться.<br> <br>Из практики можно сказать, что самые большие практические проблемы у LIR-ов из стран, подверженных санкционному режиму, как правило, возникают с произведением оплаты за членство в RIR-е. Например, на январь 2022 года RIPE NCC отметило, что из-за банковских ограничений они не могут выставить счета 93 своим членам в Иране и 8 членам в Сирии, и планирует это сделать как только появится практическая возможность.<br><br>Кроме того, платежные ограничения влияют на способность LIRов покупать и продавать блоки IPv4. С большой вероятностью, популярность альтернативных инструментов оплаты, таких как криптовалюты, в этой сфере будет расти.</p>
+                    </div>
+                   </div>
+                  </div> 
+                  <div class="v-portal" style="display:none;"></div>
+                 </div> <!----> <!---->
+                </div> 
+                <div class="tm-article-presenter__meta">
+                 <div class="tm-separated-list tm-article-presenter__meta-list">
+                  <span class="tm-separated-list__title">Теги:</span> 
+                  <ul class="tm-separated-list__list">
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bipv4%5D" class="tm-tags-list__link">ipv4</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bip-%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%B0%5D" class="tm-tags-list__link">ip-адреса</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D1%81%D0%B0%D0%BD%D0%BA%D1%86%D0%B8%D0%B8%5D" class="tm-tags-list__link">санкции</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Blir%5D" class="tm-tags-list__link">lir</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F%5D" class="tm-tags-list__link">россия</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bripe%20ncc%5D" class="tm-tags-list__link">ripe ncc</a></li>
+                  </ul>
+                 </div> 
+                 <div class="tm-separated-list tm-article-presenter__meta-list">
+                  <span class="tm-separated-list__title">Хабы:</span> 
+                  <ul class="tm-separated-list__list">
+                   <li class="tm-separated-list__item"><a href="/ru/hub/it-infrastructure/" class="tm-hubs-list__link"> IT-инфраструктура </a></li>
+                  </ul>
+                 </div>
+                </div>
+               </article>
+              </div> <!---->
+             </div> 
+             <div class="tm-article-sticky-panel">
+              <div class="tm-data-icons tm-article-sticky-panel__icons">
+               <div class="tm-article-rating tm-data-icons__item">
+                <div class="tm-votes-meter tm-article-rating__votes-switcher">
+                 <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                  <title>Всего голосов 3: ↑2 и ↓1</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                 </svg> <span title="Всего голосов 3: ↑2 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+1</span>
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> <!----> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                 <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                </svg> <span class="tm-icon-counter__value">430</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                 <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                  <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                 </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 1 </span></button> <!----> 
+               <div title="Поделиться" class="tm-sharing tm-data-icons__item">
+                <button type="button" class="tm-sharing__button">
+                 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="tm-sharing__icon">
+                  <path fill="currentColor" d="M13.8 13.8V18l7.2-6.6L13.8 5v3.9C5 8.9 3 18.6 3 18.6c2.5-4.4 6-4.8 10.8-4.8z"></path>
+                 </svg></button> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> 
+               <div class="v-portal" style="display:none;"></div>
+              </div> 
+             </div>
+            </div> 
+            <div class="v-portal" style="display:none;"></div> 
+            <div class="tm-article-presenter__footer">
+             <div class="tm-article-blocks">
+              <!----> 
+              <section class="tm-block tm-block_spacing-bottom">
+               <!----> 
+               <div class="tm-block__body tm-block__body_variant-balanced">
+                <div class="tm-article-author"> 
+                 <div class="tm-user-card tm-article-author__user-card tm-user-card_variant-article">
+                  <div class="tm-user-card__info-container">
+                   <div class="tm-user-card__header">
+                    <div class="tm-user-card__header-data">
+                     <a href="/ru/users/oxucu/" class="tm-user-card__userpic tm-user-card__userpic_size-40">
+                      <div class="tm-entity-image">
+                       <img alt="" src="//habrastorage.org/getpro/habr/avatars/e5f/8be/8f6/e5f8be8f6da5be85064f5654f8ccb817.jpg" class="tm-entity-image__pic">
+                      </div></a> 
+                     <div class="tm-user-card__meta">
+                      <div title=" 9 голосов " class="tm-karma tm-user-card__karma">
+                       <div class="tm-karma__votes tm-karma__votes_positive">
+                         7 
+                       </div> 
+                       <div class="tm-karma__text">
+                         Карма 
+                       </div>
+                      </div> 
+                      <div title="Рейтинг пользователя" class="tm-rating tm-user-card__rating">
+                       <div class="tm-rating__header"> 
+                        <div class="tm-rating__counter">
+                         1
+                        </div>
+                       </div> 
+                       <div class="tm-rating__text">
+                         Рейтинг 
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div> 
+                   <div class="tm-user-card__info tm-user-card__info_variant-article">
+                    <div class="tm-user-card__title tm-user-card__title_variant-article">
+                     <span class="tm-user-card__name tm-user-card__name_variant-article">Agnese Ilizarova</span> <a href="/ru/users/oxucu/" class="tm-user-card__nickname tm-user-card__nickname_variant-article"> @oxucu </a> <!---->
+                    </div> 
+                    <p class="tm-user-card__short-info tm-user-card__short-info_variant-article">Юрист в IPBuySell</p>
+                   </div>
+                  </div> 
+                  <div class="tm-user-card__buttons tm-user-card__buttons_variant-article">
+                   <!----> <!----> <!----> <!----> <!---->
+                  </div>
+                 </div> <!---->
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> <!---->
+              </section> 
+              <div class="tm-ad-banner__container tm-page-article__banner">
+               <!----> 
+               <div id="articleBottomBanner31396" class="tm-ad-banner tm-ad-banner_variant-leaderboard"></div>
+              </div> 
+              <div class="tm-article-blocks__comments">
+               <div class="tm-article-page-comments">
+                <div class="tm-article-comments-counter-link tm-article-comments-counter-button">
+                 <a href="/ru/post/655285/comments/" class="tm-article-comments-counter-link__link tm-article-comments-counter-link__link_button-style">
+                  <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon tm-article-comments-counter-link__icon_contrasted">
+                   <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                  </svg> <span class="tm-article-comments-counter-link__value tm-article-comments-counter-link__value_contrasted"> Комментировать </span></a> <!---->
+                </div>
+               </div>
+              </div> <!----> 
+              <section class="tm-block tm-block_spacing-around">
+               <header class="tm-block__header">
+                <h2 class="tm-block__title">Минуточку внимания</h2> 
+                <div class="tm-block__header-aside">
+                 <a href="https://tmtm.ru/megapost/" target="_blank" class="tm-block-extralink"> Разместить </a>
+                </div>
+               </header> 
+               <div class="tm-block__body">
+                <div pagination="" slides-per-view="1" class="tm-promo-block__content-wrapper">
+                 <div class="tm-promo-block__item-wrapper">
+                  <a href="https://effect.habr.com/a/L2eQGROAmhY3m9geyZg5hzbabpHGXKeDi3I6U0XddBCcLyPF23yW45snHnVydB25fw4kVLj3Sq9EhyXXC_56VYZYAWNkIk-crzggdQ9VuUcAT9Nq5_0q" rel="nofollow " class="tm-promo-block__item tm-article-title__link">
+                   <header class="tm-promo-block__head">
+                    <div class="tm-promo-block__image-wrapper">
+                     <img alt="" src="https://effect.habr.com/a/B52ADUJCnDbKpePdciA1k1eYVT-2Rzoyl8-C30Urn2j-LnSB3agyCjWImXp9aftvM1QJsxJNCrDXB8S1-iTO4p5J6EpXyOfp-5DP8x7myA9-XJmhYWHcxq4IOPSABrQaAWLrGDUtybCPIbUMnmQxRraNZTScp4MDvk4Fb0DwjVYonGbwKs-DvwpwLKyfMDysdcc65JxWAqCMNVuvey2Oqq4u0Lzb" class="tm-promo-block__image">
+                    </div> 
+                    <div class="tm-promo-block__label">
+                      Промо <!---->
+                    </div>
+                   </header> 
+                   <div class="tm-promo-block__info">
+                    <h3 class="tm-promo-block__title">Промокод — твой билет в общество потребления</h3>
+                   </div></a>
+                 </div>
+                 <div class="tm-promo-block__item-wrapper">
+                  <a href="https://effect.habr.com/a/veh1YnM1VESVL2vtRcEkoRikaBIVSTu69RdW77jEZTMFacirpEWBmL2pUKBFKuRVqNTgg4d9LvKJmE9gpNqqjy8SkipZaU2XyUzLcmHhduuMTZg6wipmDW-yF3yxzSRRq5ZoQIMnPw" rel="nofollow " class="tm-promo-block__item tm-article-title__link">
+                   <header class="tm-promo-block__head">
+                    <div class="tm-promo-block__image-wrapper">
+                     <img alt="" src="https://effect.habr.com/a/9g7pZm3KQeYPbNhhizKHeMGxb8gJldf7rMy5fgaCpe_ZvrsnvqWH8NTJ7jl37MbE5--tcyFQvEvD_Kaitthv7NBt4vCMU-a_fN1CDUFB9EpQogVacF1f7RR1mRuenKXeXwbAPUGMxXfEk8M299GHzovO3HC4khyHmToy4-ioppexHsVq1BvhcAfEQ0CrN_0RjilS-HbQEaAu" class="tm-promo-block__image">
+                    </div> 
+                    <div class="tm-promo-block__label">
+                      Интересно <!---->
+                    </div>
+                   </header> 
+                   <div class="tm-promo-block__info">
+                    <h3 class="tm-promo-block__title">Истощающая тревога: что такое стресс и как с ним бороться</h3>
+                   </div></a>
+                 </div>
+                 <div class="tm-promo-block__item-wrapper">
+                  <a href="https://effect.habr.com/a/p65VWqWZLbhHEfrl26hmpK9u2HtRXAsGcfOsEUMmgHLJmITW-QGwwDPPgufnYZ4J83w36_AF7tl6Fc5gV-zyx493raOJS9a-6AjXUi44hEh8pM6LCGhL7VkGzfEweccmknAMxdtnn4uDCi2qy8Obwg" rel="nofollow " class="tm-promo-block__item tm-article-title__link">
+                   <header class="tm-promo-block__head">
+                    <div class="tm-promo-block__image-wrapper">
+                     <img alt="" src="https://effect.habr.com/a/dA2BoHdkPwU5JadQlFdZUU1Zx0NChYdoYunCN8rgPSQWrE-4jh7eGBqlT8TIGkhYwiNNO8GryQ632Auz4fjo_-2yEe23fl2jTbGx_zzmHQdtBWa0qngUyzB_iG19Ev2Aioz6fLJYsBAgwaboWfCpdCmMZPfiBXaZzzLMlYt9ieNe4UK5NEzjRNoDuFww02wLZBCFkRoWa7eXkn5Pj1dD" class="tm-promo-block__image">
+                    </div> 
+                    <div class="tm-promo-block__label">
+                      Событие <!---->
+                    </div>
+                   </header> 
+                   <div class="tm-promo-block__info">
+                    <h3 class="tm-promo-block__title">Неделе фронтендеров на Хабр Карьере </h3>
+                   </div></a>
+                 </div>
+                </div>
+               </div> <!---->
+              </section> <!----> <!----> 
+             </div>
+            </div>
+           </div>
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__ads tm-layout-sidebar__ads_initial">
+            <div class="tm-ad-banner__container tm-layout-sidebar__banner tm-layout-sidebar__banner_top">
+             <!----> 
+             <div id="sidebarBanner31397" class="tm-ad-banner tm-ad-banner_variant-half-page"></div>
+            </div>
+           </div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> 
+            <section data-async-called="true" class="tm-block tm-block_spacing-bottom">
+             <header class="tm-block__header">
+              <h2 class="tm-block__title">Работа</h2> <!---->
+             </header> 
+             <div class="tm-block__body">
+              <div class="tm-vacancies-block__item">
+               <a href="https://career.habr.com/vacancies/sistemnij_administrator" target="_blank" class="tm-vacancies-block__vacancy-title"> Системный администратор </a> 
+               <div class="tm-vacancies-block__vacancies-count">
+                 137 вакансий 
+               </div>
+              </div>
+             </div> 
+             <footer class="tm-block__footer">
+              <a href="https://career.habr.com/catalog" class="tm-block-extralink"> Все вакансии </a>
+             </footer>
+            </section> 
+            <div class="tm-ad-banner__container tm-layout-sidebar__banner tm-layout-sidebar__banner_bottom">
+             <!----> 
+             <div id="sidebarBannerBottom31398" class="tm-ad-banner tm-ad-banner_variant-medium-rectangle"></div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/post/655285/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/post/655285/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"655285":{"id":"655285","timePublished":"2022-03-11T23:43:29+00:00","isCorporative":false,"lang":"ru","titleHtml":"Коснутся ли санкции IP адресов российских операторов связи?","leadData":{"textHtml":"\u003Cp\u003EПо прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от времени озвучиваются призывы \"отключить Россию от Интернета\", подразумевая под этим, в частности, дерегистрацию IP адресов, выделенных российским провайдерам связи. Как на это реагирует RIPE NCC и следует ли ожидать реальных ограничений в сфере распределения IP ресурсов в России? \u003Cbr\u003E\u003Cbr\u003E28 февраля RIPE NCC выступило с заявлением о том, что занимает нейтральную позицию в отношении международных конфликтов, войн и внутриполитических споров. Такое положение обосновано задачей региональных интернет-регистраторов обеспечивать средства коммуникации и оказывать критически важные услуги в географически и политически разнообразных регионах.\u003Cbr\u003E \u003Cbr\u003E2 марта Правительство Украины выступило с просьбой, среди прочего, дерегистрировать все IPv4 и IPv6 адреса, выделенные российским LIR-ам. На этот запрос RIPE NCC ответил отказом, снова подчеркнув важность своей аполитичности в сохранения глобального и открытого Интернета, доступного для населения всех стран мира. \u003Cbr\u003E\u003Cbr\u003EОдновременно RIPE NCC подчеркнуло, что окажет содействие украинским операторам связи, выполняющим свою работу в сложных условиях военных действий. К примеру, было обещано не отзывать IP адреса у украинских LIR-ов по причине неуплаты членских взносов или несоблюдения административных требований. \u003Cbr\u003E\u003Cbr\u003EОзначает ли это, что со стороны RIPE NCC не следует ожидать никаких ограничений в отношении российских LIR-ов? \u003Cbr\u003E\u003Cbr\u003EНадо отметить, что RIPE NCC не первый год последовательно придерживаться либертарианских взглядов на права свободного доступа к сетевой инфраструктуре, и старается уклоняться от попыток политиков ограничить сетевые свободы. В частности, обсуждение с властями Нидерландов применения санкций к членам RIPE NCC длилось как минимум в течение 2020-го и 2021-го годов.\u003Cbr\u003E\u003Cbr\u003EИ все же, являясь организацией зарегистрированной в Нидерландах, RIPE NCC просто-напросто обязано соблюдать законодательство ЕС, в том числе принятые ЕС санкции. \u003Cbr\u003EВ прошлом году RIPE NCC начало ежеквартально публиковать специальный отчет по своим членам, находящимся под санкциями. На данный момент таких держателей IP ресурсов два - одна организация из Ирана и одна из Сирии. Следует отметить, что данные по ним анонимизированы. \u003Cbr\u003E\u003Cbr\u003EЧто означает применение санкций со стороны RIPE NCC к его члену - держателю ресурсов? Предоставленные такому члену IP ресурсы (адреса IPv4 и IPv6, AS) замораживаются в базе данных RIPE (RIPE Database). Подсанкционные организации \u002Fлица не могут изменить свою регистрационную информацию. Также им не могут быть предоставлены дополнительные IP ресурсы, а уже выделенные запрещено передавать (продавать). При этом, дерегистрация таких ресурсов не проводится, и договор (Standard Service Agreement) с подсанкционной организацией\u002Fлицом не расторгается. Однако включенная в санкционные списки организация \u002F лицо не может стать новым членом RIPE NCC и не может являться представителем члена.\u003Cbr\u003E\u003Cbr\u003EЕще раз подчеркнем, эти ограничения относятся к конкретным организациям или лицам, включенным в санкционные списки ЕС, если IP ресурсы зарегистрированы на имя их лично или представляемых ими организаций. Эти правила не распространяются на всех операторов связи из стран, в той или иной мере подверженных санкциям. Операторы связи в Иране, Венесуэле и в других подсанкционных странах продолжают работать, пользоваться IP ресурсами, покупать и продавать их. С другой стороны, надо иметь ввиду, что ситуация с Украиной до сих пор находится в развитии, и западные страны могут принять новые неожиданные решения, санкционные списки могут пополняться.\u003Cbr\u003E  \u003Cbr\u003EИз практики можно сказать, что самые большие практические проблемы у LIR-ов из стран, подверженных санкционному режиму, как правило, возникают с произведением платежей, например, с оплатой за членство в RIR-е. Например, на январь 2022 года RIPE NCC отметило, что из-за банковских ограничений они не могут выставить счета 93 своим членам в Иране и 8 членам в Сирии, и планирует это сделать как только появится практическая возможность.\u003Cbr\u003E\u003Cbr\u003EКроме того, платежные ограничения влияют на способность LIR-ов покупать и продавать блоки IPv4. С большой вероятностью, в этой сфере будет расти популярность альтернативных инструментов оплаты, таких как криптовалюты.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F7f5\u002Fe4c\u002F352\u002F7f5e4c352693b77bfa81e8e807fda656.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F7f5\u002Fe4c\u002F352\u002F7f5e4c352693b77bfa81e8e807fda656.jpg","fit":"cover","positionY":0,"positionX":0}},"editorVersion":"2.0","postType":"article","postLabels":[],"author":{"scoreStats":{"score":7,"votesCount":9},"rating":1,"relatedData":null,"contacts":[],"authorContacts":[],"paymentDetails":{"paymentYandexMoney":null,"paymentPayPalMe":null,"paymentWebmoney":null},"id":"2805245","alias":"oxucu","fullname":"Agnese Ilizarova","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002Fe5f\u002F8be\u002F8f6\u002Fe5f8be8f6da5be85064f5654f8ccb817.jpg","speciality":"Юрист в IPBuySell"},"statistics":{"commentsCount":0,"favoritesCount":1,"readingCount":430,"score":1,"votesCount":3},"hubs":[{"relatedData":null,"id":"6398","alias":"it-infrastructure","type":"collective","title":"IT-инфраструктура","titleHtml":"IT-инфраструктура","isProfiled":true}],"flows":[{"id":"6","alias":"admin","title":"Администрирование"}],"relatedData":null,"textHtml":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EПо прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от времени озвучиваются призывы \"отключить Россию от Интернета\", подразумевая под этим, в частности, дерегистрацию IP адресов, выделенных российским провайдерам связи. Как на это реагирует RIPE NCC и следует ли ожидать реальных ограничений в сфере распределения IP ресурсов в России? \u003Cbr\u002F\u003E\u003Cbr\u002F\u003E28 февраля RIPE NCC выступило с заявлением о том, что занимает нейтральную позицию в отношении международных конфликтов, войн и внутриполитических споров. Такое положение обосновано задачей региональных интернет-регистраторов обеспечивать средства коммуникации и оказывать критически важные услуги в географически и политически разнообразных регионах.\u003Cbr\u002F\u003E \u003Cbr\u002F\u003E2 марта Правительство Украины выступило с просьбой, среди прочего, дерегистрировать все IPv4 и IPv6 адреса, выделенные российским LIR-ам. На этот запрос RIPE NCC ответил отказом, снова подчеркнув важность своей аполитичности в сохранения глобального и открытого Интернета, доступного для населения всех стран мира. \u003Cbr\u002F\u003E\u003Cbr\u002F\u003EОдновременно RIPE NCC подчеркнуло, что окажет содействие украинским операторам связи, выполняющим свою работу в сложных условиях военных действий. К примеру, было обещано не отзывать IP адреса у украинских LIR-ов по причине неуплаты членских взносов или несоблюдения административных требований. \u003Cbr\u002F\u003E\u003Cbr\u002F\u003EОзначает ли это, что со стороны RIPE NCC не следует ожидать никаких ограничений в отношении российских LIR-ов? \u003Cbr\u002F\u003E\u003Cbr\u002F\u003EНадо отметить, что RIPE NCC не первый год последовательно придерживаться либертарианских взглядов на права свободного доступа к сетевой инфраструктуре, и старается уклониться от попыток политиков ограничить сетевые свободы. В частности, обсуждение с властями Нидерландов применения санкций к членам RIPE NCC длилось как минимум в течение 2020-го и 2021-го годов.\u003Cbr\u002F\u003E\u003Cbr\u002F\u003EИ все же, являясь организацией, зарегистрированной в Нидерландах, RIPE NCC просто-напросто обязано соблюдать законодательство ЕС, в том числе принятые ЕС санкции. \u003Cbr\u002F\u003EВ прошлом году RIPE NCC начало ежеквартально публиковать специальный отчет по своим членам, находящимся под санкциями. На данный момент таких держателей IP ресурсов два - одна организация из Ирана и одна из Сирии. Следует отметить, что данные по ним анонимизированы. \u003Cbr\u002F\u003E\u003Cbr\u002F\u003EЧто означает применение санкций со стороны RIPE NCC к его члену - держателю ресурсов? Предоставленные такому члену IP ресурсы (адреса IPv4 и IPv6, AS) замораживаются в базе данных RIPE (RIPE Database). Подсанкционные организации\u002Fлица не могут изменить свою регистрационную информацию. Также им не могут быть предоставлены дополнительные IP ресурсы, а уже выделенные запрещено передавать (продавать). При этом, дерегистрация таких ресурсов не проводится, и договор (Standard Service Agreement) с подсанкционной организацией\u002Fлицом не расторгается. Однако включенная в санкционные списки организация \u002F лицо не могут стать новым членом RIPE NCC и не могут являться представителями члена.\u003Cbr\u002F\u003E\u003Cbr\u002F\u003EЕще раз подчеркнем, эти ограничения относятся к конкретным организациям или лицам, включенным в санкционные списки ЕС, если IP ресурсы зарегистрированы на имя их лично или представляемых ими организаций. Эти правила не распространяются на всех операторов связи из стран, в той или иной мере подверженных санкциям. Операторы связи в той или иной форме существуют, пользуются IP ресурсами и продают их как в Иране, так в Венесуэле и в других подсанкционных странах. С другой стороны, надо иметь ввиду, что ситуация с Украиной до сих пор находится в развитии, и западные страны могут принять новые неожиданные решения, санкционные списки могут пополняться.\u003Cbr\u002F\u003E  \u003Cbr\u002F\u003EИз практики можно сказать, что самые большие практические проблемы у LIR-ов из стран, подверженных санкционному режиму, как правило, возникают с произведением оплаты за членство в RIR-е. Например, на январь 2022 года RIPE NCC отметило, что из-за банковских ограничений они не могут выставить счета 93 своим членам в Иране и 8 членам в Сирии, и планирует это сделать как только появится практическая возможность.\u003Cbr\u002F\u003E\u003Cbr\u002F\u003EКроме того, платежные ограничения влияют на способность LIRов покупать и продавать блоки IPv4. С большой вероятностью, популярность альтернативных инструментов оплаты, таких как криптовалюты, в этой сфере будет расти.\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","tags":[{"titleHtml":"ipv4"},{"titleHtml":"ip-адреса"},{"titleHtml":"санкции"},{"titleHtml":"lir"},{"titleHtml":"россия"},{"titleHtml":"ripe ncc"}],"metadata":{"stylesUrls":[],"scriptUrls":[],"shareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F7f5\u002Fe4c\u002F352\u002F7f5e4c352693b77bfa81e8e807fda656.jpg","shareImageWidth":1200,"shareImageHeight":630,"vkShareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F7f5\u002Fe4c\u002F352\u002F7f5e4c352693b77bfa81e8e807fda656.jpg","schemaJsonLd":"{\"@context\":\"http:\\\u002F\\\u002Fschema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fpost\\\u002F655285\\\u002F\"},\"headline\":\"Коснутся ли санкции IP адресов российских операторов связи?\",\"datePublished\":\"2022-03-12T02:43:29+03:00\",\"dateModified\":\"2022-03-12T02:43:29+03:00\",\"author\":{\"@type\":\"Person\",\"name\":\"Agnese Ilizarova\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Habr\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fwebt\\\u002Fa_\\\u002Flk\\\u002F9m\\\u002Fa_lk9mjkccjox-zccjrpfolmkmq.png\"}},\"description\":\"По прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от...\",\"url\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fpost\\\u002F655285\\\u002F#post-content-body\",\"about\":[\"h_it-infrastructure\",\"f_admin\"],\"image\":[\"https:\\\u002F\\\u002Fhabr.com\\\u002Fshare\\\u002Fpublication\\\u002F655285\\\u002F9bab76619b8cb41b306c2aeed4b11d8d\\\u002F\"]}","metaDescription":"По прошествии двух недель с начала военной операции в Украине, кажется, уже не осталось отрасли российской экономики, не затронутой санкциями США и ЕС. Время от времени озвучиваются призывы &quot;отключить...","mainImageUrl":null,"amp":true,"customTrackerLinks":[]},"polls":[],"commentsEnabled":true,"rulesRemindEnabled":false,"votesEnabled":true,"status":"published","plannedPublishTime":null,"checked":null,"isEditorial":false}},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[""],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[{"title":"Системный администратор","vacanciesCount":137,"itemUrl":"https:\u002F\u002Fcareer.habr.com\u002Fvacancies\u002Fsistemnij_administrator","itemHubs":["s_admin","it-infrastructure","server_side_optimization","sys_admin"]}],"hubs":"it-infrastructure"},"comments":{"articleComments":{},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":"","moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":true,"featurer":[],"megaposts":[{"title":"Как COVID отрывается на IT: тренды и новое исследование","color":"#99ddff","link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FxIxVcWmofSW_FWBFgh5rWSVjDkpDrb72Ieef7CDli2VpaYsmUCAz5EtXUvm9mxsIwrFvwZk20p-lt6tM5DyV_IsopeT4Nzh5c5GW6KtJkL_6kab0LGLUMsMcXomKKLiPuNlwd2jUHQ"},"events":{"view":"kxa9k3NV7lhA47z_aB4vSvzTdks7ob_6r5Vd4g26hbE8C6qFFuWAaCg3pHhFK31sn4t7PLqtC44fMQ"}}],"promoLinks":[{"title":"Разбор ноутбука HONOR MagicBook 16 ","label":"Мегапост","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002Fqg5KSor3IDXn1GCNNgDmNA974gQTWtc7xEvxWMl6RkmEvvHLPBnsmM6IgEBFWK_A_KP8DIhJ1HFMqQx3_SNOLpyQgUmJ4-HJhrkBCwbS_-QsOxkdMJo7EFOcDfhNEKoC"},"events":{"view":"cKEOcPtypxWpS8MXr16sc8aqqCf_8wKec_dtXI6Ar5TEuwdAbbKyjOkavtfl5Eu2m-FLVfZdK8wawA"}},{"title":"Делаем торт вместе: собираем темы, которых вам не хватает на Хабре","label":"Опрос","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F8DcEGOFg8aYZT3la-1MBFQzRtd_-LXlsBPvPwaw_nRFdIHazh4v9n70CJu0NoCOtQnoA0oXHwMiylOquQ73kn4sY07kjODNMjD-4vjDBKiJD1rr52hbL4tHiPW5X"},"events":{"view":"z-ToizFrtQKa-vQp2Jxg2riDlSaCKKGr8a1kqe-rVyyu1fYt5OgjDJuJAijMFM3SmUG9LOEoTlNooQ"}}],"promoPosts":[{"title":"Промокод — твой билет в общество потребления","label":"Промо","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FB52ADUJCnDbKpePdciA1k1eYVT-2Rzoyl8-C30Urn2j-LnSB3agyCjWImXp9aftvM1QJsxJNCrDXB8S1-iTO4p5J6EpXyOfp-5DP8x7myA9-XJmhYWHcxq4IOPSABrQaAWLrGDUtybCPIbUMnmQxRraNZTScp4MDvk4Fb0DwjVYonGbwKs-DvwpwLKyfMDysdcc65JxWAqCMNVuvey2Oqq4u0Lzb"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FL2eQGROAmhY3m9geyZg5hzbabpHGXKeDi3I6U0XddBCcLyPF23yW45snHnVydB25fw4kVLj3Sq9EhyXXC_56VYZYAWNkIk-crzggdQ9VuUcAT9Nq5_0q"}},{"title":"Истощающая тревога: что такое стресс и как с ним бороться","label":"Интересно","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F9g7pZm3KQeYPbNhhizKHeMGxb8gJldf7rMy5fgaCpe_ZvrsnvqWH8NTJ7jl37MbE5--tcyFQvEvD_Kaitthv7NBt4vCMU-a_fN1CDUFB9EpQogVacF1f7RR1mRuenKXeXwbAPUGMxXfEk8M299GHzovO3HC4khyHmToy4-ioppexHsVq1BvhcAfEQ0CrN_0RjilS-HbQEaAu"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002Fveh1YnM1VESVL2vtRcEkoRikaBIVSTu69RdW77jEZTMFacirpEWBmL2pUKBFKuRVqNTgg4d9LvKJmE9gpNqqjy8SkipZaU2XyUzLcmHhduuMTZg6wipmDW-yF3yxzSRRq5ZoQIMnPw"}},{"title":"Неделе фронтендеров на Хабр Карьере ","label":"Событие","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FdA2BoHdkPwU5JadQlFdZUU1Zx0NChYdoYunCN8rgPSQWrE-4jh7eGBqlT8TIGkhYwiNNO8GryQ632Auz4fjo_-2yEe23fl2jTbGx_zzmHQdtBWa0qngUyzB_iG19Ev2Aioz6fLJYsBAgwaboWfCpdCmMZPfiBXaZzzLMlYt9ieNe4UK5NEzjRNoDuFww02wLZBCFkRoWa7eXkn5Pj1dD"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002Fp65VWqWZLbhHEfrl26hmpK9u2HtRXAsGcfOsEUMmgHLJmITW-QGwwDPPgufnYZ4J83w36_AF7tl6Fc5gV-zyx493raOJS9a-6AjXUi44hEh8pM6LCGhL7VkGzfEweccmknAMxdtnn4uDCi2qy8Obwg"}}]},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

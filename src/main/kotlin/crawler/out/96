@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Короли инференса: PyTorch, Tensorflow или MATLAB? / Комментарии / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/page-article-comments.5497aa9d.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" itemprop="image" content="/img/habr_ru.png" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="/img/habr_ru.png" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="/img/habr_ru.png" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="/img/habr_ru.png" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="/img/habr_ru.png?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" property="og:type" content="website" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:title" content="Хабр" data-vmid="og:title">
+  <meta data-vue-meta="ssr" property="og:url" content="https://habr.com/ru/company/etmc_exponenta/blog/651715/comments/" data-vmid="og:url"> 
+  <link data-vue-meta="ssr" image_src="image" href="/img/habr_ru.png" data-vmid="image:href">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/651715/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/company/etmc_exponenta/blog/651715/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" data-vmid="hreflang"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> <!----> <a href="https://effect.habr.com/a/LZMaSpGV5qvkXHv3XsrwFAv4PP9mYpd7F55V_nO6721uzC0rP6ZuyEvcQVKeXhevmVbSO9M6ofIvgBT_DhPNlf9ni9mSgey7FiDY2CoIsOOPQ6Lusul6WvGFMiI33BUv4CFaMA" target="_blank" class="tm-top-link" style="color:#99ddff;"> Сработают ли в IT принципы космической подготовки </a> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div hl="ru" companyname="etmc_exponenta" data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <!----> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <article class="tm-article-comments__article-body">
+            <div class="tm-article-comments__article-snippet">
+             <div class="tm-article-snippet">
+              <div class="tm-article-snippet__meta-container">
+               <div class="tm-article-snippet__meta">
+                <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/n_kapyrin/" title="n_kapyrin" class="tm-user-info__userpic">
+                  <div class="tm-entity-image">
+                   <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/40c/6a1/ce3/40c6a1ce31ae13c0ce9b7b0a4b566b63.jpg" width="24" class="tm-entity-image__pic">
+                  </div></a> <span class="tm-user-info__user"><a href="/ru/users/n_kapyrin/" class="tm-user-info__username"> n_kapyrin </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T14:24:07.000Z" title="2022-03-11, 17:24">вчера в 17:24</time></span>
+               </div> <!---->
+              </div> 
+              <h1 class="tm-article-snippet__title tm-article-snippet__title_h1"><a href="/ru/company/etmc_exponenta/blog/651715/" data-article-link="" class="tm-article-snippet__title-link router-link-active"><span>Короли инференса: PyTorch, Tensorflow или MATLAB?</span></a></h1> 
+              <div class="tm-article-snippet__hubs">
+               <span class="tm-article-snippet__hubs-item"><a href="/ru/company/etmc_exponenta/blog/" class="tm-article-snippet__hubs-item-link router-link-active"><span>Блог компании ЦИТМ Экспонента</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/machine_learning/" class="tm-article-snippet__hubs-item-link"><span>Машинное обучение</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/matlab/" class="tm-article-snippet__hubs-item-link"><span>Matlab</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/artificial_intelligence/" class="tm-article-snippet__hubs-item-link"><span>Искусственный интеллект</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/engineering_systems/" class="tm-article-snippet__hubs-item-link"><span>Инженерные системы</span> <!----></a></span>
+              </div> <!----> <!----> <!---->
+             </div> 
+             <div class="tm-data-icons">
+              <!----> 
+              <div class="tm-votes-meter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                <title>Всего голосов 5: ↑5 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+               </svg> <span title="Всего голосов 5: ↑5 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+5</span>
+              </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+               <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+               </svg> <span class="tm-icon-counter__value">1K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                 <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 7 </span></button> 
+              <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+               <a href="/ru/company/etmc_exponenta/blog/651715/comments/" aria-current="page" class="tm-article-comments-counter-link__link">
+                <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                 <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                </svg> <span class="tm-article-comments-counter-link__value"> 4 </span></a> <!---->
+              </div> <!----> 
+              <div class="v-portal" style="display:none;"></div>
+             </div>
+            </div>
+           </article> <!----> 
+           <div data-async-called="true" class="tm-article-comments-offloaded">
+            <div class="tm-article-comments">
+             <div class="tm-comments-wrapper">
+              <div class="tm-comments-wrapper__wrapper">
+               <header class="tm-comments-wrapper__header">
+                <h2 class="tm-comments-wrapper__title"> Комментарии <span class="tm-comments-wrapper__comments-count"> 4 </span></h2> 
+                <div class="tm-comments-wrapper__header-aside">
+                 <!----> <button class="tm-rss-button tm-rss-button_comments-header"><span class="tm-svg-icon__wrapper tm-rss-button__icon">
+                   <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+                    <title>Скопировать ссылку на RSS</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#rss"></use>
+                   </svg></span></button> <!---->
+                </div>
+               </header> 
+               <div class="tm-comments-wrapper__inner"> 
+                <div class="tm-comments__tree">
+                 <section class="tm-comment-thread">
+                  <!----> 
+                  <article class="tm-comment-thread__comment">
+                   <a name="comment_24156117" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-0">
+                    <div class="tm-comment-thread__circle"></div></button> <!----> 
+                   <div data-comment-body="24156117" class="tm-comment-thread__indent_l-0">
+                    <div data-gallery-root="" class="tm-comment">
+                     <header data-comment-header tabindex="-1" class="tm-comment__header">
+                      <div class="tm-comment__header-inner">
+                       <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/ZlodeiBaal/" title="ZlodeiBaal" class="tm-user-info__userpic">
+                         <div class="tm-entity-image">
+                          <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/dcf/1c7/d55/dcf1c7d552d64a8e516aa7d2f10b80da.jpg" width="24" class="tm-entity-image__pic">
+                         </div></a> <span class="tm-user-info__user"><a href="/ru/users/ZlodeiBaal/" class="tm-user-info__username"> ZlodeiBaal </a> <a href="#comment_24156117" class="tm-comment-thread__comment-link"> 11.03.2022 в 18:07 <!----></a></span></span>
+                      </div> 
+                      <div class="tm-comment__buttons">
+                       <!----> <!---->
+                      </div>
+                     </header> 
+                     <div class="tm-comment__body-content">
+                      <div xmlns="http://www.w3.org/1999/xhtml">
+                       Ого. Использование матлаба в 2022. Я думал он остался в 2015 и особо не развивается.
+                       <br> 
+                       <br> Не понимаю, правда, почему вы бенчмаркаете pytorch|tensorflow без оптимизации под железо с оптимизированным matlab'ом…
+                      </div>
+                     </div> <!----> <!---->
+                    </div> 
+                    <div class="tm-comment-footer">
+                     <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                      <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                       <title>Всего голосов 3: ↑2 и ↓1</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                      </svg> <span title="Всего голосов 3: ↑2 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">+1</span>
+                     </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                       <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                        <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                       </svg></span> <!----></button> <button data-comment-popup="24156117" class="tm-comment__button tm-comment__button_with-icon">
+                      <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                       <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                      </svg></button> <!---->
+                    </div>
+                   </div>
+                  </article> 
+                  <div class="tm-comment-thread__children" style="display:;">
+                   <section class="tm-comment-thread">
+                    <!----> 
+                    <article class="tm-comment-thread__comment">
+                     <a name="comment_24156211" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-1">
+                      <div class="tm-comment-thread__circle"></div></button> <!----> 
+                     <div data-comment-body="24156211" class="tm-comment-thread__indent_l-1">
+                      <div data-gallery-root="" class="tm-comment">
+                       <header data-comment-header tabindex="-1" class="tm-comment__header">
+                        <div class="tm-comment__header-inner">
+                         <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/n_kapyrin/" title="n_kapyrin" class="tm-user-info__userpic">
+                           <div class="tm-entity-image">
+                            <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/40c/6a1/ce3/40c6a1ce31ae13c0ce9b7b0a4b566b63.jpg" width="24" class="tm-entity-image__pic">
+                           </div></a> <span class="tm-user-info__user"><a href="/ru/users/n_kapyrin/" class="tm-user-info__username"> n_kapyrin </a> <a href="#comment_24156211" class="tm-comment-thread__comment-link"> 11.03.2022 в 18:41 <!----></a></span></span>
+                        </div> 
+                        <div class="tm-comment__buttons">
+                         <button type="button" class="tm-comment__button tm-comment__button_with-icon">
+                          <svg height="16" width="16" class="tm-svg-img tm-comment__icon">
+                           <title>Показать предыдущий комментарий</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#small-arrow"></use>
+                          </svg></button> <!---->
+                        </div>
+                       </header> 
+                       <div class="tm-comment__body-content tm-comment__body-content_v2">
+                        <div xmlns="http://www.w3.org/1999/xhtml">
+                         <p>Кстати, в 2016 появился <a href="https://www.mathworks.com/help/matlab/matlab_prog/what-is-a-live-script-or-function.html" rel="noopener noreferrer nofollow">LiveScript </a>(aka Live Editor), стало возможно работать в MATLAB в стиле Jupyter Notebooks. До этого – только скрипты и сторонний код для нейронок.</p>
+                         <p>Если изучать быстродействие в вакууме, то Вы правы, сравнение не безупречно. Но если изучать количество телодвижений от стадии <em>инженер+ТЗ+железка</em> до прототипа со встроенной нейросеткой... То понятно что для всего нужен свой инструмент.</p>
+                        </div>
+                       </div> <!----> <!---->
+                      </div> 
+                      <div class="tm-comment-footer">
+                       <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                        <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                         <title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                        </svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span>
+                       </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                         <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                          <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                         </svg></span> <!----></button> <button data-comment-popup="24156211" class="tm-comment__button tm-comment__button_with-icon">
+                        <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                         <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                        </svg></button> <!---->
+                      </div>
+                     </div>
+                    </article> 
+                    <div class="tm-comment-thread__children" style="display:;">
+                     <section class="tm-comment-thread">
+                      <!----> 
+                      <article class="tm-comment-thread__comment">
+                       <a name="comment_24156261" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-2">
+                        <div class="tm-comment-thread__circle"></div></button> <!----> 
+                       <div data-comment-body="24156261" class="tm-comment-thread__indent_l-2">
+                        <div data-gallery-root="" class="tm-comment">
+                         <header data-comment-header tabindex="-1" class="tm-comment__header">
+                          <div class="tm-comment__header-inner">
+                           <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/ZlodeiBaal/" title="ZlodeiBaal" class="tm-user-info__userpic">
+                             <div class="tm-entity-image">
+                              <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/dcf/1c7/d55/dcf1c7d552d64a8e516aa7d2f10b80da.jpg" width="24" class="tm-entity-image__pic">
+                             </div></a> <span class="tm-user-info__user"><a href="/ru/users/ZlodeiBaal/" class="tm-user-info__username"> ZlodeiBaal </a> <a href="#comment_24156261" class="tm-comment-thread__comment-link"> 11.03.2022 в 18:52 <!----></a></span></span>
+                          </div> 
+                          <div class="tm-comment__buttons">
+                           <button type="button" class="tm-comment__button tm-comment__button_with-icon">
+                            <svg height="16" width="16" class="tm-svg-img tm-comment__icon">
+                             <title>Показать предыдущий комментарий</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#small-arrow"></use>
+                            </svg></button> <!---->
+                          </div>
+                         </header> 
+                         <div class="tm-comment__body-content">
+                          <div xmlns="http://www.w3.org/1999/xhtml">
+                           Не очень понимаю про какие телодвижения вы говорите.
+                           <br> Есть Torch-TensorRT | TF-TRT, где даже ничего менять не надо.
+                           <br> Есть инструменты инференса чистого. ONNX-Runtime (а вот тут я ещё десяток разбираю — <a href="https://habr.com/ru/company/recognitor/blog/524980/">habr.com/ru/company/recognitor/blog/524980</a> ), которые не тащат с собой кучу дополнительного кода + 1-2 строчками на разных платформах используются.
+                          </div>
+                         </div> <!----> <!---->
+                        </div> 
+                        <div class="tm-comment-footer">
+                         <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                          <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                           <title>Всего голосов 2: ↑2 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                          </svg> <span title="Всего голосов 2: ↑2 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">+2</span>
+                         </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                           <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                            <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                           </svg></span> <!----></button> <button data-comment-popup="24156261" class="tm-comment__button tm-comment__button_with-icon">
+                          <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                           <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                          </svg></button> <!---->
+                        </div>
+                       </div>
+                      </article> <!----> <!---->
+                     </section>
+                    </div> <!---->
+                   </section>
+                   <section class="tm-comment-thread">
+                    <!----> 
+                    <article class="tm-comment-thread__comment">
+                     <a name="comment_24156747" class="tm-comment-thread__target"></a> <button class="tm-comment-thread__breadcrumbs tm-comment-thread__indent_b_l-1">
+                      <div class="tm-comment-thread__circle"></div></button> <!----> 
+                     <div data-comment-body="24156747" class="tm-comment-thread__indent_l-1">
+                      <div data-gallery-root="" class="tm-comment">
+                       <header data-comment-header tabindex="-1" class="tm-comment__header">
+                        <div class="tm-comment__header-inner">
+                         <span class="tm-user-info tm-comment__user-info"><a href="/ru/users/sentimentaltrooper/" title="sentimentaltrooper" class="tm-user-info__userpic">
+                           <div class="tm-entity-image">
+                            <svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_green">
+                             <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                            </svg>
+                           </div></a> <span class="tm-user-info__user"><a href="/ru/users/sentimentaltrooper/" class="tm-user-info__username"> sentimentaltrooper </a> <a href="#comment_24156747" class="tm-comment-thread__comment-link"> 11.03.2022 в 21:47 <!----></a></span></span>
+                        </div> 
+                        <div class="tm-comment__buttons">
+                         <button type="button" class="tm-comment__button tm-comment__button_with-icon">
+                          <svg height="16" width="16" class="tm-svg-img tm-comment__icon">
+                           <title>Показать предыдущий комментарий</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#small-arrow"></use>
+                          </svg></button> <!---->
+                        </div>
+                       </header> 
+                       <div class="tm-comment__body-content tm-comment__body-content_v2">
+                        <div xmlns="http://www.w3.org/1999/xhtml">
+                         <p>Матлаб был в университетской среде потому что на нём как-то могли писать студенты. Первые лекции по ML с Coursera были еще как-то в Октаве потом всё ушло в Jupyter Notebooks, но мы уже тогда спрыгнули на питон. Инженер + ТЗ + железка это очень часто tiny YOLO на ComputeModule с чем справится и интерн (a потренирует в Colab). Если задача сложная и более научная, например анализ / классификация RF сигналов и надо самим думать и пялиться много на графики и т.п. то в команде прижился R и SciPy, к которому все прикручивается сильно проще и из которого потом можно так же просто экспортировать. В итоге в нашей научной команде, не настоящих программистов, ответа на вопрос зачем плаить зa лицензию Маталаба мы не нашли. </p>
+                        </div>
+                       </div> <!----> <!---->
+                      </div> 
+                      <div class="tm-comment-footer">
+                       <div class="tm-votes-meter tm-comment-footer__votes-meter">
+                        <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-comment">
+                         <title>Комментарий пока не оценивали</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                        </svg> <span title="Комментарий пока не оценивали" class="tm-votes-meter__value tm-votes-meter__value_appearance-comment tm-votes-meter__value_rating">0</span>
+                       </div> <button type="button" class="tm-comment-thread__button"> Ответить </button> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-comment-footer__button tm-comment-footer__button_with-icon"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                         <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                          <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                         </svg></span> <!----></button> <button data-comment-popup="24156747" class="tm-comment__button tm-comment__button_with-icon">
+                        <svg height="16" width="16" class="tm-svg-img tm-comment__icon tm-comment__icon_dots">
+                         <title>Ещё</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#dots"></use>
+                        </svg></button> <!---->
+                      </div>
+                     </div>
+                    </article> <!----> <!---->
+                   </section>
+                  </div> <!---->
+                 </section>
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div>
+              </div> 
+              <div class="tm-notice tm-comments__comment-notice tm-notice_positive">
+               <!----> 
+               <div class="tm-notice__inner">
+                <!----> 
+                <div class="tm-notice__content">
+                 <span>Только полноправные пользователи могут оставлять комментарии. <a rel="nofollow" href="/kek/v1/auth/habrahabr/?back=/ru/company/etmc_exponenta/blog/651715/comments/&amp;hl=ru">Войдите</a>, пожалуйста.</span>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div> <!----> <!---->
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div hl="ru" class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__placeholder_initial"></div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> <!----> <!---->
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/company/etmc_exponenta/blog/651715/comments/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/company/etmc_exponenta/blog/651715/comments/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"651715":{"id":"651715","timePublished":"2022-03-11T14:24:07+00:00","isCorporative":true,"lang":"ru","titleHtml":"Короли инференса: PyTorch, Tensorflow или MATLAB?","leadData":{"textHtml":"\u003Cp\u003EЧто вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в этой сфере справляется с обучением и выполнением?\u003C\u002Fp\u003E\u003Cp\u003EВ этой статье мы запустим пару нейросетей в MATLAB и сравним быстродействие ResNet с opensource-фреймворками. Так что, если хотите обсудить, в чем (кроме удобства) коммерческий фреймворк может выиграть у опенсорса, добро пожаловать!\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc9d\u002F187\u002Ff38\u002Fc9d187f38b955702ca26822aa6f4d4b1.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc9d\u002F187\u002Ff38\u002Fc9d187f38b955702ca26822aa6f4d4b1.jpg","fit":"cover","positionY":0.22727272727273,"positionX":41.538461538462}},"editorVersion":"2.0","postType":"article","postLabels":[],"author":{"scoreStats":{"score":2,"votesCount":2},"rating":5,"relatedData":null,"contacts":[],"authorContacts":[],"paymentDetails":{"paymentYandexMoney":null,"paymentPayPalMe":null,"paymentWebmoney":null},"id":"474346","alias":"n_kapyrin","fullname":"Николай Капырин","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F40c\u002F6a1\u002Fce3\u002F40c6a1ce31ae13c0ce9b7b0a4b566b63.jpg","speciality":"Инженер – это звучит гордо"},"statistics":{"commentsCount":4,"favoritesCount":7,"readingCount":1000,"score":5,"votesCount":5},"hubs":[{"relatedData":null,"id":"22438","alias":"etmc_exponenta","type":"corporative","title":"Блог компании ЦИТМ Экспонента","titleHtml":"Блог компании ЦИТМ Экспонента","isProfiled":false},{"relatedData":null,"id":"19439","alias":"machine_learning","type":"collective","title":"Машинное обучение","titleHtml":"Машинное обучение","isProfiled":true},{"relatedData":null,"id":"21360","alias":"matlab","type":"collective","title":"Matlab","titleHtml":"Matlab","isProfiled":true},{"relatedData":null,"id":"21922","alias":"artificial_intelligence","type":"collective","title":"Искусственный интеллект","titleHtml":"Искусственный интеллект","isProfiled":false},{"relatedData":null,"id":"22113","alias":"engineering_systems","type":"collective","title":"Инженерные системы","titleHtml":"Инженерные системы","isProfiled":false}],"flows":[{"id":"1","alias":"develop","title":"Разработка"},{"id":"6","alias":"admin","title":"Администрирование"},{"id":"7","alias":"popsci","title":"Научпоп"}],"relatedData":null,"textHtml":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EЧто вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в этой сфере справляется с обучением и выполнением?\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F63c\u002F3aa\u002F681\u002F63c3aa681453012413f25928ac8f6b64.png\" alt=\"Photo by Cristina Gottardi on Unsplash\" title=\"Photo by Cristina Gottardi on Unsplash\" width=\"1920\" height=\"794\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F63c\u002F3aa\u002F681\u002F63c3aa681453012413f25928ac8f6b64.png\"\u002F\u003E\u003Cfigcaption\u003EPhoto by Cristina Gottardi on Unsplash\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EВ этой статье мы запустим пару нейросетей в MATLAB и сравним быстродействие ResNet с opensource-фреймворками. Так что, если хотите обсудить, в чем (кроме удобства) коммерческий фреймворк может выиграть у опенсорса, добро пожаловать!\u003C\u002Fp\u003E\u003Ch2\u003EС чего начинается MATLAB-нейросеть?\u003C\u002Fh2\u003E\u003Cp\u003EНаши заказчики охотно используют нейросети в качестве компонентов своих систем машинного зрения, предиктивной аналитики, анализа цифровых сигналов и во многих других областях. Мы часто пользуемся MATLAB, потому что он позволяет нам разработать и задеплоить сложную систему силами совсем небольшой команды, интегрировать все что нужно с другими тулбоксами MATLAB, чтобы за один присест создать и GUI для лабораторного стенда, и сайт, и подключить внешний код на Python, если надо.\u003C\u002Fp\u003E\u003Cp\u003EТак вот, хоть мы и используем MATLAB в каждом ML\u002FDL проекте, русская версия \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FComparison_of_deep_learning_software\"\u003Eсравнения сред для глубокого обучения\u003C\u002Fa\u003E из Википедии не содержит даже строчки про MATLAB.\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003E\u003Cstrong\u003EЭто повод поговорить об этом фреймворке и сравнить его с остальными.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Cp\u003EЕсли вы никогда не видели, как запустить нейронку в MATLAB, вот небольшой пример. Предположим, что вам нужно классифицировать эту картинку:\u003C\u002Fp\u003E\u003Cfigure class=\"\"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F08e\u002F197\u002F44e\u002F08e19744e8a8ad36ffdf0c28b819899a.png\" alt=\"Знакомьтесь, кот &quot;Hello world&quot;\" title=\"Знакомьтесь, кот &quot;Hello world&quot;\" width=\"244\" height=\"244\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F08e\u002F197\u002F44e\u002F08e19744e8a8ad36ffdf0c28b819899a.png\"\u002F\u003E\u003Cfigcaption\u003EЗнакомьтесь, кот \"Hello world\"\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EКакой код позволит нам это сделать?\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"matlab\"\u003Enet = resnet50(); % Открываем скачанную нейросеть\nim = imread('cat.png'); % Открываем картинку\nsz = net.Layers(1).InputSize; % Подгоняем картинку под нужную размерность\nim = im(1:sz(1),1:sz(2),1:sz(3));\n\nlabel = classify(net, im) % К какому классу относится наш объект?\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EИ вот, что мы получим в ответ:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"matlab\"\u003Elabel = \n\n  categorical\n\n     Egyptian cat\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПеред классификатором – кошка египетской породы, а перед нами – высокоуровневый фреймворк. Здесь можно делать fit-predict, а можно скачать и запустить готовую нейросеть. Поэкспериментируем с зашумленными изображениями.\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"matlab\"\u003E% Получим пары “класс, уверенность”\npredict_scores = predict(net, im);\n[scores,indx] = sort(predict_scores, 'descend');\nclassNames = net.Layers(end).ClassNames;\nclassNamesTop = classNames(indx(1:5));\n\n% Настраиваем область отображения\nh = figure;\nh.Position(3) = 2*h.Position(3); % Сократим ширину окна на 50%\nax1 = subplot(1,2,1);\nax2 = subplot(1,2,2);\n\n% Выводим график\nimage(ax1,im);\nbarh(ax2,scores(5:-1:1))\nxlabel(ax2,'Уверенность')\nyticklabels(ax2,classNamesTop(5:-1:1))\nax2.YAxisLocation = 'right';\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЗавернём код в небольшой цикл и получим:\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa38\u002Fcf6\u002F8b7\u002Fa38cf68b7e8493948de0ec0c301c8856.png\" alt=\"На скорую руку проверяем чувствительность классификации к условиям съемки и детекции\" title=\"На скорую руку проверяем чувствительность классификации к условиям съемки и детекции\" width=\"1428\" height=\"490\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa38\u002Fcf6\u002F8b7\u002Fa38cf68b7e8493948de0ec0c301c8856.png\"\u002F\u003E\u003Cfigcaption\u003EНа скорую руку проверяем чувствительность классификации к условиям съемки и детекции\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EСовсем небольшой скрипт, а сколько возможностей. Многие популярные предобученные нейронки уже заложены в MATLAB Deep Learning Toolbox, а те, которых нет, – \u003Ca href=\"https:\u002F\u002Fdocs.exponenta.ru\u002Fdeeplearning\u002Fdeep-learning-import-and-export.html?utm_source=habr&amp;utm_medium=art&amp;utm_campaign=ai\"\u003Eможно импортировать\u003C\u002Fa\u003E из ONNX, или из TensorFlow 2, или запустить через \u003Ca href=\"https:\u002F\u002Fdocs.exponenta.ru\u002Fmatlab\u002Fmatlab_external\u002Fcall-python-from-matlab.html?utm_source=habr&amp;utm_medium=art&amp;utm_campaign=ai\"\u003Eинтерфейс с Python\u003C\u002Fa\u003E. Вы легко добавите модуль определения карты глубины на базе \u003Ca href=\"https:\u002F\u002Fgithub.com\u002Fisl-org\u002FMiDaS\"\u003EMiDaS\u003C\u002Fa\u003E или повысите разрешение изображения при помощи \u003Ca href=\"https:\u002F\u002Ftfhub.dev\u002Fcaptain-pool\u002Fesrgan-tf2\u002F1\"\u003EESRGAN\u003C\u002Fa\u003E, и ваш робот будет постить в инстаграм 3D-шедевры в высоком разрешении.\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fd13\u002F927\u002Ff48\u002Fd13927f48330115b367b816237b3d5ad.png\" alt=\"Эксперименты на кошках: карта глубины (MiDaS), наложенная на фотографию в 3D, а также детали увеличенного изображения (ESRGAN)\" title=\"Эксперименты на кошках: карта глубины (MiDaS), наложенная на фотографию в 3D, а также детали увеличенного изображения (ESRGAN)\" width=\"1698\" height=\"418\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fd13\u002F927\u002Ff48\u002Fd13927f48330115b367b816237b3d5ad.png\"\u002F\u003E\u003Cfigcaption\u003EЭксперименты на кошках: карта глубины (MiDaS), наложенная на фотографию в 3D, а также детали увеличенного изображения (ESRGAN)\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EЭто далеко не весь функционал: в MATLAB можно рисовать графы сетей и делать контроль версий моделей, а можно просто обучать модели внутри блоков Simulink – достаточно лишь указать им датасет.\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003E\u003Cstrong\u003EЭто, конечно, хорошо, но будет ли сеть выполняться достаточно быстро на вашей платформе?\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Ch2\u003EПокажите мне, где нужно ускорить\u003C\u002Fh2\u003E\u003Cp\u003EСамая большая часть времени в проекте уходит на понимание задачи и данных: никто не сможет вернуть время, потраченное на решение ненужной бизнесу задачи, а из мусорных данных получаются в основном мусорные модели.\u003C\u002Fp\u003E\u003Cp\u003EПорассуждаем на основе диаграммы, которая является вольным переопределением \u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FCRISP-DM\"\u003ECRISP-DM\u003C\u002Fa\u003E:\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fdf8\u002Faf5\u002F3bc\u002Fdf8af53bc7ea1aeb78ddcdd1ceaba281.png\" alt=\"Вольная трактовка процесса CRISP-DM\" title=\"Вольная трактовка процесса CRISP-DM\" width=\"850\" height=\"532\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fdf8\u002Faf5\u002F3bc\u002Fdf8af53bc7ea1aeb78ddcdd1ceaba281.png\"\u002F\u003E\u003Cfigcaption\u003EВольная трактовка процесса CRISP-DM\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003E\u003Cstrong\u003E\u003Cu\u003EЧто трудно ускорить:\u003C\u002Fu\u003E\u003C\u002Fstrong\u003E левая часть схемы выражает околобизнесовые затраты. Ускорить ее может наличие у компании опыта, хорошие практики\u002Fшаблоны, продуктивное общение с заказчиком и коллегами, удобство фреймворка, контроль версий, всякие генераторы кода и документации, и так далее. Объективно сравнить фреймворки по этой части довольно трудно.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003E\u003Cu\u003EЧто значительно легче ускорить:\u003C\u002Fu\u003E\u003C\u002Fstrong\u003E вся правая часть схемы недавно была прерогативой дата сайентистов, но за последние 10 лет хорошо автоматизировалась (как за счет демократизации отрасли, так и за счет прогресса методов и штук вроде AutoML). В этой статье ограничимся тем, что сравним скорость выполнения и немного скорость обучения нейросетей.\u003C\u002Fp\u003E\u003Cp\u003EЧего мы ожидаем от высокоуровневого фреймворка в плане скорости разработки?\u003C\u002Fp\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F296\u002F0df\u002Fcf8\u002F2960dfcf84780d62f1f7038ea5d45754.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F296\u002F0df\u002Fcf8\u002F2960dfcf84780d62f1f7038ea5d45754.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EСкоростного выполнения модели\u003C\u002Fh5\u003E\u003Cp\u003EФреймворк должен оптимизировать код модели, а также позволять легко ее трансформировать и сравнивать производительность разных версий\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa8a\u002F4b8\u002F164\u002Fa8a4b8164c6b5770846b91123a504658.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa8a\u002F4b8\u002F164\u002Fa8a4b8164c6b5770846b91123a504658.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EАвтоподбора модели и легкого перебора гиперпараметров\u003C\u002Fh5\u003E\u003Cp\u003EГрафический редактор графов, отладчик интерфейсов (между слоями нейросети, например), скрипты, AutoML, учебные материалы и шаблоны, дружелюбное сообщество   \u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F849\u002F3e7\u002F80d\u002F8493e780d5b8a510020fc7af4f8d126e.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F849\u002F3e7\u002F80d\u002F8493e780d5b8a510020fc7af4f8d126e.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EПростого и удобного инструментария для работы с данными\u003C\u002Fh5\u003E\u003Cp\u003EЭксплоративный анализ, визуализация, удобный GUI, рефакторинг, версионирование, создание отчетов\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F1ef\u002Fb9e\u002Fbb0\u002F1efb9ebb03207f0a0a14950494d23e52.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F1ef\u002Fb9e\u002Fbb0\u002F1efb9ebb03207f0a0a14950494d23e52.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EРазвёртки и поддержки проекта\u003C\u002Fh5\u003E\u003Cp\u003EСборка проекта, интеграция всех источников данных и внешних компонентов, распаковка проекта на всех необходимых целевых платформах, симуляция и отладка в любых сценариях\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Ch2\u003EСравниваем скорость на ResNet-50\u003C\u002Fh2\u003E\u003Cp\u003EЧто ж, значит в MATLAB тоже есть нейронки, отлично – не придется вручную писать обратное распространение ошибки. Что дальше? Недавно сотрудник MathWorks David Willingham представил доклад, где он сравнивает быстродействие трех фреймворков: MATLAB, PyTorch и Tensorflow.\u003C\u002Fp\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F085\u002Fc6e\u002Fbc9\u002F085c6ebc90eb4ccb2e0a6f9db495adfc.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F085\u002Fc6e\u002Fbc9\u002F085c6ebc90eb4ccb2e0a6f9db495adfc.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EDavid Willingham\u003C\u002Fh5\u003E\u003Cp\u003EMathWorks, Deep Learning Product Manager \u003Ca href=\"https:\u002F\u002Fwww.mathworks.com\u002Fmatlabcentral\u002Fprofile\u002Fauthors\u002F106350\"\u003E\u003Cu\u003Ehttps:\u002F\u002Fwww.mathworks.com\u002Fmatlabcentral\u002Fprofile\u002Fauthors\u002F106350\u003C\u002Fu\u003E\u003C\u002Fa\u003E  \u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Cp\u003EПервое представление о различиях можно подсмотреть в \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FComparison_of_deep_learning_software\"\u003Eуже упомянутой таблице\u003C\u002Fa\u003E в Википедии. Здесь фреймворки отличаются только лицензией и поддержкой библиотек для параллельных вычислений (OpenCL и OpenMP), что для нас второстепенно.\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F16a\u002F308\u002Ffd2\u002F16a308fd2202fd0af62b1c209a13dd44.png\" alt=\"Фреймворки, которые мы будем сравнивать (укороченная версия исходной таблицы)\" title=\"Фреймворки, которые мы будем сравнивать (укороченная версия исходной таблицы)\" width=\"1281\" height=\"443\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F16a\u002F308\u002Ffd2\u002F16a308fd2202fd0af62b1c209a13dd44.png\"\u002F\u003E\u003Cfigcaption\u003EФреймворки, которые мы будем сравнивать (укороченная версия исходной таблицы)\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EСейчас мы изучим результаты сравнения на инференсе, но для начала сравним скорость обучения ResNet-50. Приходится же иногда переобучаться под новый датасет или обучать кастомную архитектуру.\u003C\u002Fp\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa94\u002F28d\u002F4b7\u002Fa9428d4b783c018d2a364fe537b65858.png\" alt=\"Длительность одной эпохи обучения ResNet 50\" title=\"Длительность одной эпохи обучения ResNet 50\" width=\"1133\" height=\"577\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa94\u002F28d\u002F4b7\u002Fa9428d4b783c018d2a364fe537b65858.png\"\u002F\u003E\u003Cfigcaption\u003EДлительность одной эпохи обучения ResNet 50\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EИтак, для сравнения взята стандартная сетка для классификации изображений – ResNet, вариант с 50 слоями. По \u003Ca href=\"https:\u002F\u002Farxiv.org\u002Fabs\u002F1709.05011\"\u003Eнекоторым бенчмаркам\u003C\u002Fa\u003E, обучение на ImageNet 1000 на GPU NVIDIA M40 в течение 90 эпох должно занимать 14 дней, по другим – выходит что A100 отработает 50 эпох за десяток часов (\u003Ca href=\"https:\u002F\u002Fwww.aime.info\u002Fblog\u002Fdeep-learning-gpu-benchmarks-2021\u002F\"\u003EAIME\u003C\u002Fa\u003E). На обучении наши инструменты показывают примерно одинаковые результаты. Может быть, и правда все упирается в железо.\u003C\u002Fp\u003E\u003Cp\u003EЗато, когда сеть уже \u003Cem\u003Eобучена\u003C\u002Fem\u003E, ее производительность будет зависеть от массы факторов, которые интересно изучить. Ее же нужно запускать для каждого пользователя и для каждого примера (фотографии, нового измерения с датчика, речевого сигнала…), на любой платформе, от сервера до бортовых вычислителей автономного робота. Пересылка через всякие интерфейсы и обращение к базам данных может отнять львиную долю времени...\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003E\u003Cstrong\u003EСравним выполнение моделей. Сначала – быстродействие на CPU.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Ch2\u003EБыстродействие на CPU\u003C\u002Fh2\u003E\u003Cp\u003EДавайте сравним запуск на CPU нейросети ResNet в таком сценарии: вы работаете на встраиваемой платформе, где нет ускорителей, или в системе, где нет CUDA. Например, сюда входит очень многое из робототехники, от институтских омни-тележек до космических спутников.\u003C\u002Fp\u003E\u003Cp\u003EОказывается, код нашей сетки выполняется в MATLAB на CPU чуть быстрее, чем в других фреймворках.\u003C\u002Fp\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F37e\u002F113\u002F185\u002F37e113185f6b481ec4b2d18a3f37d90d.png\" alt=\"ResNet 50 на CPU\" title=\"ResNet 50 на CPU\" width=\"1137\" height=\"557\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F37e\u002F113\u002F185\u002F37e113185f6b481ec4b2d18a3f37d90d.png\"\u002F\u003E\u003Cfigcaption\u003EResNet 50 на CPU\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EОказывается, код нашей сетки выполняется в MATLAB на CPU чуть быстрее, чем в других фреймворках. \u003Cstrong\u003EБенчмарк для CPU построен на Intel Xeon 3.6 GHz – такие солидные частоты редко встречаются на борту.\u003C\u002Fstrong\u003E На более приземленном CPU, возможно, код будет вести себя слегка иначе.\u003C\u002Fp\u003E\u003Cfigure class=\"float bordered full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F073\u002F9fe\u002Fa0b\u002F0739fea0b16e2c79b44433fe37b80d71.png\" alt=\"ResNet 50 + MATLAB Coder\" title=\"ResNet 50 + MATLAB Coder\" width=\"1145\" height=\"572\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F073\u002F9fe\u002Fa0b\u002F0739fea0b16e2c79b44433fe37b80d71.png\"\u002F\u003E\u003Cfigcaption\u003EResNet 50 + MATLAB Coder\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EА что, если скомпилировать все при помощи \u003Cstrong\u003EMATLAB Coder\u003C\u002Fstrong\u003E? Сеть в MATLAB выполняется в 2 раза быстрее, чем на Tensorflow и в 3 раза быстрее, чем на PyTorch. Да, это не самая тяжелая нейросеть, и хорошо изученная к тому же, есть много приемов оптимизации, которые MathWorks могли заложить в предобученную сеть, включенную в MATLAB.\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003EЕсли у вас \u003Cstrong\u003Eробототехнический проект с CPU на борту\u003C\u002Fstrong\u003E, то MATLAB – в принципе единственный коробочный продукт, который позволяет обучать модели и запускать их на любой встраиваемой платформе.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EСохранится ли эффект на GPU? Давайте узнаем.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Ch2\u003EБыстродействие на GPU\u003C\u002Fh2\u003E\u003Cp\u003EИспользование GPU позволяет добиться феноменальных скоростей обучения или выполнения нейросетей... при запуске на сравнительно больших объемах данных.\u003C\u002Fp\u003E\u003Cfigure class=\"float bordered full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fb22\u002Ff00\u002Fadc\u002Fb22f00adc75730a48fc91bb032bd506f.png\" alt=\"Батч размером 1 на CPU\" title=\"Батч размером 1 на CPU\" width=\"1143\" height=\"563\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fb22\u002Ff00\u002Fadc\u002Fb22f00adc75730a48fc91bb032bd506f.png\"\u002F\u003E\u003Cfigcaption\u003EБатч размером 1 на CPU\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EПри прогоне через нейросеть на GPU одного примера за один проход (батч размера 1), если запускать сеть через скрипт, MATLAB есть над чем поработать, судя по графикам, 1 батч можно просто запускать на CPU, разницы не будет. \u003Cstrong\u003EЯ обещал обсудить ситуации, когда MATLAB проигрывает – это как раз тот случай\u003C\u002Fstrong\u003E.\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003EПересылка из общей памяти в память GPU занимает много времени, и одновременная обработка данных (в виде \u003Cem\u003Eбатча\u003C\u002Fem\u003E) выгоднее, если в батче больше данных. Но, поскольку \u003Cstrong\u003Eкод модели и небольшой набор данных\u003C\u002Fstrong\u003E все-таки должны поместиться в памяти видеокарты, максимальный размер батча тоже ограничен.\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F435\u002Fdbf\u002Fb27\u002F435dbfb276f876dcad3061d9190bdd27.png\" alt=\"Батч размером 32 на GPU\" title=\"Батч размером 32 на GPU\" width=\"1142\" height=\"573\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F435\u002Fdbf\u002Fb27\u002F435dbfb276f876dcad3061d9190bdd27.png\"\u002F\u003E\u003Cfigcaption\u003EБатч размером 32 на GPU\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EЕсли в батче 32 примера, то все гораздо лучше. Теперь мы хорошо загружаем видеокарту и все фреймворки демонстрируют примерно одинаковый прирост быстродействия относительно запуска на CPU. Но это не все, можно ускориться. \u003Cstrong\u003EВ MATLAB для этого есть два способа скомпилировать нейронку для GPU.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa18\u002F643\u002Ffd0\u002Fa18643fd0393be6dd2deb9299796ebdf.png\" alt=\"Код для GPU в форме MEX-функции\" title=\"Код для GPU в форме MEX-функции\" width=\"1139\" height=\"562\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa18\u002F643\u002Ffd0\u002Fa18643fd0393be6dd2deb9299796ebdf.png\"\u002F\u003E\u003Cfigcaption\u003EКод для GPU в форме MEX-функции\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003E\u003Cstrong\u003EMEX-функции\u003C\u002Fstrong\u003E – это оболочки для внешних программ. Они ведут себя в точности так же, как функции MATLAB\u002FSimulink, но могут попутно с выполнением кода MATLAB вызывать внешнюю программу, C\u002FC++ или иной код. Инструментарий MEX генерирует C++ код для GPU, но не требует лицензии на \u003Cstrong\u003EGPU Coder\u003C\u002Fstrong\u003E для задач предсказания (predict).   \u003C\u002Fp\u003E\u003Cp\u003EУпакованный в MEX код нейросети ResNet выполняется на GPU почти в 2 раза быстрее на одном изображении (на одном батче), чем в PyTorch или TensorFlow.\u003C\u002Fp\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F802\u002F95a\u002Fe20\u002F80295ae20d11d2bad9d020153f9fe992.png\" alt=\"Код для GPU из MATLAB GPU Coder\" title=\"Код для GPU из MATLAB GPU Coder\" width=\"1141\" height=\"573\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F802\u002F95a\u002Fe20\u002F80295ae20d11d2bad9d020153f9fe992.png\"\u002F\u003E\u003Cfigcaption\u003EКод для GPU из MATLAB GPU Coder\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EВторой способ для получения оптимизированного кода – \u003Cstrong\u003EGPU Coder\u003C\u002Fstrong\u003E. Это уже специальный \u003Ca href=\"https:\u002F\u002Fwww.mathworks.com\u002Fhelp\u002Fgpucoder\u002Fgpucoder-deep-learning.html\"\u003Eгенератор кода для GPU\u003C\u002Fa\u003E. Чтобы его применить, нужно всего лишь переключить одну галочку в настройках генератора кода (она называется \u003Cem\u003EGenerate GPU code\u003C\u002Fem\u003E), после чего мы получаем встраиваемый оптимизированный CUDA-код, не требующий какого-то специального окружения для запуска на целевой платформе.\u003C\u002Fp\u003E\u003Cp\u003EАвтоматически оптимизированная для TensorRT нейросеть выполняется очень быстро – почти в 3 раза быстрее, чем та же сеть на GPU в Tensorflow или PyTorch. \u003Cstrong\u003EИ это на одном батче.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Ch2\u003EЗаключение\u003C\u002Fh2\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F1fc\u002F7e3\u002Fb35\u002F1fc7e3b35bb280dd18f5209ead6e1323.png\" alt=\"Ускорение ResNet 50 в MATLAB за последние полгода\" title=\"Ускорение ResNet 50 в MATLAB за последние полгода\" width=\"1129\" height=\"600\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F1fc\u002F7e3\u002Fb35\u002F1fc7e3b35bb280dd18f5209ead6e1323.png\"\u002F\u003E\u003Cfigcaption\u003EУскорение ResNet 50 в MATLAB за последние полгода\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EВ своём докладе MathWorks отмечают, что \u003Cstrong\u003Eза полгода выполнение ResNet было ускорено почти в 2 раза\u003C\u002Fstrong\u003E. Видимо, как в ядре MATLAB, так и в архитектуре нейросети, ещё есть что оптимизировать. Это вселяет оптимизм – будем ожидать, что разработчики и в следующих версиях сохранят такой темп улучшений.\u003C\u002Fp\u003E\u003Cp\u003EВ общем и целом, MATLAB отвечает всем нашим ожиданиям от высокоуровневого фреймворка в том что касается разработки систем с элементами искусственного интеллекта (список критериев – выше). Нам он облегчает и работу с данными, и подбор алгоритмов классического машинного обучения, и подключение глубоких нейросетей, и разработку собственных топологий, если нужно. Так что мы используем его в проектах с ИИ для самых разных заказчиков.\u003C\u002Fp\u003E\u003Cp\u003EПожалуйста, расскажите нам в комментариях о своем опыте работы с нейросетями в MATLAB, о бенчмарках или предпочтениях по фреймворкам. Желаем всем очень производительных AI-проектов, выполненных в комфортной среде!\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","tags":[{"titleHtml":"нейросети"},{"titleHtml":"resnet-50"},{"titleHtml":"matlab"},{"titleHtml":"simulink"},{"titleHtml":"цитм экспонента"}],"metadata":{"stylesUrls":[],"scriptUrls":[],"shareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc9d\u002F187\u002Ff38\u002Fc9d187f38b955702ca26822aa6f4d4b1.jpg","shareImageWidth":1200,"shareImageHeight":630,"vkShareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc9d\u002F187\u002Ff38\u002Fc9d187f38b955702ca26822aa6f4d4b1.jpg","schemaJsonLd":"{\"@context\":\"http:\\\u002F\\\u002Fschema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Fetmc_exponenta\\\u002Fblog\\\u002F651715\\\u002F\"},\"headline\":\"Короли инференса: PyTorch, Tensorflow или MATLAB?\",\"datePublished\":\"2022-03-11T17:24:07+03:00\",\"dateModified\":\"2022-03-11T17:49:54+03:00\",\"author\":{\"@type\":\"Person\",\"name\":\"Николай Капырин\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Habr\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fwebt\\\u002Fa_\\\u002Flk\\\u002F9m\\\u002Fa_lk9mjkccjox-zccjrpfolmkmq.png\"}},\"description\":\"Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного инте...\",\"url\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Fetmc_exponenta\\\u002Fblog\\\u002F651715\\\u002F#post-content-body\",\"about\":[\"c_etmc_exponenta\",\"h_machine_learning\",\"h_matlab\",\"h_artificial_intelligence\",\"h_engineering_systems\",\"f_develop\",\"f_admin\",\"f_popsci\"],\"image\":[\"https:\\\u002F\\\u002Fhabr.com\\\u002Fshare\\\u002Fpublication\\\u002F651715\\\u002Fd4983e5f0265512fad21878b60009f2d\\\u002F\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F63c\\\u002F3aa\\\u002F681\\\u002F63c3aa681453012413f25928ac8f6b64.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F08e\\\u002F197\\\u002F44e\\\u002F08e19744e8a8ad36ffdf0c28b819899a.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fa38\\\u002Fcf6\\\u002F8b7\\\u002Fa38cf68b7e8493948de0ec0c301c8856.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fd13\\\u002F927\\\u002Ff48\\\u002Fd13927f48330115b367b816237b3d5ad.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fdf8\\\u002Faf5\\\u002F3bc\\\u002Fdf8af53bc7ea1aeb78ddcdd1ceaba281.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F296\\\u002F0df\\\u002Fcf8\\\u002F2960dfcf84780d62f1f7038ea5d45754.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fa8a\\\u002F4b8\\\u002F164\\\u002Fa8a4b8164c6b5770846b91123a504658.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F849\\\u002F3e7\\\u002F80d\\\u002F8493e780d5b8a510020fc7af4f8d126e.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F1ef\\\u002Fb9e\\\u002Fbb0\\\u002F1efb9ebb03207f0a0a14950494d23e52.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F085\\\u002Fc6e\\\u002Fbc9\\\u002F085c6ebc90eb4ccb2e0a6f9db495adfc.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F16a\\\u002F308\\\u002Ffd2\\\u002F16a308fd2202fd0af62b1c209a13dd44.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fa94\\\u002F28d\\\u002F4b7\\\u002Fa9428d4b783c018d2a364fe537b65858.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F37e\\\u002F113\\\u002F185\\\u002F37e113185f6b481ec4b2d18a3f37d90d.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F073\\\u002F9fe\\\u002Fa0b\\\u002F0739fea0b16e2c79b44433fe37b80d71.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fb22\\\u002Ff00\\\u002Fadc\\\u002Fb22f00adc75730a48fc91bb032bd506f.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F435\\\u002Fdbf\\\u002Fb27\\\u002F435dbfb276f876dcad3061d9190bdd27.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fa18\\\u002F643\\\u002Ffd0\\\u002Fa18643fd0393be6dd2deb9299796ebdf.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F802\\\u002F95a\\\u002Fe20\\\u002F80295ae20d11d2bad9d020153f9fe992.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F1fc\\\u002F7e3\\\u002Fb35\\\u002F1fc7e3b35bb280dd18f5209ead6e1323.png\"]}","metaDescription":"Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в...","mainImageUrl":null,"amp":true,"customTrackerLinks":[]},"polls":[],"commentsEnabled":true,"rulesRemindEnabled":false,"votesEnabled":true,"status":"published","plannedPublishTime":null,"checked":null,"isEditorial":false}},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[],"hubs":""},"comments":{"articleComments":{"651715":{"refs":{"24156117":{"id":"24156117","parentId":null,"level":0,"timePublished":"2022-03-11T15:07:06+00:00","timeChanged":null,"isSuspended":false,"score":1,"votesCount":3,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003EОго. Использование матлаба в 2022. Я думал он остался в 2015 и особо не развивается.\u003Cbr\u002F\u003E\r\n\u003Cbr\u002F\u003E\r\nНе понимаю, правда, почему вы бенчмаркаете pytorch|tensorflow без оптимизации под железо с оптимизированным matlab'ом…\u003C\u002Fdiv\u003E","editorVersion":1,"author":{"id":"64162","alias":"ZlodeiBaal","fullname":"Мальцев Антон","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002Fdcf\u002F1c7\u002Fd55\u002Fdcf1c7d552d64a8e516aa7d2f10b80da.jpg","speciality":"Computer Vision, Machine Learning"},"isAuthor":false,"isPostAuthor":false,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":["24156211","24156747"],"vote":{"value":null,"isCanVote":false}},"24156211":{"id":"24156211","parentId":"24156117","level":1,"timePublished":"2022-03-11T15:41:53+00:00","timeChanged":null,"isSuspended":false,"score":0,"votesCount":0,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EКстати, в 2016 появился \u003Ca href=\"https:\u002F\u002Fwww.mathworks.com\u002Fhelp\u002Fmatlab\u002Fmatlab_prog\u002Fwhat-is-a-live-script-or-function.html\" rel=\"noopener noreferrer nofollow\"\u003ELiveScript \u003C\u002Fa\u003E(aka Live Editor), стало возможно работать в MATLAB в стиле Jupyter Notebooks. До этого – только скрипты и сторонний код для нейронок.\u003C\u002Fp\u003E\u003Cp\u003EЕсли изучать быстродействие в вакууме, то Вы правы, сравнение не безупречно. Но если изучать количество телодвижений от стадии \u003Cem\u003Eинженер+ТЗ+железка\u003C\u002Fem\u003E до прототипа со встроенной нейросеткой... То понятно что для всего нужен свой инструмент.\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","editorVersion":2,"author":{"id":"474346","alias":"n_kapyrin","fullname":"Николай Капырин","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F40c\u002F6a1\u002Fce3\u002F40c6a1ce31ae13c0ce9b7b0a4b566b63.jpg","speciality":"Инженер – это звучит гордо"},"isAuthor":false,"isPostAuthor":true,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":["24156261"],"vote":{"value":null,"isCanVote":false}},"24156261":{"id":"24156261","parentId":"24156211","level":2,"timePublished":"2022-03-11T15:52:00+00:00","timeChanged":null,"isSuspended":false,"score":2,"votesCount":2,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003EНе очень понимаю про какие телодвижения вы говорите.\u003Cbr\u002F\u003E\r\nЕсть Torch-TensorRT | TF-TRT, где даже ничего менять не надо.\u003Cbr\u002F\u003E\r\nЕсть инструменты инференса чистого. ONNX-Runtime (а вот тут я ещё десяток разбираю — \u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fcompany\u002Frecognitor\u002Fblog\u002F524980\u002F\"\u003Ehabr.com\u002Fru\u002Fcompany\u002Frecognitor\u002Fblog\u002F524980\u003C\u002Fa\u003E ), которые не тащат с собой кучу дополнительного кода + 1-2 строчками на разных платформах используются.\u003C\u002Fdiv\u003E","editorVersion":1,"author":{"id":"64162","alias":"ZlodeiBaal","fullname":"Мальцев Антон","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002Fdcf\u002F1c7\u002Fd55\u002Fdcf1c7d552d64a8e516aa7d2f10b80da.jpg","speciality":"Computer Vision, Machine Learning"},"isAuthor":false,"isPostAuthor":false,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":[],"vote":{"value":null,"isCanVote":false}},"24156747":{"id":"24156747","parentId":"24156117","level":1,"timePublished":"2022-03-11T18:47:33+00:00","timeChanged":null,"isSuspended":false,"score":0,"votesCount":0,"message":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EМатлаб был в университетской среде потому что на нём как-то могли писать студенты. Первые лекции по ML с Coursera были еще как-то в Октаве потом всё ушло в Jupyter Notebooks, но мы уже тогда спрыгнули на питон. Инженер + ТЗ + железка это очень часто  tiny YOLO на ComputeModule с чем справится и интерн (a потренирует в Colab). Если задача сложная и более научная, например анализ \u002F классификация RF сигналов и надо самим думать и пялиться много на графики и т.п. то в команде прижился R и SciPy, к которому все прикручивается сильно проще и из которого потом можно так же просто экспортировать. В итоге в нашей научной команде, не настоящих программистов,  ответа на вопрос зачем плаить зa лицензию Маталаба мы не нашли. \u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","editorVersion":2,"author":{"id":"2853913","alias":"sentimentaltrooper","fullname":null,"avatarUrl":null,"speciality":"R&D \u002F Technology transfer (Telecom \u002FRF\u002FAI), PhD"},"isAuthor":false,"isPostAuthor":false,"isNew":false,"isFavorite":false,"isCanEdit":false,"timeEditAllowedTill":null,"children":[],"vote":{"value":null,"isCanVote":false}}},"root":["24156117"]}},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{"isCanComment":false,"cantCommentReasonKey":"AUTH_REQUIRED","cantCommentReason":"Authorization required","data":null},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":1647024453,"moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":true,"featurer":[],"megaposts":[{"title":"Сработают ли в IT принципы космической подготовки","color":"#99ddff","link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FLZMaSpGV5qvkXHv3XsrwFAv4PP9mYpd7F55V_nO6721uzC0rP6ZuyEvcQVKeXhevmVbSO9M6ofIvgBT_DhPNlf9ni9mSgey7FiDY2CoIsOOPQ6Lusul6WvGFMiI33BUv4CFaMA"},"events":{"view":"d99T7YA4_fkB22EJNu9eQWbcOAIo1IIv8uEhvkJaKtMjp5ZHqo7b14sZHxLNSR09YDfy_PtkjjoSJg"}}],"promoLinks":[{"title":"Как работа вызывает стресс и как это отследить","label":"Интересно","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FmY9t4KLbuHbm4ZqYTP317GA_Q3WTvRi5ism9WVl-wS8NllHnFr_RDkn3IjH06y8mptv0GnSl4q1rq6yU2bxVOB0dri1aLZSOubL4Wm4qwhxT7tJmGBy_cSXV4HDlMMwrG24Ddb4CtA"},"events":{"view":"vnVHs5_VzNYFijDXZohEQGinkf7dPT2XkWEF6kXKmzApHAb58Z1lsEcyBOtHxMisStqO1p2Glvj_WA"}},{"title":"А как прошел ваш 2021? Исследуем рынок труда в IT, строим тренды и ищем аномалии","label":"Промо","external":true,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FwjTC3gWZt0u0oib58dsjDBUTxCWsmlCR4yJ5-qczvFastP2XXEBPygAM0_DJF87TfsDKBYiUI5qFPM4KI0vP8O5J0nuP75OWoa57zEImDxv9WnNgyMtktNACfAa0GB5de2Q9oGTaKd53Vh-rqrs9LU4aPrU9yDI"},"events":{"view":"4DJp86WFHergIrmQYSXQeTmvQSMMHLiOs1We_aPPE4QAzv6QmOd9faasbD5t_WH1q8U-NJXGVOiF7g"}}],"promoPosts":[{"title":"Конкурс технических статей Технотекст 2021","label":"Событие","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FYi4LtaQiKJMAqLzWCizqXA1cxf3czAEcjSMy0qnhd-fqbgtKh2F0eFbppMZMq316BXdSjJI7k1riyVFoIyKgeW_SwA7-hfqZS0mhuQSosCxDs1Yuec0TvZgI1a_tHLtCC5TiMHWN61Xspc8qcb-EbZYfq7RfNJGN5MwGifcbv9ZiYQGX0bdQmHt5LhawI4ZSnHN7AcZUWpvjVvOUskyPi-6Jz-ff"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FhBsM7zKESOQO7RPvtz3zGT8BAlW5zUxHAxPO0OeikM7-saGJIs6zLegBeNibFxZjWKgYqSD9fSwCZrUga63cHVA3-SwAiZhtVr3dD1HAIBSCtg"}},{"title":"Хьюстон, на воркшопе этого не было: IT-обучение и космос","label":"Мегапост","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FYyUTaQtgvxQdb0CjzXrOlR6lXpiKDCySLLqD-UEvz3DVr5mUVXCMUHRmzo61Alkv5MTWmQIdOT8fcumMjH8KHFXegemBcRaTVAuM811tBU7HsQ5gVqWH9vQHXYXdlIDpvXgWZfIJeZ6XfUXe_AIGeN_4aSHl5-UcQ_6xL3Pdvo-J2fzJWqTKNT8kfCVgXNvM-NMCuMGs9ygRDA"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FlzKqx6rzh-7A7c-MOxH3fdPXihtlxDkzkDXX0WdTmjRPmiYwnHv-cvDzwLn6_Q8eVQoetadSUG8vR-xGhYsvICCDGqLLTOhOpKMWJWa5mOMXpIohYfvk5rORC5paW-RKYCJWJEk"}},{"title":"Истощающая тревога: что такое стресс и как с ним бороться","label":"Интересно","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002Fjc-BB74uCToCPM9ImCxDcFcKJEPZ_Fys2euuAycMw9YMtNIng7u6ea9GLovtG97rs_dzqbiccOzzfQydMgzj4vc88BRnUJAAIQUqvudTAeWkyuHEzGSRDkrNKZLCIygRAr_SaKUHzyX8f_lyAF-9CHGehegpkggtWHKibvkUvxAX8hyROpGZDRBUPdWKz2qye_U69Bxhz7cK"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FWPnyg0FkwSOi60-2wOCtjR6dYgvzxzrNLJ162oBlQSstMZgoH8SJHOqKiDCXyQ3b0OVLwK_vTspsju1JSJmO-icGoo5r5ZYZfQUGnogwPmuYVqjhY8NJgWBm5th1ON5VNFjXP3YKMQ"}}]},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/page-article-comments.97bb766a.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Юнидата, Санкт-Петербург - Разработчик ПО в области управления данными / Статьи / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/page-company.eda30e8d.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/page-company.4d436d0c.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/page-company.eda30e8d.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" itemprop="image" content="/img/habr_ru.png" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="/img/habr_ru.png" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="/img/habr_ru.png" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="/img/habr_ru.png" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="/img/habr_ru.png?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" property="og:type" content="website" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:url" content="https://habr.com/ru/company/unidata/blog/" data-vmid="og:url">
+  <meta data-vue-meta="ssr" data-vmid="description" name="description" content="15 статей от авторов компании Юнидата">
+  <meta data-vue-meta="ssr" property="og:title" content="Юнидата, Санкт-Петербург - Разработчик ПО в области управления данными / Статьи" data-vmid="og:title">
+  <meta data-vue-meta="ssr" property="og:description" content="15 статей от авторов компании Юнидата" data-vmid="og:description">
+  <meta data-vue-meta="ssr" property="keywords" content="Статьи Юнидата, Санкт-Петербург - Разработчик ПО в области управления данными, IT-компании, Карьера в IT-индустрии, Анализ и проектирование систем, Софт, Информационная безопасность, mdm, управление данными, юнидата, hr, mdm-система, java, unidata" data-vmid="keywords"> 
+  <link data-vue-meta="ssr" image_src="image" href="/img/habr_ru.png" data-vmid="image:href">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/company/unidata/blog/" hreflang="ru" rel="alternate" data-vmid="hreflang">
+  <link data-vue-meta="ssr" href="https://habr.com/en/company/unidata/blog/" hreflang="en" rel="alternate" data-vmid="hreflang">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/company/unidata/blog/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/company/unidata/" rel="canonical" data-vmid="canonical"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> <!----> <a href="https://effect.habr.com/a/xS-Cjj-DarWCHg1ALoZLafG0Tc1OGdZUM7DToa6wyJpeGYmR4wdLQxnYwfDhFla3fcqLjnz3frqY_zhJe4F1XG5gLFJqZ0vByXhcfDdtTGezToxTexOLXcSf7Q" target="_blank" class="tm-top-link" style="color:#ff99f7;"> Разбор ноутбука HONOR MagicBook 16 </a> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <div class="tm-page__header">
+         <!---->
+        </div> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <section class="tm-block tm-block_spacing-bottom">
+            <!----> 
+            <div class="tm-company-profile-card">
+             <div class="tm-company-card tm-company-profile-card__info">
+              <div class="tm-company-card__header">
+               <a href="/ru/company/unidata/profile/" class="tm-company-card__avatar">
+                <div class="tm-entity-image">
+                 <img alt="" height="48" src="//habrastorage.org/getpro/habr/company/67a/e9f/02e/67ae9f02ec0bbd1ab33d901ccf0d374a.jpg" width="48" class="tm-entity-image__pic">
+                </div></a> <!----> 
+               <div class="tm-rating tm-company-card__rating">
+                <div class="tm-rating__header"> 
+                 <div class="tm-rating__counter">
+                  15.37
+                 </div>
+                </div> 
+                <div class="tm-rating__text">
+                  Рейтинг 
+                </div>
+               </div> <!---->
+              </div> 
+              <div class="tm-company-card__info">
+               <a href="/ru/company/unidata/profile/" class="tm-company-card__name"> Юнидата </a> 
+               <div class="tm-company-card__description">
+                Разработчик ПО в области управления данными
+               </div>
+              </div>
+             </div> <!---->
+            </div> 
+            <div class="tm-tabs tm-tabs_page-header">
+             <div class="tm-tabs__scroll-area">
+              <span class="tm-tabs__tab-item"><a href="/ru/company/unidata/profile/" class="tm-tabs__tab-link"> Профиль <!----></a></span><span class="tm-tabs__tab-item"><a href="/ru/company/unidata/blog/" aria-current="page" data-test-id="tab-link-active" class="tm-tabs__tab-link router-link-exact-active  tm-tabs__tab-link_active"> Блог <span class="tm-tabs__tab-counter"> 15 </span></a></span><span class="tm-tabs__tab-item"><a href="/ru/company/unidata/vacancies/" class="tm-tabs__tab-link"> Вакансии <!----></a></span><span class="tm-tabs__tab-item"><a href="/ru/company/unidata/fans/all/rating/" class="tm-tabs__tab-link"> Подписчики <span class="tm-tabs__tab-counter"> 41 </span></a></span><span class="tm-tabs__tab-item"><a href="/ru/company/unidata/workers/all/rating/" class="tm-tabs__tab-link"> Сотрудники <span class="tm-tabs__tab-counter"> 2 </span></a></span>
+             </div> <!---->
+            </div> 
+            <div class="tm-navigation-filter">
+             <div class="tm-navigation-filters">
+              <div class="tm-navigation-filters__wrapper">
+               <button class="tm-navigation-filters__button"> Новые 
+                <svg height="16" width="16" class="tm-svg-img icon_dropdown-arrow">
+                 <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+                </svg></button> <button class="tm-rss-button tm-rss-button_default"><span class="tm-svg-icon__wrapper tm-rss-button__icon">
+                 <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+                  <title>Скопировать ссылку на RSS</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#rss"></use>
+                 </svg></span></button>
+              </div> 
+              <div class="tm-navigation-filters__options">
+               <div class="tm-navigation-filters__list-label">
+                 Сначала показывать 
+               </div> 
+               <ul class="tm-navigation-filters__list">
+                <li class="tm-navigation-filters__option"><button tabindex="-1" class="tm-navigation-filters__option-button tm-navigation-filters__option-button_active"> Новые </button></li>
+                <li class="tm-navigation-filters__option"><button tabindex="-1" class="tm-navigation-filters__option-button"> Лучшие </button></li>
+               </ul> <!----> <!----> <button type="button" tabindex="-1" class="tm-navigation-filters__apply btn btn_solid btn_small"> Применить </button>
+              </div>
+             </div> <!----> <!---->
+            </div> <!---->
+           </section> 
+           <div data-async-called="true" class="tm-sub-page">
+            <div class="tm-sub-page__main">
+             <div>
+              <div class="tm-articles-list">
+               <!----> 
+               <article id="655243" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T15:40:27.000Z" title="2022-03-11, 18:40">вчера в 18:40</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/655243/" data-article-link="" class="tm-article-snippet__title-link"><span>Почувствуй себя государством, или для чего нужна наука</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/career/" class="tm-article-snippet__hubs-item-link"><span>Карьера в IT-индустрии</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/itcompanies/" class="tm-article-snippet__hubs-item-link"><span>IT-компании</span> <!----></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/8d0/64c/ddb/8d064cddb9a4a8ba2361a5f8f549265e.jpg" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p><strong>Вступление</strong></p>
+                     <p>Наша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели изначально работали в научной сфере. Разработки, лежащие в основе запатентованных технологий работы с данными и ставшие основой для нашего флагманского продукта – следствие их высоких теоретических знаний и исследовательских талантов.&nbsp;&nbsp;На пути реализации своих целей в бизнесе, они всегда старались сохранить связь с академической средой. Издавали и издают поныне научные статьи и книги, участвовали в разработке научных программ и сотрудничали со своими родными ВУЗами и кафедрами.</p>
+                     <p>Постепенно к этой деятельности все больше привлекалась ГК, это была либо практическая деятельность – дипломные работы и практики студентов, либо осознанная благотворительность – ведение спецкурса для студентов нескольких кафедр СПбГУ на базе ГК и с активной «прокачкой» слушателей по методологии и практике проектной деятельности и программирования.</p>
+                     <p>&nbsp;</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/655243/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 1: ↑0 и ↓1</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 1: ↑0 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_negative tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">-1</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">735</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 4 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/655243/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 1 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="591359" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-11-24T16:38:04.000Z" title="2021-11-24, 19:38">24 ноября 2021 в 19:38</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/591359/" data-article-link="" class="tm-article-snippet__title-link"><span>Тернистый путь вендора. Часть 1</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/dev_management/" class="tm-article-snippet__hubs-item-link"><span>Управление разработкой</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/itcompanies/" class="tm-article-snippet__hubs-item-link"><span>IT-компании</span> <!----></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/04d/243/050/04d243050474f753c43f881f1077d43e.jpg" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p><strong>Несколько слов об авторе</strong></p>
+                     <p>Чтобы был понятен контекст, нужно сказать несколько слов об авторе. Я с 2004 года занимаюсь разработкой программного обеспечения, начав с позиции junior java developer'а в аутсорсинговой компании и сейчас занимая позицию CTO в компании-вендоре «Юнидата». По пути застал времена расцвета и заката ODC западных продуктовых компаний в отечественных аутоорс компаниях, частичную переориентацию классических аутсорс компаний на отечественный рынок заказной разработки, эру импортозамещения и прочих этапов развития рынка разработки программного обеспечения (ПО) в России (мне кажется эта тема еще ждет своего историка). Учитывая все это, считаю себя достаточно опытным, чтобы рассуждать о деятельности вендора в B2B сегменте, вместе с тем осознавая ограничение своего опыта рамками определенных сегментов рынка ПО.</p>
+                     <p><strong>О чем и для кого статья</strong></p>
+                     <p>В данной статье я хочу описать, что же такое на самом деле вендор ПО, какое место в ней занимает собственно разработка продукта, и чем это отличается или не отличается от других компаний-разработчиков ПО. Надеюсь, что этот материал будет полезен для людей, планирующих работу в области продуктовой разработки, чтобы понимать на что из может ожидать, а также для сотрудников, уже работающих в продуктовой разработке, для понимания того, как это функционирует на самом деле. Из-за своего объема текст разбит на 2 части. Перед вами первая из них.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/591359/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 3: ↑3 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 3: ↑3 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+3</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">1.4K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 10 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/591359/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 1 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article">
+                <!---->
+               </div><!----> 
+               <article id="584730" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-10-21T09:23:05.000Z" title="2021-10-21, 12:23">21 октября 2021 в 12:23</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/584730/" data-article-link="" class="tm-article-snippet__title-link"><span>Когда хочется праздника. О корпоративах в пандемию</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/career/" class="tm-article-snippet__hubs-item-link"><span>Карьера в IT-индустрии</span> <!----></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/a00/b6f/cc2/a00b6fcc293e62e226e70abc1480cf76.jpg" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p>Идея гедонистической адаптации говорит, что человек обладает механизмом, который склонен постепенно снижать воздействие ярких эмоциональных событий: положительных или отрицательных. Если человек выиграет миллион за прививку, или сильно заболеет, то в любом случае через 30-90 дней он вернётся к примерно тому же уровню счастья, что и до этого. Механизм помогает мириться с событиями, жить дальше, даже забывать какие-то вещи.</p>
+                     <p>Есть события, к которым этот механизм не применим, и условия пандемии, как оказалось, в их числе. Да, нельзя сказать, что мы тут все беспрерывно страдаем. Однако же нет-нет, да и проскользнет в голове мысль, что «а раньше…». Эпидемические меры — это целая куча деталей, на каждую из которых обращаешь внимание даже спустя много времени.</p>
+                     <p>А раньше мы проводили корпоративы два раза в год, собирались вместе и веселились (думаю, о корпоративе как инструменте уже все знают, и не нужно повторяться). Летом мы праздновали день рождения компании, зачастую устраивая спортивные мероприятия: парусную регату, рафтинг, веревочный парк и т.д.</p>
+                     <p>Зимний корпоратив – это новый год. Праздничная и торжественная вечеринка, квест или викторина. Отличаемся ото всех только тем, что проводим корпоратив после январских праздников: мы даём сотрудникам больше времени на закрытие проектов перед каникулами, а в январе, когда все только раскачиваются, делаем перерыв в работе. Многие голосовали за этот вариант, в итоге уже несколько лет эта схема работает.</p>
+                     <p>&nbsp;</p>
+                     <p><strong>И тут пришел 2020-ый…</strong></p>
+                     <p>Только ленивый не говорил о пандемических изменениях. Поменялось всё, и представление об организации корпоративов тоже. Из-за введенных ограничений и из-за беспокойства за здоровье своих сотрудников руководство компаний было вынуждено перевести сотрудников на удаленную работу и, как следствие, отказаться от привычного оффлайн-формата работы и совместных мероприятий.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/584730/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 7: ↑2 и ↓5</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 7: ↑2 и ↓5" class="tm-votes-meter__value tm-votes-meter__value_negative tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">-3</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">1.5K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 2 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/584730/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 8 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="582970" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-10-12T09:20:57.000Z" title="2021-10-12, 12:20">12 октября 2021 в 12:20</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/582970/" data-article-link="" class="tm-article-snippet__title-link"><span>5 трендов баз данных. Идеи с конференции VLDB’21</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/dwh/" class="tm-article-snippet__hubs-item-link"><span>Хранение данных</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/data_warehouse/" class="tm-article-snippet__hubs-item-link"><span>Хранилища данных</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/tech_events/" class="tm-article-snippet__hubs-item-link"><span>Конференции</span> <!----></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/14a/d82/710/14ad8271039a5a14df0bb2495c781be0.png" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p>В середине августа мы приняли участие в международной научной конференции VLDB (Very Large Data Bases), и хотим поделиться актуальными идеями о работе с базами данных.</p>
+                     <p>Если вы специалист по базам данных, или так или иначе связаны с ними, то приглашаем к чтению.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/582970/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 17: ↑17 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 17: ↑17 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+17</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">3.6K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 31 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/582970/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 18 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="579194" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-09-21T13:21:39.000Z" title="2021-09-21, 16:21">21 сентября 2021 в 16:21</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/579194/" data-article-link="" class="tm-article-snippet__title-link"><span>Развиваем нечеткий поиск на примере МТР</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/9f7/a7b/f60/9f7a7bf6097ddd027a37979ccb86a170.jpg" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p>Одним из основополагающих инструментов при работе с данными является их поиск. В юнидате мы используем инструмент ElasticSearch&nbsp;как сервис полнотекстового поиска. В данной статье мы хотим поделиться нашим личным опытом развития fuzzy&nbsp;поиска в тематике материально-технических –&nbsp;ресурсов (далее МТР) как пример использования поиска в специализированных бизнес-кейсах. Статья не является руководством к применению, так как определенные решения могут не быть оптимальными вне контекста платформы, но могут быть полезны при решении похожих задач. Итак, приступим.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/579194/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 2: ↑2 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 2: ↑2 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+2</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">907</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 9 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/579194/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 0 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="578094" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-09-15T12:46:24.000Z" title="2021-09-15, 15:46">15 сентября 2021 в 15:46</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/578094/" data-article-link="" class="tm-article-snippet__title-link"><span>От неприятия к пониманию. Взгляд на стажировку в IT&nbsp;компании от лица HR</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/career/" class="tm-article-snippet__hubs-item-link"><span>Карьера в IT-индустрии</span> <!----></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/2a3/b9f/47c/2a3b9f47c3ae6808cc750cc86600552b.jpg" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p>Сегодня мы начинаем новую серию публикаций, посвященных управлению персоналом. Как оказалось, в HR подразделении нашей компании происходят весьма своеобразные и любопытные процессы, узнать о которых широкой аудитории будет полезно и любопытно. И начнем мы со статьи, посвященной стажировке. Представьте классическую ситуацию: молодые студенты или аспиранты приходят на стажировку в крупную IT компанию и… начинается самое интересное.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/578094/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 9: ↑6 и ↓3</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 9: ↑6 и ↓3" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+3</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">3.8K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 14 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/578094/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 6 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="575784" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-09-01T13:36:09.000Z" title="2021-09-01, 16:36">1 сентября 2021 в 16:36</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/575784/" data-article-link="" class="tm-article-snippet__title-link"><span>Перестроились в модульный монолит, а не в микросервисы</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/javascript/" class="tm-article-snippet__hubs-item-link"><span>JavaScript</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/reactjs/" class="tm-article-snippet__hubs-item-link"><span>ReactJS</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/typescript/" class="tm-article-snippet__hubs-item-link"><span>TypeScript</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/814/9f0/98a/8149f098aa97aecbd8b5b4125d1b695e.png" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p>Относительно недавно мы начали строить качественно новую версию платформы "Юнидата", в которой изменилось очень многое, включая архитектуру, технологии, подход. Даже основная идея продукта приросла новыми деталями.</p>
+                     <p>Нам кажется, что здорово делиться опытом подобных изменений, поэтому мы хотим сделать несколько статей о том, как устроена изнутри "Юнидата". В этой, первой, статье речь пойдет о UI. О том, как было раньше, что побудило нас кардинально пересмотреть стек и организацию работы с кодом, и что получилось в итоге.</p>
+                     <p><strong>Об авторе статьи</strong>. Меня зовут Илья, я занимаюсь разработкой новой версии. Мне не довелось работать с предыдущими версиями "Юнидата", и в проект я пришел на этапе прототипа. Я могу быть не до конца объективен на тему того, почему было выбрано то или иное решение, если это происходило еще до моего присоединения к продукту. В причинах перехода я написал свое видение, после общения с командой.</p>
+                     <p>Итак, всем, кто любит истории переезда с ноткой технических особенностей, добро пожаловать под кат.</p>
+                     <p><strong>Краткий тех.обзор</strong></p>
+                     <p>Сейчас мы имеем модульный монолит и на бэке и на фронте. Они расположены в отельных репозиториях + есть еще один, который содержит настройки для запуска всего приложения в контейнерах.</p>
+                     <p>Кроме того, продукт разделён на <strong>Community&nbsp;Edition</strong>&nbsp;(хранится&nbsp;в <a href="https://gitlab.com/unidata-community-group"><u>публичном&nbsp;гитлабе</u></a>)&nbsp;и&nbsp;<strong>Enterprise&nbsp;Edition</strong>.</p>
+                     <p>Фронтенд состоит из 20 модулей (число не конечное). Мы используем свежую версию typescript и почти свежую react (сейчас 16, но перевод на 17 - дело ближайшего времени). Применяем MVC подход в каждом модуле: реакт только view-слой, своя observable модель (обязательно про нее напишем отдельную статью), mobx&nbsp;сторы в качестве контроллеров.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/575784/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 9: ↑9 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 9: ↑9 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+9</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">8.4K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 55 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/575784/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 2 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="574660" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-08-25T14:15:40.000Z" title="2021-08-25, 17:15">25 августа 2021 в 17:15</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/574660/" data-article-link="" class="tm-article-snippet__title-link"><span>IT в тюрьме. Письма в неволю и из неволи</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/itcompanies/" class="tm-article-snippet__hubs-item-link"><span>IT-компании</span> <!----></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/f94/87a/e41/f9487ae41a373018fef7de878f8dc8f9.png" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p><a href="https://habr.com/ru/company/unidata/blog/570118/">В одной из прошлых статей</a> мы подробно рассказали о неприятной ситуации, в которой оказались наши коллеги, и дали целый ряд практических советов относительно того, как себя вести, когда «к тебе пришли». Статья вызвала настолько большой ажиотаж (шутка ли, более 20 000 просмотров), что мы вновь решили разнообразить свои технически публикации (а за последние недели мы писали о <a href="https://habr.com/ru/company/unidata/blog/571370/">«Применении машинного обучения для определения содержимого колонки в таблице»</a> и о <a href="https://habr.com/ru/company/unidata/blog/572664/">Специфике подготовки технической документации</a>) материалом, который также напрямую касается уголовного преследования. И сегодняшняя наша статья посвящена такой для многих экзотической вещи как… переписка в СИЗО.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/574660/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 86: ↑75 и ↓11</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 86: ↑75 и ↓11" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+64</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">23K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 60 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/574660/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 38 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="572664" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/InstaHeat/" title="InstaHeat" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/ef8/a07/026/ef8a07026dafc928ddb893abb5f42b04.png" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/InstaHeat/" class="tm-user-info__username"> InstaHeat </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-08-12T15:48:04.000Z" title="2021-08-12, 18:48">12 августа 2021 в 18:48</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/572664/" data-article-link="" class="tm-article-snippet__title-link"><span>Как закалялась документация</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/productpm/" class="tm-article-snippet__hubs-item-link"><span>Управление продуктом</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/technical_writing/" class="tm-article-snippet__hubs-item-link"><span>Подготовка технической документации</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/038/6f1/497/0386f1497fecaa71dfdd564dcb310ed2.png" class="tm-article-snippet__lead-image" style="object-position:55.769230769231% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p>Подобно безумному исследователю, я вот уже пятый год пытаюсь создать идеальную продуктовую документацию. Но, раз она всё еще не идеальна, значит я что-то делаю не так. Вот про это и будет статья.</p>
+                     <p>Хочу очертить тот путь, который мы прошли, и рассказать о том, какие решения принимали, и что из этого вырастало.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/572664/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 7: ↑7 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 7: ↑7 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+7</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">3.2K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 19 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/572664/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 12 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="571370" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-08-05T08:07:04.000Z" title="2021-08-05, 11:07">5 августа 2021 в 11:07</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/571370/" data-article-link="" class="tm-article-snippet__title-link"><span>Применение машинного обучения для определения содержимого колонки в таблице</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span>
+                 </div> 
+                 <div class="tm-article-snippet__labels">
+                  <div class="tm-article-snippet__label tm-article-snippet__label_variant-translation">
+                   <span> Перевод </span>
+                  </div>
+                 </div> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/115/88f/69e/11588f69ef768de1d1eeee368e749d04.png" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p>Представим, что у нас есть таблица с неизвестными данными причем у которых почему-то пропали названия колонок. Наша задача — восстановить эти названия и в общих чертах понять, что находится в каждой колонке. </p>
+                     <p>Существуют специализированные системы подготовки и анализа данных. Большинство из них отлично справляются с определением атомарного типа колонки, такого как string, integer, boolean. Однако, с задачей определения семантического типа — собственно, того, что лежит в колонке (имя человека, название организации, город и пр.), не всё так хорошо. При этом, успешное определение семантического типа может дать гораздо больше, чем простое знание атомарного типа. Имея на руках семантические типы колонок можно скорее разобраться в незнакомой базе данных, и, например, быстро выделить все колонки, относящиеся к одной сущности реального мира. </p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/571370/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 3: ↑3 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 3: ↑3 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+3</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">2.3K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 17 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/571370/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 3 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><a name="more-news"></a> 
+               <article id="570118" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-07-28T12:47:24.000Z" title="2021-07-28, 15:47">28 июля 2021 в 15:47</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/570118/" data-article-link="" class="tm-article-snippet__title-link"><span>Тук-тук. Откройте</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/infosecurity/" class="tm-article-snippet__hubs-item-link"><span>Информационная безопасность</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/bdf/fe8/0c3/bdffe80c3e6274c378ec1a9585ea4bca.jpg" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p><em>Коллеги, обычно мы пишем на Хабр технические статьи. В частности, мы уже </em><a href="https://habr.com/ru/company/unidata/blog/544192/"><em>писали о работе с дубликатами в системе управления данными</em></a><em>, про </em><a href="https://habr.com/ru/company/unidata/blog/566232/"><em>Activiti BPM в разработке бизнес-процессов</em></a><em>, про </em><a href="https://habr.com/ru/company/unidata/blog/554716/"><em>работу с отчетностью в MDM</em></a><em>.&nbsp;</em></p>
+                     <p><em>Однако реалии времени заставили нас поднять тему, напрямую не связанную с техникой дела и с управлением данными, но тему острую, важную, и многим очень интересную. Речь идет о ситуации, когда многие члены ИТ-сообщества допрашиваются Следственными комитетом из-за громких дел о злоупотреблениях – и зачастую, с весьма неприятными последствиями. Мы расскажем о ситуации, в которую попали наши коллеги из «Таскдаты Рус» и о том, что нужно делать, если к тебе пришли на допрос.</em></p>
+                     <p><strong>IT&nbsp;под ударом</strong></p>
+                     <p><a href="https://www.cnews.ru/news/top/2021-05-28_byvshego_itdirektora_rosreestra">В мае вышла статья CNews</a>. Параллельно с этим целый ряд сотрудников «ТаскДата Рус», наших ближайших коллег, был вызван на допрос с конфискацией ноутбуков и прочего. Ситуация неприятная, совершенно неожиданная, а главное – совершенно непривычная. Другое дело, что СК РФ ведет такую практику по отношению многих ИТ-компаний довольно давно. В апреле этого года все <a href="https://www.cnews.ru/news/top/2021-04-16_glava_mintsifry_protiv_vseh">на том же СNews&nbsp;вышла статья</a>, в которой Министр цифрового развития, связи и массовых коммуникаций Российской Федерации Максут&nbsp;Шадаев&nbsp;сообщил, что почти все крупные российские ИТ-компании в настоящее время являются фигурантами уголовных дел.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/570118/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 96: ↑93 и ↓3</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 96: ↑93 и ↓3" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+90</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">30K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 109 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/570118/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 110 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="566232" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-07-05T12:45:27.000Z" title="2021-07-05, 15:45">5 июля 2021 в 15:45</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/566232/" data-article-link="" class="tm-article-snippet__title-link"><span>О применении Activiti BPM&nbsp; разработке бизнес-процессов</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/soft/" class="tm-article-snippet__hubs-item-link"><span>Софт</span> <!----></a></span>
+                 </div> 
+                 <div class="tm-article-snippet__labels">
+                  <div class="tm-article-snippet__label tm-article-snippet__label_variant-tutorial">
+                   <span> Tutorial </span>
+                  </div>
+                 </div> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/fee/1ef/0f1/fee1ef0f10d514f3ebd1c661f3899eac.png" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p>Всем привет! Ранее мы упоминали, что платформа Unidata активно работает с бизнес-процессами и поддерживает нотацию BPMN в основе их проектирования. Для разработки БП мы используем open source движок Activiti BPMN, базирующийся на java.&nbsp; Среди доступных продуктов с открытым исходным кодом для проектирования бизнес-процессов мы выбрали Activiti по следующим причинам.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/566232/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 3: ↑2 и ↓1</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 3: ↑2 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+1</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">2.2K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 4 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/566232/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 0 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="554716" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-04-27T14:50:13.000Z" title="2021-04-27, 17:50">27 апреля 2021 в 17:50</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/554716/" data-article-link="" class="tm-article-snippet__title-link"><span>Работа с отчетностью в системе управления данными</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/analysis_design/" class="tm-article-snippet__hubs-item-link"><span>Анализ и проектирование систем</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/itcompanies/" class="tm-article-snippet__hubs-item-link"><span>IT-компании</span> <!----></a></span>
+                 </div> 
+                 <div class="tm-article-snippet__labels">
+                  <div class="tm-article-snippet__label tm-article-snippet__label_variant-tutorial">
+                   <span> Tutorial </span>
+                  </div>
+                 </div> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <div class="tm-article-snippet__cover tm-article-snippet__cover_cover">
+                   <img src="https://habrastorage.org/getpro/habr/upload_files/dcc/53d/3cc/dcc53d3cc51f0b969ef269fe49ee2c46.png" class="tm-article-snippet__lead-image" style="object-position:0% 0%;">
+                  </div> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-2">
+                     <p>Всем привет! В этой статье мы хотим рассказать о том, каким образом мы в платформе Unidata формируем отчетность. Любая работа с данными неизбежно ведет к построению специализированных отчетов, в которых пользователи могут эффективно эти данные обрабатывать и принимать на их основе бизнес-решения.</p>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/554716/" class="tm-article-snippet__readmore"><span>Читать далее</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 3: ↑1 и ↓2</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 3: ↑1 и ↓2" class="tm-votes-meter__value tm-votes-meter__value_negative tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">-1</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">4K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 7 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/554716/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 1 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="544192" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-02-25T13:55:38.000Z" title="2021-02-25, 16:55">25 февраля 2021 в 16:55</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/544192/" data-article-link="" class="tm-article-snippet__title-link"><span>Работа с дубликатами в системе управления данными «Юнидата»</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/analysis_design/" class="tm-article-snippet__hubs-item-link"><span>Анализ и проектирование систем</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/itcompanies/" class="tm-article-snippet__hubs-item-link"><span>IT-компании</span> <!----></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <!----> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-1">
+                     <img src="https://habrastorage.org/webt/by/28/xs/by28xssbn1hwsalomj48zc88g-k.jpeg" alt="image">
+                     <br> 
+                     <br> Обработка дубликатов – одна из самых больных тем в работе аналитика. В нашей платформе мы стараемся по максимуму автоматизировать этот процесс, чтобы снизить нагрузку на экспертов НСИ и увеличить производительность коллег с обработкой данных. Сегодня мы рассмотрим, как платформа помогает сформировать единую золотую запись на примере одного из самых распространенных и основных справочников — справочника «контрагенты». 
+                     <br>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/544192/" class="tm-article-snippet__readmore"><span>Читать дальше →</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 2: ↑1 и ↓1</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 2: ↑1 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">0</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">1K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 3 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/544192/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 1 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div><!----> 
+               <article id="543436" data-navigatable="" tabindex="0" class="tm-articles-list__item">
+                <div class="tm-article-snippet">
+                 <div class="tm-article-snippet__meta-container">
+                  <div class="tm-article-snippet__meta">
+                   <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/Unidata/" title="Unidata" class="tm-user-info__userpic">
+                     <div class="tm-entity-image">
+                      <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/652/fb6/e55/652fb6e55a265007d2785f87d51927d8.jpg" width="24" class="tm-entity-image__pic">
+                     </div></a> <span class="tm-user-info__user"><a href="/ru/users/Unidata/" class="tm-user-info__username"> Unidata </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2021-02-20T12:25:59.000Z" title="2021-02-20, 15:25">20 февраля 2021 в 15:25</time></span>
+                  </div> <!---->
+                 </div> 
+                 <h2 class="tm-article-snippet__title tm-article-snippet__title_h2"><a href="/ru/company/unidata/blog/543436/" data-article-link="" class="tm-article-snippet__title-link"><span>Время поговорить об MDM</span></a></h2> 
+                 <div class="tm-article-snippet__hubs">
+                  <span class="tm-article-snippet__hubs-item"><a href="/ru/company/unidata/blog/" aria-current="page" class="tm-article-snippet__hubs-item-link router-link-exact-active router-link-active"><span>Блог компании Юнидата</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/analysis_design/" class="tm-article-snippet__hubs-item-link"><span>Анализ и проектирование систем</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/itcompanies/" class="tm-article-snippet__hubs-item-link"><span>IT-компании</span> <!----></a></span>
+                 </div> <!----> <!----> 
+                 <div class="tm-article-body tm-article-snippet__lead">
+                  <!----> 
+                  <div>
+                   <div>
+                    <div class="article-formatted-body article-formatted-body_version-1">
+                     <img src="https://habrastorage.org/webt/5q/az/py/5qazpyg4a-kjcs6j_s0a3y4wwxm.jpeg" alt="image">
+                     <br> 
+                     <br> Рады приветствовать Вас на корпоративной странице компании «Юнидата». В последнее время имя нашей компании все чаще стало звучать на «Хабре», что сподвигло нас создать свой корпоративный блог, в котором мы будем писать об управлении данными, руководстве данными, анализировать основные тренды в области Data Management. Словом, делиться на просторах «Хабра» разными интересными материалами в области данных, что обычно мы делали в рамках нашего <a href="https://unidata-community.ru" rel="nofollow noopener noreferrer">Сообщества экспертов по управлению данными</a>.
+                     <br> 
+                     <br> Среди тем, которые мы будем регулярно затрагивать в своем блоге – управление данными, руководство данными (Data Governance), качество данных (Data Quality), основные тренды в области данных, методология внедрения в области управления данными, DAMA-DMBOK и многое другое.
+                     <br>
+                    </div>
+                   </div> 
+                   <div class="v-portal" style="display:none;"></div>
+                  </div> <a href="/ru/company/unidata/blog/543436/" class="tm-article-snippet__readmore"><span>Читать дальше →</span></a>
+                 </div>
+                </div> 
+                <div class="tm-data-icons">
+                 <!----> 
+                 <div class="tm-votes-meter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                   <title>Всего голосов 8: ↑6 и ↓2</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                  </svg> <span title="Всего голосов 8: ↑6 и ↓2" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+4</span>
+                 </div> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                  <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                   <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                  </svg> <span class="tm-icon-counter__value">2.7K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                   <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                    <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                   </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 16 </span></button> 
+                 <div title="Читать комментарии" class="tm-article-comments-counter-link tm-data-icons__item">
+                  <a href="/ru/company/unidata/blog/543436/comments/" class="tm-article-comments-counter-link__link">
+                   <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon">
+                    <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                   </svg> <span class="tm-article-comments-counter-link__value"> 5 </span></a> <!---->
+                 </div> <!----> 
+                 <div class="v-portal" style="display:none;"></div>
+                </div>
+               </article> 
+               <div class="tm-articles-list__after-article"></div>
+              </div> <!----> <!---->
+             </div>
+            </div> <!---->
+           </div>
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__placeholder_initial"></div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> 
+            <section class="tm-block tm-block_spacing-bottom">
+             <header class="tm-block__header">
+              <h2 class="tm-block__title">Информация</h2> <!---->
+             </header> 
+             <div class="tm-block__body">
+              <div class="tm-company-basic-info">
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Дата основания
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                 <time datetime="2015-07-27T21:00:00.000Z" title="2015-07-28, 00:00">28 июля 2015</time>
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Местоположение
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                  Россия 
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Сайт
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                 <a href="https://unidata-platform.ru" target="_blank" class="tm-company-basic-info__link"> unidata-platform.ru </a>
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Численность
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                  101–200 человек 
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Дата регистрации
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                 <time datetime="2021-02-20T08:02:19.000Z" title="2021-02-20, 11:02">20 февраля 2021</time>
+                </dd>
+               </dl> <!---->
+              </div>
+             </div> <!---->
+            </section> 
+            <div class="tm-company-widgets"></div> <!----> <!----> <!----> <!---->
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/company/unidata/blog/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/company/unidata/blog/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"543436":{"id":"543436","timePublished":"2021-02-20T12:25:59+00:00","isCorporative":true,"lang":"ru","titleHtml":"Время поговорить об MDM","editorVersion":"1.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":5,"favoritesCount":16,"readingCount":2683,"score":4,"votesCount":8},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"397","alias":"analysis_design","type":"collective","title":"Анализ и проектирование систем","titleHtml":"Анализ и проектирование систем","isProfiled":true},{"relatedData":null,"id":"22026","alias":"itcompanies","type":"collective","title":"IT-компании","titleHtml":"IT-компании","isProfiled":false}],"flows":[{"id":"1","alias":"develop","title":"Разработка"},{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"leadData":{"textHtml":"\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fwebt\u002F5q\u002Faz\u002Fpy\u002F5qazpyg4a-kjcs6j_s0a3y4wwxm.jpeg\" alt=\"image\"\u003E\u003Cbr\u003E\r\n\u003Cbr\u003E\r\nРады приветствовать Вас на корпоративной странице компании «Юнидата». В последнее время имя нашей компании все чаще стало звучать на «Хабре», что сподвигло нас создать свой корпоративный блог, в котором мы будем писать об управлении данными, руководстве данными, анализировать основные тренды в области Data Management. Словом, делиться на просторах «Хабра» разными интересными материалами в области данных, что обычно мы делали в рамках нашего \u003Ca href=\"https:\u002F\u002Funidata-community.ru\" rel=\"nofollow noopener noreferrer\"\u003EСообщества экспертов по управлению данными\u003C\u002Fa\u003E.\u003Cbr\u003E\r\n\u003Cbr\u003E\r\nСреди тем, которые мы будем регулярно затрагивать в своем блоге – управление данными, руководство данными (Data Governance), качество данных (Data Quality), основные тренды в области данных, методология внедрения в области управления данными, DAMA-DMBOK и многое другое.\u003Cbr\u003E","imageUrl":null,"buttonTextHtml":"Читать дальше &rarr;","image":null},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"MDM"},{"titleHtml":"Юнидата"},{"titleHtml":"Unidata"},{"titleHtml":"управление данными"}]},"544192":{"id":"544192","timePublished":"2021-02-25T13:55:38+00:00","isCorporative":true,"lang":"ru","titleHtml":"Работа с дубликатами в системе управления данными «Юнидата»","editorVersion":"1.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":1,"favoritesCount":3,"readingCount":1022,"score":0,"votesCount":2},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"397","alias":"analysis_design","type":"collective","title":"Анализ и проектирование систем","titleHtml":"Анализ и проектирование систем","isProfiled":true},{"relatedData":null,"id":"22026","alias":"itcompanies","type":"collective","title":"IT-компании","titleHtml":"IT-компании","isProfiled":false}],"flows":[{"id":"1","alias":"develop","title":"Разработка"},{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"leadData":{"textHtml":"\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fwebt\u002Fby\u002F28\u002Fxs\u002Fby28xssbn1hwsalomj48zc88g-k.jpeg\" alt=\"image\"\u003E\u003Cbr\u003E\r\n\u003Cbr\u003E\r\nОбработка дубликатов – одна из самых больных тем в работе аналитика. В нашей платформе мы стараемся по максимуму автоматизировать этот процесс, чтобы снизить нагрузку на экспертов НСИ и увеличить производительность коллег с обработкой данных. Сегодня мы рассмотрим, как платформа помогает сформировать единую золотую запись на примере одного из самых распространенных и основных справочников — справочника «контрагенты». \u003Cbr\u003E","imageUrl":null,"buttonTextHtml":"Читать дальше &rarr;","image":null},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"MDM"},{"titleHtml":"Юнидата"},{"titleHtml":"Unidata"},{"titleHtml":"управление данными"}]},"554716":{"id":"554716","timePublished":"2021-04-27T14:50:13+00:00","isCorporative":true,"lang":"ru","titleHtml":"Работа с отчетностью в системе управления данными","editorVersion":"2.0","postType":"article","postLabels":[{"type":"tutorial","data":null}],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":1,"favoritesCount":7,"readingCount":4033,"score":-1,"votesCount":3},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"397","alias":"analysis_design","type":"collective","title":"Анализ и проектирование систем","titleHtml":"Анализ и проектирование систем","isProfiled":true},{"relatedData":null,"id":"22026","alias":"itcompanies","type":"collective","title":"IT-компании","titleHtml":"IT-компании","isProfiled":false}],"flows":[{"id":"1","alias":"develop","title":"Разработка"},{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003EВсем привет! В этой статье мы хотим рассказать о том, каким образом мы в платформе Unidata формируем отчетность. Любая работа с данными неизбежно ведет к построению специализированных отчетов, в которых пользователи могут эффективно эти данные обрабатывать и принимать на их основе бизнес-решения.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fdcc\u002F53d\u002F3cc\u002Fdcc53d3cc51f0b969ef269fe49ee2c46.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fdcc\u002F53d\u002F3cc\u002Fdcc53d3cc51f0b969ef269fe49ee2c46.png","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"java"},{"titleHtml":"javascript"},{"titleHtml":"jasperreports"},{"titleHtml":"отчетность"},{"titleHtml":"данные"}]},"566232":{"id":"566232","timePublished":"2021-07-05T12:45:27+00:00","isCorporative":true,"lang":"ru","titleHtml":"О применении Activiti BPM  разработке бизнес-процессов","editorVersion":"2.0","postType":"article","postLabels":[{"type":"tutorial","data":null}],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":0,"favoritesCount":4,"readingCount":2244,"score":1,"votesCount":3},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"21918","alias":"soft","type":"collective","title":"Софт","titleHtml":"Софт","isProfiled":false}],"flows":[{"id":"7","alias":"popsci","title":"Научпоп"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003EВсем привет! Ранее мы упоминали, что платформа Unidata активно работает с бизнес-процессами и поддерживает нотацию BPMN в основе их проектирования. Для разработки БП мы используем open source движок Activiti BPMN, базирующийся на java.&nbsp; Среди доступных продуктов с открытым исходным кодом для проектирования бизнес-процессов мы выбрали Activiti по следующим причинам.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Ffee\u002F1ef\u002F0f1\u002Ffee1ef0f10d514f3ebd1c661f3899eac.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Ffee\u002F1ef\u002F0f1\u002Ffee1ef0f10d514f3ebd1c661f3899eac.png","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"java"},{"titleHtml":"bpm"},{"titleHtml":"bpmn"},{"titleHtml":"bpm-системы"},{"titleHtml":"mdm"},{"titleHtml":"mdm-система"}]},"570118":{"id":"570118","timePublished":"2021-07-28T12:47:24+00:00","isCorporative":true,"lang":"ru","titleHtml":"Тук-тук. Откройте","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":110,"favoritesCount":109,"readingCount":29917,"score":90,"votesCount":96},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"50","alias":"infosecurity","type":"collective","title":"Информационная безопасность","titleHtml":"Информационная безопасность","isProfiled":true}],"flows":[{"id":"1","alias":"develop","title":"Разработка"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003E\u003Cem\u003EКоллеги, обычно мы пишем на Хабр технические статьи. В частности, мы уже \u003C\u002Fem\u003E\u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fcompany\u002Funidata\u002Fblog\u002F544192\u002F\"\u003E\u003Cem\u003Eписали о работе с дубликатами в системе управления данными\u003C\u002Fem\u003E\u003C\u002Fa\u003E\u003Cem\u003E, про \u003C\u002Fem\u003E\u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fcompany\u002Funidata\u002Fblog\u002F566232\u002F\"\u003E\u003Cem\u003EActiviti BPM в разработке бизнес-процессов\u003C\u002Fem\u003E\u003C\u002Fa\u003E\u003Cem\u003E, про \u003C\u002Fem\u003E\u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fcompany\u002Funidata\u002Fblog\u002F554716\u002F\"\u003E\u003Cem\u003Eработу с отчетностью в MDM\u003C\u002Fem\u003E\u003C\u002Fa\u003E\u003Cem\u003E.&nbsp;\u003C\u002Fem\u003E\u003C\u002Fp\u003E\u003Cp\u003E\u003Cem\u003EОднако реалии времени заставили нас поднять тему, напрямую не связанную с техникой дела и с управлением данными, но тему острую, важную, и многим очень интересную. Речь идет о ситуации, когда многие члены ИТ-сообщества допрашиваются Следственными комитетом из-за громких дел о злоупотреблениях – и зачастую, с весьма неприятными последствиями. Мы расскажем о ситуации, в которую попали наши коллеги из «Таскдаты Рус» и о том, что нужно делать, если к тебе пришли на допрос.\u003C\u002Fem\u003E\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EIT&nbsp;под ударом\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fwww.cnews.ru\u002Fnews\u002Ftop\u002F2021-05-28_byvshego_itdirektora_rosreestra\"\u003EВ мае вышла статья CNews\u003C\u002Fa\u003E. Параллельно с этим целый ряд сотрудников «ТаскДата Рус», наших ближайших коллег, был вызван на допрос с конфискацией ноутбуков и прочего. Ситуация неприятная, совершенно неожиданная, а главное – совершенно непривычная. Другое дело, что СК РФ ведет такую практику по отношению многих ИТ-компаний довольно давно. В апреле этого года все \u003Ca href=\"https:\u002F\u002Fwww.cnews.ru\u002Fnews\u002Ftop\u002F2021-04-16_glava_mintsifry_protiv_vseh\"\u003Eна том же СNews&nbsp;вышла статья\u003C\u002Fa\u003E, в которой Министр цифрового развития, связи и массовых коммуникаций Российской Федерации Максут&nbsp;Шадаев&nbsp;сообщил, что почти все крупные российские ИТ-компании в настоящее время являются фигурантами уголовных дел.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fbdf\u002Ffe8\u002F0c3\u002Fbdffe80c3e6274c378ec1a9585ea4bca.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fbdf\u002Ffe8\u002F0c3\u002Fbdffe80c3e6274c378ec1a9585ea4bca.jpg","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"юриспруденция"},{"titleHtml":"юридические вопросы"},{"titleHtml":"юридические тонкости"}]},"571370":{"id":"571370","timePublished":"2021-08-05T08:07:04+00:00","isCorporative":true,"lang":"ru","titleHtml":"Применение машинного обучения для определения содержимого колонки в таблице","editorVersion":"2.0","postType":"article","postLabels":[{"type":"translation","data":{"originalAuthorName":"M. Hulsebos","originalUrl":"https:\u002F\u002Fdoi.org\u002F10.1145\u002F3292500.3330993"}}],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":3,"favoritesCount":17,"readingCount":2261,"score":3,"votesCount":3},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false}],"flows":[],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003EПредставим, что у нас есть таблица с неизвестными данными причем у которых почему-то пропали названия колонок. Наша задача — восстановить эти названия и в общих чертах понять, что находится в каждой колонке. \u003C\u002Fp\u003E\u003Cp\u003EСуществуют специализированные системы подготовки и анализа данных. Большинство из них отлично справляются с определением атомарного типа колонки, такого как string, integer, boolean. Однако, с задачей определения семантического типа — собственно, того, что лежит в колонке (имя человека, название организации, город и пр.), не всё так хорошо. При этом, успешное определение семантического типа может дать гораздо больше, чем простое знание атомарного типа. Имея на руках семантические типы колонок можно скорее разобраться в незнакомой базе данных, и, например, быстро выделить все колонки, относящиеся к одной сущности реального мира. \u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F115\u002F88f\u002F69e\u002F11588f69ef768de1d1eeee368e749d04.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F115\u002F88f\u002F69e\u002F11588f69ef768de1d1eeee368e749d04.png","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"semantic"},{"titleHtml":"type"},{"titleHtml":"detection"},{"titleHtml":"deep learning"},{"titleHtml":"neural networks"},{"titleHtml":"sherlock"}]},"572664":{"id":"572664","timePublished":"2021-08-12T15:48:04+00:00","isCorporative":true,"lang":"ru","titleHtml":"Как закалялась документация","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"1502327","alias":"InstaHeat","fullname":"Даниил","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002Fef8\u002Fa07\u002F026\u002Fef8a07026dafc928ddb893abb5f42b04.png","speciality":"Техническая документация и редакторская подготовка"},"statistics":{"commentsCount":12,"favoritesCount":19,"readingCount":3158,"score":7,"votesCount":7},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"20726","alias":"productpm","type":"collective","title":"Управление продуктом","titleHtml":"Управление продуктом","isProfiled":true},{"relatedData":null,"id":"22596","alias":"technical_writing","type":"collective","title":"Подготовка технической документации","titleHtml":"Подготовка технической документации","isProfiled":true}],"flows":[{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003EПодобно безумному исследователю, я вот уже пятый год пытаюсь создать идеальную продуктовую документацию. Но, раз она всё еще не идеальна, значит я что-то делаю не так. Вот про это и будет статья.\u003C\u002Fp\u003E\u003Cp\u003EХочу очертить тот путь, который мы прошли, и рассказать о том, какие решения принимали, и что из этого вырастало.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F038\u002F6f1\u002F497\u002F0386f1497fecaa71dfdd564dcb310ed2.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F038\u002F6f1\u002F497\u002F0386f1497fecaa71dfdd564dcb310ed2.png","fit":"cover","positionY":0,"positionX":55.769230769231}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"документация"},{"titleHtml":"ошибки и грабли"},{"titleHtml":"docsascode"}]},"574660":{"id":"574660","timePublished":"2021-08-25T14:15:40+00:00","isCorporative":true,"lang":"ru","titleHtml":"IT в тюрьме. Письма в неволю и из неволи","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":38,"favoritesCount":60,"readingCount":22853,"score":64,"votesCount":86},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"22026","alias":"itcompanies","type":"collective","title":"IT-компании","titleHtml":"IT-компании","isProfiled":false}],"flows":[{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fcompany\u002Funidata\u002Fblog\u002F570118\u002F\"\u003EВ одной из прошлых статей\u003C\u002Fa\u003E мы подробно рассказали о неприятной ситуации, в которой оказались наши коллеги, и дали целый ряд практических советов относительно того, как себя вести, когда «к тебе пришли». Статья вызвала настолько большой ажиотаж (шутка ли, более 20 000 просмотров), что мы вновь решили разнообразить свои технически публикации (а за последние недели мы писали о \u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fcompany\u002Funidata\u002Fblog\u002F571370\u002F\"\u003E«Применении машинного обучения для определения содержимого колонки в таблице»\u003C\u002Fa\u003E и о \u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fcompany\u002Funidata\u002Fblog\u002F572664\u002F\"\u003EСпецифике подготовки технической документации\u003C\u002Fa\u003E) материалом, который также напрямую касается уголовного преследования. И сегодняшняя наша статья посвящена такой для многих экзотической вещи как… переписка в СИЗО.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Ff94\u002F87a\u002Fe41\u002Ff9487ae41a373018fef7de878f8dc8f9.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Ff94\u002F87a\u002Fe41\u002Ff9487ae41a373018fef7de878f8dc8f9.png","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"фсин"},{"titleHtml":"сизо"}]},"575784":{"id":"575784","timePublished":"2021-09-01T13:36:09+00:00","isCorporative":true,"lang":"ru","titleHtml":"Перестроились в модульный монолит, а не в микросервисы","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":2,"favoritesCount":55,"readingCount":8442,"score":9,"votesCount":9},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"357","alias":"javascript","type":"collective","title":"JavaScript","titleHtml":"JavaScript","isProfiled":true},{"relatedData":null,"id":"19327","alias":"reactjs","type":"collective","title":"ReactJS","titleHtml":"ReactJS","isProfiled":true},{"relatedData":null,"id":"21370","alias":"typescript","type":"collective","title":"TypeScript","titleHtml":"TypeScript","isProfiled":true}],"flows":[{"id":"1","alias":"develop","title":"Разработка"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003EОтносительно недавно мы начали строить качественно новую версию платформы \"Юнидата\", в которой изменилось очень многое, включая архитектуру, технологии, подход. Даже основная идея продукта приросла новыми деталями.\u003C\u002Fp\u003E\u003Cp\u003EНам кажется, что здорово делиться опытом подобных изменений, поэтому мы хотим сделать несколько статей о том, как устроена изнутри \"Юнидата\". В этой, первой, статье речь пойдет о UI. О том, как было раньше, что побудило нас кардинально пересмотреть стек и организацию работы с кодом, и что получилось в итоге.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EОб авторе статьи\u003C\u002Fstrong\u003E. Меня зовут Илья, я занимаюсь разработкой новой версии. Мне не довелось работать с предыдущими версиями \"Юнидата\", и в проект я пришел на этапе прототипа. Я могу быть не до конца объективен на тему того, почему было выбрано то или иное решение, если это происходило еще до моего присоединения к продукту. В причинах перехода я написал свое видение, после общения с командой.\u003C\u002Fp\u003E\u003Cp\u003EИтак, всем, кто любит истории переезда с ноткой технических особенностей, добро пожаловать под кат.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EКраткий тех.обзор\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Cp\u003EСейчас мы имеем модульный монолит и на бэке и на фронте. Они расположены в отельных репозиториях + есть еще один, который содержит настройки для запуска всего приложения в контейнерах.\u003C\u002Fp\u003E\u003Cp\u003EКроме того, продукт разделён на \u003Cstrong\u003ECommunity&nbsp;Edition\u003C\u002Fstrong\u003E&nbsp;(хранится&nbsp;в \u003Ca href=\"https:\u002F\u002Fgitlab.com\u002Funidata-community-group\"\u003E\u003Cu\u003Eпубличном&nbsp;гитлабе\u003C\u002Fu\u003E\u003C\u002Fa\u003E)&nbsp;и&nbsp;\u003Cstrong\u003EEnterprise&nbsp;Edition\u003C\u002Fstrong\u003E.\u003C\u002Fp\u003E\u003Cp\u003EФронтенд состоит из 20 модулей (число не конечное). Мы используем свежую версию typescript и почти свежую react (сейчас 16, но перевод на 17 - дело ближайшего времени). Применяем MVC подход в каждом модуле: реакт только view-слой, своя observable модель (обязательно про нее напишем отдельную статью), mobx&nbsp;сторы в качестве контроллеров.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F814\u002F9f0\u002F98a\u002F8149f098aa97aecbd8b5b4125d1b695e.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F814\u002F9f0\u002F98a\u002F8149f098aa97aecbd8b5b4125d1b695e.png","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"module"},{"titleHtml":"architecture"},{"titleHtml":"mobx"}]},"578094":{"id":"578094","timePublished":"2021-09-15T12:46:24+00:00","isCorporative":true,"lang":"ru","titleHtml":"От неприятия к пониманию. Взгляд на стажировку в IT компании от лица HR","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":6,"favoritesCount":14,"readingCount":3801,"score":3,"votesCount":9},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"20740","alias":"career","type":"collective","title":"Карьера в IT-индустрии","titleHtml":"Карьера в IT-индустрии","isProfiled":false}],"flows":[{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003EСегодня мы начинаем новую серию публикаций, посвященных управлению персоналом. Как оказалось, в HR подразделении нашей компании происходят весьма своеобразные и любопытные процессы, узнать о которых широкой аудитории будет полезно и любопытно. И начнем мы со статьи, посвященной стажировке. Представьте классическую ситуацию: молодые студенты или аспиранты приходят на стажировку в крупную IT компанию и… начинается самое интересное.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F2a3\u002Fb9f\u002F47c\u002F2a3b9f47c3ae6808cc750cc86600552b.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F2a3\u002Fb9f\u002F47c\u002F2a3b9f47c3ae6808cc750cc86600552b.jpg","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"hr"},{"titleHtml":"стажер"},{"titleHtml":"стажировка в it"}]},"579194":{"id":"579194","timePublished":"2021-09-21T13:21:39+00:00","isCorporative":true,"lang":"ru","titleHtml":"Развиваем нечеткий поиск на примере МТР","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":0,"favoritesCount":9,"readingCount":907,"score":2,"votesCount":2},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false}],"flows":[],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003EОдним из основополагающих инструментов при работе с данными является их поиск. В юнидате мы используем инструмент ElasticSearch&nbsp;как сервис полнотекстового поиска. В данной статье мы хотим поделиться нашим личным опытом развития fuzzy&nbsp;поиска в тематике материально-технических –&nbsp;ресурсов (далее МТР) как пример использования поиска в специализированных бизнес-кейсах. Статья не является руководством к применению, так как определенные решения могут не быть оптимальными вне контекста платформы, но могут быть полезны при решении похожих задач. Итак, приступим.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F9f7\u002Fa7b\u002Ff60\u002F9f7a7bf6097ddd027a37979ccb86a170.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F9f7\u002Fa7b\u002Ff60\u002F9f7a7bf6097ddd027a37979ccb86a170.jpg","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"elasticsearch"}]},"582970":{"id":"582970","timePublished":"2021-10-12T09:20:57+00:00","isCorporative":true,"lang":"ru","titleHtml":"5 трендов баз данных. Идеи с конференции VLDB’21","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":18,"favoritesCount":31,"readingCount":3617,"score":17,"votesCount":17},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"19197","alias":"dwh","type":"collective","title":"Хранение данных","titleHtml":"Хранение данных","isProfiled":true},{"relatedData":null,"id":"20116","alias":"data_warehouse","type":"collective","title":"Хранилища данных","titleHtml":"Хранилища данных","isProfiled":true},{"relatedData":null,"id":"20754","alias":"tech_events","type":"collective","title":"Конференции","titleHtml":"Конференции","isProfiled":false}],"flows":[{"id":"4","alias":"marketing","title":"Маркетинг"},{"id":"6","alias":"admin","title":"Администрирование"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003EВ середине августа мы приняли участие в международной научной конференции VLDB (Very Large Data Bases), и хотим поделиться актуальными идеями о работе с базами данных.\u003C\u002Fp\u003E\u003Cp\u003EЕсли вы специалист по базам данных, или так или иначе связаны с ними, то приглашаем к чтению.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F14a\u002Fd82\u002F710\u002F14ad8271039a5a14df0bb2495c781be0.png","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F14a\u002Fd82\u002F710\u002F14ad8271039a5a14df0bb2495c781be0.png","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"vldb"},{"titleHtml":"data science"},{"titleHtml":"data storage"},{"titleHtml":"db"},{"titleHtml":"dataset"},{"titleHtml":"data discovery"}]},"584730":{"id":"584730","timePublished":"2021-10-21T09:23:05+00:00","isCorporative":true,"lang":"ru","titleHtml":"Когда хочется праздника. О корпоративах в пандемию","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":8,"favoritesCount":2,"readingCount":1455,"score":-3,"votesCount":7},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"20740","alias":"career","type":"collective","title":"Карьера в IT-индустрии","titleHtml":"Карьера в IT-индустрии","isProfiled":false}],"flows":[{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003EИдея гедонистической адаптации говорит, что человек обладает механизмом, который склонен постепенно снижать воздействие ярких эмоциональных событий: положительных или отрицательных. Если человек выиграет миллион за прививку, или сильно заболеет, то в любом случае через 30-90 дней он вернётся к примерно тому же уровню счастья, что и до этого. Механизм помогает мириться с событиями, жить дальше, даже забывать какие-то вещи.\u003C\u002Fp\u003E\u003Cp\u003EЕсть события, к которым этот механизм не применим, и условия пандемии, как оказалось, в их числе. Да, нельзя сказать, что мы тут все беспрерывно страдаем. Однако же нет-нет, да и проскользнет в голове мысль, что «а раньше…». Эпидемические меры — это целая куча деталей, на каждую из которых обращаешь внимание даже спустя много времени.\u003C\u002Fp\u003E\u003Cp\u003EА раньше мы проводили корпоративы два раза в год, собирались вместе и веселились (думаю, о корпоративе как инструменте уже все знают, и не нужно повторяться). Летом мы праздновали день рождения компании, зачастую устраивая спортивные мероприятия: парусную регату, рафтинг, веревочный парк и т.д.\u003C\u002Fp\u003E\u003Cp\u003EЗимний корпоратив – это новый год. Праздничная и торжественная вечеринка, квест или викторина. Отличаемся ото всех только тем, что проводим корпоратив после январских праздников: мы даём сотрудникам больше времени на закрытие проектов перед каникулами, а в январе, когда все только раскачиваются, делаем перерыв в работе. Многие голосовали за этот вариант, в итоге уже несколько лет эта схема работает.\u003C\u002Fp\u003E\u003Cp\u003E&nbsp;\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EИ тут пришел 2020-ый…\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Cp\u003EТолько ленивый не говорил о пандемических изменениях. Поменялось всё, и представление об организации корпоративов тоже. Из-за введенных ограничений и из-за беспокойства за здоровье своих сотрудников руководство компаний было вынуждено перевести сотрудников на удаленную работу и, как следствие, отказаться от привычного оффлайн-формата работы и совместных мероприятий.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa00\u002Fb6f\u002Fcc2\u002Fa00b6fcc293e62e226e70abc1480cf76.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa00\u002Fb6f\u002Fcc2\u002Fa00b6fcc293e62e226e70abc1480cf76.jpg","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"Юнидата"},{"titleHtml":"HR"},{"titleHtml":"Карьера"},{"titleHtml":"Управление данными"}]},"591359":{"id":"591359","timePublished":"2021-11-24T16:38:04+00:00","isCorporative":true,"lang":"ru","titleHtml":"Тернистый путь вендора. Часть 1","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":1,"favoritesCount":10,"readingCount":1379,"score":3,"votesCount":3},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"19583","alias":"dev_management","type":"collective","title":"Управление разработкой","titleHtml":"Управление разработкой","isProfiled":true},{"relatedData":null,"id":"22026","alias":"itcompanies","type":"collective","title":"IT-компании","titleHtml":"IT-компании","isProfiled":false}],"flows":[{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003E\u003Cstrong\u003EНесколько слов об авторе\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Cp\u003EЧтобы был понятен контекст, нужно сказать несколько слов об авторе. Я с 2004 года занимаюсь разработкой программного обеспечения, начав с позиции junior java developer'а в аутсорсинговой компании и сейчас занимая позицию CTO в компании-вендоре «Юнидата». По пути застал времена расцвета и заката ODC западных продуктовых компаний в отечественных аутоорс компаниях, частичную переориентацию классических аутсорс компаний на отечественный рынок заказной разработки, эру импортозамещения и прочих этапов развития рынка разработки программного обеспечения (ПО) в России (мне кажется эта тема еще ждет своего историка). Учитывая все это, считаю себя достаточно опытным, чтобы рассуждать о деятельности вендора в B2B сегменте, вместе с тем осознавая ограничение своего опыта рамками определенных сегментов рынка ПО.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EО чем и для кого статья\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Cp\u003EВ данной статье я хочу описать, что же такое на самом деле вендор ПО, какое место в ней занимает собственно разработка продукта, и чем это отличается или не отличается от других компаний-разработчиков ПО. Надеюсь, что этот материал будет полезен для людей, планирующих работу в области продуктовой разработки, чтобы понимать на что из может ожидать, а также для сотрудников, уже работающих в продуктовой разработке, для понимания того, как это функционирует на самом деле. Из-за своего объема текст разбит на 2 части. Перед вами первая из них.\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F04d\u002F243\u002F050\u002F04d243050474f753c43f881f1077d43e.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F04d\u002F243\u002F050\u002F04d243050474f753c43f881f1077d43e.jpg","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"вендор"},{"titleHtml":"вендоры"},{"titleHtml":"разработка"},{"titleHtml":"разработка приложений"},{"titleHtml":"mdm"},{"titleHtml":"mdm-система"}]},"655243":{"id":"655243","timePublished":"2022-03-11T15:40:27+00:00","isCorporative":true,"lang":"ru","titleHtml":"Почувствуй себя государством, или для чего нужна наука","editorVersion":"2.0","postType":"article","postLabels":[],"author":{"id":"2610163","alias":"Unidata","fullname":null,"avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F652\u002Ffb6\u002Fe55\u002F652fb6e55a265007d2785f87d51927d8.jpg","speciality":"Пользователь"},"statistics":{"commentsCount":1,"favoritesCount":4,"readingCount":735,"score":-1,"votesCount":1},"hubs":[{"relatedData":null,"id":"22684","alias":"unidata","type":"corporative","title":"Блог компании Юнидата","titleHtml":"Блог компании Юнидата","isProfiled":false},{"relatedData":null,"id":"20740","alias":"career","type":"collective","title":"Карьера в IT-индустрии","titleHtml":"Карьера в IT-индустрии","isProfiled":false},{"relatedData":null,"id":"22026","alias":"itcompanies","type":"collective","title":"IT-компании","titleHtml":"IT-компании","isProfiled":false}],"flows":[{"id":"3","alias":"management","title":"Менеджмент"}],"relatedData":null,"leadData":{"textHtml":"\u003Cp\u003E\u003Cstrong\u003EВступление\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Cp\u003EНаша группа компаний (ГК) еще и не была основана, но сразу имела тесную и неразрывную связь с наукой. Почему? Потому что наши основатели изначально работали в научной сфере. Разработки, лежащие в основе запатентованных технологий работы с данными и ставшие основой для нашего флагманского продукта – следствие их высоких теоретических знаний и исследовательских талантов.&nbsp;&nbsp;На пути реализации своих целей в бизнесе, они всегда старались сохранить связь с академической средой. Издавали и издают поныне научные статьи и книги, участвовали в разработке научных программ и сотрудничали со своими родными ВУЗами и кафедрами.\u003C\u002Fp\u003E\u003Cp\u003EПостепенно к этой деятельности все больше привлекалась ГК, это была либо практическая деятельность – дипломные работы и практики студентов, либо осознанная благотворительность – ведение спецкурса для студентов нескольких кафедр СПбГУ на базе ГК и с активной «прокачкой» слушателей по методологии и практике проектной деятельности и программирования.\u003C\u002Fp\u003E\u003Cp\u003E&nbsp;\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8d0\u002F64c\u002Fddb\u002F8d064cddb9a4a8ba2361a5f8f549265e.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F8d0\u002F64c\u002Fddb\u002F8d064cddb9a4a8ba2361a5f8f549265e.jpg","fit":"cover","positionY":0,"positionX":0}},"status":"published","plannedPublishTime":null,"checked":null,"tags":[{"titleHtml":"Юнидата"},{"titleHtml":"Карьера"},{"titleHtml":"Наука"},{"titleHtml":"наука и технологии"},{"titleHtml":"Управление данными"},{"titleHtml":"Лаборатория"},{"titleHtml":"лаборатория данных"}]}},"articlesIds":{"ARTICLES_LIST_BY_COMPANY_UNIDATA":["655243","591359","584730","582970","579194","578094","575784","574660","572664","571370","570118","566232","554716","544192","543436"]},"isLoading":false,"pagesCount":{"ARTICLES_LIST_BY_COMPANY_UNIDATA":1},"route":{"name":"ARTICLES_LIST_BY_COMPANY","params":{"hl":"ru","name":"unidata"},"query":{}},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[],"hubs":""},"comments":{"articleComments":{},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":"","moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{"unidata":{"alias":"unidata","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002F67a\u002Fe9f\u002F02e\u002F67ae9f02ec0bbd1ab33d901ccf0d374a.jpg","titleHtml":"Юнидата","descriptionHtml":"Разработчик ПО в области управления данными","relatedData":null,"statistics":{"postsCount":15,"newsCount":0,"vacanciesCount":0,"employeesCount":2,"careerRating":null,"subscribersCount":41,"rating":15.37,"invest":null},"foundationDate":{"year":"2015","month":"07","day":"28"},"location":{"city":{"id":"447733","title":"Санкт-Петербург"},"region":{"id":"1948","title":"Санкт-Петербург и область"},"country":{"id":"168","title":"Россия"}},"siteUrl":"https:\u002F\u002Funidata-platform.ru","staffNumber":"101–200 человек","registrationDate":"2021-02-20T08:02:19+00:00","representativeUser":null,"contacts":[{"title":"Сайт","url":"https:\u002F\u002Funidata-platform.ru"}],"settings":{"analyticsSettings":[],"branding":null,"status":"active","isStartup":false},"metadata":{"titleHtml":"Юнидата, Санкт-Петербург - Разработчик ПО в области управления данными с 28 июля 2015 г.","title":"Юнидата, Санкт-Петербург - Разработчик ПО в области управления данными с 28 июля 2015 г.","keywords":["IT-компании","Карьера в IT-индустрии","Анализ и проектирование систем","Софт","Информационная безопасность","mdm","управление данными","юнидата","hr","mdm-система","java","unidata"],"descriptionHtml":"15 статей от авторов компании Юнидата","description":"15 статей от авторов компании Юнидата"},"aDeskSettings":null,"careerAlias":null}},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":true,"featurer":[],"megaposts":[{"title":"Разбор ноутбука HONOR MagicBook 16 ","color":"#ff99f7","link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FxS-Cjj-DarWCHg1ALoZLafG0Tc1OGdZUM7DToa6wyJpeGYmR4wdLQxnYwfDhFla3fcqLjnz3frqY_zhJe4F1XG5gLFJqZ0vByXhcfDdtTGezToxTexOLXcSf7Q"},"events":{"view":"vCHsmLoA-OcnjLG3FiL1OvkzyeWOnT171-0WBXxcDEvMbTwQ5yi4Qhh0PQOIZpcDRkzGslu1RtkXgQ"}}],"promoLinks":[{"title":"Как работа вызывает стресс и как это отследить","label":"Интересно","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FiwOSXHxRIsVsZnyfMt-SbC8Ugg0q7Y2HaK_xyL_5HLh_Z16m1Qv9Rp6H8wuOzh4CIxBhCsleecHF4bE8rzlRtoBAoi0XcZGSG3Qvj7utmjmRzsAZbYWVtNTFY_LF3w4bSBrfdEXopA"},"events":{"view":"bwrNuWXRm94SPMUdWtBTw57oTlPztdMqJxgy2UJPg8dXLpeYPOZveHqJjbaKhhobwsVQh1pi_tr4XA"}},{"title":"Разбор ноутбука HONOR MagicBook 16 ","label":"Мегапост","external":false,"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FG2NrytyvDtb8uWW-GFCbrSFb-Jaomzf2bjTAhb8z15hu9GPfxw-XFB3pS675yS9ay-Y01jLm--7dcMhGMyCBQjQRt1iQmm4e6sCzUfJ4p8uw65yUm5LxBXlo-ZGu016k"},"events":{"view":"iyw52smXJNGZb5Kj6GC9KJdNqo4NmJFIS_tE4lybFg3YFnUWjJkJCg_91um63M3rd6JzbNsih_5TKw"}}],"promoPosts":[{"title":"Хотите рассказать о себе в наших социальных сетях?","label":"Опрос","external":true,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F0uOhVevESAX46smTHyey2QdnP4LkzvyPFKtt2dKLHE3QTbzUmrnv8Fx7AOICoqR2jZW2dd5F7afG7A_EU6WEz9876zzavDOihBYQXGviU4I6IX16CNwgsY67XJamCTSJybD0tNcp7bZwrHT2xuBVnprwSJE3v94ORguxZl5ZxdgXeeA_n9J4RMZjQRb19SMq3J3yTA"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FgCuCMoZANHyCWzShV96ZUfeDnge69ta6h3QEd_smlbnPAdvx4SLqInZlBCSav5Bh8H9_Sla8FwK96ANDIdD4izvh8aaCVTxpITAvr0_KNNS-1JgrnqBTnQiJFcpR7OT0likkwaoVBg_e2LY70V3L"}},{"title":"Неделе фронтендеров на Хабр Карьере ","label":"Событие","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002F-ppJye0Hb9ABIhfyJnsw_I29r8goxn_OG9jqbsgFkQKM_PAvn8lWX6XcfGIaMDB4XAuoJ-9hPMOlEqIwhqMDAAfAyEJN9db5nO-jfISxoXUI-0KOSDJiYxIjjLG3Ws90HzWl8g94oWE6w5aKoVJFDzTRLVP1zQoApTDJXl1IAxttLe9jKyUiu-u48zlR41XFE-nZq9KtKPJXZnUpL37P"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FKOrpWf1ZO0A_6mQA8pE1D_e8qGhu96BZZD8TpsVxaKZf5hQpAjeINtpxgAKAFmc8eK2IAcpTMkhhW5lKPuqDCngIhPgcqMSPwlMMC5R-UeVaHIlcbN7oiYxOypRmGjyAzi--eaXrcuGBh8YS_GFeGQ"}},{"title":"Промокод — твой билет в общество потребления","label":"Промо","external":false,"image":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FADlTFiHKbR0jUpdfG2vxNYBcljVbW5Ds6Wi4MhRyfxvIb0UOhOd1Cfky4R9ikrMewUNZUElZCdbcLl9-UnCLFyXy2WxO4aTevbx58JPX5RiyNdmD70labaa8TonFoin7yhxUj1BFuP4USwhnkFFPeHyGbzsUnxXtqA5SBg1hMXJGcULsMQYm2Q7L2N6q6PmrMXIJo8fwu8sH1SGG1Oza1FYp-_mT"},"link":{"url":"https:\u002F\u002Feffect.habr.com\u002Fa\u002FddbgWedin0DSxEu9OWEuzexqpu_Jon9fzZDe_dHiu8oo6c16bmY_WV9RV0sCL5wrnJFcwbuu3z81eexcZYD-IYwqAHwZ09hj69kQ86Rsblb12JkmZJNm"}}]},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/page-company.4d436d0c.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

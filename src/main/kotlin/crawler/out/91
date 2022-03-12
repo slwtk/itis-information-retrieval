@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Короли инференса: PyTorch, Tensorflow или MATLAB? / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script data-vue-meta="ssr" type="application/ld+json" data-vmid="ldjson-schema">{"@context":"http:\/\/schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/habr.com\/ru\/company\/etmc_exponenta\/blog\/651715\/"},"headline":"Короли инференса: PyTorch, Tensorflow или MATLAB?","datePublished":"2022-03-11T17:24:07+03:00","dateModified":"2022-03-11T17:49:54+03:00","author":{"@type":"Person","name":"Николай Капырин"},"publisher":{"@type":"Organization","name":"Habr","logo":{"@type":"ImageObject","url":"https:\/\/habrastorage.org\/webt\/a_\/lk\/9m\/a_lk9mjkccjox-zccjrpfolmkmq.png"}},"description":"Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного инте...","url":"https:\/\/habr.com\/ru\/company\/etmc_exponenta\/blog\/651715\/#post-content-body","about":["c_etmc_exponenta","h_machine_learning","h_matlab","h_artificial_intelligence","h_engineering_systems","f_develop","f_admin","f_popsci"],"image":["https:\/\/habr.com\/share\/publication\/651715\/d4983e5f0265512fad21878b60009f2d\/","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/63c\/3aa\/681\/63c3aa681453012413f25928ac8f6b64.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/08e\/197\/44e\/08e19744e8a8ad36ffdf0c28b819899a.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/a38\/cf6\/8b7\/a38cf68b7e8493948de0ec0c301c8856.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/d13\/927\/f48\/d13927f48330115b367b816237b3d5ad.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/df8\/af5\/3bc\/df8af53bc7ea1aeb78ddcdd1ceaba281.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/296\/0df\/cf8\/2960dfcf84780d62f1f7038ea5d45754.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/a8a\/4b8\/164\/a8a4b8164c6b5770846b91123a504658.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/849\/3e7\/80d\/8493e780d5b8a510020fc7af4f8d126e.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/1ef\/b9e\/bb0\/1efb9ebb03207f0a0a14950494d23e52.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/085\/c6e\/bc9\/085c6ebc90eb4ccb2e0a6f9db495adfc.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/16a\/308\/fd2\/16a308fd2202fd0af62b1c209a13dd44.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/a94\/28d\/4b7\/a9428d4b783c018d2a364fe537b65858.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/37e\/113\/185\/37e113185f6b481ec4b2d18a3f37d90d.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/073\/9fe\/a0b\/0739fea0b16e2c79b44433fe37b80d71.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/b22\/f00\/adc\/b22f00adc75730a48fc91bb032bd506f.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/435\/dbf\/b27\/435dbfb276f876dcad3061d9190bdd27.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/a18\/643\/fd0\/a18643fd0393be6dd2deb9299796ebdf.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/802\/95a\/e20\/80295ae20d11d2bad9d020153f9fe992.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/1fc\/7e3\/b35\/1fc7e3b35bb280dd18f5209ead6e1323.png"]}</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:title" content="Короли инференса: PyTorch, Tensorflow или MATLAB?" data-vmid="og:title">
+  <meta data-vue-meta="ssr" name="twitter:title" content="Короли инференса: PyTorch, Tensorflow или MATLAB?" data-vmid="twitter:title">
+  <meta data-vue-meta="ssr" name="aiturec:title" content="Короли инференса: PyTorch, Tensorflow или MATLAB?" data-vmid="aiturec:title">
+  <meta data-vue-meta="ssr" name="description" content="Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в..." data-vmid="description">
+  <meta data-vue-meta="ssr" itemprop="description" content="Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в..." data-vmid="description:itemprop">
+  <meta data-vue-meta="ssr" property="og:description" content="Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в..." data-vmid="og:description">
+  <meta data-vue-meta="ssr" name="twitter:description" content="Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в..." data-vmid="twitter:description">
+  <meta data-vue-meta="ssr" property="aiturec:description" content="Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в..." data-vmid="aiturec:description">
+  <meta data-vue-meta="ssr" itemprop="image" content="https://habrastorage.org/getpro/habr/upload_files/c9d/187/f38/c9d187f38b955702ca26822aa6f4d4b1.jpg" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="https://habrastorage.org/getpro/habr/upload_files/c9d/187/f38/c9d187f38b955702ca26822aa6f4d4b1.jpg" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="https://habrastorage.org/getpro/habr/upload_files/c9d/187/f38/c9d187f38b955702ca26822aa6f4d4b1.jpg" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="https://habrastorage.org/getpro/habr/upload_files/c9d/187/f38/c9d187f38b955702ca26822aa6f4d4b1.jpg" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="https://habrastorage.org/getpro/habr/upload_files/c9d/187/f38/c9d187f38b955702ca26822aa6f4d4b1.jpg?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="aiturec:item_id" content="651715" data-vmid="aiturec:item_id">
+  <meta data-vue-meta="ssr" property="aiturec:datetime" content="2022-03-11T14:24:07.000Z" data-vmid="aiturec:datetime">
+  <meta data-vue-meta="ssr" content="https://habr.com/ru/company/etmc_exponenta/blog/651715/" property="og:url" data-vmid="og:url">
+  <meta data-vue-meta="ssr" property="og:type" content="article" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" name="keywords" content="нейросети, resnet-50, matlab, simulink, цитм экспонента"> 
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/651715/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/company/etmc_exponenta/blog/651715/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" data-vmid="hreflang">
+  <link data-vue-meta="ssr" image_src="image" href="https://habrastorage.org/getpro/habr/upload_files/c9d/187/f38/c9d187f38b955702ca26822aa6f4d4b1.jpg" data-vmid="image:href">
+  <link data-vue-meta="ssr" rel="amphtml" href="https://habr.com/ru/amp/post/651715/"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> 
+       <div class="tm-feature tm-header__feature tm-feature_variant-inline">
+        <!---->
+       </div> <!----> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div hl="ru" companyname="etmc_exponenta" data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <div class="tm-page__header">
+         <!---->
+        </div> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <div class="tm-article-presenter">
+            <div class="tm-company-profile-card tm-company-article__profile-card">
+             <div class="tm-company-card tm-company-profile-card__info">
+              <div class="tm-company-card__header">
+               <a href="/ru/company/etmc_exponenta/profile/" class="tm-company-card__avatar">
+                <div class="tm-entity-image">
+                 <img alt="" height="48" src="//habrastorage.org/getpro/habr/company/fb1/849/594/fb184959473a2be78326182d48de946b.png" width="48" class="tm-entity-image__pic">
+                </div></a> <!----> 
+               <div class="tm-rating tm-company-card__rating">
+                <div class="tm-rating__header"> 
+                 <div class="tm-rating__counter">
+                  42.62
+                 </div>
+                </div> 
+                <div class="tm-rating__text">
+                  Рейтинг 
+                </div>
+               </div> <!---->
+              </div> 
+              <div class="tm-company-card__info">
+               <a href="/ru/company/etmc_exponenta/profile/" class="tm-company-card__name"> ЦИТМ Экспонента </a> 
+               <div class="tm-company-card__description"></div>
+              </div>
+             </div> <!---->
+            </div> 
+            <div class="tm-article-presenter__body">
+             <div class="tm-misprint-area">
+              <div class="tm-misprint-area__wrapper">
+               <article class="tm-article-presenter__content tm-article-presenter__content_narrow">
+                <div class="tm-article-presenter__header"> 
+                 <div class="tm-article-snippet tm-article-presenter__snippet">
+                  <div class="tm-article-snippet__meta-container">
+                   <div class="tm-article-snippet__meta">
+                    <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/n_kapyrin/" title="n_kapyrin" class="tm-user-info__userpic">
+                      <div class="tm-entity-image">
+                       <img alt="" height="24" src="//habrastorage.org/r/w32/getpro/habr/avatars/40c/6a1/ce3/40c6a1ce31ae13c0ce9b7b0a4b566b63.jpg" width="24" class="tm-entity-image__pic">
+                      </div></a> <span class="tm-user-info__user"><a href="/ru/users/n_kapyrin/" class="tm-user-info__username"> n_kapyrin </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T14:24:07.000Z" title="2022-03-11, 17:24">вчера в 17:24</time></span>
+                   </div> <!---->
+                  </div> 
+                  <h1 lang="ru" class="tm-article-snippet__title tm-article-snippet__title_h1"><span>Короли инференса: PyTorch, Tensorflow или MATLAB?</span></h1> 
+                  <div class="tm-article-snippet__hubs">
+                   <span class="tm-article-snippet__hubs-item"><a href="/ru/company/etmc_exponenta/blog/" class="tm-article-snippet__hubs-item-link router-link-active"><span>Блог компании ЦИТМ Экспонента</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/machine_learning/" class="tm-article-snippet__hubs-item-link"><span>Машинное обучение</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/matlab/" class="tm-article-snippet__hubs-item-link"><span>Matlab</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/artificial_intelligence/" class="tm-article-snippet__hubs-item-link"><span>Искусственный интеллект</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/engineering_systems/" class="tm-article-snippet__hubs-item-link"><span>Инженерные системы</span> <!----></a></span>
+                  </div> <!----> <!----> <!---->
+                 </div>
+                </div> <!----> 
+                <div data-gallery-root="" lang="ru" class="tm-article-body">
+                 <div></div> 
+                 <div id="post-content-body">
+                  <div>
+                   <div class="article-formatted-body article-formatted-body_version-2">
+                    <div xmlns="http://www.w3.org/1999/xhtml">
+                     <p>Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в этой сфере справляется с обучением и выполнением?</p>
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/63c/3aa/681/63c3aa681453012413f25928ac8f6b64.png" alt="Photo by Cristina Gottardi on Unsplash" title="Photo by Cristina Gottardi on Unsplash" width="1920" height="794" data-src="https://habrastorage.org/getpro/habr/upload_files/63c/3aa/681/63c3aa681453012413f25928ac8f6b64.png">
+                      <figcaption>
+                       Photo by Cristina Gottardi on Unsplash
+                      </figcaption>
+                     </figure>
+                     <p>В этой статье мы запустим пару нейросетей в MATLAB и сравним быстродействие ResNet с opensource-фреймворками. Так что, если хотите обсудить, в чем (кроме удобства) коммерческий фреймворк может выиграть у опенсорса, добро пожаловать!</p>
+                     <h2>С чего начинается MATLAB-нейросеть?</h2>
+                     <p>Наши заказчики охотно используют нейросети в качестве компонентов своих систем машинного зрения, предиктивной аналитики, анализа цифровых сигналов и во многих других областях. Мы часто пользуемся MATLAB, потому что он позволяет нам разработать и задеплоить сложную систему силами совсем небольшой команды, интегрировать все что нужно с другими тулбоксами MATLAB, чтобы за один присест создать и GUI для лабораторного стенда, и сайт, и подключить внешний код на Python, если надо.</p>
+                     <p>Так вот, хоть мы и используем MATLAB в каждом ML/DL проекте, русская версия <a href="https://en.wikipedia.org/wiki/Comparison_of_deep_learning_software">сравнения сред для глубокого обучения</a> из Википедии не содержит даже строчки про MATLAB.</p>
+                     <blockquote>
+                      <p><strong>Это повод поговорить об этом фреймворке и сравнить его с остальными.</strong></p>
+                     </blockquote>
+                     <p>Если вы никогда не видели, как запустить нейронку в MATLAB, вот небольшой пример. Предположим, что вам нужно классифицировать эту картинку:</p>
+                     <figure class="">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/08e/197/44e/08e19744e8a8ad36ffdf0c28b819899a.png" alt="Знакомьтесь, кот &quot;Hello world&quot;" title="Знакомьтесь, кот &quot;Hello world&quot;" width="244" height="244" data-src="https://habrastorage.org/getpro/habr/upload_files/08e/197/44e/08e19744e8a8ad36ffdf0c28b819899a.png">
+                      <figcaption>
+                       Знакомьтесь, кот "Hello world"
+                      </figcaption>
+                     </figure>
+                     <p>Какой код позволит нам это сделать?</p>
+                     <pre><code class="matlab">net = resnet50(); % Открываем скачанную нейросеть
+im = imread('cat.png'); % Открываем картинку
+sz = net.Layers(1).InputSize; % Подгоняем картинку под нужную размерность
+im = im(1:sz(1),1:sz(2),1:sz(3));
+
+label = classify(net, im) % К какому классу относится наш объект?</code></pre>
+                     <p>И вот, что мы получим в ответ:</p>
+                     <pre><code class="matlab">label =&nbsp;
+
+&nbsp;&nbsp;categorical
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Egyptian cat</code></pre>
+                     <p>Перед классификатором – кошка египетской породы, а перед нами – высокоуровневый фреймворк. Здесь можно делать fit-predict, а можно скачать и запустить готовую нейросеть. Поэкспериментируем с зашумленными изображениями.</p>
+                     <pre><code class="matlab">% Получим пары “класс, уверенность”
+predict_scores = predict(net, im);
+[scores,indx] = sort(predict_scores, 'descend');
+classNames = net.Layers(end).ClassNames;
+classNamesTop = classNames(indx(1:5));
+
+% Настраиваем область отображения
+h = figure;
+h.Position(3) = 2*h.Position(3); % Сократим ширину окна на 50%
+ax1 = subplot(1,2,1);
+ax2 = subplot(1,2,2);
+
+% Выводим график
+image(ax1,im);
+barh(ax2,scores(5:-1:1))
+xlabel(ax2,'Уверенность')
+yticklabels(ax2,classNamesTop(5:-1:1))
+ax2.YAxisLocation = 'right';</code></pre>
+                     <p>Завернём код в небольшой цикл и получим:</p>
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/a38/cf6/8b7/a38cf68b7e8493948de0ec0c301c8856.png" alt="На скорую руку проверяем чувствительность классификации к условиям съемки и детекции" title="На скорую руку проверяем чувствительность классификации к условиям съемки и детекции" width="1428" height="490" data-src="https://habrastorage.org/getpro/habr/upload_files/a38/cf6/8b7/a38cf68b7e8493948de0ec0c301c8856.png">
+                      <figcaption>
+                       На скорую руку проверяем чувствительность классификации к условиям съемки и детекции
+                      </figcaption>
+                     </figure>
+                     <p>Совсем небольшой скрипт, а сколько возможностей. Многие популярные предобученные нейронки уже заложены в MATLAB Deep Learning Toolbox, а те, которых нет, – <a href="https://docs.exponenta.ru/deeplearning/deep-learning-import-and-export.html?utm_source=habr&amp;utm_medium=art&amp;utm_campaign=ai">можно импортировать</a> из ONNX, или из TensorFlow 2, или запустить через <a href="https://docs.exponenta.ru/matlab/matlab_external/call-python-from-matlab.html?utm_source=habr&amp;utm_medium=art&amp;utm_campaign=ai">интерфейс с Python</a>. Вы легко добавите модуль определения карты глубины на базе <a href="https://github.com/isl-org/MiDaS">MiDaS</a> или повысите разрешение изображения при помощи <a href="https://tfhub.dev/captain-pool/esrgan-tf2/1">ESRGAN</a>, и ваш робот будет постить в инстаграм 3D-шедевры в высоком разрешении.</p>
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/d13/927/f48/d13927f48330115b367b816237b3d5ad.png" alt="Эксперименты на кошках: карта глубины (MiDaS), наложенная на фотографию в 3D, а также детали увеличенного изображения (ESRGAN)" title="Эксперименты на кошках: карта глубины (MiDaS), наложенная на фотографию в 3D, а также детали увеличенного изображения (ESRGAN)" width="1698" height="418" data-src="https://habrastorage.org/getpro/habr/upload_files/d13/927/f48/d13927f48330115b367b816237b3d5ad.png">
+                      <figcaption>
+                       Эксперименты на кошках: карта глубины (MiDaS), наложенная на фотографию в 3D, а также детали увеличенного изображения (ESRGAN)
+                      </figcaption>
+                     </figure>
+                     <p>Это далеко не весь функционал: в MATLAB можно рисовать графы сетей и делать контроль версий моделей, а можно просто обучать модели внутри блоков Simulink – достаточно лишь указать им датасет.</p>
+                     <blockquote>
+                      <p><strong>Это, конечно, хорошо, но будет ли сеть выполняться достаточно быстро на вашей платформе?</strong></p>
+                     </blockquote>
+                     <h2>Покажите мне, где нужно ускорить</h2>
+                     <p>Самая большая часть времени в проекте уходит на понимание задачи и данных: никто не сможет вернуть время, потраченное на решение ненужной бизнесу задачи, а из мусорных данных получаются в основном мусорные модели.</p>
+                     <p>Порассуждаем на основе диаграммы, которая является вольным переопределением <a href="https://ru.wikipedia.org/wiki/CRISP-DM">CRISP-DM</a>:</p>
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/df8/af5/3bc/df8af53bc7ea1aeb78ddcdd1ceaba281.png" alt="Вольная трактовка процесса CRISP-DM" title="Вольная трактовка процесса CRISP-DM" width="850" height="532" data-src="https://habrastorage.org/getpro/habr/upload_files/df8/af5/3bc/df8af53bc7ea1aeb78ddcdd1ceaba281.png">
+                      <figcaption>
+                       Вольная трактовка процесса CRISP-DM
+                      </figcaption>
+                     </figure>
+                     <p><strong><u>Что трудно ускорить:</u></strong> левая часть схемы выражает околобизнесовые затраты. Ускорить ее может наличие у компании опыта, хорошие практики/шаблоны, продуктивное общение с заказчиком и коллегами, удобство фреймворка, контроль версий, всякие генераторы кода и документации, и так далее. Объективно сравнить фреймворки по этой части довольно трудно.</p>
+                     <p><strong><u>Что значительно легче ускорить:</u></strong> вся правая часть схемы недавно была прерогативой дата сайентистов, но за последние 10 лет хорошо автоматизировалась (как за счет демократизации отрасли, так и за счет прогресса методов и штук вроде AutoML). В этой статье ограничимся тем, что сравним скорость выполнения и немного скорость обучения нейросетей.</p>
+                     <p>Чего мы ожидаем от высокоуровневого фреймворка в плане скорости разработки?</p>
+                     <div class="persona" persona="true">
+                      <img persona="true" class="image persona__image" src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/296/0df/cf8/2960dfcf84780d62f1f7038ea5d45754.png" data-src="https://habrastorage.org/getpro/habr/upload_files/296/0df/cf8/2960dfcf84780d62f1f7038ea5d45754.png">
+                      <h5 class="persona__heading" persona="true">Скоростного выполнения модели</h5>
+                      <p>Фреймворк должен оптимизировать код модели, а также позволять легко ее трансформировать и сравнивать производительность разных версий</p>
+                     </div>
+                     <div class="persona" persona="true">
+                      <img persona="true" class="image persona__image" src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/a8a/4b8/164/a8a4b8164c6b5770846b91123a504658.png" data-src="https://habrastorage.org/getpro/habr/upload_files/a8a/4b8/164/a8a4b8164c6b5770846b91123a504658.png">
+                      <h5 class="persona__heading" persona="true">Автоподбора модели и легкого перебора гиперпараметров</h5>
+                      <p>Графический редактор графов, отладчик интерфейсов (между слоями нейросети, например), скрипты, AutoML, учебные материалы и шаблоны, дружелюбное сообщество </p>
+                     </div>
+                     <div class="persona" persona="true">
+                      <img persona="true" class="image persona__image" src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/849/3e7/80d/8493e780d5b8a510020fc7af4f8d126e.png" data-src="https://habrastorage.org/getpro/habr/upload_files/849/3e7/80d/8493e780d5b8a510020fc7af4f8d126e.png">
+                      <h5 class="persona__heading" persona="true">Простого и удобного инструментария для работы с данными</h5>
+                      <p>Эксплоративный анализ, визуализация, удобный GUI, рефакторинг, версионирование, создание отчетов</p>
+                     </div>
+                     <div class="persona" persona="true">
+                      <img persona="true" class="image persona__image" src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/1ef/b9e/bb0/1efb9ebb03207f0a0a14950494d23e52.png" data-src="https://habrastorage.org/getpro/habr/upload_files/1ef/b9e/bb0/1efb9ebb03207f0a0a14950494d23e52.png">
+                      <h5 class="persona__heading" persona="true">Развёртки и поддержки проекта</h5>
+                      <p>Сборка проекта, интеграция всех источников данных и внешних компонентов, распаковка проекта на всех необходимых целевых платформах, симуляция и отладка в любых сценариях</p>
+                     </div>
+                     <h2>Сравниваем скорость на ResNet-50</h2>
+                     <p>Что ж, значит в MATLAB тоже есть нейронки, отлично – не придется вручную писать обратное распространение ошибки. Что дальше? Недавно сотрудник MathWorks David Willingham представил доклад, где он сравнивает быстродействие трех фреймворков: MATLAB, PyTorch и Tensorflow.</p>
+                     <div class="persona" persona="true">
+                      <img persona="true" class="image persona__image" src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/085/c6e/bc9/085c6ebc90eb4ccb2e0a6f9db495adfc.png" data-src="https://habrastorage.org/getpro/habr/upload_files/085/c6e/bc9/085c6ebc90eb4ccb2e0a6f9db495adfc.png">
+                      <h5 class="persona__heading" persona="true">David Willingham</h5>
+                      <p>MathWorks, Deep Learning Product Manager <a href="https://www.mathworks.com/matlabcentral/profile/authors/106350"><u>https://www.mathworks.com/matlabcentral/profile/authors/106350</u></a> </p>
+                     </div>
+                     <p>Первое представление о различиях можно подсмотреть в <a href="https://en.wikipedia.org/wiki/Comparison_of_deep_learning_software">уже упомянутой таблице</a> в Википедии. Здесь фреймворки отличаются только лицензией и поддержкой библиотек для параллельных вычислений (OpenCL и OpenMP), что для нас второстепенно.</p>
+                     <figure class="full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/16a/308/fd2/16a308fd2202fd0af62b1c209a13dd44.png" alt="Фреймворки, которые мы будем сравнивать (укороченная версия исходной таблицы)" title="Фреймворки, которые мы будем сравнивать (укороченная версия исходной таблицы)" width="1281" height="443" data-src="https://habrastorage.org/getpro/habr/upload_files/16a/308/fd2/16a308fd2202fd0af62b1c209a13dd44.png">
+                      <figcaption>
+                       Фреймворки, которые мы будем сравнивать (укороченная версия исходной таблицы)
+                      </figcaption>
+                     </figure>
+                     <p>Сейчас мы изучим результаты сравнения на инференсе, но для начала сравним скорость обучения ResNet-50. Приходится же иногда переобучаться под новый датасет или обучать кастомную архитектуру.</p>
+                     <figure class="float full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/a94/28d/4b7/a9428d4b783c018d2a364fe537b65858.png" alt="Длительность одной эпохи обучения ResNet 50" title="Длительность одной эпохи обучения ResNet 50" width="1133" height="577" data-src="https://habrastorage.org/getpro/habr/upload_files/a94/28d/4b7/a9428d4b783c018d2a364fe537b65858.png">
+                      <figcaption>
+                       Длительность одной эпохи обучения ResNet 50
+                      </figcaption>
+                     </figure>
+                     <p>Итак, для сравнения взята стандартная сетка для классификации изображений – ResNet, вариант с 50 слоями. По <a href="https://arxiv.org/abs/1709.05011">некоторым бенчмаркам</a>, обучение на ImageNet 1000 на GPU NVIDIA M40 в течение 90 эпох должно занимать 14 дней, по другим – выходит что A100 отработает 50 эпох за десяток часов (<a href="https://www.aime.info/blog/deep-learning-gpu-benchmarks-2021/">AIME</a>). На обучении наши инструменты показывают примерно одинаковые результаты. Может быть, и правда все упирается в железо.</p>
+                     <p>Зато, когда сеть уже <em>обучена</em>, ее производительность будет зависеть от массы факторов, которые интересно изучить. Ее же нужно запускать для каждого пользователя и для каждого примера (фотографии, нового измерения с датчика, речевого сигнала…), на любой платформе, от сервера до бортовых вычислителей автономного робота. Пересылка через всякие интерфейсы и обращение к базам данных может отнять львиную долю времени...</p>
+                     <blockquote>
+                      <p><strong>Сравним выполнение моделей. Сначала – быстродействие на CPU.</strong></p>
+                     </blockquote>
+                     <h2>Быстродействие на CPU</h2>
+                     <p>Давайте сравним запуск на CPU нейросети ResNet в таком сценарии: вы работаете на встраиваемой платформе, где нет ускорителей, или в системе, где нет CUDA. Например, сюда входит очень многое из робототехники, от институтских омни-тележек до космических спутников.</p>
+                     <p>Оказывается, код нашей сетки выполняется в MATLAB на CPU чуть быстрее, чем в других фреймворках.</p>
+                     <figure class="float full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/37e/113/185/37e113185f6b481ec4b2d18a3f37d90d.png" alt="ResNet 50 на CPU" title="ResNet 50 на CPU" width="1137" height="557" data-src="https://habrastorage.org/getpro/habr/upload_files/37e/113/185/37e113185f6b481ec4b2d18a3f37d90d.png">
+                      <figcaption>
+                       ResNet 50 на CPU
+                      </figcaption>
+                     </figure>
+                     <p>Оказывается, код нашей сетки выполняется в MATLAB на CPU чуть быстрее, чем в других фреймворках. <strong>Бенчмарк для CPU построен на Intel Xeon 3.6 GHz – такие солидные частоты редко встречаются на борту.</strong> На более приземленном CPU, возможно, код будет вести себя слегка иначе.</p>
+                     <figure class="float bordered full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/073/9fe/a0b/0739fea0b16e2c79b44433fe37b80d71.png" alt="ResNet 50 + MATLAB Coder" title="ResNet 50 + MATLAB Coder" width="1145" height="572" data-src="https://habrastorage.org/getpro/habr/upload_files/073/9fe/a0b/0739fea0b16e2c79b44433fe37b80d71.png">
+                      <figcaption>
+                       ResNet 50 + MATLAB Coder
+                      </figcaption>
+                     </figure>
+                     <p>А что, если скомпилировать все при помощи <strong>MATLAB Coder</strong>? Сеть в MATLAB выполняется в 2 раза быстрее, чем на Tensorflow и в 3 раза быстрее, чем на PyTorch. Да, это не самая тяжелая нейросеть, и хорошо изученная к тому же, есть много приемов оптимизации, которые MathWorks могли заложить в предобученную сеть, включенную в MATLAB.</p>
+                     <blockquote>
+                      <p>Если у вас <strong>робототехнический проект с CPU на борту</strong>, то MATLAB – в принципе единственный коробочный продукт, который позволяет обучать модели и запускать их на любой встраиваемой платформе.</p>
+                      <p><strong>Сохранится ли эффект на GPU? Давайте узнаем.</strong></p>
+                     </blockquote>
+                     <h2>Быстродействие на GPU</h2>
+                     <p>Использование GPU позволяет добиться феноменальных скоростей обучения или выполнения нейросетей... при запуске на сравнительно больших объемах данных.</p>
+                     <figure class="float bordered full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/b22/f00/adc/b22f00adc75730a48fc91bb032bd506f.png" alt="Батч размером 1 на CPU" title="Батч размером 1 на CPU" width="1143" height="563" data-src="https://habrastorage.org/getpro/habr/upload_files/b22/f00/adc/b22f00adc75730a48fc91bb032bd506f.png">
+                      <figcaption>
+                       Батч размером 1 на CPU
+                      </figcaption>
+                     </figure>
+                     <p>При прогоне через нейросеть на GPU одного примера за один проход (батч размера 1), если запускать сеть через скрипт, MATLAB есть над чем поработать, судя по графикам, 1 батч можно просто запускать на CPU, разницы не будет. <strong>Я обещал обсудить ситуации, когда MATLAB проигрывает – это как раз тот случай</strong>.</p>
+                     <blockquote>
+                      <p>Пересылка из общей памяти в память GPU занимает много времени, и одновременная обработка данных (в виде <em>батча</em>) выгоднее, если в батче больше данных. Но, поскольку <strong>код модели и небольшой набор данных</strong> все-таки должны поместиться в памяти видеокарты, максимальный размер батча тоже ограничен.</p>
+                     </blockquote>
+                     <figure class="float full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/435/dbf/b27/435dbfb276f876dcad3061d9190bdd27.png" alt="Батч размером 32 на GPU" title="Батч размером 32 на GPU" width="1142" height="573" data-src="https://habrastorage.org/getpro/habr/upload_files/435/dbf/b27/435dbfb276f876dcad3061d9190bdd27.png">
+                      <figcaption>
+                       Батч размером 32 на GPU
+                      </figcaption>
+                     </figure>
+                     <p>Если в батче 32 примера, то все гораздо лучше. Теперь мы хорошо загружаем видеокарту и все фреймворки демонстрируют примерно одинаковый прирост быстродействия относительно запуска на CPU. Но это не все, можно ускориться. <strong>В MATLAB для этого есть два способа скомпилировать нейронку для GPU.</strong></p>
+                     <figure class="float full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/a18/643/fd0/a18643fd0393be6dd2deb9299796ebdf.png" alt="Код для GPU в форме MEX-функции" title="Код для GPU в форме MEX-функции" width="1139" height="562" data-src="https://habrastorage.org/getpro/habr/upload_files/a18/643/fd0/a18643fd0393be6dd2deb9299796ebdf.png">
+                      <figcaption>
+                       Код для GPU в форме MEX-функции
+                      </figcaption>
+                     </figure>
+                     <p><strong>MEX-функции</strong> – это оболочки для внешних программ. Они ведут себя в точности так же, как функции MATLAB/Simulink, но могут попутно с выполнением кода MATLAB вызывать внешнюю программу, C/C++ или иной код. Инструментарий MEX генерирует C++ код для GPU, но не требует лицензии на <strong>GPU Coder</strong> для задач предсказания (predict). </p>
+                     <p>Упакованный в MEX код нейросети ResNet выполняется на GPU почти в 2 раза быстрее на одном изображении (на одном батче), чем в PyTorch или TensorFlow.</p>
+                     <figure class="float full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/802/95a/e20/80295ae20d11d2bad9d020153f9fe992.png" alt="Код для GPU из MATLAB GPU Coder" title="Код для GPU из MATLAB GPU Coder" width="1141" height="573" data-src="https://habrastorage.org/getpro/habr/upload_files/802/95a/e20/80295ae20d11d2bad9d020153f9fe992.png">
+                      <figcaption>
+                       Код для GPU из MATLAB GPU Coder
+                      </figcaption>
+                     </figure>
+                     <p>Второй способ для получения оптимизированного кода – <strong>GPU Coder</strong>. Это уже специальный <a href="https://www.mathworks.com/help/gpucoder/gpucoder-deep-learning.html">генератор кода для GPU</a>. Чтобы его применить, нужно всего лишь переключить одну галочку в настройках генератора кода (она называется <em>Generate GPU code</em>), после чего мы получаем встраиваемый оптимизированный CUDA-код, не требующий какого-то специального окружения для запуска на целевой платформе.</p>
+                     <p>Автоматически оптимизированная для TensorRT нейросеть выполняется очень быстро – почти в 3 раза быстрее, чем та же сеть на GPU в Tensorflow или PyTorch. <strong>И это на одном батче.</strong></p>
+                     <h2>Заключение</h2>
+                     <figure class="float full-width ">
+                      <img src="https://habrastorage.org/r/w1560/getpro/habr/upload_files/1fc/7e3/b35/1fc7e3b35bb280dd18f5209ead6e1323.png" alt="Ускорение ResNet 50 в MATLAB за последние полгода" title="Ускорение ResNet 50 в MATLAB за последние полгода" width="1129" height="600" data-src="https://habrastorage.org/getpro/habr/upload_files/1fc/7e3/b35/1fc7e3b35bb280dd18f5209ead6e1323.png">
+                      <figcaption>
+                       Ускорение ResNet 50 в MATLAB за последние полгода
+                      </figcaption>
+                     </figure>
+                     <p>В своём докладе MathWorks отмечают, что <strong>за полгода выполнение ResNet было ускорено почти в 2 раза</strong>. Видимо, как в ядре MATLAB, так и в архитектуре нейросети, ещё есть что оптимизировать. Это вселяет оптимизм – будем ожидать, что разработчики и в следующих версиях сохранят такой темп улучшений.</p>
+                     <p>В общем и целом, MATLAB отвечает всем нашим ожиданиям от высокоуровневого фреймворка в том что касается разработки систем с элементами искусственного интеллекта (список критериев – выше). Нам он облегчает и работу с данными, и подбор алгоритмов классического машинного обучения, и подключение глубоких нейросетей, и разработку собственных топологий, если нужно. Так что мы используем его в проектах с ИИ для самых разных заказчиков.</p>
+                     <p>Пожалуйста, расскажите нам в комментариях о своем опыте работы с нейросетями в MATLAB, о бенчмарках или предпочтениях по фреймворкам. Желаем всем очень производительных AI-проектов, выполненных в комфортной среде!</p>
+                    </div>
+                   </div>
+                  </div> 
+                  <div class="v-portal" style="display:none;"></div>
+                 </div> <!----> <!---->
+                </div> 
+                <div class="tm-article-presenter__meta">
+                 <div class="tm-separated-list tm-article-presenter__meta-list">
+                  <span class="tm-separated-list__title">Теги:</span> 
+                  <ul class="tm-separated-list__list">
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D0%B8%5D" class="tm-tags-list__link">нейросети</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bresnet-50%5D" class="tm-tags-list__link">resnet-50</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bmatlab%5D" class="tm-tags-list__link">matlab</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bsimulink%5D" class="tm-tags-list__link">simulink</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D1%86%D0%B8%D1%82%D0%BC%20%D1%8D%D0%BA%D1%81%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D0%B0%5D" class="tm-tags-list__link">цитм экспонента</a></li>
+                  </ul>
+                 </div> 
+                 <div class="tm-separated-list tm-article-presenter__meta-list">
+                  <span class="tm-separated-list__title">Хабы:</span> 
+                  <ul class="tm-separated-list__list">
+                   <li class="tm-separated-list__item"><a href="/ru/company/etmc_exponenta/blog/" class="tm-hubs-list__link router-link-active"> Блог компании ЦИТМ Экспонента </a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/hub/machine_learning/" class="tm-hubs-list__link"> Машинное обучение </a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/hub/matlab/" class="tm-hubs-list__link"> Matlab </a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/hub/artificial_intelligence/" class="tm-hubs-list__link"> Искусственный интеллект </a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/hub/engineering_systems/" class="tm-hubs-list__link"> Инженерные системы </a></li>
+                  </ul>
+                 </div>
+                </div>
+               </article>
+              </div> <!---->
+             </div> 
+             <div class="tm-article-sticky-panel">
+              <div class="tm-data-icons tm-article-sticky-panel__icons">
+               <div class="tm-article-rating tm-data-icons__item">
+                <div class="tm-votes-meter tm-article-rating__votes-switcher">
+                 <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                  <title>Всего голосов 5: ↑5 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                 </svg> <span title="Всего голосов 5: ↑5 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+5</span>
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> <!----> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                 <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                </svg> <span class="tm-icon-counter__value">1K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                 <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                  <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                 </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 7 </span></button> <!----> 
+               <div title="Поделиться" class="tm-sharing tm-data-icons__item">
+                <button type="button" class="tm-sharing__button">
+                 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="tm-sharing__icon">
+                  <path fill="currentColor" d="M13.8 13.8V18l7.2-6.6L13.8 5v3.9C5 8.9 3 18.6 3 18.6c2.5-4.4 6-4.8 10.8-4.8z"></path>
+                 </svg></button> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> 
+               <div class="v-portal" style="display:none;"></div>
+              </div> 
+             </div>
+            </div> 
+            <div class="v-portal" style="display:none;"></div> 
+            <div class="tm-article-presenter__footer">
+             <div class="tm-article-blocks">
+              <!----> 
+              <section class="tm-block tm-block_spacing-bottom">
+               <!----> 
+               <div class="tm-block__body tm-block__body_variant-balanced">
+                <div class="tm-article-author">
+                 <div class="tm-article-author__company">
+                  <div class="tm-article-author__company-card">
+                   <div class="tm-company-snippet">
+                    <a href="/ru/company/etmc_exponenta/profile/" class="tm-company-snippet__logo-link">
+                     <div class="tm-entity-image">
+                      <img alt="" height="40" src="//habrastorage.org/getpro/habr/company/fb1/849/594/fb184959473a2be78326182d48de946b.png" width="40" class="tm-entity-image__pic">
+                     </div></a> 
+                    <div class="tm-company-snippet__info">
+                     <a href="/ru/company/etmc_exponenta/profile/" class="tm-company-snippet__title">ЦИТМ Экспонента</a> 
+                     <div class="tm-company-snippet__description">
+                      Компания
+                     </div>
+                    </div>
+                   </div> 
+                   <div class="tm-article-author__buttons">
+                    <!----> <!---->
+                   </div>
+                  </div> 
+                  <div class="tm-article-author__company-contacts">
+                   <a href="https://exponenta.ru" rel="noopener" target="_blank" class="tm-article-author__contact"> Сайт </a>
+                  </div> 
+                  <div class="tm-article-author__separator"></div>
+                 </div> 
+                 <div class="tm-user-card tm-article-author__user-card tm-user-card_variant-article">
+                  <div class="tm-user-card__info-container">
+                   <div class="tm-user-card__header">
+                    <div class="tm-user-card__header-data">
+                     <a href="/ru/users/n_kapyrin/" class="tm-user-card__userpic tm-user-card__userpic_size-40">
+                      <div class="tm-entity-image">
+                       <img alt="" src="//habrastorage.org/getpro/habr/avatars/40c/6a1/ce3/40c6a1ce31ae13c0ce9b7b0a4b566b63.jpg" class="tm-entity-image__pic">
+                      </div></a> 
+                     <div class="tm-user-card__meta">
+                      <div title=" 2 голоса " class="tm-karma tm-user-card__karma">
+                       <div class="tm-karma__votes tm-karma__votes_positive">
+                         2 
+                       </div> 
+                       <div class="tm-karma__text">
+                         Карма 
+                       </div>
+                      </div> 
+                      <div title="Рейтинг пользователя" class="tm-rating tm-user-card__rating">
+                       <div class="tm-rating__header"> 
+                        <div class="tm-rating__counter">
+                         5
+                        </div>
+                       </div> 
+                       <div class="tm-rating__text">
+                         Рейтинг 
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div> 
+                   <div class="tm-user-card__info tm-user-card__info_variant-article">
+                    <div class="tm-user-card__title tm-user-card__title_variant-article">
+                     <span class="tm-user-card__name tm-user-card__name_variant-article">Николай Капырин</span> <a href="/ru/users/n_kapyrin/" class="tm-user-card__nickname tm-user-card__nickname_variant-article"> @n_kapyrin </a> <!---->
+                    </div> 
+                    <p class="tm-user-card__short-info tm-user-card__short-info_variant-article">Инженер – это звучит гордо</p>
+                   </div>
+                  </div> 
+                  <div class="tm-user-card__buttons tm-user-card__buttons_variant-article">
+                   <!----> <!----> <!----> <!----> <!---->
+                  </div>
+                 </div> <!---->
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> <!---->
+              </section> 
+              <div class="tm-article-blocks__comments">
+               <div class="tm-article-page-comments">
+                <div class="tm-article-comments-counter-link tm-article-comments-counter-button">
+                 <a href="/ru/company/etmc_exponenta/blog/651715/comments/" class="tm-article-comments-counter-link__link tm-article-comments-counter-link__link_button-style">
+                  <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon tm-article-comments-counter-link__icon_contrasted">
+                   <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                  </svg> <span class="tm-article-comments-counter-link__value tm-article-comments-counter-link__value_contrasted"> Комментарии 4 </span></a> <!---->
+                </div>
+               </div>
+              </div> <!----> <!----> <!----> 
+             </div>
+            </div>
+           </div>
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__placeholder_initial"></div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> 
+            <section class="tm-block tm-block_spacing-bottom">
+             <header class="tm-block__header">
+              <h2 class="tm-block__title">Информация</h2> <!---->
+             </header> 
+             <div class="tm-block__body">
+              <div class="tm-company-basic-info">
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Дата основания
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                 <time datetime="2009-04-14T20:00:00.000Z" title="2009-04-15, 00:00">15 апреля 2009</time>
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Местоположение
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                  Россия 
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Сайт
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                 <a href="https://exponenta.ru" target="_blank" class="tm-company-basic-info__link"> exponenta.ru </a>
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Численность
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                  31–50 человек 
+                </dd>
+               </dl> 
+               <dl class="tm-description-list tm-description-list_variant-columns-nowrap">
+                <dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">
+                 Дата регистрации
+                </dt> 
+                <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+                 <time datetime="2020-03-31T11:03:43.000Z" title="2020-03-31, 14:03">31 марта 2020</time>
+                </dd>
+               </dl> <!---->
+              </div>
+             </div> <!---->
+            </section> 
+            <div class="tm-company-widgets"></div> <!----> <!---->
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/company/etmc_exponenta/blog/651715/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/company/etmc_exponenta/blog/651715/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"651715":{"id":"651715","timePublished":"2022-03-11T14:24:07+00:00","isCorporative":true,"lang":"ru","titleHtml":"Короли инференса: PyTorch, Tensorflow или MATLAB?","leadData":{"textHtml":"\u003Cp\u003EЧто вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в этой сфере справляется с обучением и выполнением?\u003C\u002Fp\u003E\u003Cp\u003EВ этой статье мы запустим пару нейросетей в MATLAB и сравним быстродействие ResNet с opensource-фреймворками. Так что, если хотите обсудить, в чем (кроме удобства) коммерческий фреймворк может выиграть у опенсорса, добро пожаловать!\u003C\u002Fp\u003E","imageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc9d\u002F187\u002Ff38\u002Fc9d187f38b955702ca26822aa6f4d4b1.jpg","buttonTextHtml":"Читать далее","image":{"url":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc9d\u002F187\u002Ff38\u002Fc9d187f38b955702ca26822aa6f4d4b1.jpg","fit":"cover","positionY":0.22727272727273,"positionX":41.538461538462}},"editorVersion":"2.0","postType":"article","postLabels":[],"author":{"scoreStats":{"score":2,"votesCount":2},"rating":5,"relatedData":null,"contacts":[],"authorContacts":[],"paymentDetails":{"paymentYandexMoney":null,"paymentPayPalMe":null,"paymentWebmoney":null},"id":"474346","alias":"n_kapyrin","fullname":"Николай Капырин","avatarUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Favatars\u002F40c\u002F6a1\u002Fce3\u002F40c6a1ce31ae13c0ce9b7b0a4b566b63.jpg","speciality":"Инженер – это звучит гордо"},"statistics":{"commentsCount":4,"favoritesCount":7,"readingCount":1000,"score":5,"votesCount":5},"hubs":[{"relatedData":null,"id":"22438","alias":"etmc_exponenta","type":"corporative","title":"Блог компании ЦИТМ Экспонента","titleHtml":"Блог компании ЦИТМ Экспонента","isProfiled":false},{"relatedData":null,"id":"19439","alias":"machine_learning","type":"collective","title":"Машинное обучение","titleHtml":"Машинное обучение","isProfiled":true},{"relatedData":null,"id":"21360","alias":"matlab","type":"collective","title":"Matlab","titleHtml":"Matlab","isProfiled":true},{"relatedData":null,"id":"21922","alias":"artificial_intelligence","type":"collective","title":"Искусственный интеллект","titleHtml":"Искусственный интеллект","isProfiled":false},{"relatedData":null,"id":"22113","alias":"engineering_systems","type":"collective","title":"Инженерные системы","titleHtml":"Инженерные системы","isProfiled":false}],"flows":[{"id":"1","alias":"develop","title":"Разработка"},{"id":"6","alias":"admin","title":"Администрирование"},{"id":"7","alias":"popsci","title":"Научпоп"}],"relatedData":null,"textHtml":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EЧто вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в этой сфере справляется с обучением и выполнением?\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F63c\u002F3aa\u002F681\u002F63c3aa681453012413f25928ac8f6b64.png\" alt=\"Photo by Cristina Gottardi on Unsplash\" title=\"Photo by Cristina Gottardi on Unsplash\" width=\"1920\" height=\"794\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F63c\u002F3aa\u002F681\u002F63c3aa681453012413f25928ac8f6b64.png\"\u002F\u003E\u003Cfigcaption\u003EPhoto by Cristina Gottardi on Unsplash\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EВ этой статье мы запустим пару нейросетей в MATLAB и сравним быстродействие ResNet с opensource-фреймворками. Так что, если хотите обсудить, в чем (кроме удобства) коммерческий фреймворк может выиграть у опенсорса, добро пожаловать!\u003C\u002Fp\u003E\u003Ch2\u003EС чего начинается MATLAB-нейросеть?\u003C\u002Fh2\u003E\u003Cp\u003EНаши заказчики охотно используют нейросети в качестве компонентов своих систем машинного зрения, предиктивной аналитики, анализа цифровых сигналов и во многих других областях. Мы часто пользуемся MATLAB, потому что он позволяет нам разработать и задеплоить сложную систему силами совсем небольшой команды, интегрировать все что нужно с другими тулбоксами MATLAB, чтобы за один присест создать и GUI для лабораторного стенда, и сайт, и подключить внешний код на Python, если надо.\u003C\u002Fp\u003E\u003Cp\u003EТак вот, хоть мы и используем MATLAB в каждом ML\u002FDL проекте, русская версия \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FComparison_of_deep_learning_software\"\u003Eсравнения сред для глубокого обучения\u003C\u002Fa\u003E из Википедии не содержит даже строчки про MATLAB.\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003E\u003Cstrong\u003EЭто повод поговорить об этом фреймворке и сравнить его с остальными.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Cp\u003EЕсли вы никогда не видели, как запустить нейронку в MATLAB, вот небольшой пример. Предположим, что вам нужно классифицировать эту картинку:\u003C\u002Fp\u003E\u003Cfigure class=\"\"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F08e\u002F197\u002F44e\u002F08e19744e8a8ad36ffdf0c28b819899a.png\" alt=\"Знакомьтесь, кот &quot;Hello world&quot;\" title=\"Знакомьтесь, кот &quot;Hello world&quot;\" width=\"244\" height=\"244\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F08e\u002F197\u002F44e\u002F08e19744e8a8ad36ffdf0c28b819899a.png\"\u002F\u003E\u003Cfigcaption\u003EЗнакомьтесь, кот \"Hello world\"\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EКакой код позволит нам это сделать?\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"matlab\"\u003Enet = resnet50(); % Открываем скачанную нейросеть\nim = imread('cat.png'); % Открываем картинку\nsz = net.Layers(1).InputSize; % Подгоняем картинку под нужную размерность\nim = im(1:sz(1),1:sz(2),1:sz(3));\n\nlabel = classify(net, im) % К какому классу относится наш объект?\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EИ вот, что мы получим в ответ:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"matlab\"\u003Elabel = \n\n  categorical\n\n     Egyptian cat\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПеред классификатором – кошка египетской породы, а перед нами – высокоуровневый фреймворк. Здесь можно делать fit-predict, а можно скачать и запустить готовую нейросеть. Поэкспериментируем с зашумленными изображениями.\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"matlab\"\u003E% Получим пары “класс, уверенность”\npredict_scores = predict(net, im);\n[scores,indx] = sort(predict_scores, 'descend');\nclassNames = net.Layers(end).ClassNames;\nclassNamesTop = classNames(indx(1:5));\n\n% Настраиваем область отображения\nh = figure;\nh.Position(3) = 2*h.Position(3); % Сократим ширину окна на 50%\nax1 = subplot(1,2,1);\nax2 = subplot(1,2,2);\n\n% Выводим график\nimage(ax1,im);\nbarh(ax2,scores(5:-1:1))\nxlabel(ax2,'Уверенность')\nyticklabels(ax2,classNamesTop(5:-1:1))\nax2.YAxisLocation = 'right';\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EЗавернём код в небольшой цикл и получим:\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa38\u002Fcf6\u002F8b7\u002Fa38cf68b7e8493948de0ec0c301c8856.png\" alt=\"На скорую руку проверяем чувствительность классификации к условиям съемки и детекции\" title=\"На скорую руку проверяем чувствительность классификации к условиям съемки и детекции\" width=\"1428\" height=\"490\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa38\u002Fcf6\u002F8b7\u002Fa38cf68b7e8493948de0ec0c301c8856.png\"\u002F\u003E\u003Cfigcaption\u003EНа скорую руку проверяем чувствительность классификации к условиям съемки и детекции\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EСовсем небольшой скрипт, а сколько возможностей. Многие популярные предобученные нейронки уже заложены в MATLAB Deep Learning Toolbox, а те, которых нет, – \u003Ca href=\"https:\u002F\u002Fdocs.exponenta.ru\u002Fdeeplearning\u002Fdeep-learning-import-and-export.html?utm_source=habr&amp;utm_medium=art&amp;utm_campaign=ai\"\u003Eможно импортировать\u003C\u002Fa\u003E из ONNX, или из TensorFlow 2, или запустить через \u003Ca href=\"https:\u002F\u002Fdocs.exponenta.ru\u002Fmatlab\u002Fmatlab_external\u002Fcall-python-from-matlab.html?utm_source=habr&amp;utm_medium=art&amp;utm_campaign=ai\"\u003Eинтерфейс с Python\u003C\u002Fa\u003E. Вы легко добавите модуль определения карты глубины на базе \u003Ca href=\"https:\u002F\u002Fgithub.com\u002Fisl-org\u002FMiDaS\"\u003EMiDaS\u003C\u002Fa\u003E или повысите разрешение изображения при помощи \u003Ca href=\"https:\u002F\u002Ftfhub.dev\u002Fcaptain-pool\u002Fesrgan-tf2\u002F1\"\u003EESRGAN\u003C\u002Fa\u003E, и ваш робот будет постить в инстаграм 3D-шедевры в высоком разрешении.\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fd13\u002F927\u002Ff48\u002Fd13927f48330115b367b816237b3d5ad.png\" alt=\"Эксперименты на кошках: карта глубины (MiDaS), наложенная на фотографию в 3D, а также детали увеличенного изображения (ESRGAN)\" title=\"Эксперименты на кошках: карта глубины (MiDaS), наложенная на фотографию в 3D, а также детали увеличенного изображения (ESRGAN)\" width=\"1698\" height=\"418\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fd13\u002F927\u002Ff48\u002Fd13927f48330115b367b816237b3d5ad.png\"\u002F\u003E\u003Cfigcaption\u003EЭксперименты на кошках: карта глубины (MiDaS), наложенная на фотографию в 3D, а также детали увеличенного изображения (ESRGAN)\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EЭто далеко не весь функционал: в MATLAB можно рисовать графы сетей и делать контроль версий моделей, а можно просто обучать модели внутри блоков Simulink – достаточно лишь указать им датасет.\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003E\u003Cstrong\u003EЭто, конечно, хорошо, но будет ли сеть выполняться достаточно быстро на вашей платформе?\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Ch2\u003EПокажите мне, где нужно ускорить\u003C\u002Fh2\u003E\u003Cp\u003EСамая большая часть времени в проекте уходит на понимание задачи и данных: никто не сможет вернуть время, потраченное на решение ненужной бизнесу задачи, а из мусорных данных получаются в основном мусорные модели.\u003C\u002Fp\u003E\u003Cp\u003EПорассуждаем на основе диаграммы, которая является вольным переопределением \u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FCRISP-DM\"\u003ECRISP-DM\u003C\u002Fa\u003E:\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fdf8\u002Faf5\u002F3bc\u002Fdf8af53bc7ea1aeb78ddcdd1ceaba281.png\" alt=\"Вольная трактовка процесса CRISP-DM\" title=\"Вольная трактовка процесса CRISP-DM\" width=\"850\" height=\"532\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fdf8\u002Faf5\u002F3bc\u002Fdf8af53bc7ea1aeb78ddcdd1ceaba281.png\"\u002F\u003E\u003Cfigcaption\u003EВольная трактовка процесса CRISP-DM\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003E\u003Cstrong\u003E\u003Cu\u003EЧто трудно ускорить:\u003C\u002Fu\u003E\u003C\u002Fstrong\u003E левая часть схемы выражает околобизнесовые затраты. Ускорить ее может наличие у компании опыта, хорошие практики\u002Fшаблоны, продуктивное общение с заказчиком и коллегами, удобство фреймворка, контроль версий, всякие генераторы кода и документации, и так далее. Объективно сравнить фреймворки по этой части довольно трудно.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003E\u003Cu\u003EЧто значительно легче ускорить:\u003C\u002Fu\u003E\u003C\u002Fstrong\u003E вся правая часть схемы недавно была прерогативой дата сайентистов, но за последние 10 лет хорошо автоматизировалась (как за счет демократизации отрасли, так и за счет прогресса методов и штук вроде AutoML). В этой статье ограничимся тем, что сравним скорость выполнения и немного скорость обучения нейросетей.\u003C\u002Fp\u003E\u003Cp\u003EЧего мы ожидаем от высокоуровневого фреймворка в плане скорости разработки?\u003C\u002Fp\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F296\u002F0df\u002Fcf8\u002F2960dfcf84780d62f1f7038ea5d45754.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F296\u002F0df\u002Fcf8\u002F2960dfcf84780d62f1f7038ea5d45754.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EСкоростного выполнения модели\u003C\u002Fh5\u003E\u003Cp\u003EФреймворк должен оптимизировать код модели, а также позволять легко ее трансформировать и сравнивать производительность разных версий\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa8a\u002F4b8\u002F164\u002Fa8a4b8164c6b5770846b91123a504658.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa8a\u002F4b8\u002F164\u002Fa8a4b8164c6b5770846b91123a504658.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EАвтоподбора модели и легкого перебора гиперпараметров\u003C\u002Fh5\u003E\u003Cp\u003EГрафический редактор графов, отладчик интерфейсов (между слоями нейросети, например), скрипты, AutoML, учебные материалы и шаблоны, дружелюбное сообщество   \u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F849\u002F3e7\u002F80d\u002F8493e780d5b8a510020fc7af4f8d126e.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F849\u002F3e7\u002F80d\u002F8493e780d5b8a510020fc7af4f8d126e.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EПростого и удобного инструментария для работы с данными\u003C\u002Fh5\u003E\u003Cp\u003EЭксплоративный анализ, визуализация, удобный GUI, рефакторинг, версионирование, создание отчетов\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F1ef\u002Fb9e\u002Fbb0\u002F1efb9ebb03207f0a0a14950494d23e52.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F1ef\u002Fb9e\u002Fbb0\u002F1efb9ebb03207f0a0a14950494d23e52.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EРазвёртки и поддержки проекта\u003C\u002Fh5\u003E\u003Cp\u003EСборка проекта, интеграция всех источников данных и внешних компонентов, распаковка проекта на всех необходимых целевых платформах, симуляция и отладка в любых сценариях\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Ch2\u003EСравниваем скорость на ResNet-50\u003C\u002Fh2\u003E\u003Cp\u003EЧто ж, значит в MATLAB тоже есть нейронки, отлично – не придется вручную писать обратное распространение ошибки. Что дальше? Недавно сотрудник MathWorks David Willingham представил доклад, где он сравнивает быстродействие трех фреймворков: MATLAB, PyTorch и Tensorflow.\u003C\u002Fp\u003E\u003Cdiv class=\"persona\" persona=\"true\"\u003E\u003Cimg persona=\"true\" class=\"image persona__image\" src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F085\u002Fc6e\u002Fbc9\u002F085c6ebc90eb4ccb2e0a6f9db495adfc.png\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F085\u002Fc6e\u002Fbc9\u002F085c6ebc90eb4ccb2e0a6f9db495adfc.png\"\u002F\u003E\u003Ch5 class=\"persona__heading\" persona=\"true\"\u003EDavid Willingham\u003C\u002Fh5\u003E\u003Cp\u003EMathWorks, Deep Learning Product Manager \u003Ca href=\"https:\u002F\u002Fwww.mathworks.com\u002Fmatlabcentral\u002Fprofile\u002Fauthors\u002F106350\"\u003E\u003Cu\u003Ehttps:\u002F\u002Fwww.mathworks.com\u002Fmatlabcentral\u002Fprofile\u002Fauthors\u002F106350\u003C\u002Fu\u003E\u003C\u002Fa\u003E  \u003C\u002Fp\u003E\u003C\u002Fdiv\u003E\u003Cp\u003EПервое представление о различиях можно подсмотреть в \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FComparison_of_deep_learning_software\"\u003Eуже упомянутой таблице\u003C\u002Fa\u003E в Википедии. Здесь фреймворки отличаются только лицензией и поддержкой библиотек для параллельных вычислений (OpenCL и OpenMP), что для нас второстепенно.\u003C\u002Fp\u003E\u003Cfigure class=\"full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F16a\u002F308\u002Ffd2\u002F16a308fd2202fd0af62b1c209a13dd44.png\" alt=\"Фреймворки, которые мы будем сравнивать (укороченная версия исходной таблицы)\" title=\"Фреймворки, которые мы будем сравнивать (укороченная версия исходной таблицы)\" width=\"1281\" height=\"443\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F16a\u002F308\u002Ffd2\u002F16a308fd2202fd0af62b1c209a13dd44.png\"\u002F\u003E\u003Cfigcaption\u003EФреймворки, которые мы будем сравнивать (укороченная версия исходной таблицы)\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EСейчас мы изучим результаты сравнения на инференсе, но для начала сравним скорость обучения ResNet-50. Приходится же иногда переобучаться под новый датасет или обучать кастомную архитектуру.\u003C\u002Fp\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa94\u002F28d\u002F4b7\u002Fa9428d4b783c018d2a364fe537b65858.png\" alt=\"Длительность одной эпохи обучения ResNet 50\" title=\"Длительность одной эпохи обучения ResNet 50\" width=\"1133\" height=\"577\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa94\u002F28d\u002F4b7\u002Fa9428d4b783c018d2a364fe537b65858.png\"\u002F\u003E\u003Cfigcaption\u003EДлительность одной эпохи обучения ResNet 50\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EИтак, для сравнения взята стандартная сетка для классификации изображений – ResNet, вариант с 50 слоями. По \u003Ca href=\"https:\u002F\u002Farxiv.org\u002Fabs\u002F1709.05011\"\u003Eнекоторым бенчмаркам\u003C\u002Fa\u003E, обучение на ImageNet 1000 на GPU NVIDIA M40 в течение 90 эпох должно занимать 14 дней, по другим – выходит что A100 отработает 50 эпох за десяток часов (\u003Ca href=\"https:\u002F\u002Fwww.aime.info\u002Fblog\u002Fdeep-learning-gpu-benchmarks-2021\u002F\"\u003EAIME\u003C\u002Fa\u003E). На обучении наши инструменты показывают примерно одинаковые результаты. Может быть, и правда все упирается в железо.\u003C\u002Fp\u003E\u003Cp\u003EЗато, когда сеть уже \u003Cem\u003Eобучена\u003C\u002Fem\u003E, ее производительность будет зависеть от массы факторов, которые интересно изучить. Ее же нужно запускать для каждого пользователя и для каждого примера (фотографии, нового измерения с датчика, речевого сигнала…), на любой платформе, от сервера до бортовых вычислителей автономного робота. Пересылка через всякие интерфейсы и обращение к базам данных может отнять львиную долю времени...\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003E\u003Cstrong\u003EСравним выполнение моделей. Сначала – быстродействие на CPU.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Ch2\u003EБыстродействие на CPU\u003C\u002Fh2\u003E\u003Cp\u003EДавайте сравним запуск на CPU нейросети ResNet в таком сценарии: вы работаете на встраиваемой платформе, где нет ускорителей, или в системе, где нет CUDA. Например, сюда входит очень многое из робототехники, от институтских омни-тележек до космических спутников.\u003C\u002Fp\u003E\u003Cp\u003EОказывается, код нашей сетки выполняется в MATLAB на CPU чуть быстрее, чем в других фреймворках.\u003C\u002Fp\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F37e\u002F113\u002F185\u002F37e113185f6b481ec4b2d18a3f37d90d.png\" alt=\"ResNet 50 на CPU\" title=\"ResNet 50 на CPU\" width=\"1137\" height=\"557\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F37e\u002F113\u002F185\u002F37e113185f6b481ec4b2d18a3f37d90d.png\"\u002F\u003E\u003Cfigcaption\u003EResNet 50 на CPU\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EОказывается, код нашей сетки выполняется в MATLAB на CPU чуть быстрее, чем в других фреймворках. \u003Cstrong\u003EБенчмарк для CPU построен на Intel Xeon 3.6 GHz – такие солидные частоты редко встречаются на борту.\u003C\u002Fstrong\u003E На более приземленном CPU, возможно, код будет вести себя слегка иначе.\u003C\u002Fp\u003E\u003Cfigure class=\"float bordered full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F073\u002F9fe\u002Fa0b\u002F0739fea0b16e2c79b44433fe37b80d71.png\" alt=\"ResNet 50 + MATLAB Coder\" title=\"ResNet 50 + MATLAB Coder\" width=\"1145\" height=\"572\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F073\u002F9fe\u002Fa0b\u002F0739fea0b16e2c79b44433fe37b80d71.png\"\u002F\u003E\u003Cfigcaption\u003EResNet 50 + MATLAB Coder\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EА что, если скомпилировать все при помощи \u003Cstrong\u003EMATLAB Coder\u003C\u002Fstrong\u003E? Сеть в MATLAB выполняется в 2 раза быстрее, чем на Tensorflow и в 3 раза быстрее, чем на PyTorch. Да, это не самая тяжелая нейросеть, и хорошо изученная к тому же, есть много приемов оптимизации, которые MathWorks могли заложить в предобученную сеть, включенную в MATLAB.\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003EЕсли у вас \u003Cstrong\u003Eробототехнический проект с CPU на борту\u003C\u002Fstrong\u003E, то MATLAB – в принципе единственный коробочный продукт, который позволяет обучать модели и запускать их на любой встраиваемой платформе.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cstrong\u003EСохранится ли эффект на GPU? Давайте узнаем.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Ch2\u003EБыстродействие на GPU\u003C\u002Fh2\u003E\u003Cp\u003EИспользование GPU позволяет добиться феноменальных скоростей обучения или выполнения нейросетей... при запуске на сравнительно больших объемах данных.\u003C\u002Fp\u003E\u003Cfigure class=\"float bordered full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fb22\u002Ff00\u002Fadc\u002Fb22f00adc75730a48fc91bb032bd506f.png\" alt=\"Батч размером 1 на CPU\" title=\"Батч размером 1 на CPU\" width=\"1143\" height=\"563\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fb22\u002Ff00\u002Fadc\u002Fb22f00adc75730a48fc91bb032bd506f.png\"\u002F\u003E\u003Cfigcaption\u003EБатч размером 1 на CPU\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EПри прогоне через нейросеть на GPU одного примера за один проход (батч размера 1), если запускать сеть через скрипт, MATLAB есть над чем поработать, судя по графикам, 1 батч можно просто запускать на CPU, разницы не будет. \u003Cstrong\u003EЯ обещал обсудить ситуации, когда MATLAB проигрывает – это как раз тот случай\u003C\u002Fstrong\u003E.\u003C\u002Fp\u003E\u003Cblockquote\u003E\u003Cp\u003EПересылка из общей памяти в память GPU занимает много времени, и одновременная обработка данных (в виде \u003Cem\u003Eбатча\u003C\u002Fem\u003E) выгоднее, если в батче больше данных. Но, поскольку \u003Cstrong\u003Eкод модели и небольшой набор данных\u003C\u002Fstrong\u003E все-таки должны поместиться в памяти видеокарты, максимальный размер батча тоже ограничен.\u003C\u002Fp\u003E\u003C\u002Fblockquote\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F435\u002Fdbf\u002Fb27\u002F435dbfb276f876dcad3061d9190bdd27.png\" alt=\"Батч размером 32 на GPU\" title=\"Батч размером 32 на GPU\" width=\"1142\" height=\"573\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F435\u002Fdbf\u002Fb27\u002F435dbfb276f876dcad3061d9190bdd27.png\"\u002F\u003E\u003Cfigcaption\u003EБатч размером 32 на GPU\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EЕсли в батче 32 примера, то все гораздо лучше. Теперь мы хорошо загружаем видеокарту и все фреймворки демонстрируют примерно одинаковый прирост быстродействия относительно запуска на CPU. Но это не все, можно ускориться. \u003Cstrong\u003EВ MATLAB для этого есть два способа скомпилировать нейронку для GPU.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa18\u002F643\u002Ffd0\u002Fa18643fd0393be6dd2deb9299796ebdf.png\" alt=\"Код для GPU в форме MEX-функции\" title=\"Код для GPU в форме MEX-функции\" width=\"1139\" height=\"562\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fa18\u002F643\u002Ffd0\u002Fa18643fd0393be6dd2deb9299796ebdf.png\"\u002F\u003E\u003Cfigcaption\u003EКод для GPU в форме MEX-функции\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003E\u003Cstrong\u003EMEX-функции\u003C\u002Fstrong\u003E – это оболочки для внешних программ. Они ведут себя в точности так же, как функции MATLAB\u002FSimulink, но могут попутно с выполнением кода MATLAB вызывать внешнюю программу, C\u002FC++ или иной код. Инструментарий MEX генерирует C++ код для GPU, но не требует лицензии на \u003Cstrong\u003EGPU Coder\u003C\u002Fstrong\u003E для задач предсказания (predict).   \u003C\u002Fp\u003E\u003Cp\u003EУпакованный в MEX код нейросети ResNet выполняется на GPU почти в 2 раза быстрее на одном изображении (на одном батче), чем в PyTorch или TensorFlow.\u003C\u002Fp\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F802\u002F95a\u002Fe20\u002F80295ae20d11d2bad9d020153f9fe992.png\" alt=\"Код для GPU из MATLAB GPU Coder\" title=\"Код для GPU из MATLAB GPU Coder\" width=\"1141\" height=\"573\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F802\u002F95a\u002Fe20\u002F80295ae20d11d2bad9d020153f9fe992.png\"\u002F\u003E\u003Cfigcaption\u003EКод для GPU из MATLAB GPU Coder\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EВторой способ для получения оптимизированного кода – \u003Cstrong\u003EGPU Coder\u003C\u002Fstrong\u003E. Это уже специальный \u003Ca href=\"https:\u002F\u002Fwww.mathworks.com\u002Fhelp\u002Fgpucoder\u002Fgpucoder-deep-learning.html\"\u003Eгенератор кода для GPU\u003C\u002Fa\u003E. Чтобы его применить, нужно всего лишь переключить одну галочку в настройках генератора кода (она называется \u003Cem\u003EGenerate GPU code\u003C\u002Fem\u003E), после чего мы получаем встраиваемый оптимизированный CUDA-код, не требующий какого-то специального окружения для запуска на целевой платформе.\u003C\u002Fp\u003E\u003Cp\u003EАвтоматически оптимизированная для TensorRT нейросеть выполняется очень быстро – почти в 3 раза быстрее, чем та же сеть на GPU в Tensorflow или PyTorch. \u003Cstrong\u003EИ это на одном батче.\u003C\u002Fstrong\u003E\u003C\u002Fp\u003E\u003Ch2\u003EЗаключение\u003C\u002Fh2\u003E\u003Cfigure class=\"float full-width \"\u003E\u003Cimg src=\"https:\u002F\u002Fhabrastorage.org\u002Fr\u002Fw1560\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F1fc\u002F7e3\u002Fb35\u002F1fc7e3b35bb280dd18f5209ead6e1323.png\" alt=\"Ускорение ResNet 50 в MATLAB за последние полгода\" title=\"Ускорение ResNet 50 в MATLAB за последние полгода\" width=\"1129\" height=\"600\" data-src=\"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002F1fc\u002F7e3\u002Fb35\u002F1fc7e3b35bb280dd18f5209ead6e1323.png\"\u002F\u003E\u003Cfigcaption\u003EУскорение ResNet 50 в MATLAB за последние полгода\u003C\u002Ffigcaption\u003E\u003C\u002Ffigure\u003E\u003Cp\u003EВ своём докладе MathWorks отмечают, что \u003Cstrong\u003Eза полгода выполнение ResNet было ускорено почти в 2 раза\u003C\u002Fstrong\u003E. Видимо, как в ядре MATLAB, так и в архитектуре нейросети, ещё есть что оптимизировать. Это вселяет оптимизм – будем ожидать, что разработчики и в следующих версиях сохранят такой темп улучшений.\u003C\u002Fp\u003E\u003Cp\u003EВ общем и целом, MATLAB отвечает всем нашим ожиданиям от высокоуровневого фреймворка в том что касается разработки систем с элементами искусственного интеллекта (список критериев – выше). Нам он облегчает и работу с данными, и подбор алгоритмов классического машинного обучения, и подключение глубоких нейросетей, и разработку собственных топологий, если нужно. Так что мы используем его в проектах с ИИ для самых разных заказчиков.\u003C\u002Fp\u003E\u003Cp\u003EПожалуйста, расскажите нам в комментариях о своем опыте работы с нейросетями в MATLAB, о бенчмарках или предпочтениях по фреймворкам. Желаем всем очень производительных AI-проектов, выполненных в комфортной среде!\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","tags":[{"titleHtml":"нейросети"},{"titleHtml":"resnet-50"},{"titleHtml":"matlab"},{"titleHtml":"simulink"},{"titleHtml":"цитм экспонента"}],"metadata":{"stylesUrls":[],"scriptUrls":[],"shareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc9d\u002F187\u002Ff38\u002Fc9d187f38b955702ca26822aa6f4d4b1.jpg","shareImageWidth":1200,"shareImageHeight":630,"vkShareImageUrl":"https:\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fupload_files\u002Fc9d\u002F187\u002Ff38\u002Fc9d187f38b955702ca26822aa6f4d4b1.jpg","schemaJsonLd":"{\"@context\":\"http:\\\u002F\\\u002Fschema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Fetmc_exponenta\\\u002Fblog\\\u002F651715\\\u002F\"},\"headline\":\"Короли инференса: PyTorch, Tensorflow или MATLAB?\",\"datePublished\":\"2022-03-11T17:24:07+03:00\",\"dateModified\":\"2022-03-11T17:49:54+03:00\",\"author\":{\"@type\":\"Person\",\"name\":\"Николай Капырин\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Habr\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fwebt\\\u002Fa_\\\u002Flk\\\u002F9m\\\u002Fa_lk9mjkccjox-zccjrpfolmkmq.png\"}},\"description\":\"Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного инте...\",\"url\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fcompany\\\u002Fetmc_exponenta\\\u002Fblog\\\u002F651715\\\u002F#post-content-body\",\"about\":[\"c_etmc_exponenta\",\"h_machine_learning\",\"h_matlab\",\"h_artificial_intelligence\",\"h_engineering_systems\",\"f_develop\",\"f_admin\",\"f_popsci\"],\"image\":[\"https:\\\u002F\\\u002Fhabr.com\\\u002Fshare\\\u002Fpublication\\\u002F651715\\\u002Fd4983e5f0265512fad21878b60009f2d\\\u002F\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F63c\\\u002F3aa\\\u002F681\\\u002F63c3aa681453012413f25928ac8f6b64.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F08e\\\u002F197\\\u002F44e\\\u002F08e19744e8a8ad36ffdf0c28b819899a.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fa38\\\u002Fcf6\\\u002F8b7\\\u002Fa38cf68b7e8493948de0ec0c301c8856.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fd13\\\u002F927\\\u002Ff48\\\u002Fd13927f48330115b367b816237b3d5ad.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fdf8\\\u002Faf5\\\u002F3bc\\\u002Fdf8af53bc7ea1aeb78ddcdd1ceaba281.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F296\\\u002F0df\\\u002Fcf8\\\u002F2960dfcf84780d62f1f7038ea5d45754.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fa8a\\\u002F4b8\\\u002F164\\\u002Fa8a4b8164c6b5770846b91123a504658.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F849\\\u002F3e7\\\u002F80d\\\u002F8493e780d5b8a510020fc7af4f8d126e.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F1ef\\\u002Fb9e\\\u002Fbb0\\\u002F1efb9ebb03207f0a0a14950494d23e52.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F085\\\u002Fc6e\\\u002Fbc9\\\u002F085c6ebc90eb4ccb2e0a6f9db495adfc.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F16a\\\u002F308\\\u002Ffd2\\\u002F16a308fd2202fd0af62b1c209a13dd44.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fa94\\\u002F28d\\\u002F4b7\\\u002Fa9428d4b783c018d2a364fe537b65858.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F37e\\\u002F113\\\u002F185\\\u002F37e113185f6b481ec4b2d18a3f37d90d.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F073\\\u002F9fe\\\u002Fa0b\\\u002F0739fea0b16e2c79b44433fe37b80d71.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fb22\\\u002Ff00\\\u002Fadc\\\u002Fb22f00adc75730a48fc91bb032bd506f.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F435\\\u002Fdbf\\\u002Fb27\\\u002F435dbfb276f876dcad3061d9190bdd27.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002Fa18\\\u002F643\\\u002Ffd0\\\u002Fa18643fd0393be6dd2deb9299796ebdf.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F802\\\u002F95a\\\u002Fe20\\\u002F80295ae20d11d2bad9d020153f9fe992.png\",\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fgetpro\\\u002Fhabr\\\u002Fupload_files\\\u002F1fc\\\u002F7e3\\\u002Fb35\\\u002F1fc7e3b35bb280dd18f5209ead6e1323.png\"]}","metaDescription":"Что вам важнее в DL-проекте, удобство или производительность? Посмотрим на проблему глазами инженера-разработчика сложных систем с элементами искусственного интеллекта. Как типичный инструментарий в...","mainImageUrl":null,"amp":true,"customTrackerLinks":[]},"polls":[],"commentsEnabled":true,"rulesRemindEnabled":false,"votesEnabled":true,"status":"published","plannedPublishTime":null,"checked":null,"isEditorial":false}},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[""],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[],"hubs":""},"comments":{"articleComments":{},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":"","moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{"etmc_exponenta":{"alias":"etmc_exponenta","imageUrl":"\u002F\u002Fhabrastorage.org\u002Fgetpro\u002Fhabr\u002Fcompany\u002Ffb1\u002F849\u002F594\u002Ffb184959473a2be78326182d48de946b.png","titleHtml":"ЦИТМ Экспонента","descriptionHtml":null,"relatedData":null,"statistics":{"postsCount":31,"newsCount":13,"vacanciesCount":0,"employeesCount":11,"careerRating":null,"subscribersCount":114,"rating":42.62,"invest":null},"foundationDate":{"year":"2009","month":"04","day":"15"},"location":{"city":{"id":"447159","title":"Москва"},"region":{"id":"1885","title":"Москва и Московская обл."},"country":{"id":"168","title":"Россия"}},"siteUrl":"https:\u002F\u002Fexponenta.ru","staffNumber":"31–50 человек","registrationDate":"2020-03-31T11:03:43+00:00","representativeUser":null,"contacts":[{"title":"Сайт","url":"https:\u002F\u002Fexponenta.ru"}],"settings":{"analyticsSettings":[{"type":"ym","trackingId":"51020078"}],"branding":null,"status":"active","isStartup":false},"metadata":{"titleHtml":"ЦИТМ Экспонента, Москва -  с 15 апреля 2009 г.","title":"ЦИТМ Экспонента, Москва -  с 15 апреля 2009 г.","keywords":["Инженерные системы","Matlab","Алгоритмы","Машинное обучение","FPGA","matlab","simulink","пид-регулятор","моделирование","плис","глубокое обучение","fpga","pid controller","real-time","hdl","авиация","системная инженерия","моп","iso 26262","разработка","do-178","электродвигатель","artificial intelligence","генерация кода","прототипирование"],"descriptionHtml":"31 статья от авторов компании ЦИТМ Экспонента","description":"31 статья от авторов компании ЦИТМ Экспонента"},"aDeskSettings":null,"careerAlias":"exponenta"}},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":false,"featurer":null,"megaposts":null,"promoLinks":null,"promoPosts":null},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>

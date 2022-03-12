@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="ru" data-vue-meta="%7B%22lang%22:%7B%22ssr%22:%22ru%22%7D%7D"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"> 
+  <meta name="referrer" content="unsafe-url"> 
+  <title>Основы Linux (обзор с практическим уклоном) / Хабр</title> 
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style> 
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" as="script">
+  <link rel="preload" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css" as="style">
+  <link rel="preload" href="https://assets.habr.com/habr-web/js/app.69ba180e.js" as="script"> 
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/chunk-vendors.961b6771.css">
+  <link rel="stylesheet" href="https://assets.habr.com/habr-web/css/app.d1834a6b.css"> 
+  <script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.2822d469ec31a56409ac330bbcf7fcbf.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script> 
+  <script data-vue-meta="ssr" type="application/ld+json" data-vmid="ldjson-schema">{"@context":"http:\/\/schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/habr.com\/ru\/post\/655275\/"},"headline":"Основы Linux (обзор с практическим уклоном)","datePublished":"2022-03-11T23:40:23+03:00","dateModified":"2022-03-11T23:40:23+03:00","author":{"@type":"Person","name":"Семен Устинов"},"publisher":{"@type":"Organization","name":"Habr","logo":{"@type":"ImageObject","url":"https:\/\/habrastorage.org\/webt\/a_\/lk\/9m\/a_lk9mjkccjox-zccjrpfolmkmq.png"}},"description":"Привет, Хабр!В последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вмес...","url":"https:\/\/habr.com\/ru\/post\/655275\/#post-content-body","about":["h_sys_admin","h_nix","f_admin"],"image":["https:\/\/habr.com\/share\/publication\/655275\/e8bae472e835bd58e70c9e8cb8365824\/"]}</script> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js" async></script> 
+  <style>.grecaptcha-badge{visibility: hidden;}</style> 
+  <meta name="habr-version" content="2.66.0"> 
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613">
+  <meta data-vue-meta="ssr" property="fb:pages" content="472597926099084">
+  <meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image">
+  <meta data-vue-meta="ssr" name="twitter:site" content="@habr_com">
+  <meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name">
+  <meta data-vue-meta="ssr" property="og:title" content="Основы Linux (обзор с практическим уклоном)" data-vmid="og:title">
+  <meta data-vue-meta="ssr" name="twitter:title" content="Основы Linux (обзор с практическим уклоном)" data-vmid="twitter:title">
+  <meta data-vue-meta="ssr" name="aiturec:title" content="Основы Linux (обзор с практическим уклоном)" data-vmid="aiturec:title">
+  <meta data-vue-meta="ssr" name="description" content="Привет, Хабр!В последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вместе с тем полноценных обзоров с..." data-vmid="description">
+  <meta data-vue-meta="ssr" itemprop="description" content="Привет, Хабр!В последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вместе с тем полноценных обзоров с..." data-vmid="description:itemprop">
+  <meta data-vue-meta="ssr" property="og:description" content="Привет, Хабр!В последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вместе с тем полноценных обзоров с..." data-vmid="og:description">
+  <meta data-vue-meta="ssr" name="twitter:description" content="Привет, Хабр!В последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вместе с тем полноценных обзоров с..." data-vmid="twitter:description">
+  <meta data-vue-meta="ssr" property="aiturec:description" content="Привет, Хабр!В последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вместе с тем полноценных обзоров с..." data-vmid="aiturec:description">
+  <meta data-vue-meta="ssr" itemprop="image" content="https://habr.com/share/publication/655275/e8bae472e835bd58e70c9e8cb8365824/" data-vmid="image:itemprop">
+  <meta data-vue-meta="ssr" property="og:image" content="https://habr.com/share/publication/655275/e8bae472e835bd58e70c9e8cb8365824/" data-vmid="og:image">
+  <meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width">
+  <meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height">
+  <meta data-vue-meta="ssr" property="aiturec:image" content="https://habr.com/share/publication/655275/e8bae472e835bd58e70c9e8cb8365824/" data-vmid="aiturec:image">
+  <meta data-vue-meta="ssr" name="twitter:image" content="https://habr.com/share/publication/655275/e8bae472e835bd58e70c9e8cb8365824/" data-vmid="twitter:image">
+  <meta data-vue-meta="ssr" property="vk:image" content="https://habr.com/share/publication/655275/e8bae472e835bd58e70c9e8cb8365824/?format=vk" data-vmid="vk:image">
+  <meta data-vue-meta="ssr" property="aiturec:item_id" content="655275" data-vmid="aiturec:item_id">
+  <meta data-vue-meta="ssr" property="aiturec:datetime" content="2022-03-11T20:40:23.000Z" data-vmid="aiturec:datetime">
+  <meta data-vue-meta="ssr" content="https://habr.com/ru/post/655275/" property="og:url" data-vmid="og:url">
+  <meta data-vue-meta="ssr" property="og:type" content="article" data-vmid="og:type">
+  <meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale">
+  <meta data-vue-meta="ssr" name="keywords" content="обучение администрированию, linux, bash, systemd"> 
+  <link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/655275/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/post/655275/" rel="canonical" data-vmid="canonical">
+  <link data-vue-meta="ssr" data-vmid="hreflang">
+  <link data-vue-meta="ssr" image_src="image" href="https://habr.com/share/publication/655275/e8bae472e835bd58e70c9e8cb8365824/" data-vmid="image:href">
+  <link data-vue-meta="ssr" rel="amphtml" href="https://habr.com/ru/amp/post/655275/"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44"> 
+  <meta name="msapplication-TileColor" content="#629FBC"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png"> 
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png"> 
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png"> 
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png"> 
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg"> 
+  <link crossorigin="use-credentials" href="/manifest.webmanifest" rel="manifest"> 
+ </head> 
+ <body> 
+  <div id="app" data-server-rendered="true" data-async-called="true">
+   <div class="tm-layout__wrapper">
+    <!----> 
+    <div></div> <!----> 
+    <header class="tm-header">
+     <div class="tm-page-width">
+      <div class="tm-header__container">
+       <!----> <span class="tm-header__logo-wrap"><a href="/ru/" class="tm-header__logo tm-header__logo_ru">
+         <svg height="16" width="16" class="tm-svg-img tm-header__icon">
+          <title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use>
+         </svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> 
+       <div class="tm-dropdown tm-header__projects">
+        <div class="tm-dropdown__head">
+         <button class="tm-header__dropdown-toggle">
+          <svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown">
+           <title>Открыть список</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#arrow-down"></use>
+          </svg></button>
+        </div> <!---->
+       </div> <a href="/ru/sandbox/start/" class="tm-header__become-author-btn"> Как стать автором </a> 
+       <div class="tm-feature tm-header__feature tm-feature_variant-inline">
+        <!---->
+       </div> <!----> <!---->
+      </div>
+     </div>
+    </header> 
+    <div class="tm-layout">
+     <div class="tm-page-progress-bar"></div> 
+     <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky">
+      <div class="tm-page-width">
+       <div class="tm-base-layout__header-wrapper">
+        <div class="tm-main-menu">
+         <div class="tm-main-menu__section">
+          <nav class="tm-main-menu__section-content">
+           <!----> <a href="/ru/flows/all" class="tm-main-menu__item"> Все потоки </a> <a href="/ru/flows/develop/" class="tm-main-menu__item"> Разработка </a><a href="/ru/flows/admin/" class="tm-main-menu__item"> Администрирование </a><a href="/ru/flows/design/" class="tm-main-menu__item"> Дизайн </a><a href="/ru/flows/management/" class="tm-main-menu__item"> Менеджмент </a><a href="/ru/flows/marketing/" class="tm-main-menu__item"> Маркетинг </a><a href="/ru/flows/popsci/" class="tm-main-menu__item"> Научпоп </a>
+          </nav>
+         </div>
+        </div> 
+        <div class="tm-header-user-menu tm-base-layout__user-menu">
+         <a href="/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search">
+          <svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark">
+           <title>Поиск</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#search"></use>
+          </svg></a> <!----> <!----> <!----> 
+         <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop">
+          <div class="tm-dropdown">
+           <div class="tm-dropdown__head">
+            <svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon">
+             <title>Профиль</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#header-user"></use>
+            </svg> <!---->
+           </div> <!---->
+          </div> <!---->
+         </div> <!---->
+        </div>
+       </div>
+      </div>
+     </div> <!----> 
+     <div class="tm-page-width"></div> 
+     <main class="tm-layout__container">
+      <div hl="ru" data-async-called="true" class="tm-page">
+       <div class="tm-page-width">
+        <!----> 
+        <div class="tm-page__wrapper">
+         <div class="tm-page__main tm-page__main_has-sidebar">
+          <div class="pull-down">
+           <div class="pull-down__header" style="height:0px;">
+            <div class="pull-down__content" style="bottom:10px;">
+             <svg height="24" width="24" class="tm-svg-img pull-down__arrow">
+              <title>Обновить</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#pull-arrow"></use>
+             </svg>
+            </div>
+           </div> 
+           <div class="tm-article-presenter"> 
+            <div class="tm-article-presenter__body">
+             <div class="tm-misprint-area">
+              <div class="tm-misprint-area__wrapper">
+               <article class="tm-article-presenter__content tm-article-presenter__content_narrow">
+                <div class="tm-article-presenter__header"> 
+                 <div class="tm-article-snippet tm-article-presenter__snippet">
+                  <div class="tm-article-snippet__meta-container">
+                   <div class="tm-article-snippet__meta">
+                    <span class="tm-user-info tm-article-snippet__author"><a href="/ru/users/simust/" title="simust" class="tm-user-info__userpic">
+                      <div class="tm-entity-image">
+                       <svg height="24" width="24" class="tm-svg-img tm-image-placeholder tm-image-placeholder_pink">
+                        <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                       </svg>
+                      </div></a> <span class="tm-user-info__user"><a href="/ru/users/simust/" class="tm-user-info__username"> simust </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-03-11T20:40:23.000Z" title="2022-03-11, 23:40">вчера в 23:40</time></span>
+                   </div> <!---->
+                  </div> 
+                  <h1 lang="ru" class="tm-article-snippet__title tm-article-snippet__title_h1"><span>Основы Linux (обзор с практическим уклоном)</span></h1> 
+                  <div class="tm-article-snippet__hubs">
+                   <span class="tm-article-snippet__hubs-item"><a href="/ru/hub/sys_admin/" class="tm-article-snippet__hubs-item-link"><span>Системное администрирование</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="/ru/hub/nix/" class="tm-article-snippet__hubs-item-link"><span>*nix</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span>
+                  </div> 
+                  <div class="tm-article-snippet__labels">
+                   <div class="tm-article-snippet__label tm-article-snippet__label_variant-sandbox">
+                    <span> Из песочницы </span>
+                   </div>
+                  </div> <!----> <!---->
+                 </div>
+                </div> <!----> 
+                <div data-gallery-root="" lang="ru" class="tm-article-body">
+                 <div></div> 
+                 <div id="post-content-body">
+                  <div>
+                   <div class="article-formatted-body article-formatted-body_version-2">
+                    <div xmlns="http://www.w3.org/1999/xhtml">
+                     <p>Привет, Хабр!</p>
+                     <p>В последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вместе с тем полноценных обзоров с практическом уклоном по типу «все и сразу» написано не так уж и много (особенно на русском языке). </p>
+                     <p>Главная задача данной статьи – указать начинающим специалистам направление развития, дать ключевые понятия для дальнейшего изучения и показать несколько простых практических приемов. По этой причине (а еще, безусловно, вследствие недостаточной квалификации автора) теоретический материал достаточно сильно упрощен.</p>
+                     <h2>Что такое Linux?</h2>
+                     <h3>История и определение</h3>
+                     <p>В 1969 году&nbsp;в дочернем подразделении компании AT&amp;T – Bell Laboratories –&nbsp;была выпущена операционная система Unix, которая стала основной для большого количества операционных систем того времени. UNIX была проприетарной системой, лицензия на нее стоила порядка&nbsp;40&nbsp;000&nbsp;долларов. Таким образом, позволить себе ее покупку могли только крупные компании. Это послужило толчком для старта в 1983 году проекта <a href="https://www.gnu.org/" rel="noopener noreferrer nofollow">GNU</a> – GNU is Not Unix. Его основоположник,&nbsp;<a href="https://en.wikipedia.org/wiki/Richard_Stallman" rel="noopener noreferrer nofollow">Ричард Столлман</a>, объявил целью проекта создание свободно распространяемой операционной системы.&nbsp;Чуть позже Столлманом был написан знаменитый&nbsp;<a href="https://www.gnu.org/gnu/manifesto.html" rel="noopener noreferrer nofollow">манифест GNU</a>, который стал основой для лицензии&nbsp;<a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noopener noreferrer nofollow">GPL</a>&nbsp;(GNU General Public License), актуальной и по сей день. К началу 1990-х годов в рамках проекта GNU было написано большинство компонентов ОС&nbsp;– оболочка bash, компиляторы, отладчик, текстовый редактор и др. Не хватало лишь ядра операционной системы.</p>
+                     <p>В 1991 году&nbsp;<a href="https://en.wikipedia.org/wiki/Linus_Torvalds" rel="noopener noreferrer nofollow">Линус Торвальдс</a>, будучи студентом финского университета,&nbsp;увлекся&nbsp;идеей написания ядра операционной системы для своего персонального компьютера с&nbsp;процессором Intel. Вдохновлением и прототипом для будущего Linux стала совместимая с&nbsp;Unix операционная система для персональных компьютеров Minix. Уже в августе 1991 года было написано ядро операционной системы, в нее были портированы оболочка bash и компилятор gсс из проекта GNU.&nbsp;По признанию самого Линуса, изначально это было не более, чем хобби, однако проект оказался весьма востребованным, к нему начали присоединяться разработчики со всего мира.&nbsp;Дополненная массой программ, разработанных в&nbsp;рамках проекта GNU, ОС&nbsp;Linux стала пригодна для практического использования. При этом ядро системы распространялось под лицензией GNU General Public License, что гарантировало свободное распространение кода ядра системы.&nbsp;</p>
+                     <p><u>Читать подробнее:</u>&nbsp;<a href="https://habr.com/ru/post/95646/" rel="noopener noreferrer nofollow">История Linux. Вкратце о главном</a></p>
+                     <p>Итак, сегодня&nbsp;<a href="https://en.wikipedia.org/wiki/Linux" rel="noopener noreferrer nofollow">Linux (или GNU/Linux)</a>&nbsp;–&nbsp;семейство Unix-подобных операционных систем на базе ядра Linux, включающих тот или иной набор утилит и программ проекта GNU. Linux-системы распространяются в виде различных дистрибутивов, имеющих свой набор системных и прикладных компонентов (как свободных, так и проприетарных).</p>
+                     <h3>Серверные дистрибутивы</h3>
+                     <p><a href="https://en.wikipedia.org/wiki/Linux_distribution" rel="noopener noreferrer nofollow">Дистрибутив Linux</a>&nbsp;— это операционная система, созданная на основе ядра Linux, которая включает в себя набор библиотек и утилит (пакетов), разработанных в рамках проекта GNU, а также систему управления пакетами (менеджер пакетов).&nbsp;В настоящее время существует более 500 различных&nbsp;дистрибутивов, разрабатываемых как при коммерческой поддержке (<a href="https://ru.wikipedia.org/wiki/Red_Hat" rel="noopener noreferrer nofollow">Red Hat</a>&nbsp;/&nbsp;<a href="https://ru.wikipedia.org/wiki/Fedora" rel="noopener noreferrer nofollow">Fedora</a>,&nbsp;<a href="https://ru.wikipedia.org/wiki/SLED" rel="noopener noreferrer nofollow">SLED</a>&nbsp;/&nbsp;<a href="https://ru.wikipedia.org/wiki/OpenSUSE" rel="noopener noreferrer nofollow">OpenSUSE</a>,&nbsp;<a href="https://ru.wikipedia.org/wiki/Ubuntu" rel="noopener noreferrer nofollow">Ubuntu</a>&nbsp;и др.), так и&nbsp;исключительно усилиями добровольцев (<a href="https://ru.wikipedia.org/wiki/Debian" rel="noopener noreferrer nofollow">Debian</a>,&nbsp;<a href="https://ru.wikipedia.org/wiki/Slackware" rel="noopener noreferrer nofollow">Slackware</a>,&nbsp;<a href="https://ru.wikipedia.org/wiki/Gentoo" rel="noopener noreferrer nofollow">Gentoo</a>,&nbsp;<a href="https://ru.wikipedia.org/wiki/ArchLinux" rel="noopener noreferrer nofollow">ArchLinux</a>&nbsp;и др.).&nbsp;</p>
+                     <p>Дистрибутивы делятся на несколько типов в зависимости от базового дистрибутива и системы управления пакетами. Вот несколько примеров наиболее популярных серверых дистрибутивов двух типов:</p>
+                     <ul>
+                      <li><p><a href="https://en.wikipedia.org/wiki/List_of_Linux_distributions#RPM-based" rel="noopener noreferrer nofollow">RPM-based</a>&nbsp;(используют формат пакетов .rpm)<br>RedHat Enterprise Linux, CentOS, Fedora</p></li>
+                      <li><p><a href="https://en.wikipedia.org/wiki/List_of_Linux_distributions#DEB-based" rel="noopener noreferrer nofollow">DEB-based</a>&nbsp;(используют формат пакетов .deb)<br>Debian, Ubuntu, Astra Linux</p></li>
+                     </ul>
+                     <p>Стоит отметить, что существует великое множество различных дистрибутивов на любой вкус и цвет. Их невозможно даже сосчитать, так как практически каждый представитель сообщества может собрать свой собственный дистрибутив на основе ядра Linux.</p>
+                     <h2>Работа с Linux</h2>
+                     <h3>Загрузка</h3>
+                     <p>Алгоритм включения сервера и загрузки Linux в большинстве случаев выглядит следующим образом:</p>
+                     <ul>
+                      <li><p><a href="https://en.wikipedia.org/wiki/BIOS" rel="noopener noreferrer nofollow">BIOS</a>&nbsp;/&nbsp;<a href="https://en.wikipedia.org/wiki/UEFI" rel="noopener noreferrer nofollow">UEFI</a>&nbsp;→&nbsp;<a href="https://en.wikipedia.org/wiki/Master_boot_record" rel="noopener noreferrer nofollow">MBR</a>&nbsp;/&nbsp;<a href="https://en.wikipedia.org/wiki/GUID_Partition_Table" rel="noopener noreferrer nofollow">GPT</a><br>Выполняется код, заложенный производителем аппаратного обеспечения. Этот код проводит тестирование системы POST (Power On Self Test) и&nbsp;передает управление загрузчику в MBR (Master Boot Record) / GPT (GUID Partition Table)</p></li>
+                      <li><p>MBR / GPT&nbsp;→&nbsp;<a href="https://en.wikipedia.org/wiki/GNU_GRUB#GRUB_2" rel="noopener noreferrer nofollow">GRUB2</a>&nbsp;(существуют и другие загрузчики)<br>Загрузчик из MBR / GPT очень простой – он способен только найти на диске и запустить следующий загрузчик. Как правило это GRUB2, но существуют и другие загрузчики, например&nbsp;<a href="https://en.wikipedia.org/wiki/LILO_(boot_loader)" rel="noopener noreferrer nofollow">LILO</a>&nbsp;(в настоящее время практически не используется)</p></li>
+                      <li><p>GRUB2&nbsp;→ Kernel<br>GRUB2 расположен на разделе жесткого диска в каталоге /boot. GRUB2 загружает ядро Linux (vmlinuz)</p></li>
+                      <li><p>Kernel&nbsp;→ Init<br>Ядро запускает процесс инициализации операционной системы. Как правило это SystemD, но существуют и другие системы инициализации, например&nbsp;<a href="https://en.wikipedia.org/wiki/UNIX_System_V" rel="noopener noreferrer nofollow">SystemV</a>&nbsp;(в настоящее время практически не используется). Процесс инициализации запускает все остальные процессы в системе</p></li>
+                     </ul>
+                     <p><u>Читать подробнее:</u>&nbsp;<a href="https://sysadminium.ru/adm_serv_linux-boot_algorithm" rel="noopener noreferrer nofollow">Алгоритм загрузки Linux (BIOS / UEFI)</a></p>
+                     <h3>Подключение</h3>
+                     <h4>Командная оболочка</h4>
+                     <p>Подключиться к Linux для управления можно в интерфейсе командной строки&nbsp;(command-line interface, CLI) или в графическом интерфейсе (graphical user interface, GUI). При работе с серверной инфраструктурой в подавляющем числе случаев GUI отсутствует и взаимодействие с сервером осуществляется в CLI. При входе пользователя на сервер CLI запускается командная оболочка (в GUI командную оболочку можно запустить через эмулятор, например Terminal).&nbsp;Командная оболочка (shell) –&nbsp;это программа, которая принимает команды с клавиатуры и передает их операционной системе для выполнения. Наиболее распространенной командной оболочкой в Linux является&nbsp;<a href="https://www.gnu.org/software/bash/" rel="noopener noreferrer nofollow">GNU bash</a>&nbsp;(Bourne Again SHell).&nbsp;bash основывается на другой легковесной оболочке-предшественнике –&nbsp;<a href="https://en.wikipedia.org/wiki/Bourne_shell" rel="noopener noreferrer nofollow">sh</a>&nbsp;(Bourne sh), созданной&nbsp;<a href="https://en.wikipedia.org/wiki/Stephen_R._Bourne" rel="noopener noreferrer nofollow">Стефеном Борном</a>.</p>
+                     <p>Команды можно выполнять с помощью командной строки, указав имя двоичного (бинарного, bin) исполняемого файла или сценария. По умолчанию в Linux много команд, которые позволяют перемещаться по файловой системе, устанавливать ПО, конфигурировать его и выполнять другие действия. Каждая запущенная команда является отдельным процессом. Важно отметить, что в Linux (в отличие от Windows) почти всегда учитывается регистр, включая имена файлов и каталогов, команды, аргументы и опции.</p>
+                     <p><u>Читать подробнее:</u>&nbsp;<a href="https://www.8host.com/blog/osnovy-raboty-s-terminalom-linux" rel="noopener noreferrer nofollow">Основы работы с терминалом Linux</a></p>
+                     <h4>SSH</h4>
+                     <p>Подключаться к Linux и работать с командной оболочкой можно локально (например включив ПК дома или подойдя к серверу в центре обработки данных), однако гораздо чаще работать с системой требуется удаленно. Для этого необходимо настроить SSH и подключаться через него.&nbsp;<a href="https://en.wikipedia.org/wiki/SSH" rel="noopener noreferrer nofollow">SSH</a>&nbsp;(Secure SHell) –&nbsp;это протокол, позволяющий производить удаленное управление операционной системой и туннелирование TCP-соединений (например, для копирования файлов). SSH&nbsp;основан на клиент-серверной архитектуре, которая организует защищенное&nbsp; (зашифрованное) соединение поверх небезопасных каналов связи. Серверная часть устанавливается на удаленном сервере, а клиентская на компьютере, с которых осуществляется подключение.</p>
+                     <p>Существует много клиентов для удаленного подключения к серверу по SSH. Вот несколько примеров для различных операционных систем:</p>
+                     <ul>
+                      <li><p>Windows<br><a href="https://www.putty.org/" rel="noopener noreferrer nofollow">PuTTY</a>&nbsp;– выбор новичка,&nbsp;<a href="https://mobaxterm.mobatek.net/" rel="noopener noreferrer nofollow">MobaXterm</a>,&nbsp;<a href="https://mremoteng.org/" rel="noopener noreferrer nofollow">mRemoteNG</a>,&nbsp;<a href="https://www.netsarang.com/en/xshell/" rel="noopener noreferrer nofollow">Xshell</a>&nbsp;– выбор редакции</p></li>
+                      <li><p>Linux<br>Terminal (команда ssh) – выбор новичка и редакции,&nbsp;<a href="https://www.asbru-cm.net/" rel="noopener noreferrer nofollow">Asbru Connection Manager</a></p></li>
+                      <li><p>MacOS<br>Terminal (команда ssh)&nbsp;– выбор новичка и редакции,&nbsp;<a href="https://codinn.com/shell/" rel="noopener noreferrer nofollow">Core Shell</a></p></li>
+                     </ul>
+                     <p><u>Читать подробнее:</u>&nbsp;</p>
+                     <ul>
+                      <li><p><a href="http://xgu.ru/wiki/SSH" rel="noopener noreferrer nofollow">SSH</a></p></li>
+                      <li><p><a href="https://losst.ru/kak-podklyuchitsya-po-ssh" rel="noopener noreferrer nofollow">Как подключиться по SSH</a></p></li>
+                      <li><p><a href="https://timeweb.com/ru/community/articles/luchshie-ssh-klienty-dlya-windows-linux-i-macos" rel="noopener noreferrer nofollow">Лучшие SSH клиенты для Windows, Linux и MacOS</a></p></li>
+                     </ul>
+                     <h3>Установка программ (утилит) пакетным менеджером</h3>
+                     <h4>Зачем нужны пакетные менеджеры?</h4>
+                     <p>На заре развития Linux установить приложение (утилиту) можно было только путем скачивания исходного кода программы и компиляции. Это не практично и не слишком удобно для пользователей, поэтому были разработаны&nbsp;<a href="https://en.wikipedia.org/wiki/Package_manager" rel="noopener noreferrer nofollow">пакетные менеджеры</a>. Установка приложений в них производится из пакетов&nbsp;– архивов с файлами скомпилированной программы. Большинство популярных дистрибутивов Linux содержат пакетные менеджеры, способные устанавливать любое программное обеспечение. Пакетные менеджеры имеют свой список репозиториев&nbsp;– серверов с базой пакетов. Во время установки алгоритм менеджера находит необходимый пакет в базе и производит автоматическое скачивание, установку и настройку.</p>
+                     <p>Существует несколько форматов пакетов, однако наибольшее распространение получили .deb и .rpm. Рассмотрим операционные системы и менеджеры пакетов для данных форматов:</p>
+                     <ul>
+                      <li><p>DEB (.deb)<br>ОС – DEB-based, например Debian, Ubuntu, AstraLinux<br>Система управления пакетами –&nbsp;<a href="https://en.wikipedia.org/wiki/Dpkg" rel="noopener noreferrer nofollow">DPKG</a>&nbsp;(работает только с локальными пакетами)<br>Пакетный менеджер&nbsp;–&nbsp;<a href="https://en.wikipedia.org/wiki/APT_(software)" rel="noopener noreferrer nofollow">apt</a></p></li>
+                      <li><p>RPM (.rpm)<br>ОС – RPM-based, например RedHat Enterprise Linux, Fedora, CentOS<br>Система управления пакетами&nbsp;–&nbsp;<a href="https://en.wikipedia.org/wiki/RPM_Package_Manager" rel="noopener noreferrer nofollow">RPM</a>&nbsp;(работает только с локальными пакетами)&nbsp;<br>Пакетный менеджер&nbsp;–&nbsp;<a href="https://en.wikipedia.org/wiki/Yum_(software)" rel="noopener noreferrer nofollow">yum</a>&nbsp;(в последних дистрибутивах заменен на&nbsp;<a href="https://en.wikipedia.org/wiki/DNF_(software)" rel="noopener noreferrer nofollow">dnf</a>)</p></li>
+                     </ul>
+                     <p><u>Читать подробнее:</u>&nbsp;<a href="https://eternalhost.net/blog/sistemnoe-administrirovanie/paketnye-menedzhery-linux" rel="noopener noreferrer nofollow">Популярные пакетные менеджеры Linux</a></p>
+                     <h4>Практика</h4>
+                     <p>На практике пользователю необходимо уметь взаимодействовать с пакетныи менеджерами – устанавливать и удалять пакеты.</p>
+                     <p>Ниже приведены несколько примеров команд:</p>
+                     <pre><code class="bash"># руководство (справочная информация)
+man &lt;utility&gt; # просмотр справочной информации по утилите
+&lt;utility&gt; --help # просмотр справочной информации по утилите
+
+# менеджер пакетов apt (.deb)
+sudo apt install nano # установка пакета
+sudo apt remove nano # удаление пакета
+sudo apt autoclean # удаление кэша пакетов
+
+# менеджер пакетов yum (.rpm) - для dnf команды полностью аналогичны
+sudo yum install nano # установка пакета
+sudo yum remove nano # удаление пакета
+sudo yum clean all # удаление кэша пакетов</code></pre>
+                     <p>При необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.</p>
+                     <h3>Структура файловой системы и работа с файлами</h3>
+                     <h4>Типы файлов</h4>
+                     <p>Все объекты в Linux являются&nbsp;файлами. Существуют следующие типы файлов:</p>
+                     <ul>
+                      <li><p>Обычные файлы&nbsp;<strong>-<br></strong>Символьные и двоичные данные (текст, картинки, программы и др.)</p></li>
+                      <li><p>Каталог (директория)&nbsp;<strong>d<br></strong>Список ссылок на файлы или другие каталоги</p></li>
+                      <li><p>Символьные ссылки&nbsp;<strong>l<br></strong>Ссылки на другие файлы по имени</p></li>
+                      <li><p>Блочные устройства&nbsp;<strong>b, </strong>символьные устройства&nbsp;<strong>c<br></strong>Интерфейсы для взаимодействия с аппаратным обеспечением (диски, терминалы, клавиатуры, принтеры и др.).&nbsp;Когда происходит обращение к файлу устройства, ядро операционной системы передает запрос драйверу этого устройства</p></li>
+                      <li><p>Сокеты&nbsp;<strong>s</strong>&nbsp;и каналы&nbsp;<strong>p</strong><br>Интерфейсы для взаимодействия процессов</p></li>
+                     </ul>
+                     <p><u>Читать подробнее:</u>&nbsp;<a href="https://younglinux.info/bash/filestype" rel="noopener noreferrer nofollow">Типы файлов в Linux</a></p>
+                     <h4>Структура файловой системы</h4>
+                     <p>Структура файловой системы представляет собой дерево, корнем которой является каталог /.</p>
+                     <p>Рассмотрим подробно структуру и назначение каталогов:</p>
+                     <ul>
+                      <li><p>/bin (binaries) – исполняемые файлы самых необходимых утилит. Может быть символьной ссылкой на /usr/bin</p></li>
+                      <li><p>/boot – файлы, необходимые для самого первого этапа загрузки: загрузки ядра и, обычно, само ядро</p></li>
+                      <li><p>/dev (devices) – блочные и символьные файлы устройств&nbsp;(диски, терминалы, клавиатуры, принтеры и др.)</p></li>
+                      <li><p>/etc (etcetera)&nbsp;– конфигурационные файлы системы и различных программ</p></li>
+                      <li><p>/home&nbsp;– домашние каталоги пользователей для хранения&nbsp;«личных» файлов</p></li>
+                      <li><p>/lib (libraries)&nbsp;– файлы библиотек (стандартных функций, необходимых многим программам), необходимых для работы утилит. Может быть символьной ссылкой на /usr/bin</p></li>
+                      <li><p>/mnt (mount)&nbsp;– каталог для подключения файловых систем (съемных носителей и др.)</p></li>
+                      <li><p>/opt (optional)&nbsp;– каталог для дополнительных программ (проприетарных драйверов, агентов мониторинга и др.)</p></li>
+                      <li><p>/proc (process)&nbsp;– файлы в оперативной памяти, в которых содерживатся информация о выполняемых в системе процессах</p></li>
+                      <li><p>/root&nbsp;– домашний каталог пользователя root</p></li>
+                      <li><p>/sbin (system binaries)&nbsp;– файлы системных утилит, необходимые для загрузки, резервного копирования и восстановления системы.&nbsp;Может быть символьной ссылкой на /usr/sbin</p></li>
+                      <li><p>/sys (system) – виртуальная файловая система sysfs, которая содержит информацию об аппаратном обеспечении (ЦПУ, ОЗУ, дисках, сетевых устройствах), драйверах, ядре системы и др.</p></li>
+                      <li><p>/tmp&nbsp;– каталог для временных файлов, обычно зачищается при каждой загрузке системы</p></li>
+                      <li><p>/usr&nbsp;– пользовательский каталог, который содержит каталоги исполняемых файлов и конфигурационных файлов</p></li>
+                      <li><p>/var (variable)&nbsp;– файлы, создаваемые или используемые различными программами (логи, очереди, идентификаторы процессов, БД и др.)</p></li>
+                     </ul>
+                     <p><u>Читать подробнее:</u>&nbsp;<a href="https://serverspace.ru/support/help/struktura-fajlovoj-sistemy-linux/" rel="noopener noreferrer nofollow">Структура файловой системы Linux</a></p>
+                     <h4>Права доступа</h4>
+                     <p>В Linux права доступа к файлам (в том числе к каталогам) задаются для трех видов пользователей – владельца, группы владельца и остальных. Также есть три типа доступа к файлу&nbsp;– чтение&nbsp;<strong>r</strong>&nbsp;(Read), запись&nbsp;<strong>w</strong>&nbsp;(Write) и исполнение&nbsp;<strong>x</strong>&nbsp;(eXecution), которые задаются для каждого из видов пользователей. Прочерк&nbsp;<strong>-</strong>&nbsp;означает отсутствие доступа.</p>
+                     <p>Таким образом, права доступа к файлу выглядят следующим образом:</p>
+                     <ul>
+                      <li><p>права для владельца (u, user)&nbsp;– чтение, запись, исполнение</p></li>
+                      <li><p>права для группы владельца (g, group)&nbsp;–&nbsp;read, write, execution</p></li>
+                      <li><p>права для остальных пользователей (o, other)&nbsp;–&nbsp;read, write, execution</p></li>
+                     </ul>
+                     <p>Пример: rwx r-- --- означает, что у владельца есть права на все, у группы владельца доступ только на чтение, а у остальных доступа нет. В двоичной системе исчисления эти права выглядят как 111 100 000, что равно 740 в десятичной системе.</p>
+                     <p><u>Читать подробнее:</u>&nbsp;</p>
+                     <ul>
+                      <li><p><a href="https://wiki.merionet.ru/servernye-resheniya/87/vladelcy-fajlov-i-papok-v-linux/" rel="noopener noreferrer nofollow">Владельцы файлов и папок в Linux</a></p></li>
+                      <li><p><a href="https://losst.ru/komanda-chmod-linux" rel="noopener noreferrer nofollow">Команда chmod в Linux</a></p></li>
+                     </ul>
+                     <h4>Практика</h4>
+                     <p>На практике пользователю необходимо осуществлять навигацию по системе, просматривать, создавать, редактировать и удалять файлы, настраивать права доступа.</p>
+                     <p>Ниже приведены несколько примеров наиболее часто используемых команд:</p>
+                     <pre><code class="bash"># руководство (справочная информация)
+man&nbsp;&lt;utility&gt;&nbsp;# просмотр справочной информации по утилите
+&lt;utility&gt; --help&nbsp;# просмотр справочной информации по утилите
+
+# навигация
+ls&nbsp;-la &lt;dir&gt;&nbsp;# просмотр содержимого каталога (в том числе прав доступа)
+cd&nbsp;&lt;dir&gt;&nbsp;# переход в каталог
+
+# каталоги
+mkdir&nbsp;&lt;dir&gt;&nbsp;# создание каталога
+rmdir&nbsp;&lt;dir&gt;&nbsp;# удаление пустого каталога
+rm&nbsp;-rf &lt;dir&gt;&nbsp;# удаление каталога с файлами
+
+# файлы
+cat&nbsp;&lt;file&gt;&nbsp;# вывод файла в консоль
+less&nbsp;&lt;file&gt;&nbsp;# постраничный вывод файла
+tail&nbsp;&lt;file&gt;&nbsp;# вывод последних строк («хвоста») файла
+vi&nbsp;&lt;file&gt;&nbsp;# редактиврование файла текстовым редактором vi
+nano &lt;file&gt;&nbsp;# редактирование файла текстовым редактором nano
+cp&nbsp;&lt;file&gt; &lt;dir&gt;&nbsp;# копирование файла в каталог
+mv&nbsp;&lt;file&gt; &lt;dir&gt;&nbsp;# перемещение файла в каталог (для переименования переместите файл в тот же каталог)
+rm&nbsp;&lt;file&gt;&nbsp;# удаление файла
+rm&nbsp;-rf &lt;dir&gt;/*&nbsp;# удаление всех файлов в каталоге
+
+# права доступа
+chown&nbsp;&lt;user&gt; &lt;dir&gt;&nbsp;# установить пользователя владельцем каталога
+chown&nbsp;&lt;user&gt;:&lt;group&gt; &lt;dir&gt;&nbsp;# установить владельца и группу владельца каталога
+chmod&nbsp;644 &lt;file&gt;&nbsp;# установить права доступа rw- r-- --- (чтение и запись для владельца, чтение для группы владельца)
+сhmod 740 &lt;file&gt;&nbsp;# установить права доступа rwx r-- --- (чтение, запись и исполнение для владельца, чтение для группы владельца)
+chmod&nbsp;u+w &lt;file&gt;&nbsp;# добавить владельцу право на запись файла</code></pre>
+                     <p>При необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.</p>
+                     <h3>Процессы и потребление ресурсов сервера</h3>
+                     <h4>Процессы</h4>
+                     <p>Если предельно упростить, то процесс – это любая программа, которая выполняется в системе. В ходе работы с системой может быть запущено множество программ, которые, в свою очередь, могут запустить множество процессов. Простейший пример процесса&nbsp;– командная оболочка bash.&nbsp;Каждому процессу в Linux присваивается уникальный идентификатор процесса (PID),&nbsp;который используется ядром для управления процессом до завершения программы или команды, с которой он связан.</p>
+                     <p>Процесс может находиться в следующих статусах:</p>
+                     <ul>
+                      <li><p>Выполнение (<strong>R</strong>, Running)<br>Выполнение или ожидание ЦПУ для выполнения</p></li>
+                      <li><p>Сон (<strong>S</strong>, Sleep)<br>Прерываемое программно ожидание</p></li>
+                      <li><p>Прерываемое ожидание (<strong>D</strong>, Direct)<br>Ожидание «прямого» сигнала от аппаратной части</p></li>
+                      <li><p>Приостановлен (<strong>T</strong>, Tracing)<br>Отладка</p></li>
+                      <li><p>Зомби (<strong>Z</strong>, Zombie)<br>Выполнение завершено, однако ресурсы не освобождены</p></li>
+                     </ul>
+                     <p>Также любой процесс может быть принудительно прерван администратором в случае необходимости («убит»). Это не всегда безопасно, однако возможно.</p>
+                     <p>Запущенные процессы требуют использования аппаратных ресурсов сервера&nbsp;– ЦПУ, ОЗУ, дисков, сетевых интерфейсов.</p>
+                     <p><u>Читать подробнее:</u>&nbsp;<a href="https://www.k-max.name/linux/processy-v-linux/" rel="noopener noreferrer nofollow">Процессы в Linux</a></p>
+                     <h4>Практика</h4>
+                     <p>На практике пользователю необходимо просматривать списки процессов и останавливать процессы, а также просматривать имеющиеся и потребляемые ресурсы сервера в системе.</p>
+                     <p>Ниже приведены несколько примеров наиболее часто используемых команд:</p>
+                     <pre><code class="bash"># руководство (справочная информация)
+man&nbsp;&lt;utility&gt;&nbsp;# просмотр справочной информации по утилите
+&lt;utility&gt; --help&nbsp;# просмотр справочной информации по утилите
+
+# процессы
+top
+sudo&nbsp;ps&nbsp;aux
+sudo&nbsp;kill&nbsp;-9 &lt;pid&gt;&nbsp;# убийство процесса по PID
+sudo&nbsp;killall -s 9 &lt;name&gt;&nbsp;# убийство всех процессов по имени
+
+# утилиты для мониторинга использования ресурсов
+htop&nbsp;# использование ресурсов по процессам (может потребоваться установка пакета htop)
+nmon&nbsp;# использование процессора по ядрам, памяти, дисков и др. (может потребоваться установка пакета nmon)
+iostat&nbsp;# использование процессора в среднем по ядрам и чтение/запись по дискам
+
+# ЦПУ
+lscpu&nbsp;# общая информация
+cat&nbsp;/proc/cpuinfo&nbsp;# подробная информация
+
+# ОЗУ
+cat&nbsp;/proc/meminfo&nbsp;# общая информация и потребление
+free&nbsp;-h&nbsp;# удобное представление на основе данных из файла meminfo
+ps&nbsp;aux --sort&nbsp;-rss&nbsp;# использование памяти по процессам
+
+# диски
+lsblk&nbsp;# общая информация
+df&nbsp;-h&nbsp;# просмотр занятного места по разделам
+du&nbsp;-сh &lt;dir&gt;&nbsp;# просмотр занятого места в каталоге
+
+# сеть
+/sys/class/net/&lt;interface&gt;/speed&nbsp;# просмотр максимальной скорости интерфейса</code></pre>
+                     <p>При необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.</p>
+                     <h3>Программный комплекс systemd</h3>
+                     <h4>Зачем нужен systemd?</h4>
+                     <p><a href="https://en.wikipedia.org/wiki/Systemd" rel="noopener noreferrer nofollow">SystemD</a>&nbsp;–&nbsp;это программный комплекс, состоящий из системных компонентов Linux. Основным компонентом является система инициализации системы SystemD, которая пришла на смену&nbsp;<a href="https://en.wikipedia.org/wiki/UNIX_System_V" rel="noopener noreferrer nofollow">SystemV</a>&nbsp;в большинстве современных дистрибутивов. Ядро Linux запускает процесс systemd, который, в свою очередь, запускает все остальные процессы системы.</p>
+                     <p>SystemD&nbsp;предоставляет следующий функционал:</p>
+                     <ul>
+                      <li><p>Запуск служб при старте системы (по возможности параллельно) по различным таргетам (target, аналог уровней загрузки в SystemV)<br>Обеспечивается обратная совместимость с системами инициализации SystemV и LSB</p></li>
+                      <li><p>Контроль состояния запущенных служб</p></li>
+                      <li><p>Управление устройствами, входом в систему, сетевыми подключениями, ведение журнала событий</p></li>
+                      <li><p>Интерфейсы для реализации функциональных возможностей ядра –&nbsp;cgroups, autofs, kdbus</p></li>
+                      <li><p>Набор утилит для управления системой – systemctl, journalctl и др.</p></li>
+                     </ul>
+                     <h3>Что такое systemd unit?</h3>
+                     <p><a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html" rel="noopener noreferrer nofollow">SystemD Unit</a>&nbsp;– это обычный текстовый файл в стиле ini, который декларативно описывает информацию о службах .service, устройствах .device, целях запуска .target и других типах модулей systemd.</p>
+                     <p>Описание юнита состоих из нескольких секций:</p>
+                     <ul>
+                      <li><p>Unit<br>Description (краткое описание),&nbsp;After (ожидание запуска),&nbsp;Requires (обязательная зависимость) и др.</p></li>
+                      <li><p>Service<br>Type (тип)&nbsp;– по умолчанию Simple,&nbsp;ExecStart (команда для запуска),&nbsp;ExecStop (команда для остановки) и др.</p></li>
+                      <li><p>Install<br>WantedBy (таргет или уровень запуска, на котором юнит должен запуститься)</p></li>
+                     </ul>
+                     <p>Файлы systemd unit располагаются в следующих каталогах:</p>
+                     <ul>
+                      <li><p>/etc/systemd/system&nbsp;– юниты, создаваемые администраторами</p></li>
+                      <li><p>/usr/lib/systemd/system&nbsp;– юниты из установленых пакетов</p></li>
+                      <li><p>/run/systemd/system&nbsp;– юниты, создаваемые во время работы системы (в runtime)</p></li>
+                     </ul>
+                     <p>Редактировать и создавать юниты можно с помощью текстового редактора (например vi или nano).</p>
+                     <p><u>Читать подробнее:</u></p>
+                     <ul>
+                      <li><p><a href="https://highload.today/systemd-linux/" rel="noopener noreferrer nofollow">Применение systemd: только самое главное</a></p></li>
+                      <li><p><a href="https://max-ko.ru/9-systemd-i-junity.html" rel="noopener noreferrer nofollow">Понимание systemd юнитов</a></p></li>
+                      <li><p>Примеры systemd unit –&nbsp;<a href="https://www.nginx.com/resources/wiki/start/topics/examples/systemd/" rel="noopener noreferrer nofollow">NGINX</a>,&nbsp;<a href="https://httpd.apache.org/docs/trunk/mod/mod_systemd.html" rel="noopener noreferrer nofollow">Apache</a></p></li>
+                     </ul>
+                     <h4>Практика</h4>
+                     <p>На практике пользователю необходимо просматривать различные systemd unit, просматривать их содержимое и управлять сервисами, а также читать журналы логов.</p>
+                     <p>Ниже приведены несколько примеров наиболее часто используемых команд:</p>
+                     <pre><code class="bash"># руководство (справочная информация)
+man&nbsp;&lt;utility&gt;&nbsp;# просмотр справочной информации по утилите
+&lt;utility&gt; --help&nbsp;# просмотр справочной информации по утилите
+
+# просмотр юнитов
+systemctl&nbsp;# список юнитов (это псевдоним команды systemctl list-units)
+systemctl --type=service&nbsp;# юниты типа сервисы
+systemct |&nbsp;grep&nbsp;&lt;keyword&gt;&nbsp;# юниты, содержащие ключевое слово (полезно для быстрого поиска)
+systemctl&nbsp;cat&nbsp;&lt;unit&gt;&nbsp;# описание юнита
+
+# управление юнитами
+systemctl status &lt;unit&gt;&nbsp;# статус (состояние) юнита
+sudo&nbsp;systemctl daemon-reload&nbsp;# перезагрузка конфигурационных файлов в systemd
+sudo&nbsp;systemctl&nbsp;enable&nbsp;&lt;unit&gt;&nbsp;# включение сервиса в автозагрузку
+sudo&nbsp;systemctl disable &lt;unit&gt;&nbsp;# отключение сервиса из автозагрузки
+sudo&nbsp;systemctl start &lt;unit&gt;&nbsp;# запуск
+sudo&nbsp;systemctl stop &lt;unit&gt;&nbsp;# остановка
+
+# журналы логов
+journalctl -u &lt;unit&gt; # чтение логов по юниту
+journalctl -u &lt;unit&gt; --since today # чтение логов по юниту со смены дня </code></pre>
+                     <p>При необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.</p>
+                     <h3>Сеть</h3>
+                     <p>На практике пользователю необходимо уметь просматривать сетевые настройки сервера, а также уметь проводить простейшую диагностику сетевых проблем.</p>
+                     <p>Ниже приведены несколько примеров наиболее часто используемых команд:</p>
+                     <pre><code class="bash"># руководство (справочная информация)
+man&nbsp;&lt;utility&gt;&nbsp;# просмотр справочной информации по утилите
+&lt;utility&gt; --help&nbsp;# просмотр справочной информации по утилите
+
+# просмотр сетевых настроек сервера
+ip a&nbsp;# IP адреса
+ip n&nbsp;# ARP таблица
+cat&nbsp;/etc/resolv.conf&nbsp;# конфигурация DNS
+sudo&nbsp;netstat&nbsp;-tulpn&nbsp;# открытые порты
+sudo&nbsp;ss -tulpn&nbsp;# открытые порты (молодежный вариант)
+
+# диагностика сетевых проблем
+nslookup&nbsp;&lt;hostname&gt;&nbsp;# проверка разрешения DNS имени
+ping&nbsp;&lt;host&gt;&nbsp;# отправка ICMP пакетов до хоста
+traceroute&nbsp;&lt;host&gt;&nbsp;# трассировка до хоста UDP пакетами
+telnet &lt;host&gt; &lt;port&gt;&nbsp;# проверка доступности TCP порта на хосте
+nmap &lt;host&gt;&nbsp;# сетевое сканирование хоста
+nmap -p T:&lt;port&gt; &lt;host&gt;&nbsp;# проверка доступности TCP порта на хосте (молодежный вариант)
+nmap -p U:&lt;port&gt; &lt;host&gt;&nbsp;# проверка доступности UDP порта на хосте (молодежный вариант)</code></pre>
+                     <p>При необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.</p>
+                    </div>
+                   </div>
+                  </div> 
+                  <div class="v-portal" style="display:none;"></div>
+                 </div> <!----> <!---->
+                </div> 
+                <div class="tm-article-presenter__meta">
+                 <div class="tm-separated-list tm-article-presenter__meta-list">
+                  <span class="tm-separated-list__title">Теги:</span> 
+                  <ul class="tm-separated-list__list">
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B0%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8E%5D" class="tm-tags-list__link">обучение администрированию</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Blinux%5D" class="tm-tags-list__link">linux</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bbash%5D" class="tm-tags-list__link">bash</a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bsystemd%5D" class="tm-tags-list__link">systemd</a></li>
+                  </ul>
+                 </div> 
+                 <div class="tm-separated-list tm-article-presenter__meta-list">
+                  <span class="tm-separated-list__title">Хабы:</span> 
+                  <ul class="tm-separated-list__list">
+                   <li class="tm-separated-list__item"><a href="/ru/hub/sys_admin/" class="tm-hubs-list__link"> Системное администрирование </a></li>
+                   <li class="tm-separated-list__item"><a href="/ru/hub/nix/" class="tm-hubs-list__link"> *nix </a></li>
+                  </ul>
+                 </div>
+                </div>
+               </article>
+              </div> <!---->
+             </div> 
+             <div class="tm-article-sticky-panel">
+              <div class="tm-data-icons tm-article-sticky-panel__icons">
+               <div class="tm-article-rating tm-data-icons__item">
+                <div class="tm-votes-meter tm-article-rating__votes-switcher">
+                 <svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article">
+                  <title>Всего голосов 4: ↑4 и ↓0</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-rating"></use>
+                 </svg> <span title="Всего голосов 4: ↑4 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+4</span>
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> <!----> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item">
+                <svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon">
+                 <title>Просмотры</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-views"></use>
+                </svg> <span class="tm-icon-counter__value">2.1K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon">
+                 <svg height="24" width="24" class="tm-svg-img tm-svg-icon">
+                  <title>Добавить в закладки</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-favorite"></use>
+                 </svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter"> 31 </span></button> <!----> 
+               <div title="Поделиться" class="tm-sharing tm-data-icons__item">
+                <button type="button" class="tm-sharing__button">
+                 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="tm-sharing__icon">
+                  <path fill="currentColor" d="M13.8 13.8V18l7.2-6.6L13.8 5v3.9C5 8.9 3 18.6 3 18.6c2.5-4.4 6-4.8 10.8-4.8z"></path>
+                 </svg></button> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> 
+               <div class="v-portal" style="display:none;"></div>
+              </div> 
+             </div>
+            </div> 
+            <div class="v-portal" style="display:none;"></div> 
+            <div class="tm-article-presenter__footer">
+             <div class="tm-article-blocks">
+              <!----> 
+              <section class="tm-block tm-block_spacing-bottom">
+               <!----> 
+               <div class="tm-block__body tm-block__body_variant-balanced">
+                <div class="tm-article-author"> 
+                 <div class="tm-user-card tm-article-author__user-card tm-user-card_variant-article">
+                  <div class="tm-user-card__info-container">
+                   <div class="tm-user-card__header">
+                    <div class="tm-user-card__header-data">
+                     <a href="/ru/users/simust/" class="tm-user-card__userpic tm-user-card__userpic_size-40">
+                      <div class="tm-entity-image">
+                       <svg class="tm-svg-img tm-image-placeholder tm-image-placeholder_pink">
+                        <!----> <use xlink:href="/img/megazord-v25.4b679db1.svg#placeholder-user"></use>
+                       </svg>
+                      </div></a> 
+                     <div class="tm-user-card__meta">
+                      <div title=" 5 голосов " class="tm-karma tm-user-card__karma">
+                       <div class="tm-karma__votes tm-karma__votes_positive">
+                         5 
+                       </div> 
+                       <div class="tm-karma__text">
+                         Карма 
+                       </div>
+                      </div> 
+                      <div title="Рейтинг пользователя" class="tm-rating tm-user-card__rating">
+                       <div class="tm-rating__header"> 
+                        <div class="tm-rating__counter">
+                         4
+                        </div>
+                       </div> 
+                       <div class="tm-rating__text">
+                         Рейтинг 
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div> 
+                   <div class="tm-user-card__info tm-user-card__info_variant-article">
+                    <div class="tm-user-card__title tm-user-card__title_variant-article">
+                     <span class="tm-user-card__name tm-user-card__name_variant-article">Семен Устинов</span> <a href="/ru/users/simust/" class="tm-user-card__nickname tm-user-card__nickname_variant-article"> @simust </a> <!---->
+                    </div> 
+                    <p class="tm-user-card__short-info tm-user-card__short-info_variant-article">Пользователь</p>
+                   </div>
+                  </div> 
+                  <div class="tm-user-card__buttons tm-user-card__buttons_variant-article">
+                   <!----> <!----> <!----> <!----> <!---->
+                  </div>
+                 </div> <!---->
+                </div> 
+                <div class="v-portal" style="display:none;"></div>
+               </div> <!---->
+              </section> 
+              <div class="tm-ad-banner__container tm-page-article__banner">
+               <!----> 
+               <div id="articleBottomBanner29646" class="tm-ad-banner tm-ad-banner_variant-leaderboard"></div>
+              </div> 
+              <div class="tm-article-blocks__comments">
+               <div class="tm-article-page-comments">
+                <div class="tm-article-comments-counter-link tm-article-comments-counter-button">
+                 <a href="/ru/post/655275/comments/" class="tm-article-comments-counter-link__link tm-article-comments-counter-link__link_button-style">
+                  <svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon tm-article-comments-counter-link__icon_contrasted">
+                   <title>Комментарии</title> <use xlink:href="/img/megazord-v25.4b679db1.svg#counter-comments"></use>
+                  </svg> <span class="tm-article-comments-counter-link__value tm-article-comments-counter-link__value_contrasted"> Комментарии 1 </span></a> <!---->
+                </div>
+               </div>
+              </div> <!----> <!----> <!----> <!----> 
+             </div>
+            </div>
+           </div>
+          </div>
+         </div> 
+         <div class="tm-page__sidebar">
+          <div class="tm-layout-sidebar">
+           <div class="tm-layout-sidebar__ads tm-layout-sidebar__ads_initial">
+            <div class="tm-ad-banner__container tm-layout-sidebar__banner tm-layout-sidebar__banner_top">
+             <!----> 
+             <div id="sidebarBanner29647" class="tm-ad-banner tm-ad-banner_variant-half-page"></div>
+            </div>
+           </div> 
+           <div class="tm-sexy-sidebar tm-sexy-sidebar_initial" style="margin-top:0px;">
+            <!----> 
+            <section data-async-called="true" class="tm-block tm-block_spacing-bottom">
+             <header class="tm-block__header">
+              <h2 class="tm-block__title">Работа</h2> <!---->
+             </header> 
+             <div class="tm-block__body">
+              <div class="tm-vacancies-block__item">
+               <a href="https://career.habr.com/vacancies/devops" target="_blank" class="tm-vacancies-block__vacancy-title"> DevOps инженер </a> 
+               <div class="tm-vacancies-block__vacancies-count">
+                 75 вакансий 
+               </div>
+              </div>
+              <div class="tm-vacancies-block__item">
+               <a href="https://career.habr.com/vacancies/sistemnij_administrator" target="_blank" class="tm-vacancies-block__vacancy-title"> Системный администратор </a> 
+               <div class="tm-vacancies-block__vacancies-count">
+                 137 вакансий 
+               </div>
+              </div>
+             </div> 
+             <footer class="tm-block__footer">
+              <a href="https://career.habr.com/catalog" class="tm-block-extralink"> Все вакансии </a>
+             </footer>
+            </section> 
+            <div class="tm-ad-banner__container tm-layout-sidebar__banner tm-layout-sidebar__banner_bottom">
+             <!----> 
+             <div id="sidebarBannerBottom29648" class="tm-ad-banner tm-ad-banner_variant-medium-rectangle"></div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main> <!---->
+    </div> 
+    <div class="tm-footer-menu">
+     <div class="tm-page-width">
+      <div class="tm-footer-menu__container">
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Ваш аккаунт </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr/?back=/ru/post/655275/&amp;hl=ru" rel="nofollow" target="_self"> Войти </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/kek/v1/auth/habrahabr-register/?back=/ru/post/655275/&amp;hl=ru" rel="nofollow" target="_self"> Регистрация </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Разделы </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/" class="footer-menu__item-link router-link-active"> Публикации </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/news/" class="footer-menu__item-link"> Новости </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/hubs/" class="footer-menu__item-link"> Хабы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/companies/" class="footer-menu__item-link"> Компании </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/users/" class="footer-menu__item-link"> Авторы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/sandbox/" class="footer-menu__item-link"> Песочница </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Информация </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/help/" class="footer-menu__item-link"> Устройство сайта </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/authors/codex/" class="footer-menu__item-link"> Для авторов </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/companies/corpblogs/" class="footer-menu__item-link"> Для компаний </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/docs/docs/transparency/" class="footer-menu__item-link"> Документы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank"> Соглашение </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank"> Конфиденциальность </a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="tm-footer-menu__block">
+        <h3 class="tm-footer-menu__block-title"> Услуги </h3> 
+        <div class="tm-footer-menu__block-content">
+         <ul class="tm-footer-menu__list">
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank"> Реклама </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank"> Тарифы </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank"> Контент </a></li>
+          <li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank"> Семинары </a></li>
+          <li class="tm-footer-menu__list-item"><a href="/ru/megaprojects/" class="footer-menu__item-link"> Мегапроекты </a></li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div class="tm-footer">
+     <div class="tm-page-width">
+      <div class="tm-footer__container">
+       <!----> 
+       <div class="tm-footer__social">
+        <a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use>
+         </svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use>
+         </svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use>
+         </svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use>
+         </svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use>
+         </svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon">
+         <svg height="16" width="16" class="tm-svg-img tm-svg-icon">
+          <title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use>
+         </svg></a>
+       </div> 
+       <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!----> Настройка языка </button> <a href="/ru/about" class="tm-footer__link"> О сайте </a> <a href="/ru/feedback/" class="tm-footer__link"> Техническая поддержка </a> <!----> <a href="/berserk-mode-nope" class="tm-footer__link"> Вернуться на старую версию </a> 
+       <div class="tm-footer-copyright">
+        <span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span>
+       </div>
+      </div>
+     </div>
+    </div> <!----> <!---->
+   </div> 
+   <div class="vue-portal-target"></div>
+  </div> 
+  <script>window.__INITIAL_STATE__={"adblock":{"hasAcceptableAdsFilter":false,"hasAdblock":false},"articlesList":{"articlesList":{"655275":{"id":"655275","timePublished":"2022-03-11T20:40:23+00:00","isCorporative":false,"lang":"ru","titleHtml":"Основы Linux (обзор с практическим уклоном)","leadData":{"textHtml":"\u003Cp\u003EПривет, Хабр!\u003C\u002Fp\u003E\u003Cp\u003EВ последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вместе с тем полноценных обзоров с практическом уклоном по типу «все и сразу» написано не так уж и много (особенно на русском языке). \u003C\u002Fp\u003E\u003Cp\u003EГлавная задача данной статьи – указать начинающим специалистам направление развития, дать ключевые понятия для дальнейшего изучения и показать несколько простых практических приемов. По этой причине (а еще, безусловно, вследствие недостаточной квалификации автора) теоретический материал достаточно сильно упрощен.\u003C\u002Fp\u003E","imageUrl":null,"buttonTextHtml":"Читать далее","image":null},"editorVersion":"2.0","postType":"article","postLabels":[{"type":"sandbox","data":null}],"author":{"scoreStats":{"score":5,"votesCount":5},"rating":4,"relatedData":null,"contacts":[],"authorContacts":[],"paymentDetails":{"paymentYandexMoney":null,"paymentPayPalMe":null,"paymentWebmoney":null},"id":"1175878","alias":"simust","fullname":"Семен Устинов","avatarUrl":null,"speciality":null},"statistics":{"commentsCount":1,"favoritesCount":31,"readingCount":2093,"score":4,"votesCount":4},"hubs":[{"relatedData":null,"id":"221","alias":"sys_admin","type":"collective","title":"Системное администрирование","titleHtml":"Системное администрирование","isProfiled":true},{"relatedData":null,"id":"7289","alias":"nix","type":"collective","title":"*nix","titleHtml":"*nix","isProfiled":true}],"flows":[{"id":"6","alias":"admin","title":"Администрирование"}],"relatedData":null,"textHtml":"\u003Cdiv xmlns=\"http:\u002F\u002Fwww.w3.org\u002F1999\u002Fxhtml\"\u003E\u003Cp\u003EПривет, Хабр!\u003C\u002Fp\u003E\u003Cp\u003EВ последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вместе с тем полноценных обзоров с практическом уклоном по типу «все и сразу» написано не так уж и много (особенно на русском языке). \u003C\u002Fp\u003E\u003Cp\u003EГлавная задача данной статьи – указать начинающим специалистам направление развития, дать ключевые понятия для дальнейшего изучения и показать несколько простых практических приемов. По этой причине (а еще, безусловно, вследствие недостаточной квалификации автора) теоретический материал достаточно сильно упрощен.\u003C\u002Fp\u003E\u003Ch2\u003EЧто такое Linux?\u003C\u002Fh2\u003E\u003Ch3\u003EИстория и определение\u003C\u002Fh3\u003E\u003Cp\u003EВ 1969 году в дочернем подразделении компании AT&amp;T – Bell Laboratories – была выпущена операционная система Unix, которая стала основной для большого количества операционных систем того времени. UNIX была проприетарной системой, лицензия на нее стоила порядка 40 000 долларов. Таким образом, позволить себе ее покупку могли только крупные компании. Это послужило толчком для старта в 1983 году проекта \u003Ca href=\"https:\u002F\u002Fwww.gnu.org\u002F\" rel=\"noopener noreferrer nofollow\"\u003EGNU\u003C\u002Fa\u003E – GNU is Not Unix. Его основоположник, \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FRichard_Stallman\" rel=\"noopener noreferrer nofollow\"\u003EРичард Столлман\u003C\u002Fa\u003E, объявил целью проекта создание свободно распространяемой операционной системы. Чуть позже Столлманом был написан знаменитый \u003Ca href=\"https:\u002F\u002Fwww.gnu.org\u002Fgnu\u002Fmanifesto.html\" rel=\"noopener noreferrer nofollow\"\u003Eманифест GNU\u003C\u002Fa\u003E, который стал основой для лицензии \u003Ca href=\"https:\u002F\u002Fwww.gnu.org\u002Flicenses\u002Fgpl-3.0.html\" rel=\"noopener noreferrer nofollow\"\u003EGPL\u003C\u002Fa\u003E (GNU General Public License), актуальной и по сей день. К началу 1990-х годов в рамках проекта GNU было написано большинство компонентов ОС – оболочка bash, компиляторы, отладчик, текстовый редактор и др. Не хватало лишь ядра операционной системы.\u003C\u002Fp\u003E\u003Cp\u003EВ 1991 году \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FLinus_Torvalds\" rel=\"noopener noreferrer nofollow\"\u003EЛинус Торвальдс\u003C\u002Fa\u003E, будучи студентом финского университета, увлекся идеей написания ядра операционной системы для своего персонального компьютера с процессором Intel. Вдохновлением и прототипом для будущего Linux стала совместимая с Unix операционная система для персональных компьютеров Minix. Уже в августе 1991 года было написано ядро операционной системы, в нее были портированы оболочка bash и компилятор gсс из проекта GNU. По признанию самого Линуса, изначально это было не более, чем хобби, однако проект оказался весьма востребованным, к нему начали присоединяться разработчики со всего мира. Дополненная массой программ, разработанных в рамках проекта GNU, ОС Linux стала пригодна для практического использования. При этом ядро системы распространялось под лицензией GNU General Public License, что гарантировало свободное распространение кода ядра системы. \u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E \u003Ca href=\"https:\u002F\u002Fhabr.com\u002Fru\u002Fpost\u002F95646\u002F\" rel=\"noopener noreferrer nofollow\"\u003EИстория Linux. Вкратце о главном\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003Cp\u003EИтак, сегодня \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FLinux\" rel=\"noopener noreferrer nofollow\"\u003ELinux (или GNU\u002FLinux)\u003C\u002Fa\u003E – семейство Unix-подобных операционных систем на базе ядра Linux, включающих тот или иной набор утилит и программ проекта GNU. Linux-системы распространяются в виде различных дистрибутивов, имеющих свой набор системных и прикладных компонентов (как свободных, так и проприетарных).\u003C\u002Fp\u003E\u003Ch3\u003EСерверные дистрибутивы\u003C\u002Fh3\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FLinux_distribution\" rel=\"noopener noreferrer nofollow\"\u003EДистрибутив Linux\u003C\u002Fa\u003E — это операционная система, созданная на основе ядра Linux, которая включает в себя набор библиотек и утилит (пакетов), разработанных в рамках проекта GNU, а также систему управления пакетами (менеджер пакетов). В настоящее время существует более 500 различных дистрибутивов, разрабатываемых как при коммерческой поддержке (\u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FRed_Hat\" rel=\"noopener noreferrer nofollow\"\u003ERed Hat\u003C\u002Fa\u003E \u002F \u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FFedora\" rel=\"noopener noreferrer nofollow\"\u003EFedora\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FSLED\" rel=\"noopener noreferrer nofollow\"\u003ESLED\u003C\u002Fa\u003E \u002F \u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FOpenSUSE\" rel=\"noopener noreferrer nofollow\"\u003EOpenSUSE\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FUbuntu\" rel=\"noopener noreferrer nofollow\"\u003EUbuntu\u003C\u002Fa\u003E и др.), так и исключительно усилиями добровольцев (\u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FDebian\" rel=\"noopener noreferrer nofollow\"\u003EDebian\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FSlackware\" rel=\"noopener noreferrer nofollow\"\u003ESlackware\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FGentoo\" rel=\"noopener noreferrer nofollow\"\u003EGentoo\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fru.wikipedia.org\u002Fwiki\u002FArchLinux\" rel=\"noopener noreferrer nofollow\"\u003EArchLinux\u003C\u002Fa\u003E и др.). \u003C\u002Fp\u003E\u003Cp\u003EДистрибутивы делятся на несколько типов в зависимости от базового дистрибутива и системы управления пакетами. Вот несколько примеров наиболее популярных серверых дистрибутивов двух типов:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FList_of_Linux_distributions#RPM-based\" rel=\"noopener noreferrer nofollow\"\u003ERPM-based\u003C\u002Fa\u003E (используют формат пакетов .rpm)\u003Cbr\u002F\u003ERedHat Enterprise Linux, CentOS, Fedora\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FList_of_Linux_distributions#DEB-based\" rel=\"noopener noreferrer nofollow\"\u003EDEB-based\u003C\u002Fa\u003E (используют формат пакетов .deb)\u003Cbr\u002F\u003EDebian, Ubuntu, Astra Linux\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003EСтоит отметить, что существует великое множество различных дистрибутивов на любой вкус и цвет. Их невозможно даже сосчитать, так как практически каждый представитель сообщества может собрать свой собственный дистрибутив на основе ядра Linux.\u003C\u002Fp\u003E\u003Ch2\u003EРабота с Linux\u003C\u002Fh2\u003E\u003Ch3\u003EЗагрузка\u003C\u002Fh3\u003E\u003Cp\u003EАлгоритм включения сервера и загрузки Linux в большинстве случаев выглядит следующим образом:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FBIOS\" rel=\"noopener noreferrer nofollow\"\u003EBIOS\u003C\u002Fa\u003E \u002F \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FUEFI\" rel=\"noopener noreferrer nofollow\"\u003EUEFI\u003C\u002Fa\u003E → \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FMaster_boot_record\" rel=\"noopener noreferrer nofollow\"\u003EMBR\u003C\u002Fa\u003E \u002F \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FGUID_Partition_Table\" rel=\"noopener noreferrer nofollow\"\u003EGPT\u003C\u002Fa\u003E\u003Cbr\u002F\u003EВыполняется код, заложенный производителем аппаратного обеспечения. Этот код проводит тестирование системы POST (Power On Self Test) и передает управление загрузчику в MBR (Master Boot Record) \u002F GPT (GUID Partition Table)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EMBR \u002F GPT → \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FGNU_GRUB#GRUB_2\" rel=\"noopener noreferrer nofollow\"\u003EGRUB2\u003C\u002Fa\u003E (существуют и другие загрузчики)\u003Cbr\u002F\u003EЗагрузчик из MBR \u002F GPT очень простой – он способен только найти на диске и запустить следующий загрузчик. Как правило это GRUB2, но существуют и другие загрузчики, например \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FLILO_(boot_loader)\" rel=\"noopener noreferrer nofollow\"\u003ELILO\u003C\u002Fa\u003E (в настоящее время практически не используется)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EGRUB2 → Kernel\u003Cbr\u002F\u003EGRUB2 расположен на разделе жесткого диска в каталоге \u002Fboot. GRUB2 загружает ядро Linux (vmlinuz)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EKernel → Init\u003Cbr\u002F\u003EЯдро запускает процесс инициализации операционной системы. Как правило это SystemD, но существуют и другие системы инициализации, например \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FUNIX_System_V\" rel=\"noopener noreferrer nofollow\"\u003ESystemV\u003C\u002Fa\u003E (в настоящее время практически не используется). Процесс инициализации запускает все остальные процессы в системе\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E \u003Ca href=\"https:\u002F\u002Fsysadminium.ru\u002Fadm_serv_linux-boot_algorithm\" rel=\"noopener noreferrer nofollow\"\u003EАлгоритм загрузки Linux (BIOS \u002F UEFI)\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003Ch3\u003EПодключение\u003C\u002Fh3\u003E\u003Ch4\u003EКомандная оболочка\u003C\u002Fh4\u003E\u003Cp\u003EПодключиться к Linux для управления можно в интерфейсе командной строки (command-line interface, CLI) или в графическом интерфейсе (graphical user interface, GUI). При работе с серверной инфраструктурой в подавляющем числе случаев GUI отсутствует и взаимодействие с сервером осуществляется в CLI. При входе пользователя на сервер CLI запускается командная оболочка (в GUI командную оболочку можно запустить через эмулятор, например Terminal). Командная оболочка (shell) – это программа, которая принимает команды с клавиатуры и передает их операционной системе для выполнения. Наиболее распространенной командной оболочкой в Linux является \u003Ca href=\"https:\u002F\u002Fwww.gnu.org\u002Fsoftware\u002Fbash\u002F\" rel=\"noopener noreferrer nofollow\"\u003EGNU bash\u003C\u002Fa\u003E (Bourne Again SHell). bash основывается на другой легковесной оболочке-предшественнике – \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FBourne_shell\" rel=\"noopener noreferrer nofollow\"\u003Esh\u003C\u002Fa\u003E (Bourne sh), созданной \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FStephen_R._Bourne\" rel=\"noopener noreferrer nofollow\"\u003EСтефеном Борном\u003C\u002Fa\u003E.\u003C\u002Fp\u003E\u003Cp\u003EКоманды можно выполнять с помощью командной строки, указав имя двоичного (бинарного, bin) исполняемого файла или сценария. По умолчанию в Linux много команд, которые позволяют перемещаться по файловой системе, устанавливать ПО, конфигурировать его и выполнять другие действия. Каждая запущенная команда является отдельным процессом. Важно отметить, что в Linux (в отличие от Windows) почти всегда учитывается регистр, включая имена файлов и каталогов, команды, аргументы и опции.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E \u003Ca href=\"https:\u002F\u002Fwww.8host.com\u002Fblog\u002Fosnovy-raboty-s-terminalom-linux\" rel=\"noopener noreferrer nofollow\"\u003EОсновы работы с терминалом Linux\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003Ch4\u003ESSH\u003C\u002Fh4\u003E\u003Cp\u003EПодключаться к Linux и работать с командной оболочкой можно локально (например включив ПК дома или подойдя к серверу в центре обработки данных), однако гораздо чаще работать с системой требуется удаленно. Для этого необходимо настроить SSH и подключаться через него. \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FSSH\" rel=\"noopener noreferrer nofollow\"\u003ESSH\u003C\u002Fa\u003E (Secure SHell) – это протокол, позволяющий производить удаленное управление операционной системой и туннелирование TCP-соединений (например, для копирования файлов). SSH основан на клиент-серверной архитектуре, которая организует защищенное  (зашифрованное) соединение поверх небезопасных каналов связи. Серверная часть устанавливается на удаленном сервере, а клиентская на компьютере, с которых осуществляется подключение.\u003C\u002Fp\u003E\u003Cp\u003EСуществует много клиентов для удаленного подключения к серверу по SSH. Вот несколько примеров для различных операционных систем:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003EWindows\u003Cbr\u002F\u003E\u003Ca href=\"https:\u002F\u002Fwww.putty.org\u002F\" rel=\"noopener noreferrer nofollow\"\u003EPuTTY\u003C\u002Fa\u003E – выбор новичка, \u003Ca href=\"https:\u002F\u002Fmobaxterm.mobatek.net\u002F\" rel=\"noopener noreferrer nofollow\"\u003EMobaXterm\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fmremoteng.org\u002F\" rel=\"noopener noreferrer nofollow\"\u003EmRemoteNG\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fwww.netsarang.com\u002Fen\u002Fxshell\u002F\" rel=\"noopener noreferrer nofollow\"\u003EXshell\u003C\u002Fa\u003E – выбор редакции\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003ELinux\u003Cbr\u002F\u003ETerminal (команда ssh) – выбор новичка и редакции, \u003Ca href=\"https:\u002F\u002Fwww.asbru-cm.net\u002F\" rel=\"noopener noreferrer nofollow\"\u003EAsbru Connection Manager\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EMacOS\u003Cbr\u002F\u003ETerminal (команда ssh) – выбор новичка и редакции, \u003Ca href=\"https:\u002F\u002Fcodinn.com\u002Fshell\u002F\" rel=\"noopener noreferrer nofollow\"\u003ECore Shell\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E \u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"http:\u002F\u002Fxgu.ru\u002Fwiki\u002FSSH\" rel=\"noopener noreferrer nofollow\"\u003ESSH\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Flosst.ru\u002Fkak-podklyuchitsya-po-ssh\" rel=\"noopener noreferrer nofollow\"\u003EКак подключиться по SSH\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Ftimeweb.com\u002Fru\u002Fcommunity\u002Farticles\u002Fluchshie-ssh-klienty-dlya-windows-linux-i-macos\" rel=\"noopener noreferrer nofollow\"\u003EЛучшие SSH клиенты для Windows, Linux и MacOS\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Ch3\u003EУстановка программ (утилит) пакетным менеджером\u003C\u002Fh3\u003E\u003Ch4\u003EЗачем нужны пакетные менеджеры?\u003C\u002Fh4\u003E\u003Cp\u003EНа заре развития Linux установить приложение (утилиту) можно было только путем скачивания исходного кода программы и компиляции. Это не практично и не слишком удобно для пользователей, поэтому были разработаны \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FPackage_manager\" rel=\"noopener noreferrer nofollow\"\u003Eпакетные менеджеры\u003C\u002Fa\u003E. Установка приложений в них производится из пакетов – архивов с файлами скомпилированной программы. Большинство популярных дистрибутивов Linux содержат пакетные менеджеры, способные устанавливать любое программное обеспечение. Пакетные менеджеры имеют свой список репозиториев – серверов с базой пакетов. Во время установки алгоритм менеджера находит необходимый пакет в базе и производит автоматическое скачивание, установку и настройку.\u003C\u002Fp\u003E\u003Cp\u003EСуществует несколько форматов пакетов, однако наибольшее распространение получили .deb и .rpm. Рассмотрим операционные системы и менеджеры пакетов для данных форматов:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003EDEB (.deb)\u003Cbr\u002F\u003EОС – DEB-based, например Debian, Ubuntu, AstraLinux\u003Cbr\u002F\u003EСистема управления пакетами – \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FDpkg\" rel=\"noopener noreferrer nofollow\"\u003EDPKG\u003C\u002Fa\u003E (работает только с локальными пакетами)\u003Cbr\u002F\u003EПакетный менеджер – \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FAPT_(software)\" rel=\"noopener noreferrer nofollow\"\u003Eapt\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003ERPM (.rpm)\u003Cbr\u002F\u003EОС – RPM-based, например RedHat Enterprise Linux, Fedora, CentOS\u003Cbr\u002F\u003EСистема управления пакетами – \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FRPM_Package_Manager\" rel=\"noopener noreferrer nofollow\"\u003ERPM\u003C\u002Fa\u003E (работает только с локальными пакетами) \u003Cbr\u002F\u003EПакетный менеджер – \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FYum_(software)\" rel=\"noopener noreferrer nofollow\"\u003Eyum\u003C\u002Fa\u003E (в последних дистрибутивах заменен на \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FDNF_(software)\" rel=\"noopener noreferrer nofollow\"\u003Ednf\u003C\u002Fa\u003E)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E \u003Ca href=\"https:\u002F\u002Feternalhost.net\u002Fblog\u002Fsistemnoe-administrirovanie\u002Fpaketnye-menedzhery-linux\" rel=\"noopener noreferrer nofollow\"\u003EПопулярные пакетные менеджеры Linux\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003Ch4\u003EПрактика\u003C\u002Fh4\u003E\u003Cp\u003EНа практике пользователю необходимо уметь взаимодействовать с пакетныи менеджерами – устанавливать и удалять пакеты.\u003C\u002Fp\u003E\u003Cp\u003EНиже приведены несколько примеров команд:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"bash\"\u003E# руководство (справочная информация)\nman &lt;utility\u003E # просмотр справочной информации по утилите\n&lt;utility\u003E --help # просмотр справочной информации по утилите\n\n# менеджер пакетов apt (.deb)\nsudo apt install nano # установка пакета\nsudo apt remove nano # удаление пакета\nsudo apt autoclean # удаление кэша пакетов\n\n# менеджер пакетов yum (.rpm) - для dnf команды полностью аналогичны\nsudo yum install nano # установка пакета\nsudo yum remove nano # удаление пакета\nsudo yum clean all # удаление кэша пакетов\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПри необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.\u003C\u002Fp\u003E\u003Ch3\u003EСтруктура файловой системы и работа с файлами\u003C\u002Fh3\u003E\u003Ch4\u003EТипы файлов\u003C\u002Fh4\u003E\u003Cp\u003EВсе объекты в Linux являются файлами. Существуют следующие типы файлов:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003EОбычные файлы \u003Cstrong\u003E-\u003Cbr\u002F\u003E\u003C\u002Fstrong\u003EСимвольные и двоичные данные (текст, картинки, программы и др.)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EКаталог (директория) \u003Cstrong\u003Ed\u003Cbr\u002F\u003E\u003C\u002Fstrong\u003EСписок ссылок на файлы или другие каталоги\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EСимвольные ссылки \u003Cstrong\u003El\u003Cbr\u002F\u003E\u003C\u002Fstrong\u003EСсылки на другие файлы по имени\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EБлочные устройства \u003Cstrong\u003Eb, \u003C\u002Fstrong\u003Eсимвольные устройства \u003Cstrong\u003Ec\u003Cbr\u002F\u003E\u003C\u002Fstrong\u003EИнтерфейсы для взаимодействия с аппаратным обеспечением (диски, терминалы, клавиатуры, принтеры и др.). Когда происходит обращение к файлу устройства, ядро операционной системы передает запрос драйверу этого устройства\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EСокеты \u003Cstrong\u003Es\u003C\u002Fstrong\u003E и каналы \u003Cstrong\u003Ep\u003C\u002Fstrong\u003E\u003Cbr\u002F\u003EИнтерфейсы для взаимодействия процессов\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E \u003Ca href=\"https:\u002F\u002Fyounglinux.info\u002Fbash\u002Ffilestype\" rel=\"noopener noreferrer nofollow\"\u003EТипы файлов в Linux\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003Ch4\u003EСтруктура файловой системы\u003C\u002Fh4\u003E\u003Cp\u003EСтруктура файловой системы представляет собой дерево, корнем которой является каталог \u002F.\u003C\u002Fp\u003E\u003Cp\u003EРассмотрим подробно структуру и назначение каталогов:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003E\u002Fbin (binaries) – исполняемые файлы самых необходимых утилит. Может быть символьной ссылкой на \u002Fusr\u002Fbin\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fboot – файлы, необходимые для самого первого этапа загрузки: загрузки ядра и, обычно, само ядро\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fdev (devices) – блочные и символьные файлы устройств (диски, терминалы, клавиатуры, принтеры и др.)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fetc (etcetera) – конфигурационные файлы системы и различных программ\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fhome – домашние каталоги пользователей для хранения «личных» файлов\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Flib (libraries) – файлы библиотек (стандартных функций, необходимых многим программам), необходимых для работы утилит. Может быть символьной ссылкой на \u002Fusr\u002Fbin\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fmnt (mount) – каталог для подключения файловых систем (съемных носителей и др.)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fopt (optional) – каталог для дополнительных программ (проприетарных драйверов, агентов мониторинга и др.)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fproc (process) – файлы в оперативной памяти, в которых содерживатся информация о выполняемых в системе процессах\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Froot – домашний каталог пользователя root\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fsbin (system binaries) – файлы системных утилит, необходимые для загрузки, резервного копирования и восстановления системы. Может быть символьной ссылкой на \u002Fusr\u002Fsbin\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fsys (system) – виртуальная файловая система sysfs, которая содержит информацию об аппаратном обеспечении (ЦПУ, ОЗУ, дисках, сетевых устройствах), драйверах, ядре системы и др.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Ftmp – каталог для временных файлов, обычно зачищается при каждой загрузке системы\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fusr – пользовательский каталог, который содержит каталоги исполняемых файлов и конфигурационных файлов\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fvar (variable) – файлы, создаваемые или используемые различными программами (логи, очереди, идентификаторы процессов, БД и др.)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E \u003Ca href=\"https:\u002F\u002Fserverspace.ru\u002Fsupport\u002Fhelp\u002Fstruktura-fajlovoj-sistemy-linux\u002F\" rel=\"noopener noreferrer nofollow\"\u003EСтруктура файловой системы Linux\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003Ch4\u003EПрава доступа\u003C\u002Fh4\u003E\u003Cp\u003EВ Linux права доступа к файлам (в том числе к каталогам) задаются для трех видов пользователей – владельца, группы владельца и остальных. Также есть три типа доступа к файлу – чтение \u003Cstrong\u003Er\u003C\u002Fstrong\u003E (Read), запись \u003Cstrong\u003Ew\u003C\u002Fstrong\u003E (Write) и исполнение \u003Cstrong\u003Ex\u003C\u002Fstrong\u003E (eXecution), которые задаются для каждого из видов пользователей. Прочерк \u003Cstrong\u003E-\u003C\u002Fstrong\u003E означает отсутствие доступа.\u003C\u002Fp\u003E\u003Cp\u003EТаким образом, права доступа к файлу выглядят следующим образом:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003Eправа для владельца (u, user) – чтение, запись, исполнение\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003Eправа для группы владельца (g, group) – read, write, execution\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003Eправа для остальных пользователей (o, other) – read, write, execution\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003EПример: rwx r-- --- означает, что у владельца есть права на все, у группы владельца доступ только на чтение, а у остальных доступа нет. В двоичной системе исчисления эти права выглядят как 111 100 000, что равно 740 в десятичной системе.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E \u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fwiki.merionet.ru\u002Fservernye-resheniya\u002F87\u002Fvladelcy-fajlov-i-papok-v-linux\u002F\" rel=\"noopener noreferrer nofollow\"\u003EВладельцы файлов и папок в Linux\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Flosst.ru\u002Fkomanda-chmod-linux\" rel=\"noopener noreferrer nofollow\"\u003EКоманда chmod в Linux\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Ch4\u003EПрактика\u003C\u002Fh4\u003E\u003Cp\u003EНа практике пользователю необходимо осуществлять навигацию по системе, просматривать, создавать, редактировать и удалять файлы, настраивать права доступа.\u003C\u002Fp\u003E\u003Cp\u003EНиже приведены несколько примеров наиболее часто используемых команд:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"bash\"\u003E# руководство (справочная информация)\nman &lt;utility\u003E # просмотр справочной информации по утилите\n&lt;utility\u003E --help # просмотр справочной информации по утилите\n\n# навигация\nls -la &lt;dir\u003E # просмотр содержимого каталога (в том числе прав доступа)\ncd &lt;dir\u003E # переход в каталог\n\n# каталоги\nmkdir &lt;dir\u003E # создание каталога\nrmdir &lt;dir\u003E # удаление пустого каталога\nrm -rf &lt;dir\u003E # удаление каталога с файлами\n\n# файлы\ncat &lt;file\u003E # вывод файла в консоль\nless &lt;file\u003E # постраничный вывод файла\ntail &lt;file\u003E # вывод последних строк («хвоста») файла\nvi &lt;file\u003E # редактиврование файла текстовым редактором vi\nnano &lt;file\u003E # редактирование файла текстовым редактором nano\ncp &lt;file\u003E &lt;dir\u003E # копирование файла в каталог\nmv &lt;file\u003E &lt;dir\u003E # перемещение файла в каталог (для переименования переместите файл в тот же каталог)\nrm &lt;file\u003E # удаление файла\nrm -rf &lt;dir\u003E\u002F* # удаление всех файлов в каталоге\n\n# права доступа\nchown &lt;user\u003E &lt;dir\u003E # установить пользователя владельцем каталога\nchown &lt;user\u003E:&lt;group\u003E &lt;dir\u003E # установить владельца и группу владельца каталога\nchmod 644 &lt;file\u003E # установить права доступа rw- r-- --- (чтение и запись для владельца, чтение для группы владельца)\nсhmod 740 &lt;file\u003E # установить права доступа rwx r-- --- (чтение, запись и исполнение для владельца, чтение для группы владельца)\nchmod u+w &lt;file\u003E # добавить владельцу право на запись файла\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПри необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.\u003C\u002Fp\u003E\u003Ch3\u003EПроцессы и потребление ресурсов сервера\u003C\u002Fh3\u003E\u003Ch4\u003EПроцессы\u003C\u002Fh4\u003E\u003Cp\u003EЕсли предельно упростить, то процесс – это любая программа, которая выполняется в системе. В ходе работы с системой может быть запущено множество программ, которые, в свою очередь, могут запустить множество процессов. Простейший пример процесса – командная оболочка bash. Каждому процессу в Linux присваивается уникальный идентификатор процесса (PID), который используется ядром для управления процессом до завершения программы или команды, с которой он связан.\u003C\u002Fp\u003E\u003Cp\u003EПроцесс может находиться в следующих статусах:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003EВыполнение (\u003Cstrong\u003ER\u003C\u002Fstrong\u003E, Running)\u003Cbr\u002F\u003EВыполнение или ожидание ЦПУ для выполнения\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EСон (\u003Cstrong\u003ES\u003C\u002Fstrong\u003E, Sleep)\u003Cbr\u002F\u003EПрерываемое программно ожидание\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EПрерываемое ожидание (\u003Cstrong\u003ED\u003C\u002Fstrong\u003E, Direct)\u003Cbr\u002F\u003EОжидание «прямого» сигнала от аппаратной части\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EПриостановлен (\u003Cstrong\u003ET\u003C\u002Fstrong\u003E, Tracing)\u003Cbr\u002F\u003EОтладка\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EЗомби (\u003Cstrong\u003EZ\u003C\u002Fstrong\u003E, Zombie)\u003Cbr\u002F\u003EВыполнение завершено, однако ресурсы не освобождены\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003EТакже любой процесс может быть принудительно прерван администратором в случае необходимости («убит»). Это не всегда безопасно, однако возможно.\u003C\u002Fp\u003E\u003Cp\u003EЗапущенные процессы требуют использования аппаратных ресурсов сервера – ЦПУ, ОЗУ, дисков, сетевых интерфейсов.\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E \u003Ca href=\"https:\u002F\u002Fwww.k-max.name\u002Flinux\u002Fprocessy-v-linux\u002F\" rel=\"noopener noreferrer nofollow\"\u003EПроцессы в Linux\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003Ch4\u003EПрактика\u003C\u002Fh4\u003E\u003Cp\u003EНа практике пользователю необходимо просматривать списки процессов и останавливать процессы, а также просматривать имеющиеся и потребляемые ресурсы сервера в системе.\u003C\u002Fp\u003E\u003Cp\u003EНиже приведены несколько примеров наиболее часто используемых команд:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"bash\"\u003E# руководство (справочная информация)\nman &lt;utility\u003E # просмотр справочной информации по утилите\n&lt;utility\u003E --help # просмотр справочной информации по утилите\n\n# процессы\ntop\nsudo ps aux\nsudo kill -9 &lt;pid\u003E # убийство процесса по PID\nsudo killall -s 9 &lt;name\u003E # убийство всех процессов по имени\n\n# утилиты для мониторинга использования ресурсов\nhtop # использование ресурсов по процессам (может потребоваться установка пакета htop)\nnmon # использование процессора по ядрам, памяти, дисков и др. (может потребоваться установка пакета nmon)\niostat # использование процессора в среднем по ядрам и чтение\u002Fзапись по дискам\n\n# ЦПУ\nlscpu # общая информация\ncat \u002Fproc\u002Fcpuinfo # подробная информация\n\n# ОЗУ\ncat \u002Fproc\u002Fmeminfo # общая информация и потребление\nfree -h # удобное представление на основе данных из файла meminfo\nps aux --sort -rss # использование памяти по процессам\n\n# диски\nlsblk # общая информация\ndf -h # просмотр занятного места по разделам\ndu -сh &lt;dir\u003E # просмотр занятого места в каталоге\n\n# сеть\n\u002Fsys\u002Fclass\u002Fnet\u002F&lt;interface\u003E\u002Fspeed # просмотр максимальной скорости интерфейса\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПри необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.\u003C\u002Fp\u003E\u003Ch3\u003EПрограммный комплекс systemd\u003C\u002Fh3\u003E\u003Ch4\u003EЗачем нужен systemd?\u003C\u002Fh4\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FSystemd\" rel=\"noopener noreferrer nofollow\"\u003ESystemD\u003C\u002Fa\u003E – это программный комплекс, состоящий из системных компонентов Linux. Основным компонентом является система инициализации системы SystemD, которая пришла на смену \u003Ca href=\"https:\u002F\u002Fen.wikipedia.org\u002Fwiki\u002FUNIX_System_V\" rel=\"noopener noreferrer nofollow\"\u003ESystemV\u003C\u002Fa\u003E в большинстве современных дистрибутивов. Ядро Linux запускает процесс systemd, который, в свою очередь, запускает все остальные процессы системы.\u003C\u002Fp\u003E\u003Cp\u003ESystemD предоставляет следующий функционал:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003EЗапуск служб при старте системы (по возможности параллельно) по различным таргетам (target, аналог уровней загрузки в SystemV)\u003Cbr\u002F\u003EОбеспечивается обратная совместимость с системами инициализации SystemV и LSB\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EКонтроль состояния запущенных служб\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EУправление устройствами, входом в систему, сетевыми подключениями, ведение журнала событий\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EИнтерфейсы для реализации функциональных возможностей ядра – cgroups, autofs, kdbus\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EНабор утилит для управления системой – systemctl, journalctl и др.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Ch3\u003EЧто такое systemd unit?\u003C\u002Fh3\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fwww.freedesktop.org\u002Fsoftware\u002Fsystemd\u002Fman\u002Fsystemd.unit.html\" rel=\"noopener noreferrer nofollow\"\u003ESystemD Unit\u003C\u002Fa\u003E – это обычный текстовый файл в стиле ini, который декларативно описывает информацию о службах .service, устройствах .device, целях запуска .target и других типах модулей systemd.\u003C\u002Fp\u003E\u003Cp\u003EОписание юнита состоих из нескольких секций:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003EUnit\u003Cbr\u002F\u003EDescription (краткое описание), After (ожидание запуска), Requires (обязательная зависимость) и др.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EService\u003Cbr\u002F\u003EType (тип) – по умолчанию Simple, ExecStart (команда для запуска), ExecStop (команда для остановки) и др.\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EInstall\u003Cbr\u002F\u003EWantedBy (таргет или уровень запуска, на котором юнит должен запуститься)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003EФайлы systemd unit располагаются в следующих каталогах:\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003E\u002Fetc\u002Fsystemd\u002Fsystem – юниты, создаваемые администраторами\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Fusr\u002Flib\u002Fsystemd\u002Fsystem – юниты из установленых пакетов\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u002Frun\u002Fsystemd\u002Fsystem – юниты, создаваемые во время работы системы (в runtime)\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Cp\u003EРедактировать и создавать юниты можно с помощью текстового редактора (например vi или nano).\u003C\u002Fp\u003E\u003Cp\u003E\u003Cu\u003EЧитать подробнее:\u003C\u002Fu\u003E\u003C\u002Fp\u003E\u003Cul\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fhighload.today\u002Fsystemd-linux\u002F\" rel=\"noopener noreferrer nofollow\"\u003EПрименение systemd: только самое главное\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fmax-ko.ru\u002F9-systemd-i-junity.html\" rel=\"noopener noreferrer nofollow\"\u003EПонимание systemd юнитов\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003Cli\u003E\u003Cp\u003EПримеры systemd unit – \u003Ca href=\"https:\u002F\u002Fwww.nginx.com\u002Fresources\u002Fwiki\u002Fstart\u002Ftopics\u002Fexamples\u002Fsystemd\u002F\" rel=\"noopener noreferrer nofollow\"\u003ENGINX\u003C\u002Fa\u003E, \u003Ca href=\"https:\u002F\u002Fhttpd.apache.org\u002Fdocs\u002Ftrunk\u002Fmod\u002Fmod_systemd.html\" rel=\"noopener noreferrer nofollow\"\u003EApache\u003C\u002Fa\u003E\u003C\u002Fp\u003E\u003C\u002Fli\u003E\u003C\u002Ful\u003E\u003Ch4\u003EПрактика\u003C\u002Fh4\u003E\u003Cp\u003EНа практике пользователю необходимо просматривать различные systemd unit, просматривать их содержимое и управлять сервисами, а также читать журналы логов.\u003C\u002Fp\u003E\u003Cp\u003EНиже приведены несколько примеров наиболее часто используемых команд:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"bash\"\u003E# руководство (справочная информация)\nman &lt;utility\u003E # просмотр справочной информации по утилите\n&lt;utility\u003E --help # просмотр справочной информации по утилите\n\n# просмотр юнитов\nsystemctl # список юнитов (это псевдоним команды systemctl list-units)\nsystemctl --type=service # юниты типа сервисы\nsystemct | grep &lt;keyword\u003E # юниты, содержащие ключевое слово (полезно для быстрого поиска)\nsystemctl cat &lt;unit\u003E # описание юнита\n\n# управление юнитами\nsystemctl status &lt;unit\u003E # статус (состояние) юнита\nsudo systemctl daemon-reload # перезагрузка конфигурационных файлов в systemd\nsudo systemctl enable &lt;unit\u003E # включение сервиса в автозагрузку\nsudo systemctl disable &lt;unit\u003E # отключение сервиса из автозагрузки\nsudo systemctl start &lt;unit\u003E # запуск\nsudo systemctl stop &lt;unit\u003E # остановка\n\n# журналы логов\njournalctl -u &lt;unit\u003E # чтение логов по юниту\njournalctl -u &lt;unit\u003E --since today # чтение логов по юниту со смены дня \u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПри необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.\u003C\u002Fp\u003E\u003Ch3\u003EСеть\u003C\u002Fh3\u003E\u003Cp\u003EНа практике пользователю необходимо уметь просматривать сетевые настройки сервера, а также уметь проводить простейшую диагностику сетевых проблем.\u003C\u002Fp\u003E\u003Cp\u003EНиже приведены несколько примеров наиболее часто используемых команд:\u003C\u002Fp\u003E\u003Cpre\u003E\u003Ccode class=\"bash\"\u003E# руководство (справочная информация)\nman &lt;utility\u003E # просмотр справочной информации по утилите\n&lt;utility\u003E --help # просмотр справочной информации по утилите\n\n# просмотр сетевых настроек сервера\nip a # IP адреса\nip n # ARP таблица\ncat \u002Fetc\u002Fresolv.conf # конфигурация DNS\nsudo netstat -tulpn # открытые порты\nsudo ss -tulpn # открытые порты (молодежный вариант)\n\n# диагностика сетевых проблем\nnslookup &lt;hostname\u003E # проверка разрешения DNS имени\nping &lt;host\u003E # отправка ICMP пакетов до хоста\ntraceroute &lt;host\u003E # трассировка до хоста UDP пакетами\ntelnet &lt;host\u003E &lt;port\u003E # проверка доступности TCP порта на хосте\nnmap &lt;host\u003E # сетевое сканирование хоста\nnmap -p T:&lt;port\u003E &lt;host\u003E # проверка доступности TCP порта на хосте (молодежный вариант)\nnmap -p U:&lt;port\u003E &lt;host\u003E # проверка доступности UDP порта на хосте (молодежный вариант)\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\u003Cp\u003EПри необходимости уточняйте описание утилит и ключей выполнения в Интернете или в руководстве man.\u003C\u002Fp\u003E\u003C\u002Fdiv\u003E","tags":[{"titleHtml":"обучение администрированию"},{"titleHtml":"linux"},{"titleHtml":"bash"},{"titleHtml":"systemd"}],"metadata":{"stylesUrls":[],"scriptUrls":[],"shareImageUrl":"https:\u002F\u002Fhabr.com\u002Fshare\u002Fpublication\u002F655275\u002Fe8bae472e835bd58e70c9e8cb8365824\u002F","shareImageWidth":1200,"shareImageHeight":630,"vkShareImageUrl":"https:\u002F\u002Fhabr.com\u002Fshare\u002Fpublication\u002F655275\u002Fe8bae472e835bd58e70c9e8cb8365824\u002F?format=vk","schemaJsonLd":"{\"@context\":\"http:\\\u002F\\\u002Fschema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fpost\\\u002F655275\\\u002F\"},\"headline\":\"Основы Linux (обзор с практическим уклоном)\",\"datePublished\":\"2022-03-11T23:40:23+03:00\",\"dateModified\":\"2022-03-11T23:40:23+03:00\",\"author\":{\"@type\":\"Person\",\"name\":\"Семен Устинов\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Habr\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\\\u002F\\\u002Fhabrastorage.org\\\u002Fwebt\\\u002Fa_\\\u002Flk\\\u002F9m\\\u002Fa_lk9mjkccjox-zccjrpfolmkmq.png\"}},\"description\":\"Привет, Хабр!В последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вмес...\",\"url\":\"https:\\\u002F\\\u002Fhabr.com\\\u002Fru\\\u002Fpost\\\u002F655275\\\u002F#post-content-body\",\"about\":[\"h_sys_admin\",\"h_nix\",\"f_admin\"],\"image\":[\"https:\\\u002F\\\u002Fhabr.com\\\u002Fshare\\\u002Fpublication\\\u002F655275\\\u002Fe8bae472e835bd58e70c9e8cb8365824\\\u002F\"]}","metaDescription":"Привет, Хабр!В последние несколько лет все больше и больше людей ищут возможность войти в ИТ или поглубже изучить Linux, повысив уровень своей квалификации. Вместе с тем полноценных обзоров с...","mainImageUrl":null,"amp":true,"customTrackerLinks":[]},"polls":[],"commentsEnabled":true,"rulesRemindEnabled":false,"votesEnabled":true,"status":"published","plannedPublishTime":null,"checked":null,"isEditorial":false}},"articlesIds":{},"isLoading":false,"pagesCount":{},"route":{},"reasonsList":null,"view":"cards","lastVisitedRoute":{},"ssrCommentsArticleIds":[""],"karma":{}},"authorContribution":{"authors":{}},"betaTest":{"currentAnnouncement":null,"announcements":{},"announcementCards":null,"announcementComments":{},"announcementCommentThreads":{},"announcementCommentingStatuses":{},"archivedList":[]},"authorStatistics":{"articleRefs":{},"articleIds":{},"pagesCount":{},"route":{},"viewsCount":[],"maxStatsCount":{}},"career":{"seoLandings":[{"title":"DevOps инженер","vacanciesCount":75,"itemUrl":"https:\u002F\u002Fcareer.habr.com\u002Fvacancies\u002Fdevops","itemHubs":["devops","build_automation","sys_admin","virtualization","kubernetes"]},{"title":"Системный администратор","vacanciesCount":137,"itemUrl":"https:\u002F\u002Fcareer.habr.com\u002Fvacancies\u002Fsistemnij_administrator","itemHubs":["s_admin","it-infrastructure","server_side_optimization","sys_admin"]}],"hubs":"sys_admin,nix"},"comments":{"articleComments":{},"searchCommentsResults":null,"previewComment":null,"pagesCount":null,"commentAccess":{},"scrollParents":{},"pageArticleComments":{"lastViewedComment":0,"postId":null,"lastCommentTimestamp":"","moderated":[],"moderatedIds":[],"commentRoute":""}},"companies":{"companyRefs":{},"companyIds":{},"companyTopIds":{},"pagesCount":{},"companyProfiles":{},"companiesCategories":[],"companiesCategoriesTotalCount":0,"companiesWidgets":{},"companiesWorkers":{},"companiesFans":{},"route":{},"isLoading":false,"companyWorkersLoading":false,"companyFansLoading":false,"vacancies":{},"workplaceInfo":null},"companyAdmin":{"companyInfo":null,"companyInfoLoading":false,"faqArticles":null,"brandingPreviewImageUrl":null},"companiesContribution":{"hubs":{},"flows":{},"companyRefs":{}},"companyHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"conversation":{"messages":[],"respondent":null,"isLoadMore":false},"conversations":{"conversations":[],"unreadCount":0,"pagesCount":0,"isLoadMore":false},"desktopState":{"desktopFl":null,"desktopHl":null,"isChecked":false,"isLoginDemanded":false},"docs":{"menu":{},"articles":{},"mainMenu":[],"loading":{"main":false,"dropdown":false,"article":false}},"feature":{"isProbablyVisible":"true"},"flows":{"flows":[{"alias":"develop","id":1,"route":{"name":"FLOW_PAGE","params":{"flowName":"develop"}}},{"alias":"admin","id":6,"route":{"name":"FLOW_PAGE","params":{"flowName":"admin"}}},{"alias":"design","id":2,"route":{"name":"FLOW_PAGE","params":{"flowName":"design"}}},{"alias":"management","id":3,"route":{"name":"FLOW_PAGE","params":{"flowName":"management"}}},{"alias":"marketing","id":4,"route":{"name":"FLOW_PAGE","params":{"flowName":"marketing"}}},{"alias":"popsci","id":7,"route":{"name":"FLOW_PAGE","params":{"flowName":"popsci"}}}]},"global":{"isPwa":false,"device":"desktop","isHabrCom":true},"hubs":{"hubRefs":{},"hubIds":{},"pagesCount":{},"isLoading":false,"route":{}},"hubsBlock":{"hubRefs":{},"hubIds":{}},"i18n":{"fl":"ru","hl":"ru"},"info":{"infoPage":{},"isLoading":true},"location":{"urlStruct":{"protocol":null,"slashes":null,"auth":null,"host":null,"port":null,"hostname":null,"hash":null,"search":null,"query":{},"pathname":null,"path":null,"href":""},"searchQuery":null},"me":{"user":null,"ppgDemanded":false,"karmaResetInfo":{"canReincarnate":null,"wasReincarnated":null,"currentScore":null},"notes":null},"mostReadingList":{"mostReadingListIds":[],"mostReadingListRefs":null,"promoPost":null},"pinnedPost":{"pinnedPost":null},"ppa":{"articles":{},"card":null,"transactions":null,"totalTransactions":null,"isAccessible":null},"projectsBlocks":{"activeBlocks":{}},"promoData":{"isLoading":false,"hasLoaded":false,"featurer":null,"megaposts":null,"promoLinks":null,"promoPosts":null},"pullRefresh":{"shouldRefresh":false},"sandbox":{"articleIds":[],"articleRefs":{},"pagesCount":null,"route":{},"lastVisitedRoute":{},"isLoading":false},"search":{"searchQueryError":null},"settingsOther":{"inputs":{"uiLang":{"errors":[],"ref":null,"value":""},"articlesLangEnglish":{"errors":[],"ref":null,"value":false},"articlesLangRussian":{"errors":[],"ref":null,"value":false},"agreement":{"errors":[],"ref":null,"value":false},"email":{"errors":[],"ref":null,"value":true},"digest":{"errors":[],"ref":null,"value":true}}},"similarList":{"similarListIds":[],"similarListRefs":null},"ssr":{"error":null,"isDataLoaded":false,"isDataLoading":false,"isHydrationFailed":false,"isServer":false},"technotext":{"nominationsList":[]},"userHubsContribution":{"contributionRefs":{"hubRefs":{},"hubIds":{}}},"userInvites":{"availableInvites":0,"usedInvitesIds":[],"usedInvitesRefs":{},"usedInvitesPagesCount":0,"unusedInvitesIds":[],"unusedInvitesRefs":{},"unusedInvitesPagesCount":0},"users":{"authorRefs":{},"authorIds":{},"pagesCount":{},"authorProfiles":{},"userHubs":{},"userInvitations":{},"authorFollowers":{},"authorFollowed":{},"userSpecialization":{},"karmaStats":[],"statistics":null,"isLoading":false,"authorFollowersLoading":false,"authorFollowedLoading":false,"userHubsLoading":false,"userInvitationsLoading":false,"route":{}},"viewport":{"prevScrollY":{},"scrollY":0,"width":0},"tracker":{"items":{},"pagesCache":{},"markedViewedSilently":{},"markedRead":{},"unreadCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null},"unviewedCounters":{"applications":null,"system":null,"mentions":null,"subscribers":null,"posts_and_comments":null}}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script> 
+  <script src="https://assets.habr.com/habr-web/js/chunk-vendors.55ca5167.js" defer></script>
+  <script src="https://assets.habr.com/habr-web/js/app.69ba180e.js" defer></script> 
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script> 
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script> 
+  <noscript> 
+   <div> 
+    <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt=""> 
+   </div> 
+  </noscript> 
+  <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script> 
+  <script src="/js/ads.js" onload="window['zhY4i4nJ9K'] = true"></script>  
+ </body>
+</html>
