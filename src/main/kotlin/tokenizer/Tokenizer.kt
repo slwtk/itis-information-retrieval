@@ -9,8 +9,8 @@ import java.util.ArrayList
 import java.util.HashMap
 import java.util.HashSet
 
-class Tokenizer(private val inputPath: String, private val outputPath: String) {
-  fun tokenize() {
+class Tokenizer {
+  fun tokenize(files: List<File>): Set<String> {
     val tokens: MutableSet<String> = HashSet()
     val regex = "[^\\u0400-\\u04FF]+$".toRegex()
     // word exceptions
@@ -22,7 +22,7 @@ class Tokenizer(private val inputPath: String, private val outputPath: String) {
       "чтобы", "с тем чтобы", "если", "раз", "бы", "а", "но", "и"
     )
 
-    File(inputPath).walkTopDown().filter { it.isFile }.toList().forEach { file ->
+    files.forEach { file ->
       println("${file.absolutePath} parsing...")
       // parsing html
       val html = Jsoup.parse(file, StandardCharsets.UTF_8.toString())
@@ -32,21 +32,10 @@ class Tokenizer(private val inputPath: String, private val outputPath: String) {
       tokens.addAll(cyrillicWords)
       println("Tokens list has ${tokens.size} items")
     }
-
-    // writing in tokens.txt
-    println("Writing result to $outputPath/tokens.txt")
-    File("$outputPath/tokens.txt").printWriter().use { out -> tokens.forEach { out.println(it) } }
-    println("Done")
-
-    // writing in lemmas.txt
-    println("Writing result to $outputPath/lemmas.txt")
-    File("$outputPath/lemmas.txt").printWriter().use { out ->
-      groupByLemmas(tokens).forEach { (key, value) -> out.println("$key: $value") }
-    }
-    println("Done")
+    return tokens
   }
 
-  private fun groupByLemmas(tokens: Set<String>): Map<String, String> {
+  fun groupByLemmas(tokens: Set<String>): Map<String, String> {
     val result: MutableMap<String, String> = HashMap()
     val notFoundWords: MutableList<String> = ArrayList()
     tokens.forEach { token ->
