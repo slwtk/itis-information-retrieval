@@ -10,7 +10,7 @@ import java.util.HashMap
 import java.util.HashSet
 
 class Tokenizer {
-  fun tokenize(files: List<File>): Set<String> {
+  fun getTokens(file: File): Set<String> {
     val tokens: MutableSet<String> = HashSet()
     val regex = "[^\\u0400-\\u04FF]+$".toRegex()
     // word exceptions
@@ -22,16 +22,14 @@ class Tokenizer {
       "чтобы", "с тем чтобы", "если", "раз", "бы", "а", "но", "и"
     )
 
-    files.forEach { file ->
-      println("${file.absolutePath} parsing...")
-      // parsing html
-      val html = Jsoup.parse(file, StandardCharsets.UTF_8.toString())
-      val cyrillicWords = SimpleTokenizer.INSTANCE.tokenize(html.text().lowercase()).toMutableList()
-      cyrillicWords.removeIf { it.matches(regex) || it.length > 15 || it.length <= 2 || stopWords.contains(it)}
-      // tokenizing html
-      tokens.addAll(cyrillicWords)
-      println("Tokens list has ${tokens.size} items")
-    }
+    println("${file.absolutePath} parsing...")
+    // parsing html
+    val html = Jsoup.parse(file, StandardCharsets.UTF_8.toString())
+    val cyrillicWords = SimpleTokenizer.INSTANCE.tokenize(html.text().lowercase()).toMutableList()
+    cyrillicWords.removeIf { it.matches(regex) || it.length > 15 || it.length <= 2 || stopWords.contains(it)}
+    // tokenizing html
+    tokens.addAll(cyrillicWords)
+    println("Tokens list has ${tokens.size} items")
     return tokens
   }
 
@@ -51,3 +49,5 @@ class Tokenizer {
     return result
   }
 }
+
+fun File.getTokens(): Set<String> = Tokenizer().getTokens(this)

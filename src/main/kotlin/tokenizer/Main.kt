@@ -8,7 +8,9 @@ const val OUTPUT_PATH = "src/main/kotlin/tokenizer/out"
 fun main() {
   val tokenizer = Tokenizer()
   val files = File(INPUT_PATH).walkTopDown().filter { it.isFile }.toList()
-  val tokens = tokenizer.tokenize(files)
+  val tokens = HashSet<String>()
+  files.forEach { tokens.addAll(it.getTokens()) }
+  println("tokens.txt has ${tokens.size} items")
 
   // writing in tokens.txt
   println("Writing result to $OUTPUT_PATH/tokens.txt")
