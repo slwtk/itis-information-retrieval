@@ -38,7 +38,7 @@ class Tokenizer {
     val notFoundWords: MutableList<String> = ArrayList()
     tokens.forEach { token ->
       val meanings = WordformMeaning.lookupForMeanings(token)
-      if (meanings.size != 0) {
+      if (meanings.isNotEmpty()) {
         val key = meanings[0].lemma.toString()
         if (result.containsKey(key)) result[key] += " $token" else result[key] = token
       } else {
