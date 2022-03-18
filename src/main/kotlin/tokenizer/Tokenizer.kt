@@ -5,49 +5,56 @@ import org.jsoup.Jsoup
 import com.github.demidko.aot.WordformMeaning
 import java.io.File
 import java.nio.charset.StandardCharsets
-import java.util.ArrayList
 import java.util.HashMap
-import java.util.HashSet
+import kotlin.collections.HashSet
 
 class Tokenizer {
-  fun getTokens(file: File): Set<String> {
-    val tokens: MutableSet<String> = HashSet()
-    val regex = "[^\\u0400-\\u04FF]+$".toRegex()
-    // word exceptions
-    val stopWords = setOf(
-      "в", "без", "до", "из", "к", "на", "по", "о", "от", "перед",
-      "при", "через", "с", "со", "у", "и", "нет", "за", "над", "для", "об",
-      "под", "про", "когда", "пока", "едва", "лишь", "только", "потому", "что",
-      "так", "как", "оттого", "что", "ибо", "чтобы", "чтоб", "для", "того",
-      "чтобы", "с тем чтобы", "если", "раз", "бы", "а", "но", "и"
-    )
+  private val regex = "[^\\u0400-\\u04FF]+$".toRegex()
+  private val stopWords = setOf(
+    "в", "без", "до", "из", "к", "на", "по", "о", "от", "перед",
+    "при", "через", "с", "со", "у", "и", "нет", "за", "над", "для", "об",
+    "под", "про", "когда", "пока", "едва", "лишь", "только", "потому", "что",
+    "так", "как", "оттого", "что", "ибо", "чтобы", "чтоб", "для", "того",
+    "чтобы", "с тем чтобы", "если", "раз", "бы", "а", "но", "и"
+  )
 
-    println("${file.absolutePath} parsing...")
-    // parsing html
-    val html = Jsoup.parse(file, StandardCharsets.UTF_8.toString())
-    val cyrillicWords = SimpleTokenizer.INSTANCE.tokenize(html.text().lowercase()).toMutableList()
+  fun getTokens(line: String): Set<String> {
+    val tokens: MutableSet<String> = HashSet()
+    val cyrillicWords = SimpleTokenizer.INSTANCE.tokenize(line.lowercase()).toMutableList()
     cyrillicWords.removeIf { it.matches(regex) || it.length > 15 || it.length <= 2 || stopWords.contains(it)}
-    // tokenizing html
     tokens.addAll(cyrillicWords)
-    println("Tokens list has ${tokens.size} items")
     return tokens
   }
 
-  fun groupByLemmas(tokens: Set<String>): Map<String, String> {
-    val result: MutableMap<String, String> = HashMap()
-    val notFoundWords: MutableList<String> = ArrayList()
+  fun getTokens(file: File): Set<String> = getTokens(Jsoup.parse(file, StandardCharsets.UTF_8.toString()).text())
+
+  fun getLemma(token: String): String? {
+    val meanings = WordformMeaning.lookupForMeanings(token)
+    return if (meanings.isNotEmpty()) meanings[0].lemma.toString() else null
+  }
+
+  fun groupByLemmas(tokens: Set<String>): Map<String, Set<String>> {
+    val result: MutableMap<String, MutableSet<String>> = HashMap()
+    val notFoundWords: MutableSet<String> = HashSet()
     tokens.forEach { token ->
-      val meanings = WordformMeaning.lookupForMeanings(token)
-      if (meanings.isNotEmpty()) {
-        val key = meanings[0].lemma.toString()
-        if (result.containsKey(key)) result[key] += " $token" else result[key] = token
+      val lemma = token.getLemma()
+      if (lemma != null) {
+        if (result.containsKey(lemma)) {
+          result[lemma]?.add(token)
+        } else {
+          result[lemma] = mutableSetOf(token)
+        }
       } else {
         notFoundWords.add(token)
       }
     }
-    result["Tokens without lemma"] = notFoundWords.joinToString(" ")
+    result["Tokens without lemma"] = notFoundWords
     return result
   }
 }
 
 fun File.getTokens(): Set<String> = Tokenizer().getTokens(this)
+
+fun String.getTokens(): Set<String> = Tokenizer().getTokens(this)
+
+fun String.getLemma(): String? = Tokenizer().getLemma(this)

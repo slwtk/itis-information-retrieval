@@ -9,7 +9,9 @@ fun main() {
   val tokenizer = Tokenizer()
   val files = File(INPUT_PATH).walkTopDown().filter { it.isFile }.toList()
   val tokens = HashSet<String>()
-  files.forEach { tokens.addAll(it.getTokens()) }
+  files.forEach { file ->
+    tokens.addAll(file.getTokens())
+  }
   println("tokens.txt has ${tokens.size} items")
 
   // writing in tokens.txt
@@ -20,7 +22,7 @@ fun main() {
   // writing in lemmas.txt
   println("Writing result to $OUTPUT_PATH/lemmas.txt")
   File("$OUTPUT_PATH/lemmas.txt").printWriter().use { out ->
-    tokenizer.groupByLemmas(tokens).forEach { (key, value) -> out.println("$key: $value") }
+    tokenizer.groupByLemmas(tokens).forEach { (key, value) -> out.println("$key: ${value.joinToString(" ")}") }
   }
   println("Done")
 }

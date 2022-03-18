@@ -1,16 +1,11 @@
 package indexer
 
-import com.github.demidko.aot.WordformMeaning
-import opennlp.tools.tokenize.SimpleTokenizer
+import tokenizer.getLemma
 import java.io.File
 
+const val LEMMA_TOKENS_FILE = "src/main/kotlin/indexer/out/result.txt"
+
 fun main() {
-  val index: MutableMap<String, Set<String>> = mutableMapOf()
-  val file = File("src/main/kotlin/indexer/out/result.txt")
-  var result = mutableSetOf<String>()
-  file.forEachLine {
-    index[it.substringBefore(":")] = it.substringAfter(": ").split(" ").toSet()
-  }
   println(
     """
     --------------
@@ -18,9 +13,17 @@ fun main() {
     --------------
     """.trimIndent()
   )
-  val searchLemmas = search(readLine().orEmpty())
+
+  val searchQueryLemmas = readLine().orEmpty().split(" ").map { word -> word.getLemma() }.toSet()
+
+  val fileLemmaTokens = mutableMapOf<String, Set<String>>()
+  File(LEMMA_TOKENS_FILE).forEachLine { line ->
+    fileLemmaTokens[line.substringBefore(":")] =
+      line.substringAfter(": ").split(" ").toSet()
+  }
+
   val resultMap = mutableMapOf<String, Set<String>>()
-  for ((key, value) in index) if (searchLemmas.contains(key)) resultMap[key] = value
+  for ((key, value) in fileLemmaTokens) if (searchQueryLemmas.contains(key)) resultMap[key] = value
 
   println("Поиск...")
   for ((key,value) in resultMap) {
@@ -33,23 +36,10 @@ fun main() {
     )
   }
 
-  searchLemmas.forEach {
-    result =
-      if (result.isNotEmpty()) {
-        result.intersect(index[it].orEmpty()).toMutableSet()
-      } else { index[it].orEmpty().toMutableSet() }
+  var searchResult: Set<String> = fileLemmaTokens[searchQueryLemmas.first()].orEmpty()
+  searchQueryLemmas.forEach {
+    searchResult = searchResult.intersect(fileLemmaTokens[it].orEmpty())
   }
-  println("Результат поиска: ${result.joinToString(" ")}")
-}
 
-fun search(query: String): Set<String> {
-  val tokens = SimpleTokenizer.INSTANCE.tokenize(query.lowercase()).toMutableList()
-  val queryLemmas = mutableSetOf<String>()
-  tokens.forEach { token ->
-    val meanings = WordformMeaning.lookupForMeanings(token)
-    if(meanings.isNotEmpty()) {
-      queryLemmas.add(meanings[0].lemma.toString())
-    }
-  }
-  return queryLemmas
+  println("Результат поиска: ${searchResult.joinToString(" ")}")
 }
